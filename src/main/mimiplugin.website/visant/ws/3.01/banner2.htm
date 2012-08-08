@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MiMIVisAnt</title>
+<link href="mimivisant.css" rel="stylesheet" type="text/css" />
+
+<SCRIPT language="JavaScript">
+<!--
+function loadMethodLinks(orf, spec){
+   document.visant.loadMethodLinks(orf, spec);
+}
+function search(orf, spec){
+   //alert(spec);
+   document.visant.search(orf, spec);
+}
+function start() {
+        //alert("hi");
+        document.visant.showme();
+}
+function openKGML(fname){
+        //document.visant.clear();
+        //document.visant.openFile('http://mimiplugin.ncibi.org/visant/ws/3.01/sample/kegg/'+fname);
+        document.visant.openFile('http://mimiplugin.ncibi.org/visant/ws/3.01/visantquerymimi1.php?command=time_proxy&target=http://www.genome.jp/kegg/KGML/KGML_v0.6.1/'+fname.substring(4));
+	//document.visant.openFile('http://mimiplugin.ncibi.org/visant/ws/3.01/visantquerymimi1.php?command=time_proxy&target=http://www.genome.jp/kegg/KGML/KGML_v0.6.1/hsa/hsa00020.xml');
+}
+function openFile(fname){
+   //document.visant.clear();
+    document.visant.openFile(fname);
+   //return true;
+}
+
+//-->
+</script>
+<script langauge="JavaScript" src="overlib.js"></script>
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header"><img src="images/MiMI_visANT_Banner.jpg" alt="MiMi VisAnt Banner" width="1000" height="60" /></div>
+<div id ="applet">
+        <APPLET  style="visibility:hidden;"  NAME="visant" codebase="." ARCHIVE="./VisAntAll_031910.jar" CODE="cagt.bu.visant.VisAntApplet.class" width=1 height=1>
+               <!-- <PARAM NAME=Connection VALUE='http://visant.bu.edu:8080/test/DAI?command=unilink&orf=YAL054C&species=sce'>-->
+                <PARAM NAME=DAIurl VALUE='http://mimiplugin.ncibi.org/visant/ws/3.01/visantquerymimi1.php?'>
+                <PARAM NAME=Startup VALUE=''>
+                <PARAM NAME=kegg VALUE='http://www.genome.ad.jp/dbget-bin/www_bget?'>
+                <PARAM NAME=KGML VALUE='http://www.genome.jp/kegg/KGML/KGML_v0.6.1/'>
+                <PARAM NAME=GI VALUE='NCBI Genebank=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Protein&dopt=GenPept&list_uids='>
+                <PARAM NAME='SGD ID' VALUE='SGD Link=http://db.yeastgenome.org/cgi-bin/SGD/locus.pl?locus='>
+                <PARAM NAME=SP VALUE='Swiss-Prot NiceProt View=http://us.expasy.org/cgi-bin/niceprot.pl?'>
+                <PARAM NAME=loc VALUE='Entrez Gene=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=Graphics&list_uids='>
+                <PARAM NAME=mim VALUE='OMIM=http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id='>
+                <PARAM NAME='ref_s' VALUE='RefSeq=http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val='>
+                <PARAM NAME='gcard' VALUE='GeneCard=http://bioinfo.weizmann.ac.il/cards-bin/carddisp?'>
+                <PARAM NAME='gtest' VALUE='GeneClinics/GeneTests=http://www.genetests.org/query?gene='>
+                <PARAM NAME='O_N_hsa' VALUE='HUGO=http://www.genenames.org/data/hgnc_data.php?match='>
+                <PARAM NAME='wormbase' VALUE='WormBase=http://www.wormbase.org/db/gene/gene?name='>
+                <PARAM NAME='fbgn' VALUE='Flybase Report=http://flybase.net/.bin/fbidq.html?'>
+                <PARAM NAME='rgd' VALUE='Rat Genome Database=http://rgd.mcw.edu/tools/genes/genes_view.cgi?id='>
+                <PARAM NAME='ecocyc' VALUE='EcoCyc=http://biocyc.org/ECOLI/NEW-IMAGE?type=NIL&object='>
+                <PARAM NAME='ratmap' VALUE='RatMap=http://ratmap.gen.gu.se/ShowSingleLocus.htm?accno='>
+                <PARAM NAME='pubmed' VALUE='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids='>
+                 <!--UI customization-->
+                 <!-- determines where the web pages, such as SVG, link to external databases etc. default is main frame to avoid popout blocker-->
+                 <PARAM  NAME='target_frame'   Value = 'main'>
+                 <PARAM  NAME=Link1      Value = 'MenuName=HugeIndex Home Link=http://www.HugeIndex.org'>
+                 <PARAM  NAME=Link2      Value = 'MenuName=NCBI Home Link=http://www.ncbi.nlm.nih.gov'>
+                 </APPLET>
+</div>
+
+<div id="navcontainer">
+<ul id="navlist">
+<li id="active"><a target="main" href="home2.htm">Home</a></li>
+<li><a target="main" href="home2.htm">Tutorials</a></li>
+<li><a target="main" href="home2.htm">About MiMI Data in VisANT</a></li>
+<li><a target="new" href="http://visant.bu.edu/">VisANT</a></li>
+<li><a target="main" href="home2.htm">Known Bugs</a></li>
+<li><a target="main" href="home2.htm">Contact</a></li>
+</ul>
+</div>
+</div>
+</body>
+</html>

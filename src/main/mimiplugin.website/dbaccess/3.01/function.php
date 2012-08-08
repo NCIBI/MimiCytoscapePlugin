@@ -1,0 +1,43 @@
+<?php
+//connect to database server
+function conn_db(){
+//$server="dbx.ncibi.org:1433"; //dbx
+$server="dbx.ncibi.org:1434"; //pub
+//$server="dbx.ncibi.org:1435"; //db3
+//$server="dbx.ncibi.org:1436"; //db4
+
+$user="userMimiCytoPlugin";
+$pwd="GoBlue08!";
+$connection = mssql_connect($server, $user,  $pwd) or die("Unable to connect to server");
+}
+
+
+function conn_db_more(){
+//$server="dbx.ncibi.org:1433";
+$server="dbx.ncibi.org:1434";
+//$server="dbx.ncibi.org:1435";
+//$server="dbx.ncibi.org:1436";
+$user="userMimianno";
+$pwd="userMimianno";
+$connection = mssql_connect($server, $user,  $pwd) or die("Unable to connect to server");
+}
+
+
+
+
+function conn_db_1434(){
+$server="dbx.ncibi.org:1434";
+$user="userMimiCytoPlugin";
+$pwd="GoBlue08!";
+$connection = mssql_connect($server, $user,  $pwd) or die("Unable to connect to server");
+}
+
+
+function conn_db4(){
+$server="dbx.ncibi.org:1436";
+$user="userMimiCytoPlugin";
+$pwd="GoBlue08!";
+$connection = mssql_connect($server, $user,  $pwd) or die("Unable to connect to server");
+}
+
+?>

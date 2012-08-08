@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cytoscape Plugin for MiMI</title>
+<link href="mimipluginstyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header"><img src="images/MiMI_Plugin_banner.jpg" alt="MiMi Plugin Banner" width="1000" height="60" /></div>
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="index.html" >Home</a></li>
+<li><a href="tryplugin.html">Try Plugin</a></li>
+<li><a href="tutorial.html">Tutorials</a></li>
+<li id="active"><a href="download.html" id="current">Download</a></li>
+<li><a href="acknowledgement.html">Acknowledgement</a></li>
+<li ><a href="bugs.html" >Known Bugs</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div id="content">
+  <h3>Download Cytoscape &amp; MiMI Plugin</h3>
+  <hr />
+  <h3>Download Cytoscape</h3>
+  <p><a href="http://chianti.ucsd.edu/cyto_web/plugins/displayplugininfo.php?name=MiMIplugin" target="_blank">Download Cytoscape from cytoscape.org</a></p>
+  <h3>Download and Install MiMIPlugin</h3>
+   <p>       <strong>Install from within Cytoscape </strong><br />
+      a) Startup Cytoscape-&gt;Plugins-&gt;Manage Plugins-&gt;Available for Install-&gt;Network and Attribute I/O-&gt;MiMIPlugin<br />
+      b) 
+      Install<br />
+   </p>
+   <h3>     Download a sample input file</h3>
+   <p>Users can upload a text file with gene list to start the interaction network query. Users can specify species, molecule type etc using GUI or put these parameters on the header lines of the input file. <br />
+     <br />
+     Here is a sample input file:<br />
+     <br />
+     taxonomyID=9606 <br />
+     moleculeType=protein <br />
+     dataSource =all <br />
+     interactionLevel=1 <br />
+     searchPathBetweenGenes=no<br />
+     csf1r<br />
+     CCNT2<br />
+     <br />
+     <br />
+     Line 1 specify taxonomy id as 9606 (human)<br />
+     Line 2 specify molecule type as protein<br />
+     Line 3 get interactions from all data sources<br />
+     Line 4 find direct neighbors for input gene. You can expand network by choosing higher interaction level. <br />
+     Line 5 find all neighbors for input gene.<br />
+     Line 6 gene1<br />
+    Line 7 gene2</p>
+   <p>Download above sample input file <a href="http://mimiplugin.ncibi.org/mygene.txt">here</a>. <br />
+     Click <a href="http://mimiplugin.ncibi.org/template.html">here</a> to get more input file format information. <br />
+     <br />
+   </p>
+   <p>For bug reporting please email: <a href="mailto:mimi-help@umich.edu">mimi-help@umich.edu</a></p>
+  <h3>&nbsp;</h3>
+  <div align="center"><br />
+  </div>
+</div>
+<div id ="footer">
+  <div align="center">
+    <p><br />
+      </p>
+  </div>
+</div>
+</div>
+</body>
+</html>

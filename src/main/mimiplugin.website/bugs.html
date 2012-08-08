@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cytoscape Plugin for MiMI</title>
+<link href="mimipluginstyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header"><img src="images/MiMI_Plugin_banner.jpg" alt="MiMi Plugin Banner" width="1000" height="60" /></div>
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="index.html" >Home</a></li>
+<li><a href="tryplugin.html">Try Plugin</a></li>
+<li><a href="tutorial.html">Tutorials</a></li>
+<li><a href="download.html">Download</a></li>
+<li><a href="acknowledgement.html">Acknowledgement</a></li>
+<li id="active"><a href="bugs.html" id="current">Known Bugs</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div id="content">
+  <h3>Known bugs and issues</h3>
+  <hr />
+  <ul>
+    <li><strong>MiMI Internal ID</strong><br />
+      MiMI internal IDs are build dependent. This affects users node/edge annotations since we use this internal id as the identifier of node/edge annotation. It can also affect external storage and linking of data using MiMI IDs.<br />
+      <br />
+    </li>
+    <li><strong>MiMI merging issues</strong><br />
+      For some molecules, MiMI assigns them to different internal IDs although they have same molecule names. For example, when users query molecule “csf1r” from MiMI for mouse, protein with interaction only from BIND data source, they will get two nodes called “csf1r” but with 46646 and 5983 as the molecule IDs. <br />
+    </li>
+    </ul>
+  <p>For bug reporting please email: <a href="mailto:mimi-help@umich.edu">mimi-help@umich.edu</a></p>
+  <h3>&nbsp;</h3>
+  <p>&nbsp;</p>
+  <div align="center"><br />
+  </div>
+</div>
+<div id ="footer">
+  <div align="center">
+    <p><br />
+      </p>
+  </div>
+</div>
+</div>
+</body>
+</html>

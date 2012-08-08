@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+ <title>GIN Interactions Extracted from the Literature (PubMed Update: 11/12/2008)</title>
+ <link>http://gin.ncibi.org:8080/gin/</link>
+ <description>The latest interactions automatically extracted from PubMed by using text mining.</description>
+ <language>en-us</language>
+ <lastBuildDate>Sat Nov 29 01:11:58 EST 2008</lastBuildDate>
+
+<atom:link href="http://www-personal.umich.edu/~ozgur/gin_test.xml" rel="self" type="text/xml" />
+ <item>
+  <title>Agent: orc2 Target: orc1 Interaction Type: interacts (PMID: 11779870)</title>
+  <link>http://www.ncbi.nlm.nih.gov/pubmed/11779870</link>
+  <description>  Further analyses indicate that ORC2 physically interacts with ORC1 on non-chromatin nuclear structures. 
+  </description>
+  <guid>pmid:11779870agent:orc2target:orc1type:interactssentence:Further analyses indicate that ORC2 physically interacts with ORC1 on non-chromatin nuclear structures. </guid>
+  <pubDate>Sat Nov 29 01:36:40 EST 2008</pubDate>
+ </item>
+
+</channel>
+
+</rss>

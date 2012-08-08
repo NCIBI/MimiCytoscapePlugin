@@ -1,0 +1,24 @@
+After getting the project from SVN you will need to initialize 
+the local plugin directory in Eclipse.
+
+These steps will do that:
+
+1. Import into Eclipse as a Maven project. NOTE: Make sure the src/main/resources
+   has all its directories on the classpath! (In some versions of Elipse and/or STS
+   this in NOT the default for imported maven projects).
+
+2. From the command line mvn -Dmaven.test.skip=true package
+
+3. Copy/edit template.build.properties to build.properties (points to local Cytoscape 
+   download; we are currently using Cytoscape 2.8.0). 
+
+4. Run the file InstallPluginsBuild.xml as ant build (this will create a local copy of 
+   the plugins in directory in the target directory in your Eclipse project you only 
+   need to do this once now, and any time you delete/clean the targets directory).
+   ant -file InstallPluginsBuild.xml
+
+5. Create/Edit a new run configuration, pointed at the Eclipse project that runs main 
+   class cytoscape.CyMain with program arguments -p target/plugins (I also set the VM 
+   arguments to -Xms512m -Xmx512m)
+
+

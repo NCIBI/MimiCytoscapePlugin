@@ -1,0 +1,30 @@
+<?
+include ('functionBeth.php');
+//Written by Jing Gao
+//This script is called by mimi cytoscape plugin to query mimi database on 
+//NCIBIDB\PUB
+$ids=$_GET['ID'];
+
+$db="mimiR2";
+$ret="";
+print "$ids\n";
+//connect to database server
+$cn=conn_db();
+mssql_select_db( $db);
+print "cn is $cn\n";
+  $stmt = mssql_init("mimiCytoPlugin.test2");
+  mssql_bind($stmt, "@list", $ids, SQLVARCHAR, false);
+  $result = mssql_execute($stmt);
+  unset($stmt);  // <---VERY important
+print $result;
+
+
+
+//$results=mssql_query("exec mimiCytoPlugin.test2 'abc'")or die("Sorry, \"$query\" failed.");
+while ($myrow = mssql_fetch_array($results))
+	$ret.="$myrow[0]\n";
+print $ret;
+
+mssql_close($cn);
+
+?>

@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+
+body 
+{
+font-family: Arial, Helvetica, sans-serif;
+}
+
+body p 
+{
+font-family: Arial, Helvetica, sans-serif;
+}
+
+a:link img {
+border: none;
+}
+
+a:visited img {
+border: none;
+}
+
+a:hover img {
+border: none;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+font-family: Arial, Helvetica, sans-serif;
+color: navy
+}
+
+#wrapper {
+background-color: #FFFFFF;
+	width: 1000px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-bottom: 10px;
+	margin-left: auto;
+	border: 1px solid #000000;
+	text-align:left;
+}

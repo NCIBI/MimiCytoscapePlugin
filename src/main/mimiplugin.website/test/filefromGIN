@@ -1,0 +1,25 @@
+^GlobalNetworkStatistics
+Degree=255
+Clusteringcoefficient=0.04 (1350 out of 32385)
+DiseaseSpecificNetworks=Prostate Cancer
+EigenvectorCentralityPercentile=99
+DegreeCentralityPercentile=97
+ClosenessCentralityPercentile=99
+BetweennessCentralityPercentile=99
+^Interactions
+GeneNamePair=tp53	mdm2
+Description=As it happens, P53 also engineers its own destruction by including MDM2 in its list of transcriptional targets. (Article 1363702) (score = 5.57857)
+GeneNamePair=tp53	nr3c1
+Description=These findings have suggested that GR could enhance survival by sequestering P53 in the cytoplasm and, conversely, that P53 might enhance cell death by sequestering GR in the cytoplasm and blocking its survival function. (Article 1716177) (score = 5.44045) 
+GeneNamePair=tp53	tp73
+Description=To test whether P73 can also inhibit GR activity, we monitored activation of a GR-responsive luciferase reporter gene (GR-luc, Fig. 3) when GR was co-expressed with P53 or P73. (Article 1716177) (score = 5.4193)
+GeneNamePair=tp53	pttg1
+Description=Our results show that overexpression of PTTG activates P53 expression, and that this action of PTTG is achieved through the regulation of the expression of c-myc, which in turn regulates the expression of the P53 gene, by its direct binding to the c-myc/max sequence of the P53 promoter. (Article 479695) (score = 4.86244) 
+GeneNamePair=tp53	akt1
+Description=Through this mechanism, HER-2 and AKT have been shown to block apoptosis in vitro by regulating p21WAF1/CIP1 and by enhancing P53 degradation [21,31]. (Article 314414) (score = 2.6959) 
+GeneNamePair=stat3	akt1
+Description=
+GeneNamePair=tp53	fas
+Description=Holocytochrome C interacts with apoptotic protease activating factor (APAF-1), which then recruits and activates procaspase 9. This ternary complex triggers the autocatalytic processing of caspase 9 and subsequently activates caspase 3. However inhibition of CD95 and P53 signaling pathway does not block this release, but activation of the caspase dependent apoptotic machinery requires cooperation between c-myc induced cytochrome C release and CD95 signaling. (Article 1395315) (score = 0.17717) 
+GeneNamePair=il4	fas
+Description=

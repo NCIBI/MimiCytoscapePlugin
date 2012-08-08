@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cytoscape Plugin for MiMI</title>
+<link href="mimipluginstyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header"><img src="images/MiMI_Plugin_banner.jpg" alt="MiMi Plugin Banner" width="1000" height="60" /></div>
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="index.html" >Home</a></li>
+<li><a href="tryplugin.html">Try Plugin</a></li>
+<li><a href="tutorial.html">Tutorials</a></li>
+<li id="active"><a href="download.html" id="current">Download</a></li>
+<li><a href="acknowledgement.html">Acknowledgement</a></li>
+<li ><a href="casestudy.html" >Case Study</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div id="content">
+  <h3>Download Cytoscape &amp; MiMI Plugin</h3>
+  <hr />
+  <h3>Download Cytoscape</h3>
+  <p>You can download Cytoscape from <a href="http://www.cytoscape.org/" target="_blank">here</a>.  </p>
+  <h3>Download and Install MiMIPlugin</h3>
+   <p>There are two ways to install MiMI Plugin,intstall from within Cytoscape or download latest plugin jar file. You can use either of them. If you have old version of MiMI Plugin in your system, you need to do plugin <a href="#update">Update</a> or first <a href="#cleanup">Clean up</a> the old version of MiMI Plugin and then install the latest version. Otherwise, MiMIplugin duplication or version conflict will mess up plugin functionalities.    
+   </p>
+   <ul>
+     <li>       Install from within Cytoscape
+	<ol>
+        <li> Startup Cytoscape-&gt;Plugins-&gt;Manage Plugins-&gt;Available for Install-&gt;Network and Attribute I/O-&gt;MiMIPlugin
+        <li> Install</li>
+	</ol>
+      </li>
+     <li>Download plugin jar file 
+	<ol>
+        <li>Download plugin jar file from <a href="http://mimiplugin.ncibi.org/jar/MiMIplugin.jar">here</a>.</li>
+        <li>Save the jar file into your Cytoscape/plugings/ directory</li>
+	</ol>
+     </li>
+    </ul>
+   <h3><br/>
+      <a name="update">Update MiMIPlugin</a> </h3>
+      <p>Please make sure no MiMIplugin.jar in yourcytoscape/plugins/ directory. Otherwise delete it. </p>
+      <ol>
+	<li>
+	Startup Cytoscape->Plugins->Update Plugins->Updatable Plugins
+	</li>
+	<li>	Choose MiMIplugin latest version->Update Selected </li>
+	<li>	Re-startup Cytoscape</li>
+      </ol>
+   <h3><br/>
+      <a name="cleanup">Clean up Old MiMI Plugin</a> </h3>
+      <p>
+	In order to avoid MiMI Plugin duplication and version conflict, you need to clean up the old plugin versions in your system before install/update latest plugin.</P>
+	<ol>
+	<li>	delete MiMIplugin.jar file from yourcytoscape/plugins/ directory </li>
+	<li>	delete directory ".cytoscape" from C:\Documents and Settings\yourloginname\</li> 
+	</ol>
+   <h3><br />
+     Download a sample input file</h3>
+   
+   <p>Users can upload a text file with gene list to start the interaction network query.  <br />
+     <br />
+     Here is a sample input file:<br />
+     <br />
+     FZP1 <br />
+     AFAM1 <br />
+     CF <br />
+     MUG1 <br />
+     BLURB <br />
+     CFH <br />
+     HPX <br />
+     C3 <br />
+     C7 <br />
+     PRGU <br />
+     MUP1 <br />
+     FABP5 <br />
+     PGLYRP2 <br />
+     HABP2 <br />
+     KNG1 <br />
+     CCDC11 <br />
+     AHSG <br />
+     DLD <br />
+     ACAT2 <br />
+     HP <br />
+     MUG1 <br />
+     IFNAR2 <br />
+     GC <br />
+     COL3A1 <br />
+     CLR <br />
+     <br />
+     <br />
+   <p>Download above sample file <a href="http://mimiplugin.ncibi.org/mygene.txt">here</a>. <br />
+     <br />
+   </p>
+   <p>For bug reporting please email: <a href="mailto:mimi-help@umich.edu">mimi-help@umich.edu</a></p>
+  <h3>&nbsp;</h3>
+  <div align="center"><br />
+  </div>
+</div>
+<div id ="footer">
+  <div align="center">
+    <p><br />
+      </p>
+  </div>
+</div>
+</div>
+</body>
+</html>

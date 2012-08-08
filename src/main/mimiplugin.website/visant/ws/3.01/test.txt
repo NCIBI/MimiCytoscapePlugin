@@ -1,0 +1,25 @@
+#!batch commands
+#clear the current network
+clear_network
+
+#read file with input protein 
+read=http://mimiplugin.ncibi.org/visant/ws/3.01/csf1r.txt
+#query mimi 
+login=jinggao@umich.edu:jinggao@umich.edu
+database=MiMI
+species=hsa
+select_node=csf1r
+query_selected_nodes
+#expand 
+select_node=sos1
+query_selected_nodes
+pause=700
+
+#load KGML(alreday tested, worked fine)
+read=http://mimiplugin.ncibi.org/visant/ws/3.01/visantquerymimi1.php?command=time_proxy&target=http://www.genome.jp/kegg/KGML/KGML_v0.6.1/hsa/hsa00020.xml
+#load marix file
+read=http://mimiplugin.ncibi.org/visant/ws/3.01/cmpdConcentration.txt
+
+
+
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">		
+<title> Welcome to VisANT Home Page</title>	
+<style fprolloverstyle>A:hover {color: #9BFC4E; font-weight: bold}
+</style>
+
+<base target="main">
+
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;">
+  <p align="left"></div>
+
+<SCRIPT language="JavaScript">
+<!--
+function loadMethodLinks(orf, spec){
+   document.visant.loadMethodLinks(orf, spec);
+}
+function search(orf, spec){
+   //alert(spec);
+   document.visant.search(orf, spec);
+}
+function start() {
+	//alert("hi");
+	document.visant.showme();
+}
+function openKGML(fname){
+	//document.visant.clear();
+	//document.visant.openFile('http://visant.bu.edu:8080/test/DAI?command=time_proxy&target=http://www.genome.jp/kegg/'+fname);
+	document.visant.openFile('http://visant.bu.edu:8080/test/DAI?command=time_proxy&target=http://www.genome.jp/kegg/KGML/KGML_v0.6.1/'+fname.substring(4));
+}
+function openFile(fname){
+   //document.visant.clear();
+    document.visant.openFile(fname);
+   //return true;
+}
+
+//-->
+</script>
+<script langauge="JavaScript" src="overlib.js"></script>
+</head>	
+<body link="#FFFFFF" vlink="#FFFFFF" alink="#9BFC4E" leftmargin="2" topmargin="0" >
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="800" id="AutoNumber3" height="47" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+  <tr>
+    <td height="79" colspan="10" width="863" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" background="banner_background.png">
+           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#FFFFFF" width="800" id="AutoNumber4" height="78">
+             <tr>
+               <td width="69%" height="48">
+    <APPLET NAME="visant"  codebase="."	ARCHIVE="./VisAnt.jar" 					
+			CODE="cagt.bu.visant.VisAntApplet.class" WIDTH=1 HEIGHT=1 align="right">
+      <PARAM  NAME=Connection Value = 'http://visant.bu.edu:8080/test/DAI?command=unilink&orf=YAL054C&species=sce'>
+      <!-- <PARAM  NAME=DAIurl     Value = 'http://visant.bu.edu:8080/test/DAI?'>-->
+      <PARAM  NAME=DAIurl     Value = 'http://mimiplugin.ncibi.org/visant/ws/3.01/visantquerymimi.php?'>	
+      <!--<PARAM  NAME=startup     Value = 'sample/visml_files/start_up_4.xml'>-->
+      <PARAM  NAME=startup     Value = ''>	
+      <PARAM  NAME=kegg       Value = 'http://www.genome.ad.jp/dbget-bin/www_bget?'>
+      <!--<PARAM  NAME=KGML       Value = 'http://www.genome.jp/kegg/xml/'>-->
+      <PARAM  NAME=KGML       Value = 'http://www.genome.jp/kegg/KGML/KGML_v0.6.1/'>
+      <PARAM  NAME='GI'       Value = 'NCBI Genebank=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Protein&dopt=GenPept&list_uids='>
+      <PARAM  NAME='SGD ID'   Value = 'SGD Link=http://db.yeastgenome.org/cgi-bin/SGD/locus.pl?locus='>
+      <PARAM  NAME='SP'       Value = 'Swiss-Prot NiceProt View=http://us.expasy.org/cgi-bin/niceprot.pl?'>
+		  <PARAM  NAME='loc'      Value = 'Entrez Gene=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=Graphics&list_uids='>
+		  <PARAM  NAME='mim'     Value = 'OMIM=http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id='>
+		  <PARAM  NAME='ref_s'    Value = 'RefSeq=http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val='>
+		  <PARAM  NAME='gcard'    Value = 'GeneCard=http://bioinfo.weizmann.ac.il/cards-bin/carddisp?'>
+		  <PARAM  NAME='gtest'    Value = 'GeneClinics/GeneTests=http://www.genetests.org/query?gene='>
+		  <PARAM  NAME='O_N_hsa'    Value = 'HUGO=http://www.genenames.org/data/hgnc_data.php?match='>
+      <PARAM  NAME='wormbase'    Value = 'WormBase=http://www.wormbase.org/db/gene/gene?name='>
+	  	<PARAM  NAME='fbgn'    Value = 'Flybase Report=http://flybase.net/.bin/fbidq.html?'>
+      <PARAM  NAME='rgd'    Value = 'Rat Genome Database=http://rgd.mcw.edu/tools/genes/genes_view.cgi?id='>
+      <PARAM  NAME='ecocyc'    Value = 'EcoCyc=http://biocyc.org/ECOLI/NEW-IMAGE?type=NIL&object='>
+		  <PARAM  NAME='ratmap'    Value = 'RatMap=http://ratmap.gen.gu.se/ShowSingleLocus.htm?accno='>
+		  <PARAM  NAME='pubmed'    Value = 'http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids='>
+		  <!--UI customization-->
+		  <!-- determines where the web pages, such as SVG, link to external databases etc. default is main frame to avoid popout blocker-->
+		  <PARAM  NAME='target_frame' 	Value = 'main'><PARAM  NAME=Link1      Value = 'MenuName=HugeIndex Home Link=http://www.HugeIndex.org'><PARAM  NAME=Link2      Value = 'MenuName=NCBI Home Link=http://www.ncbi.nlm.nih.gov'>
+		  </APPLET></td>
+               <td width="31%" height="48">
+           <p align="right"><b><font face="Arial" color="#FFFFFF" size="4">
+         <a href="javascript:parent.header.start()" onmouseover="return overlib('Click to <B>Start VisANT</B>', CENTER);" onmouseout="return nd();" >
+		    
+		   Start VisANT</a></font></b></td>
+             </tr>
+             <tr>
+               <td width="100%"  colspan="2" height="30">
+               <p align="right">
+    <b><font face="Arial" color="#FFFFFF" size="2">Integrative Visual Analysis Tool for 
+               Biological Networks and Pathways</font></b></td>
+             </tr>
+           </table>
+    </td>
+  </tr>
+  <tr>
+      <td width="47" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <p><span >
+      <font face="Arial" color="#66CCFF" style="font-size: 9pt">
+      <a title="VisANT Home:Latest updates, announcements..." target="main" style="text-decoration: none; font-weight:700" href="home2.htm">Home</a></font></span></td>
+      <td width="80" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF"><span >
+      <font face="Arial" style="font-size: 9pt">
+      <a title="Latest updates of VisANT, monthly news letters" target="main" style="text-decoration: none; font-weight:700" href="news.htm">News</a></font></span></td>
+      <td width="92" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <span >
+      <font face="Arial" color="#66CCFF" style="font-size: 9pt">
+      <a title="Run VisANT as Applet, or Application through Java Web Starter...." target="main" style="text-decoration: none; font-weight:700" href="running2.htm">Run VisANT</a></font></td>
+      <td width="72" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <font face="Arial" style="font-size: 9pt">
+      <a title="Databases behind VisANT" target="main" style="text-decoration: none; font-weight:700" href="database.htm">Database</a></font></td>
+      <td width="64" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <font face="Arial" color="#66CCFF" style="font-size: 9pt">
+      <a title="Detailed description of VisANT features" target="main" style="text-decoration: none; font-weight:700" href="features.htm">Features</a></font></td>
+      <td width="63" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <font face="Arial" color="#66CCFF" style="font-size: 9pt">
+      <a target="main" title="Detailed tutorials of how to use VisANT and a list of live VisANT networks" style="text-decoration: none; font-weight:700" href="tutorials/tutorials_list.html">Tutorials</a></td>
+      <td width="60" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <p dir="ltr">
+      <font face="Arial" color="#66CCFF" style="font-size: 9pt">
+      <a target="main" title="Detailed tutorials of how to use VisANT and a list of live VisANT networks" style="text-decoration: none; font-weight: 700" href="sample/sample_main.html">Samples</a></td>
+      <td width="73" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <span >
+      <font face="Arial" color="#66CCFF" style="font-size: 9pt">
+      <a target="main" title="Scentific publications, VisANT user manual, faq..." style="text-decoration: none; font-weight:700" href="docs.htm">Documents</a></font></span></td>
+      <td width="142" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <font face="Arial" color="#66CCFF" style="font-size: 9pt">
+      <a title="VisANT develop team, discussion board, user registration..." target="main" style="text-decoration: none; font-weight:700" href="community.htm">VisANT Community</a></font></td>
+      <td width="170" bgcolor="#7D87DF" align="center" height="23" style="border-style: solid; border-width: 1" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+      <span style="font-weight: 700"><font face="Arial" style="font-size: 9pt">
+      <a style="text-decoration: none" target="main" title="List all interactions in out database, allow bach loading of large scale data..." href="statistics_visant/index.html">
+      Interaction Statistics</a></font></span></td>
+    </tr>
+</table>
+</body>
+
+
+
+</html>

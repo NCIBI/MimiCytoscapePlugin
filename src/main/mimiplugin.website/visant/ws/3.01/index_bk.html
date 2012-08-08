@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MiMIVisAnt</title>
+<link href="mimivisant.css" rel="stylesheet" type="text/css" />
+
+<SCRIPT language="JavaScript">
+<!--
+function loadMethodLinks(orf, spec){
+   document.visant.loadMethodLinks(orf, spec);
+}
+function search(orf, spec){
+   //alert(spec);
+   document.visant.search(orf, spec);
+}
+function start() {
+        //alert("hi");
+        document.visant.showme();
+}
+function openKGML(fname){
+        //document.visant.clear();
+        //document.visant.openFile('http://visant.bu.edu:8080/test/DAI?command=time_proxy&target=http://www.genome.jp/kegg/'+fname);
+        document.visant.openFile('http://visant.bu.edu:8080/test/DAI?command=time_proxy&target=http://www.genome.jp/kegg/KGML/KGML_v0.6.1/'+fname.substring(4));
+}
+function openFile(fname){
+   //document.visant.clear();
+    document.visant.openFile(fname);
+   //return true;
+}
+
+//-->
+</script>
+<script langauge="JavaScript" src="overlib.js"></script>
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header"><img src="images/MiMI_visANT_Banner.jpg" alt="MiMi VisAnt Banner" width="1000" height="60" /></div>
+<div id ="applet">
+        <APPLET  style="visibility:hidden;"  NAME="visant" codebase="." ARCHIVE="./VisAnt_031910.jar" CODE="cagt.bu.visant.VisAntApplet.class" width=1 height=1>
+                <PARAM NAME=Connection VALUE='http://visant.bu.edu:8080/test/DAI?command=unilink&orf=YAL054C&species=sce'>
+                <PARAM NAME=DAIurl VALUE='http://mimiplugin.ncibi.org/visant/ws/3.01/visantquerymimi1.php?'>
+                <PARAM NAME=Startup VALUE=''>
+                <PARAM NAME=kegg VALUE='http://www.genome.ad.jp/dbget-bin/www_bget?'>
+                <PARAM NAME=KGML VALUE='http://www.genome.jp/kegg/KGML/KGML_v0.6.1/'>
+                <PARAM NAME=GI VALUE='NCBI Genebank=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Protein&dopt=GenPept&list_uids='>
+                <PARAM NAME='SGD ID' VALUE='SGD Link=http://db.yeastgenome.org/cgi-bin/SGD/locus.pl?locus='>
+                <PARAM NAME=SP VALUE='Swiss-Prot NiceProt View=http://us.expasy.org/cgi-bin/niceprot.pl?'>
+                <PARAM NAME=loc VALUE='Entrez Gene=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene&cmd=Retrieve&dopt=Graphics&list_uids='>
+                <PARAM NAME=mim VALUE='OMIM=http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id='>
+                <PARAM NAME='ref_s' VALUE='RefSeq=http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val='>
+                <PARAM NAME='gcard' VALUE='GeneCard=http://bioinfo.weizmann.ac.il/cards-bin/carddisp?'>
+                <PARAM NAME='gtest' VALUE='GeneClinics/GeneTests=http://www.genetests.org/query?gene='>
+                <PARAM NAME='O_N_hsa' VALUE='HUGO=http://www.genenames.org/data/hgnc_data.php?match='>
+                <PARAM NAME='wormbase' VALUE='WormBase=http://www.wormbase.org/db/gene/gene?name='>
+                <PARAM NAME='fbgn' VALUE='Flybase Report=http://flybase.net/.bin/fbidq.html?'>
+                <PARAM NAME='rgd' VALUE='Rat Genome Database=http://rgd.mcw.edu/tools/genes/genes_view.cgi?id='>
+                <PARAM NAME='ecocyc' VALUE='EcoCyc=http://biocyc.org/ECOLI/NEW-IMAGE?type=NIL&object='>
+                <PARAM NAME='ratmap' VALUE='RatMap=http://ratmap.gen.gu.se/ShowSingleLocus.htm?accno='>
+                <PARAM NAME='pubmed' VALUE='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids='>
+                 <!--UI customization-->
+                 <!-- determines where the web pages, such as SVG, link to external databases etc. default is main frame to avoid popout blocker-->
+                 <PARAM  NAME='target_frame'   Value = 'main'>
+                 <PARAM  NAME=Link1      Value = 'MenuName=HugeIndex Home Link=http://www.HugeIndex.org'>
+                 <PARAM  NAME=Link2      Value = 'MenuName=NCBI Home Link=http://www.ncbi.nlm.nih.gov'>
+                 </APPLET>
+</div>
+
+<div id="navcontainer">
+<ul id="navlist">
+<li id="active"><a href="#" id="current">Home</a></li>
+<li><a href="tutorial.html">Tutorials</a></li>
+<li><a href="download.html">About MiMI Data in VisANT</a></li>
+<li><a href="acknowledgement.html">VisANT</a></li>
+<li><a href="bugs.html">Known Bugs</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div id="content">
+  <form name=searchform onSubmit="return search()">
+<table border="0" cellpadding="3" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="800" id="AutoNumber2" height="54">
+
+  <tr>
+    <td width="782" height="1">
+    <p style="margin-top: 0; margin-bottom:0" align="center">
+    <BR><BR>
+    <font size="2" face="Arial">
+    <b>Gene/Protein &nbsp; name/ID:</b></font><font face="Arial">&nbsp;<input type="text" name="orf" value="csf1r" size="24"></font><font size="2" face="Arial">&nbsp;<b>in
+    species</b>&nbsp; </font><font face="Arial"><SELECT NAME="species" width="5">
+                        <OPTION VALUE="ath">Arabidopsis thaliana</OPTION>
+                        <OPTION VALUE="cel">Caenorhabditis elegans</OPTION>
+                        <OPTION VALUE="dme">Drosophila melanogaster</OPTION>
+                        <OPTION VALUE="eco">Escherichia coli K-12</OPTION>
+                        <OPTION SELECTED VALUE="hsa">Homo sapiens</OPTION>
+                        <OPTION VALUE="mmu">Mus musculus</OPTION>
+                        <OPTION VALUE="rno">Rattus norvegicus</OPTION>
+                        <OPTION VALUE="sce">Saccharomyces cerevisiae</OPTION>
+                </SELECT></font><BR>
+    </p>
+    <p style="margin-top: 0; margin-bottom:0" align="center"><font face="Arial">
+    <Button TYPE=BUTTON onClick="javascript:search(document.searchform.orf.value, document.searchform.species.value)"
+        <STRONG><font size="2" face="Arial">
+        Search for Interactions</font></STRONG></Button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!--  <Button TYPE=BUTTON onClick="javascript:window.open('http://visant.bu.edu/sample/kegg/'+document.searchform.species.value+'/index.html','main')">
+        <strong><font size="2" face="Arial">Browse KEGG Pathways</font></strong></Button>-->
+    </font></p>
+</td></tr></table>	
+
+
+
+
+
+  <h3>MiMI Data in VisANT</h3>
+  <hr />
+  <p align="left"><a href="http://visant.bu.edu/" target="_blank">VisANT </a>is a three-tier enterprise system designed specifically for the integrative visual data-mining of multi-scale Bio-Network/Pathways. It features:<br/>
+		<p><strong>Network Module Enrichment Analysis (NMEA) </strong>to detect phenotypic difference between two data sets (e.g. gene expression of disease v.s. normal), try out  NMEA for cell cycle pathway in P53 mutant data. NMEA is deigned to find functional modules that inform phenotypic differences. For the current release, such differences are usually transcriptional activity. NMEA by default will be performed for all non-embedded metanodes. The function is available under the <strong> Expression</strong> menu and requires the input of expression data (sample expression data). When execution of NMEA is complete, the nodes in the modules will be colored according to their enrichment scores </p>
+		<p><strong>GO Term Enrichment Analysis (GOTEA) to</strong> find the over-represented GO terms in <strong>network modules</strong>.  The function is available under the  <strong>Metagraph</strong> menu and requires genes in the modules being annotated. A quick example  can be tried here. An example with  the step-by-step macros is illustrated here to predict the function of KEGG cell cycle pathway using both hyper-geometry test </p>
+		<p> <strong>Batch</strong> mode automates database queries for interactions, name resolutions, and GO annotations,     more ..</p>
+		<p><strong>Batch mode</strong> to automate batch processes in the background and to handle large-scale networks with millions nodes and edges. A test case has been carried out with 15,447 nodes and 1,722,708 edges as shown below,   more information can be found here  </p>
+  </p>
+
+</div>
+<div id ="footer">
+  <div align="center">
+    <p><br />
+      </p>
+  </div>
+</div>
+</div>
+</body>
+</html>

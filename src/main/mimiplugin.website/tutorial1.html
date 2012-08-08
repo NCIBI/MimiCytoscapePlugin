@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cytoscape Plugin for MiMI</title>
+<link href="mimipluginstyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header"><img src="images/MiMI_Plugin_banner.jpg" alt="MiMi Plugin Banner" width="1000" height="60" /></div>
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="index.html" >Home</a></li>
+<li><a href="tryplugin.html">Try Plugin</a></li>
+<li id="active"><a href="tutorial.html" id="current">Tutorials</a></li>
+<li><a href="download.html">Download</a></li>
+<li ><a href="acknowledgement.html" >Acknowledgement</a></li>
+<li ><a href="bugs.html" >Known Bugs</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div id="content">
+  <h3><a name="Top" id="Top"></a>Tutorial</h3>
+  <hr />
+  <ul>
+    <li><a href="#Install">Install Cytoscape and MiMI Plugin</a></li>
+    <li><a href="#Load"> Loading a network</a></li>
+    <li><a href="#Getting"> Getting literature information for selected edge and sort the result</a></li>
+    <li><a href="#Finding"> Finding pathway matches for chosen network</a></li>
+    <li><a href="#Adding"> Adding your own node/edge annotation      </a></li>
+    <li><a href="#Expanding">Expanding a network</a></li>
+    <li><a href="#Paths">Finding paths among given genes</a></li>
+  </ul>
+  <h3><a name="Install" id="Install"></a>Install Cytoscape and MiMI Plugin</h3>
+  <p><a href="download.html">Click here to get instructions.</a></p>
+  <h3><a name="Load" id="Load"></a>Loading a Network</h3>
+  <ol>
+    <li>Assuming that you already installed Cytoscape and MiMI Plugin. If you need to install Cytoscape, click <a href="http://cytoscape.org" target="_blank">here</a>.<br />
+    </li>
+    <li>Prepare a list of genes, see, for example <a href="mygene.txt" target="_blank">mygene.txt</a> .</li>
+    <li>Load mygene.txt file. <br />
+      a) Starting up Cytoscape-&gt;plugins-&gt;MiMI-&gt;MiMI Plugin-&gt;From File tab-&gt; Drop down box -&gt;specify species, molecule type etc <br />
+  b) Load Gene File-&gt;your gene file name</li>
+    <li>Browse node/edge attributes with Cytoscape Node Attribute Browser and Edge Attribute Browser.<br />
+    a) Click Node Attribute Browser on Cytoscape panel (bottom right)-&gt;click icon -&gt;check attributes name-&gt;choose nodes to see attributes.<br />
+      b)	 Click Edge Attribute Browser to get edge information</li>
+    <li>Double clicking node/edge will direct you to MiMI webpage for that node/edge.</li>
+  </ol>
+  <h3><a name="Getting" id="Getting"></a>Getting literature information for  selected edge (interaction) and sort the result</h3>
+  <ol>
+    <li>Assuming that you already loaded a network. If you need to load a network, click <a href="#Load">here</a>. </li>
+    <li>Right click an edge-&gt;get literature info from BioNLP</li>
+    <li>Sort the result. Click “sort” to sort the result with MEAD</li>
+    </ol>
+  <h3><a name="Finding" id="Finding"></a>Finding pathway matches for chosen  network</h3>
+  <ol>
+    <li>Assuming that you already loaded a network. If you need to load a network, click <a href="#Load">here</a>. </li>
+    <li>Select nodes and edges-&gt;right click node-&gt;SAGA-&gt;apply SAGA to chosen network-&gt;specify database and matching percentage-&gt;query</li>
+    </ol>
+  <h3><a name="Adding" id="Adding"></a>Adding your own node/edge annotation</h3>
+  <ol>
+    <li>Assuming that you already loaded a network. If you need to load a network, click <a href="#Load">here</a>. </li>
+    <li>Right click a node/edge-&gt;annotation-&gt;log in-&gt;change annotation set name-&gt;edit attributes from MiMI, add comments and URLs-&gt;save-&gt;log out</li>
+    </ol>
+  <h3><a name="Expanding" id="Expanding"></a>Expanding a network</h3>
+  <ol>
+    <li>There is interaction level drop-down list on the dialog box. It has three levels from 1 to 3 that mean users can choose different number of steps of expansion to find neighbors. Choose higher level to expand network. </li>
+  </ol>
+  <h3><br />
+    <a name="Paths" id="Paths"></a>Finding paths among given genes</h3>
+  <ol>
+    <li>If you only interested in interactions among given genes, you can do this by following “Loading a network” and you need to check the box of “Search Paths Between Genes”.<br />
+    </li>
+  </ol>
+  <p></p>
+  <div align="center">
+    <p><a href="#Top">Top of Page</a></p>
+    <p><br />
+    </p>
+  </div>
+</div>
+<div id ="footer">
+  <div align="center">
+    <p><br />
+      </p>
+  </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisAnt ver="1.34" species="sce" nodecount="543" fs="0" net_size="711,635" edgeopp="false" db_online="true" fineArt="false" autoFit="true">
+	<method name="M0015" desc="Electron microscopy" weight="null" type="E" visible="true" species="rsion=" color="255,0,0"/>
+	<method name="M0014" desc="cross-linking studies" weight="null" type="E" visible="true" species="rsion=" color="176,48,96"/>
+	<method name="M0013" desc="copurification" weight="null" type="E" visible="true" species="rsion=" color="85,26,139"/>
+	<method name="M0012" desc="Competition binding" weight="null" type="E" visible="true" species="rsion=" color="12,254,34"/>
+	<method name="M0011" desc="Co-sedimentation " weight="null" type="E" visible="true" species="rsion=" color="84,117,184"/>
+	<method name="M0010" desc="coimmunoprecipitation" weight="null" type="E" visible="true" species="rsion=" color="25,110,6"/>
+	<method name="M0104" desc="Transcription Nominal" weight="null" type="E" visible="true" species="rsion=" color="0,0,0"/>
+	<method name="M9901" desc="Connection of Shared Components" weight="null" type="C" visible="true" color="185,191,180"/>
+	<method name="M0103" desc="Transcriptional Downregulation" weight="null" type="E" visible="true" species="rsion=" color="0,0,0"/>
+	<method name="M0102" desc="Transcriptional Upregulation" weight="null" type="E" visible="true" species="rsion=" color="0,0,0"/>
+	<method name="M0006" desc="Affinity Column" weight="null" type="E" visible="true" species="rsion=" color="191,88,3"/>
+	<method name="M1005" desc="COG - Homologies " weight="null" type="null" visible="true" species="rsion=" color="255,82,4"/>
+	<method name="M0064" desc="TFSVM (Predicted TF by SVM)" weight="null" type="C" visible="false" color="200,25,100"/>
+	<method name="M1004" desc="GeneQuiz - Marginal Similarity " weight="null" type="null" visible="true" species="rsion=" color="0,69,198"/>
+	<method name="M0063" desc="colocalization/visualisation technologies" weight="null" type="E" visible="true" color="0,0,0"/>
+	<method name="M1003" desc="EUROFAN - Disruption " weight="null" type="null" visible="true" species="rsion=" color="255,85,106"/>
+	<method name="M0062" desc="electron microscopy" weight="null" type="E" visible="true" color="0,0,0"/>
+	<method name="M1002" desc="SGD - Gene Registry" weight="null" type="null" visible="true" species="rsion=" color="255,150,47"/>
+	<method name="M0061" desc="resonance energy transfer" weight="null" type="E" visible="true" color="0,0,0"/>
+	<method name="M1001" desc="GeneQuiz - Clear Similarity" weight="null" type="null" visible="true" species="rsion=" color="34,150,47"/>
+	<method name="M0060" desc="far western blotting" weight="null" type="E" visible="true" color="0,0,0"/>
+	<method name="M1000" desc="GeneQuiz - 3D Homology " weight="null" type="null" visible="true" species="rsion=" color="34,150,209"/>
+	<method name="M5001" desc="Tandem Affinity Mass. Spec Complex Determination from Gavin, et al." weight="null" type="g" visible="true" color="0,0,0"/>
+	<method name="M0059" desc="genetic synthetic phenotype" weight="null" type="E" visible="true" color="193,100,42"/>
+	<method name="M0058" desc="genetic suppression" weight="null" type="E" visible="true" color="28,144,242"/>
+	<method name="M0057" desc="genetic,suppression expression alteration" weight="null" type="E" visible="true" color="123,109,238"/>
+	<method name="M0056" desc="genetic,suppression mutation" weight="null" type="E" visible="true" color="0,51,153"/>
+	<method name="M0055" desc="genetic,synthetic growth effect" weight="null" type="E" visible="true" color="144,176,17"/>
+	<method name="M0054" desc="genetic,conditional synthetic lethal" weight="null" type="E" visible="true" color="242,103,26"/>
+	<method name="M0053" desc="filter binding" weight="null" type="E" visible="true" color="255,0,204"/>
+	<method name="M0052" desc="fluorescence polarization spectroscopy" weight="null" type="E" visible="true" color="0,153,153"/>
+	<method name="M0051" desc="elisa" weight="null" type="0" visible="true" color="193,100,42"/>
+	<method name="M0050" desc="phage display" weight="null" type="E" visible="true" color="166,195,96"/>
+	<method name="M0049" desc="surface plasmon resonance" weight="null" type="E" visible="true" color="137,220,101"/>
+	<method name="M0048" desc="structure based prediction" weight="null" type="E" visible="true" color="174,121,131"/>
+	<method name="M0047" desc="genetic,synthetic lethal" weight="null" type="E" visible="true" color="91,167,147"/>
+	<method name="M0046" desc="Bayesian Predicted Interaction" weight="null" type="C" visible="true" color="162,230,60"/>
+	<method name="M0045" desc="affinity chromatography" weight="null" type="E" visible="true" color="139,169,9"/>
+	<method name="M0044" desc="Affinity Precipitation" weight="null" type="E" visible="true" color="8,130,224"/>
+	<method name="M0043" desc="Screened ChromoImmunoPrecipitation" weight="null" type="E" visible="true" species="rsion=" color="0,0,0"/>
+	<method name="M0042" desc="Chromatin Immunoprecipitation (ChIP)" weight="null" type="E" visible="true" species="rsion=" color="100,14,33"/>
+	<method name="M0041" desc="Transcription Factor" weight="null" type="E" visible="true" species="rsion=" color="22,214,233"/>
+	<method name="M9999" desc="KEGG Pathway" weight="null" type="E" visible="true" species="rsion=" color="250,51,131"/>
+	<method name="M0039" desc="transient coexpression" weight="null" type="E" visible="true" species="rsion=" color="34,255,209"/>
+	<method name="M0038" desc="gene neighbourhoods" weight="null" type="C" visible="true" species="rsion=" color="205,95,245"/>
+	<method name="M0037" desc="phylogenetic profile" weight="null" type="C" visible="true" species="rsion=" color="6,185,76"/>
+	<method name="M0036" desc="domain fusion" weight="null" type="C" visible="true" species="rsion=" color="205,95,138"/>
+	<method name="M0035" desc="X-ray" weight="null" type="E" visible="true" species="rsion=" color="125,93,66"/>
+	<method name="M0034" desc="two hybrid test" weight="null" type="E" visible="true" species="rsion=" color="0,0,255"/>
+	<method name="M0099" desc="unknown" weight="null" type="E" visible="true" species="rsion=" color="0,0,0"/>
+	<method name="M0033" desc="cosedimentation through density gradients" weight="null" type="E" visible="true" species="rsion=" color="125,93,66"/>
+	<method name="M0032" desc="Sizing Column" weight="null" type="E" visible="true" species="rsion=" color="25,110,6"/>
+	<method name="M0031" desc="Other Biophysical" weight="null" type="E" visible="true" species="rsion=" color="125,93,255"/>
+	<method name="M0030" desc="other genetic" weight="null" type="E" visible="true" species="rsion=" color="125,182,97"/>
+	<method name="M0029" desc="monoclonal antibody" weight="null" type="E" visible="true" species="rsion=" color="0,182,212"/>
+	<method name="M0028" desc="mass spectrometry studies of complexes" weight="null" type="E" visible="true" species="rsion=" color="255,182,212"/>
+	<method name="M0027" desc="Interaction adhesion assay " weight="null" type="E" visible="true" species="rsion=" color="255,0,212"/>
+	<method name="M0026" desc="In vitro binding" weight="null" type="E" visible="true" color="255,0,90"/>
+	<method name="M0025" desc="colocalization by immunostaining" weight="null" type="E" visible="true" color="255,165,0"/>
+	<method name="M0024" desc="Immunoprecipitation" weight="null" type="E" visible="true" color="105,67,159"/>
+	<method name="M0021" desc="western blot" weight="null" type="E" visible="true" color="129,94,42"/>
+	<method name="M0020" desc="genetic,tetrad analysis" weight="null" type="E" visible="true" species="rsion=" color="204,113,0"/>
+	<method name="M0019" desc="Gel retardation assays " weight="null" type="E" visible="true" color="158,240,27"/>
+	<method name="M0018" desc="molecular sieving" weight="null" type="E" visible="true" color="142,146,215"/>
+	<Nodes size="13">
+		<VNodes x="18" y="247" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YOR035C" index="373" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="386" y="18" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YML094W">
+			<data name="YHR030C" index="188" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YDL006W" method="M0031,M0020"/>
+			</data>
+		</VNodes>
+		<VNodes x="546" y="267" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YHR149C" index="72" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="140" y="267" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YBR017C" index="359" type="0">
+				<link to="YGR119C" method="M0031,M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="173" y="149" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="153 0 153" axisnode="YDR398W">
+			<data name="YKL061W" index="342" type="0">
+				<id name="GI" value="6322789"/>
+				<id name="ORF" value="YKL061W"/>
+				<id name="PIR ID" value="S37883"/>
+				<link to="YDR398W" method="M0034"/>
+				<link to="YNL086W" method="M0034" weight="0.1"/>
+				<link to="YJL061W" method="M0034"/>
+				<link to="YNL122C" method="M0034" weight="0.1"/>
+				<link to="YMR047C" method="M0034"/>
+				<link to="YGR119C" method="M0034"/>
+				<link to="YGR092W" method="M0034"/>
+				<link to="YEL013W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="124" y="388" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YPL013C" index="282" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="242" y="343" counter="2" w="0" h="0" axisnode="YGR119C">
+			<data name="YKL112W" index="362" type="0">
+				<link to="YGR119C" method="M0042" toType="1" fromType="1000"/>
+				<link to="YNL258C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="204" y="405" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YDR036C" index="274" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="342" y="281" counter="2" w="0" h="0" axisnode="YOR212W">
+			<data name="YKL209C" index="10" type="0">
+				<link to="YOR212W" method="M0046"/>
+				<link to="YHR005C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="565" y="547" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YKL050C" index="498" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="448" y="553" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YML094W">
+			<data name="YMR048W" index="119" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="546" y="475" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDR508C" index="534" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="145" y="510" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YKR006C" index="258" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="140" y="139" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YKL061W">
+			<data name="YEL013W" index="355" type="0">
+				<link to="YKL061W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="241" y="158" counter="1" w="0" h="0" ncc="51 0 102" axisnode="YDR398W">
+			<data name="YBL092W" index="343" type="0">
+				<link to="YDR398W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="363" y="300" counter="2" w="0" h="0" ncc="255 0 204" axisnode="YOR212W">
+			<data name="YHR084W" index="5" type="0">
+				<link to="YOR212W" method="M0046,M0039"/>
+				<link to="YHR005C" method="M0039,M0042,M0046" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="468" y="527" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YPL257W-A" index="522" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="565" y="282" counter="1" w="0" h="0" axisnode="YML109W">
+			<data name="YDR507C" index="58" type="0">
+				<link to="YML109W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="487" y="369" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" axisnode="YDR037W">
+			<data name="YLL018C" index="464" type="0" alias="DPS1,APS" pws="00252 00970">
+				<id name="GI" value="6323011"/>
+				<id name="SGD ID" value="S0003941"/>
+				<id name="ORF" value="YLL018C"/>
+				<link to="YDR037W" method="M0046"/>
+				<link to="YHR206W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YHR019C" method="M0046"/>
+				<link to="YHR056C" method="M0034"/>
+				<link to="YGR185C" method="M0046"/>
+				<link to="YOR282W" method="M0034"/>
+				<link to="YOR335C" method="M0046"/>
+				<group name="pathway" value="00252 00970"/>
+			</data>
+		</VNodes>
+		<VNodes x="105" y="369" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YLR203C" index="283" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="363" y="265" counter="2" w="0" h="0" axisnode="YOR212W">
+			<data name="YCL027W" index="18" type="0">
+				<link to="YOR212W" method="M0039"/>
+				<link to="YHR005C" method="M0039"/>
+			</data>
+		</VNodes>
+		<VNodes x="496" y="213" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YMR109W" index="62" type="0">
+				<link to="YML109W" method="M0046"/>
+				<link to="YML094W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="546" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YPL107W" index="520" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="171" y="106" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YKL061W">
+			<data name="YMR047C" index="352" type="0">
+				<link to="YKL061W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="482" y="249" counter="2" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YKL082C" index="37" type="0">
+				<link to="YHR061C" method="M0034"/>
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="61" y="369" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YDR034C" index="275" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="368" y="105" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YMR012W" index="319" type="0">
+				<link to="YDL006W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="309" y="56" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YPL129W" index="304" type="0">
+				<link to="YDL006W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="463" y="178" counter="4" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="153 204 0" ksymbol="false" axisnode="YCL032W">
+			<data name="YHR061C" index="29" type="0" alias="GIC1">
+				<id name="SGD ID" value="S0001103"/>
+				<id name="GI" value="6321852"/>
+				<id name="ORF" value="YHR061C"/>
+				<id name="PIR ID" value="S46709"/>
+				<link to="YCL032W" method="M0034"/>
+				<link to="YLR229C" method="M0034" weight="0.1"/>
+				<link to="YKL082C" method="M0034"/>
+				<link to="YMR055C" method="M0034" weight="0.1"/>
+				<link to="YMR238W" method="M0034"/>
+				<link to="YCR086W" method="M0034"/>
+				<link to="YHR061C" method="M0034"/>
+				<link to="YDL056W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YHR107C" method="M0034"/>
+				<link to="YML109W" method="M0034"/>
+				<link to="YPL161C" method="M0034"/>
+				<link to="YNL068C" method="M0042" toType="1000" fromType="1"/>
+				<link to="YNL298W" method="M0034"/>
+				<link to="YNL309W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YDR309C" method="M0034"/>
+				<link to="YER111C" method="M0042" toType="1000" fromType="1"/>
+				<link to="YLR182W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YMR032W" method="M0034"/>
+				<link to="YMR273C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="469" y="70" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YIL147C" index="300" type="0">
+				<link to="YDL006W" method="M0031,M0020"/>
+			</data>
+		</VNodes>
+		<VNodes x="320" y="196" counter="1" w="0" h="0" axisnode="YCL032W">
+			<data name="YBR059C" index="34" type="0">
+				<link to="YCL032W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="363" y="194" counter="1" w="0" h="0" axisnode="YDL230W">
+			<data name="YJR091C" index="289" type="0">
+				<link to="YDL230W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="626" y="213" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YEL023C" index="73" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="26" y="370" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YBL090W" index="277" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="568" y="124" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YCL014W" index="91" type="0">
+				<link to="YPL115C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="386" y="440" counter="1" w="0" h="0" ncc="153 0 51" axisnode="YGL145W">
+			<data name="YLR268W" index="491" type="0">
+				<link to="YGL145W" method="M0034,M0010"/>
+			</data>
+		</VNodes>
+		<VNodes x="444" y="416" counter="1" w="0" h="0" ncc="153 0 51" axisnode="YGL145W">
+			<data name="YOR075W" index="496" type="0">
+				<link to="YGL145W" method="M0034,M0010"/>
+			</data>
+		</VNodes>
+		<VNodes x="281" y="228" counter="1" w="0" h="0" axisnode="YCL032W">
+			<data name="YDR032C" index="28" type="0">
+				<link to="YCL032W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="404" y="458" counter="1" w="0" h="0" ncc="153 0 51" axisnode="YGL145W">
+			<data name="YDR498C" index="490" type="0">
+				<link to="YGL145W" method="M0034,M0031,M0010"/>
+			</data>
+		</VNodes>
+		<VNodes x="587" y="427" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YBL026W">
+			<data name="YDL160C" index="387" type="0">
+				<link to="YBL026W" method="M0034"/>
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="486" y="405" counter="1" w="0" h="0" axisnode="YLL018C">
+			<data name="YHR206W" index="469" type="0">
+				<link to="YLL018C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="447" y="131" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YLR182W" index="51" type="0">
+				<link to="YHR061C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="100" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YNL068C" index="46" type="0">
+				<link to="YHR061C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="438" y="109" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YMR032W" index="52" type="0">
+				<link to="YHR061C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="138" y="198" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YEL043W" index="369" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="487" y="162" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YMR055C" index="38" type="0">
+				<link to="YHR061C" method="M0034"/>
+				<link to="YML094W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="610" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YHR154W" index="509" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="215" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YAL004W" index="69" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="99" y="281" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YMR139W" index="365" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="301" y="172" counter="1" w="0" h="0" axisnode="YCL032W">
+			<data name="YMR117C" index="32" type="0">
+				<link to="YCL032W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="562" y="163" counter="2" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YPL115C" index="66" type="0" alias="BEM3,LPH12">
+				<id name="SGD ID" value="S0006036"/>
+				<id name="GI" value="6325142"/>
+				<id name="ORF" value="YPL115C"/>
+				<id name="PIR ID" value="A49960"/>
+				<link to="YML109W" method="M0034"/>
+				<link to="YNL173C" method="M0046"/>
+				<link to="YPL161C" method="M0034"/>
+				<link to="YGR078C" method="M0047"/>
+				<link to="YNL153C" method="M0047"/>
+				<link to="YBL026W" method="M0031"/>
+				<link to="YML094W" method="M0047"/>
+				<link to="YNL298W" method="M0034"/>
+				<link to="YLR300W" method="M0046"/>
+				<link to="YMR273C" method="M0034"/>
+				<link to="YOR188W" method="M0046"/>
+				<link to="YCL014W" method="M0046"/>
+				<link to="YLR313C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="341" y="99" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YJL005W" index="320" type="0">
+				<link to="YDL006W" method="M0036"/>
+			</data>
+		</VNodes>
+		<VNodes x="631" y="529" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDR126W" index="519" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="61" y="405" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YOR158W" index="264" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="301" y="388" counter="1" w="0" h="0" ncc="255 102 0" axisnode="YNL258C">
+			<data name="YMR042W" index="485" type="0">
+				<link to="YNL258C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="302" y="247" counter="2" w="0" h="0" axisnode="YOR212W">
+			<data name="YDR103W" index="17" type="0">
+				<link to="YOR212W" method="M0031,M0034"/>
+				<link to="YCL032W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="332" y="246" counter="2" w="0" h="0" axisnode="YOR212W">
+			<data name="YDR461W" index="16" type="0">
+				<link to="YOR212W" method="M0046,M0039"/>
+				<link to="YHR005C" method="M0039,M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="341" y="139" counter="2" w="0" h="0" ncc="0 0 204" axisnode="YDL230W">
+			<data name="YOR208W" index="293" type="0">
+				<link to="YDL230W" method="M0020,M0031"/>
+				<link to="YDL006W" method="M0020,M0031"/>
+			</data>
+		</VNodes>
+		<VNodes x="424" y="437" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="153 0 51" axisnode="YNL258C">
+			<data name="YGL145W" index="480" type="0" alias="TIP1,TIP20">
+				<id name="SGD ID" value="S0003113"/>
+				<id name="GI" value="14318435"/>
+				<id name="ORF" value="YGL145W"/>
+				<id name="PIR ID" value="S35313"/>
+				<link to="YNL258C" method="M0034"/>
+				<link to="YDR498C" method="M0034,M0031,M0010" weight="0.1"/>
+				<link to="YLR268W" method="M0034,M0010" weight="0.1"/>
+				<link to="YLR373C" method="M0034"/>
+				<link to="YPR105C" method="M0034" weight="0.1"/>
+				<link to="YPR086W" method="M0034"/>
+				<link to="YOR075W" method="M0034,M0010" weight="0.1"/>
+			</data>
+		</VNodes>
+		<VNodes x="385" y="369" counter="1" w="0" h="0" ncc="255 102 0" axisnode="YNL258C">
+			<data name="YKR022C" index="487" type="0">
+				<link to="YNL258C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="404" y="332" counter="1" w="0" h="0" ncc="255 0 204" axisnode="YHR005C">
+			<data name="YCL055W" index="454" type="0">
+				<link to="YHR005C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="384" y="179" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="0 0 204" axisnode="YOR212W">
+			<data name="YDL230W" index="15" type="0" alias="PTP1" pws="04070">
+				<id name="SGD ID" value="S0002389"/>
+				<id name="GI" value="6319971"/>
+				<id name="ORF" value="YDL230W"/>
+				<id name="PIR ID" value="A39862"/>
+				<link to="YOR212W" method="M0039"/>
+				<link to="YJR091C" method="M0034"/>
+				<link to="YPR165W" method="M0039"/>
+				<link to="YDL006W" method="M0020,M0031" weight="0.1"/>
+				<link to="YOR208W" method="M0020,M0031" weight="0.1"/>
+				<group name="pathway" value="04070"/>
+			</data>
+		</VNodes>
+		<VNodes x="302" y="213" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" axisnode="YOR212W">
+			<data name="YCL032W" index="19" type="0" alias="STE50">
+				<id name="SGD ID" value="S0000537"/>
+				<id name="GI" value="6319817"/>
+				<id name="ORF" value="YCL032W"/>
+				<id name="PIR ID" value="S17475"/>
+				<link to="YOR212W" method="M0034"/>
+				<link to="YLR362W" method="M0034,M0010" weight="0.1"/>
+				<link to="YLR423C" method="M0034"/>
+				<link to="YDR309C" method="M0034"/>
+				<link to="YDR032C" method="M0034"/>
+				<link to="YHR061C" method="M0034"/>
+				<link to="YDR103W" method="M0034"/>
+				<link to="YMR117C" method="M0034"/>
+				<link to="YPR076W" method="M0034"/>
+				<link to="YBR059C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="486" y="563" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YBR098W" index="511" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="123" y="163" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YKL061W">
+			<data name="YNL086W" index="348" type="0">
+				<link to="YKL061W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="608" y="543" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YPL060W" index="512" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="274" y="283" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YMR159C" index="11" type="0">
+				<link to="YOR212W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="163" y="404" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YMR158W" index="276" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="26" y="404" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YML094W">
+			<data name="YBR103W" index="182" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="164" y="472" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YNL137C" index="266" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="625" y="150" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YOR188W" index="90" type="0">
+				<link to="YPL115C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="649" y="511" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YJL058C" index="523" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="125" y="423" counter="2" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="255 0 0" axisnode="YOR212W">
+			<data name="YHL004W" index="9" type="0" alias="MRP4">
+				<id name="SGD ID" value="S0000996"/>
+				<id name="GI" value="6321782"/>
+				<id name="ORF" value="YHL004W"/>
+				<id name="PIR ID" value="A42115"/>
+				<link to="YOR212W" method="M0034"/>
+				<link to="YKL003C" method="M0046"/>
+				<link to="YDR110W" method="M0034"/>
+				<link to="YDR347W" method="M0046"/>
+				<link to="YGR249W" method="M0034"/>
+				<link to="YDR337W" method="M0046"/>
+				<link to="YDL100C" method="M0034" weight="0.1"/>
+				<link to="YKR006C" method="M0046"/>
+				<link to="YER086W" method="M0034"/>
+				<link to="YBR146W" method="M0046"/>
+				<link to="YMR153W" method="M0034"/>
+				<link to="YNL306W" method="M0046"/>
+				<link to="YOR158W" method="M0046"/>
+				<link to="YLR423C" method="M0034"/>
+				<link to="YNL137C" method="M0046"/>
+				<link to="YPL255W" method="M0034" weight="0.1"/>
+				<link to="YNL073W" method="M0046"/>
+				<link to="YDL116W" method="M0034"/>
+				<link to="YKR085C" method="M0046"/>
+				<link to="YBR103W" method="M0034"/>
+				<link to="YGR084C" method="M0046"/>
+				<link to="YBL014C" method="M0034"/>
+				<link to="YDR036C" method="M0046"/>
+				<link to="YDR034C" method="M0034"/>
+				<link to="YMR158W" method="M0046"/>
+				<link to="YBL090W" method="M0046"/>
+				<link to="YBR251W" method="M0046"/>
+				<link to="YCR046C" method="M0046"/>
+				<link to="YNR037C" method="M0046"/>
+				<link to="YDL045W-A" method="M0046"/>
+				<link to="YPL013C" method="M0046"/>
+				<link to="YLR203C" method="M0046"/>
+				<link to="YJR113C" method="M0046"/>
+				<link to="YNL185C" method="M0046"/>
+				<link to="YJL063C" method="M0046"/>
+				<link to="YMR188C" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="354" y="170" counter="4" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" axisnode="YER089C">
+			<data name="YDR071C" index="324" type="0">
+				<id name="GI" value="6320276"/>
+				<id name="ORF" value="YDR071C"/>
+				<id name="PIR ID" value="S49826"/>
+				<link to="YER089C" method="M0034"/>
+				<link to="YBR125C" method="M0034"/>
+				<link to="YBL056W" method="M0034,M0046" weight="0.1"/>
+				<link to="YDR398W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="377" y="55" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YLR262C" index="295" type="0">
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="185" y="437" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YNL073W" index="268" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="60" y="525" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YDR110W" index="253" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="607" y="127" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YLR313C" index="92" type="0">
+				<link to="YPL115C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="398" y="160" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" axisnode="YER089C">
+			<data name="YBR125C" index="323" type="0" alias="GCT1,PTC4">
+				<id name="SGD ID" value="S0000329"/>
+				<id name="GI" value="6319601"/>
+				<id name="ORF" value="YBR125C"/>
+				<id name="PIR ID" value="S48288"/>
+				<link to="YER089C" method="M0036"/>
+				<link to="YDR071C" method="M0034" weight="0.1"/>
+				<link to="YER020W" method="M0036"/>
+				<link to="YBL056W" method="M0036"/>
+			</data>
+		</VNodes>
+		<VNodes x="505" y="517" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YCL063W" index="536" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="454" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YML094W">
+			<data name="YER016W" index="95" type="0">
+				<link to="YML094W" method="M0047,M0020"/>
+				<link to="YLR373C" method="M0020"/>
+			</data>
+		</VNodes>
+		<VNodes x="143" y="351" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YDL045W-A" index="281" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="301" y="140" counter="1" w="0" h="0" ncc="51 0 102" axisnode="YDR398W">
+			<data name="YMR093W" index="344" type="0">
+				<link to="YDR398W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="611" y="182" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YLR300W" index="88" type="0">
+				<link to="YPL115C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="106" y="493" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YBR146W" index="260" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="240" y="92" counter="1" w="0" h="0" ncc="51 0 102" axisnode="YDR398W">
+			<data name="YPL216W" index="341" type="0">
+				<link to="YDR398W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="242" y="212" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YBR083W" index="22" type="0">
+				<link to="YOR212W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="319" y="300" counter="2" w="0" h="0" axisnode="YOR212W">
+			<data name="YNL145W" index="12" type="0">
+				<link to="YOR212W" method="M0046"/>
+				<link to="YHR005C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="209" y="437" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YKR085C" index="270" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="646" y="565" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YBR094W" index="517" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="468" y="493" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YPR025C" index="526" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="182" y="174" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YKL061W">
+			<data name="YNL122C" index="351" type="0">
+				<link to="YKL061W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="606" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YLR418C" index="503" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="101" y="246" counter="2" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="153 0 153" axisnode="YKL061W">
+			<data name="YGR119C" index="353" type="0" alias="NUP57">
+				<id name="SGD ID" value="S0003351"/>
+				<id name="GI" value="6321557"/>
+				<id name="ORF" value="YGR119C"/>
+				<id name="PIR ID" value="S51799"/>
+				<link to="YKL061W" method="M0034"/>
+				<link to="YJL041W" method="M0010,M0046,M0034" weight="0.1"/>
+				<link to="YGL172W" method="M0034,M0046" weight="0.1"/>
+				<link to="YBR017C" method="M0031,M0034" weight="0.1"/>
+				<link to="YKL103C" method="M0034"/>
+				<link to="YJL050W" method="M0046"/>
+				<link to="YKL112W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YMR236W" method="M0034"/>
+				<link to="YDL065C" method="M0034"/>
+				<link to="YMR139W" method="M0034"/>
+				<link to="YDR416W" method="M0034"/>
+				<link to="YGL005C" method="M0034"/>
+				<link to="YMR294W" method="M0034"/>
+				<link to="YEL043W" method="M0034"/>
+				<link to="YGR218W" method="M0034"/>
+				<link to="YFR002W" method="M0010"/>
+				<link to="YLR423C" method="M0034"/>
+				<link to="YOR035C" method="M0034"/>
+				<link to="YGL170C" method="M0034"/>
+				<link to="YOL069W" method="M0034"/>
+				<link to="YMR308C" method="M0034"/>
+				<link to="YPR083W" method="M0034"/>
+				<link to="YGR120C" method="M0034"/>
+				<link to="YPR046W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="21" y="195" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YML094W">
+			<data name="YPR046W" index="118" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="242" y="283" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YAL041W" index="6" type="0">
+				<link to="YOR212W" method="M0010,M0013,M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="163" y="385" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YMR188C" index="287" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="587" y="607" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YML094W">
+			<data name="YMR154C" index="193" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="399" y="300" counter="2" w="0" h="0" ncc="255 0 204" axisnode="YOR212W">
+			<data name="YFL026W" index="23" type="0">
+				<link to="YOR212W" method="M0039"/>
+				<link to="YHR005C" method="M0039,M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="58" y="458" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YMR153W" index="261" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="100" y="318" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YGL172W" index="358" type="0">
+				<link to="YGR119C" method="M0034,M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="92" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YMR238W" index="39" type="0">
+				<link to="YHR061C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="526" y="163" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YGR078C" index="82" type="0">
+				<link to="YPL115C" method="M0047"/>
+				<link to="YML094W" method="M0010,M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="304" y="272" counter="6" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" axisnode="YCL032W">
+			<vlabel>STE4</vlabel>
+			<data name="YOR212W" index="0" type="0" alias="HMD2,STE4" pws="04010">
+				<id name="SGD ID" value="S0005738"/>
+				<id name="GI" value="6324786"/>
+				<id name="ORF" value="YOR212W"/>
+				<id name="PIR ID" value="S60939"/>
+				<link to="YHR005C" method="M0046,M0034,M0039" weight="0.1"/>
+				<link to="YJR086W" method="M0034,M0046" weight="0.1"/>
+				<link to="YPR122W" method="M0046"/>
+				<link to="YIL047C" method="M0034" weight="0.1"/>
+				<link to="YHR084W" method="M0046,M0039" weight="0.1"/>
+				<link to="YAL041W" method="M0010,M0013,M0034" weight="0.1"/>
+				<link to="YLR452C" method="M0046,M0039" weight="0.1"/>
+				<link to="YDR264C" method="M0034" weight="0.1"/>
+				<link to="YHL004W" method="M0034"/>
+				<link to="YKL209C" method="M0046"/>
+				<link to="YMR159C" method="M0034"/>
+				<link to="YNL145W" method="M0046"/>
+				<link to="YDL101C" method="M0039"/>
+				<link to="YLR362W" method="M0034" weight="0.1"/>
+				<link to="YDL230W" method="M0039"/>
+				<link to="YDR461W" method="M0046,M0039" weight="0.1"/>
+				<link to="YDR103W" method="M0031,M0034" weight="0.1"/>
+				<link to="YCL027W" method="M0039"/>
+				<link to="YCL032W" method="M0034"/>
+				<link to="YBL016W" method="M0039"/>
+				<link to="YJL157C" method="M0034,M0010,M0039" weight="0.1"/>
+				<link to="YBR083W" method="M0046"/>
+				<link to="YFL026W" method="M0039"/>
+				<group name="pathway" value="04010"/>
+			</data>
+		</VNodes>
+		<VNodes x="403" y="90" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="0 0 204" axisnode="YDL230W">
+			<data name="YDL006W" index="291" type="0" alias="CWH47,KCS2,PTC1,TPD1,MDM28,YD8119.01">
+				<id name="SGD ID" value="S0002164"/>
+				<id name="GI" value="6320198"/>
+				<id name="ORF" value="YDL006W"/>
+				<id name="PIR ID" value="S41854"/>
+				<link to="YDL230W" method="M0020,M0031"/>
+				<link to="YLR262C" method="M0047"/>
+				<link to="YHR030C" method="M0031,M0020" weight="0.1"/>
+				<link to="YNL322C" method="M0047"/>
+				<link to="YCR071C" method="M0046"/>
+				<link to="YGR229C" method="M0047"/>
+				<link to="YIL147C" method="M0031,M0020" weight="0.1"/>
+				<link to="YMR307W" method="M0047"/>
+				<link to="YOR208W" method="M0020,M0031" weight="0.1"/>
+				<link to="YGL027C" method="M0047"/>
+				<link to="YPL129W" method="M0046"/>
+				<link to="YOR326W" method="M0047"/>
+				<link to="YBL101C" method="M0046"/>
+				<link to="YKL037W" method="M0047"/>
+				<link to="YLR342W" method="M0047"/>
+				<link to="YLR442C" method="M0046"/>
+				<link to="YLR039C" method="M0047"/>
+				<link to="YOR353C" method="M0036"/>
+				<link to="YBL105C" method="M0031,M0020" weight="0.1"/>
+				<link to="YER020W" method="M0036"/>
+				<link to="YOR373W" method="M0036"/>
+				<link to="YHR023W" method="M0046"/>
+				<link to="YDR162C" method="M0034"/>
+				<link to="YER089C" method="M0036"/>
+				<link to="YMR012W" method="M0046"/>
+				<link to="YJL005W" method="M0036"/>
+				<link to="YBL056W" method="M0036"/>
+			</data>
+		</VNodes>
+		<VNodes x="587" y="337" counter="1" w="0" h="0" axisnode="YDR037W">
+			<data name="YBR121C" index="460" type="0">
+				<link to="YDR037W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="301" y="86" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YLR342W" index="309" type="0">
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="140" y="299" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YJL041W" index="357" type="0">
+				<link to="YGR119C" method="M0010,M0046,M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="153" y="438" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YNR037C" index="280" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="241" y="127" counter="1" w="0" h="0" ncc="51 0 102" axisnode="YDR398W">
+			<data name="YDR236C" index="345" type="0">
+				<link to="YDR398W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="447" y="92" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YML094W">
+			<data name="YDR162C" index="112" type="0">
+				<link to="YML094W" method="M0020"/>
+				<link to="YDL006W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="571" y="315" counter="1" w="0" h="0" axisnode="YDR037W">
+			<data name="YPR033C" index="461" type="0">
+				<link to="YDR037W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="492" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YMR140W" index="528" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="668" y="546" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YLR028C" index="521" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="178" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YNL153C" index="84" type="0">
+				<link to="YPL115C" method="M0047"/>
+				<link to="YML094W" method="M0010,M0046,M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="142" counter="2" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YPL161C" index="45" type="0">
+				<link to="YHR061C" method="M0034"/>
+				<link to="YPL115C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="102" y="463" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YJL063C" index="286" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="424" y="163" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YLR039C" index="311" type="0">
+				<link to="YDL006W" method="M0047"/>
+				<link to="YBL026W" method="M0031"/>
+			</data>
+		</VNodes>
+		<VNodes x="403" y="232" counter="4" w="0" h="0" ncc="255 0 204" axisnode="YCL032W">
+			<data name="YDR309C" index="27" type="0">
+				<link to="YCL032W" method="M0034"/>
+				<link to="YHR061C" method="M0034"/>
+				<link to="YML109W" method="M0034"/>
+				<link to="YHR005C" method="M0039,M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="80" y="246" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YMR236W" index="363" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="607" y="581" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YBR186W" index="502" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="58" y="162" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YGL170C" index="374" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="456" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YPR065W" index="524" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="544" y="536" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YOR317W" index="538" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="139" y="229" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YJL050W" index="361" type="0">
+				<link to="YGR119C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="280" y="195" counter="1" w="0" h="0" axisnode="YCL032W">
+			<data name="YPR076W" index="33" type="0">
+				<link to="YCL032W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="342" y="231" counter="3" w="0" h="0" axisnode="YOR212W">
+			<data name="YLR362W" index="14" type="0">
+				<link to="YOR212W" method="M0034"/>
+				<link to="YCL032W" method="M0034,M0010"/>
+				<link to="YHR005C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="58" y="231" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YOL069W" index="375" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="139" y="106" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YKL061W">
+			<data name="YJL061W" index="349" type="0">
+				<link to="YKL061W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="448" y="458" counter="1" w="0" h="0" ncc="153 0 51" axisnode="YGL145W">
+			<data name="YPR105C" index="493" type="0">
+				<link to="YGL145W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="22" y="437" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YPL255W" index="267" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="125" y="440" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YNL185C" index="285" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="386" y="140" counter="4" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YER089C" index="318" type="0" alias="PTC2">
+				<id name="SGD ID" value="S0000891"/>
+				<id name="GI" value="6320934"/>
+				<id name="ORF" value="YER089C"/>
+				<id name="PIR ID" value="S50592"/>
+				<link to="YDL006W" method="M0036"/>
+				<link to="YBR125C" method="M0036"/>
+				<link to="YDR071C" method="M0034"/>
+				<link to="YBL056W" method="M0036"/>
+				<link to="YER020W" method="M0036"/>
+				<link to="YEL009C" method="M0042" toType="1000" fromType="1"/>
+			</data>
+		</VNodes>
+		<VNodes x="446" y="388" counter="1" w="0" h="0" ncc="255 102 0" axisnode="YHR056C">
+			<data name="YFL067W" index="478" type="0">
+				<link to="YHR056C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="566" y="511" counter="2" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="0 153 102" axisnode="YGL145W">
+			<data name="YLR373C" index="492" type="0" alias="VID22">
+				<id name="SGD ID" value="S0004365"/>
+				<id name="GI" value="6323405"/>
+				<id name="ORF" value="YLR373C"/>
+				<id name="PIR ID" value="S51391"/>
+				<link to="YGL145W" method="M0034"/>
+				<link to="YKL050C" method="M0034"/>
+				<link to="YDR386W" method="M0047"/>
+				<link to="YMR154C" method="M0034"/>
+				<link to="YNL250W" method="M0047"/>
+				<link to="YBR186W" method="M0034"/>
+				<link to="YLR418C" method="M0047"/>
+				<link to="YOR028C" method="M0034"/>
+				<link to="YGR166W" method="M0047"/>
+				<link to="YGL190C" method="M0034"/>
+				<link to="YHR129C" method="M0047"/>
+				<link to="YHR154W" method="M0047"/>
+				<link to="YHR057C" method="M0034"/>
+				<link to="YBR098W" method="M0047"/>
+				<link to="YPL060W" method="M0034"/>
+				<link to="YNL271C" method="M0047"/>
+				<link to="YMR048W" method="M0034"/>
+				<link to="YDR363W" method="M0047"/>
+				<link to="YOR368W" method="M0034"/>
+				<link to="YBR094W" method="M0047"/>
+				<link to="YIL049W" method="M0034"/>
+				<link to="YDR126W" method="M0047"/>
+				<link to="YPL107W" method="M0034"/>
+				<link to="YLR028C" method="M0034"/>
+				<link to="YPL257W-A" method="M0034"/>
+				<link to="YJL058C" method="M0034"/>
+				<link to="YPR065W" method="M0034"/>
+				<link to="YLR057W" method="M0034"/>
+				<link to="YPR025C" method="M0034"/>
+				<link to="YDR353W" method="M0034"/>
+				<link to="YMR140W" method="M0034"/>
+				<link to="YNR041C" method="M0034"/>
+				<link to="YDR277C" method="M0034"/>
+				<link to="YEL006W" method="M0034"/>
+				<link to="YER016W" method="M0020"/>
+				<link to="YDR317W" method="M0034"/>
+				<link to="YDR508C" method="M0034"/>
+				<link to="YDL160C" method="M0034"/>
+				<link to="YCL063W" method="M0034"/>
+				<link to="YBL097W" method="M0034"/>
+				<link to="YOR317W" method="M0034"/>
+				<link to="YDL134C" method="M0034"/>
+				<link to="YBR012W-B" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="488" y="124" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YNL309W" index="48" type="0">
+				<link to="YHR061C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="479" y="440" counter="1" w="0" h="0" ncc="153 0 51" axisnode="YGL145W">
+			<data name="YPR086W" index="495" type="0">
+				<link to="YGL145W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="403" y="124" counter="3" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YER020W" index="314" type="0">
+				<link to="YDL006W" method="M0036"/>
+				<link to="YER089C" method="M0036"/>
+				<link to="YBR125C" method="M0036"/>
+			</data>
+		</VNodes>
+		<VNodes x="403" y="210" counter="2" w="0" h="0" ncc="255 0 204" axisnode="YOR212W">
+			<data name="YJL157C" index="21" type="0">
+				<link to="YOR212W" method="M0034,M0010,M0039"/>
+				<link to="YBL026W" method="M0031"/>
+				<link to="YHR005C" method="M0039"/>
+			</data>
+		</VNodes>
+		<VNodes x="423" y="269" counter="1" w="0" h="0" ncc="255 0 204" axisnode="YHR005C">
+			<data name="YNR044W" index="456" type="0">
+				<link to="YHR005C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="590" y="163" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YNL173C" index="80" type="0">
+				<link to="YPL115C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="159" y="245" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YMR308C" index="377" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="344" y="382" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="255 102 0" axisnode="YHR056C">
+			<data name="YNL258C" index="476" type="0" alias="DSL1">
+				<id name="SGD ID" value="S0005202"/>
+				<id name="GI" value="6324071"/>
+				<id name="ORF" value="YNL258C"/>
+				<id name="PIR ID" value="S63231"/>
+				<link to="YHR056C" method="M0034"/>
+				<link to="YGL145W" method="M0034" weight="0.1"/>
+				<link to="YFL021W" method="M0034"/>
+				<link to="YBL052C" method="M0034"/>
+				<link to="YKL112W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YMR042W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YLR457C" method="M0034"/>
+				<link to="YKR022C" method="M0034"/>
+				<link to="YLR440C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="322" y="352" counter="1" w="0" h="0" ncc="255 102 0" axisnode="YNL258C">
+			<data name="YFL021W" index="481" type="0">
+				<link to="YNL258C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="608" y="510" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDR317W" index="533" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="60" y="427" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YCR046C" index="279" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="362" y="231" counter="2" w="0" h="0" ncc="255 0 204" axisnode="YOR212W">
+			<data name="YBL016W" index="20" type="0">
+				<link to="YOR212W" method="M0039"/>
+				<link to="YHR005C" method="M0039,M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="352" y="69" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YMR307W" index="301" type="0">
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="342" y="405" counter="1" w="0" h="0" ncc="255 102 0" axisnode="YNL258C">
+			<data name="YLR457C" index="486" type="0">
+				<link to="YNL258C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="468" y="39" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YOR326W" index="305" type="0">
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="519" y="372" counter="2" w="0" h="0" axisnode="YML109W">
+			<data name="YGL190C" index="55" type="0">
+				<link to="YML109W" method="M0046,M0034"/>
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="202" y="267" counter="3" w="0" h="0" ncc="153 0 153" axisnode="YCL032W">
+			<data name="YLR423C" index="26" type="0">
+				<link to="YCL032W" method="M0034"/>
+				<link to="YHL004W" method="M0034"/>
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="528" y="511" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDR277C" index="530" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="204" y="470" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YGR084C" index="272" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="585" y="269" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YJL189W" index="74" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="469" y="333" counter="2" w="0" h="0" axisnode="YDR037W">
+			<data name="YHR019C" index="459" type="0">
+				<link to="YDR037W" method="M0046"/>
+				<link to="YLL018C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="648" y="466" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YLR057W" index="525" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="22" y="472" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YER086W" index="259" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="448" y="198" counter="1" w="0" h="0" linkLoaded="true" extend="false" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YBL026W" index="85" type="0" alias="LSM2,SMX5,SNP3">
+				<id name="SGD ID" value="S0000122"/>
+				<id name="GI" value="6319445"/>
+				<id name="ORF" value="YBL026W"/>
+				<id name="PIR ID" value="S45760"/>
+				<link to="YPL115C" method="M0031"/>
+				<link to="YDL160C" method="M0034"/>
+				<link to="YCR077C" method="M0034,M0010,M0031" weight="0.1"/>
+				<link to="YJL157C" method="M0031"/>
+				<link to="YLR039C" method="M0031"/>
+			</data>
+		</VNodes>
+		<VNodes x="548" y="234" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YER115C" index="68" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="518" y="243" counter="4" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YML109W" index="44" type="0" alias="CES4,ZDS2">
+				<id name="SGD ID" value="S0004577"/>
+				<id name="GI" value="6323527"/>
+				<id name="ORF" value="YML109W"/>
+				<id name="PIR ID" value="S53963"/>
+				<link to="YHR061C" method="M0034"/>
+				<link to="YGL190C" method="M0046,M0034" weight="0.1"/>
+				<link to="YML109W" method="M0034"/>
+				<link to="YDL188C" method="M0046"/>
+				<link to="YBL105C" method="M0034"/>
+				<link to="YDR507C" method="M0046"/>
+				<link to="YNL271C" method="M0034"/>
+				<link to="YMR273C" method="M0046,M0034" weight="0.1"/>
+				<link to="YMR109W" method="M0046"/>
+				<link to="YCR077C" method="M0031"/>
+				<link to="YLR084C" method="M0046"/>
+				<link to="YPR165W" method="M0034"/>
+				<link to="YPL115C" method="M0034"/>
+				<link to="YER114C" method="M0034"/>
+				<link to="YER115C" method="M0034"/>
+				<link to="YAL004W" method="M0034"/>
+				<link to="YNL298W" method="M0034"/>
+				<link to="YDR309C" method="M0034"/>
+				<link to="YHR149C" method="M0034"/>
+				<link to="YEL023C" method="M0034"/>
+				<link to="YJL189W" method="M0034"/>
+				<link to="YER124C" method="M0034"/>
+				<link to="YBL085W" method="M0034"/>
+				<link to="YKL082C" method="M0034"/>
+				<link to="YJR076C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="527" y="124" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YDL056W" index="42" type="0">
+				<link to="YHR061C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="260" y="245" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YDR264C" index="8" type="0">
+				<link to="YOR212W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="189" y="506" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YNL306W" index="262" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="99" y="210" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YGR218W" index="370" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="133" y="542" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YDR337W" index="256" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="18" y="217" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YPR083W" index="378" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="317" counter="1" w="0" h="0" axisnode="YDR037W">
+			<data name="YNR053C" index="466" type="0">
+				<link to="YDR037W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="626" y="249" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YER114C" index="67" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="79" y="473" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YBL014C" index="273" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="464" y="215" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YCR077C" index="63" type="0">
+				<link to="YML109W" method="M0031"/>
+				<link to="YBL026W" method="M0034,M0010,M0031"/>
+			</data>
+		</VNodes>
+		<VNodes x="488" y="59" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YKL037W" index="307" type="0">
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="462" y="586" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YGR166W" index="505" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="684" y="493" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YNR041C" index="529" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="202" y="124" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YKL061W">
+			<data name="YGR092W" index="354" type="0">
+				<link to="YKL061W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="352" counter="2" w="0" h="0" axisnode="YDR037W">
+			<data name="YOR335C" index="463" type="0">
+				<link to="YDR037W" method="M0046"/>
+				<link to="YLL018C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="322" y="37" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YML094W">
+			<data name="YGR229C" index="186" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="322" y="323" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YPR122W" index="3" type="0">
+				<link to="YOR212W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="528" y="565" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YOR368W" index="516" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="82" y="493" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YDR347W" index="254" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="389" y="267" counter="4" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="255 0 204" axisnode="YOR212W">
+			<data name="YHR005C" index="1" type="0" alias="CDC70,DAC1,GPA1,SCG1" pws="04010">
+				<id name="GI" value="6321792"/>
+				<id name="SGD ID" value="S0001047"/>
+				<id name="ORF" value="YHR005C"/>
+				<link to="YOR212W" method="M0046,M0034,M0039"/>
+				<link to="YHR084W" method="M0039,M0042,M0046" weight="0.1" toType="1000" fromType="1"/>
+				<link to="YKL043W" method="M0042" toType="1000" fromType="1"/>
+				<link to="YBL016W" method="M0039,M0046" weight="0.1"/>
+				<link to="YCL027W" method="M0039"/>
+				<link to="YLR362W" method="M0034" weight="0.1"/>
+				<link to="YFL026W" method="M0039,M0046" weight="0.1"/>
+				<link to="YDL100C" method="M0034"/>
+				<link to="YHR005C" method="M0039"/>
+				<link to="YDR037W" method="M0036"/>
+				<link to="YDR461W" method="M0039,M0046" weight="0.1"/>
+				<link to="YNL145W" method="M0046"/>
+				<link to="YJL157C" method="M0039"/>
+				<link to="YDR309C" method="M0039,M0046" weight="0.1"/>
+				<link to="YLR452C" method="M0046,M0039" weight="0.1"/>
+				<link to="YNL325C" method="M0039"/>
+				<link to="YKL209C" method="M0046"/>
+				<link to="YCL055W" method="M0046"/>
+				<link to="YLR229C" method="M0046"/>
+				<link to="YNR044W" method="M0046"/>
+				<group name="pathway" value="04010"/>
+			</data>
+		</VNodes>
+		<VNodes x="105" y="527" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YKL003C" index="252" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="566" y="196" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YER124C" index="75" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="493" y="87" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YLR442C" index="310" type="0">
+				<link to="YDL006W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="179" counter="3" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YNL298W" index="47" type="0">
+				<link to="YHR061C" method="M0034"/>
+				<link to="YML109W" method="M0034"/>
+				<link to="YPL115C" method="M0034"/>
+				<link to="YML094W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="548" y="386" counter="1" w="0" h="0" axisnode="YLL018C">
+			<data name="YOR282W" index="473" type="0">
+				<link to="YLL018C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="84" y="437" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YDL116W" index="269" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="145" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YCR086W" index="40" type="0">
+				<link to="YHR061C" method="M0034"/>
+				<link to="YML094W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="99" y="185" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YGR120C" index="379" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="59" y="283" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YDL065C" index="364" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="403" y="177" counter="4" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YBL056W" index="321" type="0">
+				<link to="YDL006W" method="M0036"/>
+				<link to="YER089C" method="M0036"/>
+				<link to="YBR125C" method="M0036"/>
+				<link to="YDR071C" method="M0034,M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="44" y="493" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YGR249W" index="255" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="363" y="336" counter="2" w="0" h="0" ncc="255 0 204" axisnode="YOR212W">
+			<data name="YLR452C" index="7" type="0">
+				<link to="YOR212W" method="M0046,M0039"/>
+				<link to="YHR005C" method="M0046,M0039"/>
+			</data>
+		</VNodes>
+		<VNodes x="466" y="146" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YER111C" index="50" type="0">
+				<link to="YHR061C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="422" y="198" counter="2" w="0" h="0" axisnode="YML109W">
+			<data name="YPR165W" index="65" type="0">
+				<link to="YML109W" method="M0034"/>
+				<link to="YDL230W" method="M0039"/>
+			</data>
+		</VNodes>
+		<VNodes x="447" y="524" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YIL049W" index="518" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="525" y="199" counter="3" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YMR273C" index="53" type="0">
+				<link to="YHR061C" method="M0034"/>
+				<link to="YML109W" method="M0046,M0034"/>
+				<link to="YPL115C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="386" y="405" counter="1" w="0" h="0" ncc="255 102 0" axisnode="YNL258C">
+			<data name="YLR440C" index="488" type="0">
+				<link to="YNL258C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="461" y="278" counter="1" w="0" h="0" ncc="255 0 204" axisnode="YHR005C">
+			<data name="YNL325C" index="452" type="0">
+				<link to="YHR005C" method="M0039"/>
+			</data>
+		</VNodes>
+		<VNodes x="144" y="472" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YBR251W" index="278" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="18" y="278" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YML094W">
+			<data name="YMR294W" index="142" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="581" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YNL250W" index="501" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="525" y="406" counter="1" w="0" h="0" axisnode="YLL018C">
+			<data name="YGR185C" index="472" type="0">
+				<link to="YLL018C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="344" y="124" counter="1" w="0" h="0" axisnode="YER089C">
+			<data name="YEL009C" index="328" type="0">
+				<link to="YER089C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="301" y="105" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YHR023W" index="316" type="0">
+				<link to="YDL006W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="428" y="63" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YOR353C" index="312" type="0">
+				<link to="YDL006W" method="M0036"/>
+			</data>
+		</VNodes>
+		<VNodes x="447" y="163" counter="2" w="0" h="0" ncc="0 0 204" axisnode="YML109W">
+			<data name="YBL105C" index="57" type="0">
+				<link to="YML109W" method="M0034"/>
+				<link to="YDL006W" method="M0031,M0020"/>
+			</data>
+		</VNodes>
+		<VNodes x="576" y="581" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YOR028C" index="504" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="258" y="315" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YIL047C" index="4" type="0">
+				<link to="YOR212W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="586" y="564" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YHR057C" index="510" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="58" y="267" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YGL005C" index="367" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="424" y="302" counter="1" w="0" h="0" ncc="255 0 204" axisnode="YHR005C">
+			<data name="YKL043W" index="440" type="0">
+				<link to="YHR005C" method="M0042" toType="1" fromType="1000"/>
+			</data>
+		</VNodes>
+		<VNodes x="21" y="301" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YDR416W" index="366" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="587" y="213" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YJR076C" index="78" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="504" y="263" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YLR084C" index="64" type="0">
+				<link to="YML109W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="221" y="245" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YDL101C" index="13" type="0">
+				<link to="YOR212W" method="M0039"/>
+			</data>
+		</VNodes>
+		<VNodes x="418" y="18" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YCR071C" index="298" type="0">
+				<link to="YDL006W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="443" y="28" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YGL027C" index="303" type="0">
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="686" y="514" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDR353W" index="527" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="270" y="140" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="51 0 102" axisnode="YDR071C">
+			<data name="YDR398W" index="337" type="0" alias="UTP5">
+				<id name="GI" value="6320606"/>
+				<id name="ORF" value="YDR398W"/>
+				<id name="PIR ID" value="S69681"/>
+				<link to="YDR071C" method="M0034"/>
+				<link to="YPL216W" method="M0034"/>
+				<link to="YKL061W" method="M0034"/>
+				<link to="YBL092W" method="M0034"/>
+				<link to="YMR093W" method="M0034" weight="0.1"/>
+				<link to="YDR236C" method="M0034"/>
+				<link to="YPL027W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="284" y="304" counter="1" w="0" h="0" axisnode="YOR212W">
+			<data name="YJR086W" index="2" type="0">
+				<link to="YOR212W" method="M0034,M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="424" y="370" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" ncc="255 102 0" axisnode="YLL018C">
+			<data name="YHR056C" index="471" type="0" alias="RSC30">
+				<id name="GI" value="6321847"/>
+				<id name="SGD ID" value="S0001098"/>
+				<id name="ORF" value="YHR056C"/>
+				<link to="YLL018C" method="M0034"/>
+				<link to="YNL258C" method="M0034"/>
+				<link to="YFL067W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="586" y="372" counter="2" w="0" h="0" axisnode="YML109W">
+			<data name="YNL271C" index="59" type="0">
+				<link to="YML109W" method="M0034"/>
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="607" y="484" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YBL097W" index="537" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="59" y="196" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YFR002W" index="371" type="0">
+				<link to="YGR119C" method="M0010"/>
+			</data>
+		</VNodes>
+		<VNodes x="351" y="23" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YNL322C" index="297" type="0">
+				<link to="YDL006W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="463" y="109" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YHR107C" index="43" type="0">
+				<link to="YHR061C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="585" y="529" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YBR012W-B" index="540" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="566" y="475" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDL134C" index="539" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="280" y="120" counter="1" w="0" h="0" ncc="51 0 102" axisnode="YDR398W">
+			<data name="YPL027W" index="346" type="0">
+				<link to="YDR398W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="404" y="54" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YOR373W" index="315" type="0">
+				<link to="YDL006W" method="M0036"/>
+			</data>
+		</VNodes>
+		<VNodes x="318" y="423" counter="1" w="0" h="0" ncc="255 102 0" axisnode="YNL258C">
+			<data name="YBL052C" index="482" type="0">
+				<link to="YNL258C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="283" y="337" counter="2" w="0" h="0" axisnode="YHL004W">
+			<data name="YDL100C" index="257" type="0">
+				<link to="YHL004W" method="M0034"/>
+				<link to="YHR005C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="579" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDR386W" index="499" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="608" y="456" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YEL006W" index="531" type="0">
+				<link to="YLR373C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="586" y="237" counter="1" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YML109W">
+			<data name="YBL085W" index="76" type="0">
+				<link to="YML109W" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="626" y="607" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YML094W">
+			<data name="YHR129C" index="197" type="0">
+				<link to="YML094W" method="M0047"/>
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="667" y="579" counter="1" w="0" h="0" ncc="0 153 102" axisnode="YLR373C">
+			<data name="YDR363W" index="515" type="0">
+				<link to="YLR373C" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="547" y="352" counter="1" w="0" h="0" axisnode="YDR037W">
+			<data name="YDR341C" index="462" type="0">
+				<link to="YDR037W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="487" y="195" counter="1" w="0" h="0" linkLoaded="true" extend="false" ncc="153 204 0" ksymbol="false" axisnode="YPL115C">
+			<data name="YML094W" index="86" type="0" alias="GIM5,PFD5,YNB5">
+				<id name="SGD ID" value="S0004559"/>
+				<id name="GI" value="6323544"/>
+				<id name="ORF" value="YML094W"/>
+				<id name="PIR ID" value="S49633"/>
+				<link to="YPL115C" method="M0047"/>
+				<link to="YER016W" method="M0047,M0020"/>
+				<link to="YML094W" method="M0010,M0034" weight="0.1"/>
+				<link to="YNL153C" method="M0010,M0046,M0034" weight="0.1"/>
+				<link to="YMR055C" method="M0047"/>
+				<link to="YDR162C" method="M0020"/>
+				<link to="YGR078C" method="M0010,M0034" weight="0.1"/>
+				<link to="YPR046W" method="M0047"/>
+				<link to="YMR048W" method="M0047"/>
+				<link to="YMR294W" method="M0047"/>
+				<link to="YMR109W" method="M0047"/>
+				<link to="YNL298W" method="M0047"/>
+				<link to="YBR103W" method="M0047"/>
+				<link to="YGR229C" method="M0047"/>
+				<link to="YHR030C" method="M0047"/>
+				<link to="YMR154C" method="M0047"/>
+				<link to="YHR129C" method="M0047"/>
+				<link to="YCR086W" method="M0047"/>
+			</data>
+		</VNodes>
+		<VNodes x="526" y="299" counter="1" w="0" h="0" axisnode="YDR037W">
+			<data name="YHR020W" index="465" type="0">
+				<link to="YDR037W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="444" y="234" counter="2" w="0" h="0" ncc="153 204 0" ksymbol="false" axisnode="YHR061C">
+			<data name="YLR229C" index="36" type="0">
+				<link to="YHR061C" method="M0034"/>
+				<link to="YHR005C" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="505" y="314" counter="3" w="0" h="0" linkDisplayed="true" linkLoaded="true" extend="false" axisnode="YHR005C">
+			<data name="YDR037W" index="446" type="0" alias="GCD5,KRS1" pws="00300 00970">
+				<id name="SGD ID" value="S0002444"/>
+				<id name="GI" value="6320242"/>
+				<id name="ORF" value="YDR037W"/>
+				<id name="PIR ID" value="SYBYKT"/>
+				<link to="YHR005C" method="M0036"/>
+				<link to="YHR019C" method="M0046"/>
+				<link to="YBR121C" method="M0046"/>
+				<link to="YPR033C" method="M0046"/>
+				<link to="YDR341C" method="M0046"/>
+				<link to="YOR335C" method="M0046"/>
+				<link to="YLL018C" method="M0046"/>
+				<link to="YHR020W" method="M0046"/>
+				<link to="YNR053C" method="M0046"/>
+				<group name="pathway" value="00300 00970"/>
+			</data>
+		</VNodes>
+		<VNodes x="59" y="318" counter="1" w="0" h="0" ncc="153 0 153" axisnode="YGR119C">
+			<data name="YKL103C" index="360" type="0">
+				<link to="YGR119C" method="M0034"/>
+			</data>
+		</VNodes>
+		<VNodes x="102" y="405" counter="1" w="0" h="0" ncc="255 0 0" axisnode="YHL004W">
+			<data name="YJR113C" index="284" type="0">
+				<link to="YHL004W" method="M0046"/>
+				<group name="common" value="541"/>
+			</data>
+		</VNodes>
+		<VNodes x="324" y="70" counter="1" w="0" h="0" ncc="0 0 204" axisnode="YDL006W">
+			<data name="YBL101C" index="306" type="0">
+				<link to="YDL006W" method="M0046"/>
+			</data>
+		</VNodes>
+		<VNodes x="607" y="282" counter="1" w="0" h="0" axisnode="YML109W">
+			<data name="YDL188C" index="56" type="0">
+				<link to="YML109W" method="M0046"/>
+			</data>
+		</VNodes>
+	</Nodes>
+	<Edges>
+		<VEdge from="YML094W" to="YGR078C"/>
+		<VEdge from="YDR071C" to="YBL056W"/>
+		<VEdge from="YBR125C" to="YBL056W"/>
+		<VEdge from="YML094W" to="YCR086W"/>
+		<VEdge from="YML109W" to="YKL082C"/>
+		<VEdge from="YLR373C" to="YNL271C"/>
+		<VEdge from="YGL145W" to="YOR075W"/>
+		<VEdge from="YGL145W" to="YPR086W"/>
+		<VEdge from="YGL145W" to="YPR105C"/>
+		<VEdge from="YGL145W" to="YLR373C"/>
+		<VEdge from="YGL145W" to="YLR268W"/>
+		<VEdge from="YGL145W" to="YDR498C"/>
+		<VEdge from="YML094W" to="YMR055C"/>
+		<VEdge from="YML109W" to="YDR309C"/>
+		<VEdge from="YLL018C" to="YOR282W"/>
+		<VEdge from="YLL018C" to="YGR185C"/>
+		<VEdge from="YLL018C" to="YHR056C"/>
+		<VEdge from="YLL018C" to="YHR206W"/>
+		<VEdge from="YML094W" to="YMR109W"/>
+		<VEdge from="YHR061C" to="YDR309C"/>
+		<VEdge from="YDL006W" to="YBL105C"/>
+		<VEdge from="YHR056C" to="YFL067W"/>
+		<VEdge from="YHR056C" to="YNL258C"/>
+		<VEdge from="YLR373C" to="YDL160C"/>
+		<VEdge from="YLL018C" to="YOR335C"/>
+		<VEdge from="YGR119C" to="YLR423C"/>
+		<VEdge from="YCL032W" to="YDR103W"/>
+		<VEdge from="YHL004W" to="YMR188C"/>
+		<VEdge from="YHL004W" to="YJL063C"/>
+		<VEdge from="YHL004W" to="YNL185C"/>
+		<VEdge from="YHL004W" to="YJR113C"/>
+		<VEdge from="YHL004W" to="YLR203C"/>
+		<VEdge from="YHL004W" to="YPL013C"/>
+		<VEdge from="YHL004W" to="YDL045W-A"/>
+		<VEdge from="YHL004W" to="YNR037C"/>
+		<VEdge from="YDL006W" to="YDR162C"/>
+		<VEdge from="YHL004W" to="YCR046C"/>
+		<VEdge from="YHL004W" to="YBR251W"/>
+		<VEdge from="YHL004W" to="YBL090W"/>
+		<VEdge from="YHL004W" to="YMR158W"/>
+		<VEdge from="YHL004W" to="YDR034C"/>
+		<VEdge from="YHL004W" to="YDR036C"/>
+		<VEdge from="YHL004W" to="YBL014C"/>
+		<VEdge from="YHL004W" to="YGR084C"/>
+		<VEdge from="YHL004W" to="YKR085C"/>
+		<VEdge from="YML094W" to="YNL153C"/>
+		<VEdge from="YHL004W" to="YDL116W"/>
+		<VEdge from="YHL004W" to="YNL073W"/>
+		<VEdge from="YHL004W" to="YPL255W"/>
+		<VEdge from="YHL004W" to="YNL137C"/>
+		<VEdge from="YDR037W" to="YNR053C"/>
+		<VEdge from="YDR037W" to="YHR020W"/>
+		<VEdge from="YHL004W" to="YOR158W"/>
+		<VEdge from="YDR037W" to="YLL018C"/>
+		<VEdge from="YDR037W" to="YOR335C"/>
+		<VEdge from="YHL004W" to="YNL306W"/>
+		<VEdge from="YDR037W" to="YDR341C"/>
+		<VEdge from="YHL004W" to="YMR153W"/>
+		<VEdge from="YDR037W" to="YPR033C"/>
+		<VEdge from="YHL004W" to="YBR146W"/>
+		<VEdge from="YDR037W" to="YBR121C"/>
+		<VEdge from="YDL006W" to="YBL056W"/>
+		<VEdge from="YBL026W" to="YCR077C"/>
+		<VEdge from="YDL006W" to="YJL005W"/>
+		<VEdge from="YHL004W" to="YER086W"/>
+		<VEdge from="YDR037W" to="YHR019C"/>
+		<VEdge from="YHL004W" to="YKR006C"/>
+		<VEdge from="YHL004W" to="YDL100C"/>
+		<VEdge from="YHL004W" to="YDR337W"/>
+		<VEdge from="YHL004W" to="YGR249W"/>
+		<VEdge from="YHL004W" to="YDR347W"/>
+		<VEdge from="YHL004W" to="YDR110W"/>
+		<VEdge from="YDL006W" to="YMR012W"/>
+		<VEdge from="YHL004W" to="YKL003C"/>
+		<VEdge from="YDL006W" to="YER089C"/>
+		<VEdge from="YDL006W" to="YHR023W"/>
+		<VEdge from="YDL006W" to="YOR373W"/>
+		<VEdge from="YDL006W" to="YER020W"/>
+		<VEdge from="YDL006W" to="YOR353C"/>
+		<VEdge from="YDL006W" to="YLR039C"/>
+		<VEdge from="YDL006W" to="YLR442C"/>
+		<VEdge from="YBL026W" to="YJL157C"/>
+		<VEdge from="YDL006W" to="YLR342W"/>
+		<VEdge from="YDL006W" to="YKL037W"/>
+		<VEdge from="YDL006W" to="YBL101C"/>
+		<VEdge from="YDL006W" to="YOR326W"/>
+		<VEdge from="YDL006W" to="YPL129W"/>
+		<VEdge from="YDL006W" to="YGL027C"/>
+		<VEdge from="YDL006W" to="YMR307W"/>
+		<VEdge from="YDL006W" to="YIL147C"/>
+		<VEdge from="YLR373C" to="YGL190C"/>
+		<VEdge from="YHR061C" to="YMR273C"/>
+		<VEdge from="YHR061C" to="YMR032W"/>
+		<VEdge from="YHR061C" to="YLR182W"/>
+		<VEdge from="YHR061C" to="YER111C"/>
+		<VEdge from="YHR061C" to="YNL309W"/>
+		<VEdge from="YHR061C" to="YNL298W"/>
+		<VEdge from="YHR061C" to="YNL068C"/>
+		<VEdge from="YHR061C" to="YPL161C"/>
+		<VEdge from="YHR061C" to="YML109W"/>
+		<VEdge from="YPL115C" to="YMR273C"/>
+		<VEdge from="YHR061C" to="YHR107C"/>
+		<VEdge from="YHR061C" to="YDL056W"/>
+		<VEdge from="YHR061C" to="YCR086W"/>
+		<VEdge from="YHR061C" to="YMR238W"/>
+		<VEdge from="YHR061C" to="YMR055C"/>
+		<VEdge from="YHR061C" to="YKL082C"/>
+		<VEdge from="YHR061C" to="YLR229C"/>
+		<VEdge from="YGR119C" to="YGR120C"/>
+		<VEdge from="YGR119C" to="YPR083W"/>
+		<VEdge from="YGR119C" to="YMR308C"/>
+		<VEdge from="YGR119C" to="YOL069W"/>
+		<VEdge from="YGR119C" to="YGL170C"/>
+		<VEdge from="YGR119C" to="YOR035C"/>
+		<VEdge from="YGR119C" to="YFR002W"/>
+		<VEdge from="YGR119C" to="YGR218W"/>
+		<VEdge from="YHR061C" to="YHR061C"/>
+		<VEdge from="YGR119C" to="YEL043W"/>
+		<VEdge from="YGR119C" to="YGL005C"/>
+		<VEdge from="YGR119C" to="YDR416W"/>
+		<VEdge from="YGR119C" to="YMR139W"/>
+		<VEdge from="YGR119C" to="YDL065C"/>
+		<VEdge from="YGR119C" to="YMR236W"/>
+		<VEdge from="YGR119C" to="YKL112W"/>
+		<VEdge from="YGR119C" to="YJL050W"/>
+		<VEdge from="YGR119C" to="YKL103C"/>
+		<VEdge from="YGR119C" to="YPR046W"/>
+		<VEdge from="YGR119C" to="YBR017C"/>
+		<VEdge from="YLR373C" to="YBR012W-B"/>
+		<VEdge from="YGR119C" to="YGL172W"/>
+		<VEdge from="YGR119C" to="YJL041W"/>
+		<VEdge from="YGR119C" to="YMR294W"/>
+		<VEdge from="YLR373C" to="YDL134C"/>
+		<VEdge from="YLR373C" to="YOR317W"/>
+		<VEdge from="YLR373C" to="YBL097W"/>
+		<VEdge from="YLR373C" to="YCL063W"/>
+		<VEdge from="YDR398W" to="YPL027W"/>
+		<VEdge from="YDR398W" to="YDR236C"/>
+		<VEdge from="YLR373C" to="YDR508C"/>
+		<VEdge from="YDR398W" to="YMR093W"/>
+		<VEdge from="YLR373C" to="YDR317W"/>
+		<VEdge from="YDR398W" to="YBL092W"/>
+		<VEdge from="YDR398W" to="YKL061W"/>
+		<VEdge from="YLR373C" to="YEL006W"/>
+		<VEdge from="YDR398W" to="YPL216W"/>
+		<VEdge from="YLR373C" to="YDR277C"/>
+		<VEdge from="YLR373C" to="YNR041C"/>
+		<VEdge from="YLR373C" to="YMR140W"/>
+		<VEdge from="YLR373C" to="YDR353W"/>
+		<VEdge from="YLR373C" to="YPR025C"/>
+		<VEdge from="YLR373C" to="YLR057W"/>
+		<VEdge from="YLR373C" to="YPR065W"/>
+		<VEdge from="YLR373C" to="YJL058C"/>
+		<VEdge from="YLR373C" to="YPL257W-A"/>
+		<VEdge from="YLR373C" to="YLR028C"/>
+		<VEdge from="YLR373C" to="YPL107W"/>
+		<VEdge from="YCL032W" to="YBR059C"/>
+		<VEdge from="YCL032W" to="YPR076W"/>
+		<VEdge from="YCL032W" to="YMR117C"/>
+		<VEdge from="YLR373C" to="YDR126W"/>
+		<VEdge from="YLR373C" to="YIL049W"/>
+		<VEdge from="YLR373C" to="YBR094W"/>
+		<VEdge from="YLR373C" to="YOR368W"/>
+		<VEdge from="YLR373C" to="YDR363W"/>
+		<VEdge from="YLR373C" to="YPL060W"/>
+		<VEdge from="YLR373C" to="YBR098W"/>
+		<VEdge from="YLR373C" to="YHR057C"/>
+		<VEdge from="YCL032W" to="YHR061C"/>
+		<VEdge from="YCL032W" to="YDR032C"/>
+		<VEdge from="YOR212W" to="YHL004W"/>
+		<VEdge from="YCL032W" to="YDR309C"/>
+		<VEdge from="YOR212W" to="YDR264C"/>
+		<VEdge from="YCL032W" to="YLR423C"/>
+		<VEdge from="YOR212W" to="YLR452C"/>
+		<VEdge from="YOR212W" to="YAL041W"/>
+		<VEdge from="YOR212W" to="YHR084W"/>
+		<VEdge from="YOR212W" to="YIL047C"/>
+		<VEdge from="YOR212W" to="YPR122W"/>
+		<VEdge from="YOR212W" to="YJR086W"/>
+		<VEdge from="YOR212W" to="YHR005C"/>
+		<VEdge from="YLR373C" to="YHR154W"/>
+		<VEdge from="YLR373C" to="YGR166W"/>
+		<VEdge from="YLR373C" to="YOR028C"/>
+		<VEdge from="YLR373C" to="YLR418C"/>
+		<VEdge from="YLR373C" to="YBR186W"/>
+		<VEdge from="YLR373C" to="YNL250W"/>
+		<VEdge from="YLR373C" to="YHR129C"/>
+		<VEdge from="YDL006W" to="YHR030C"/>
+		<VEdge from="YML094W" to="YML094W"/>
+		<VEdge from="YBL026W" to="YLR039C"/>
+		<VEdge from="YML109W" to="YJR076C"/>
+		<VEdge from="YML109W" to="YBL085W"/>
+		<VEdge from="YML109W" to="YER124C"/>
+		<VEdge from="YML109W" to="YJL189W"/>
+		<VEdge from="YML109W" to="YEL023C"/>
+		<VEdge from="YML109W" to="YHR149C"/>
+		<VEdge from="YML109W" to="YAL004W"/>
+		<VEdge from="YML109W" to="YER115C"/>
+		<VEdge from="YML109W" to="YER114C"/>
+		<VEdge from="YML109W" to="YPL115C"/>
+		<VEdge from="YML109W" to="YPR165W"/>
+		<VEdge from="YML109W" to="YLR084C"/>
+		<VEdge from="YML109W" to="YCR077C"/>
+		<VEdge from="YML109W" to="YMR109W"/>
+		<VEdge from="YML109W" to="YNL271C"/>
+		<VEdge from="YML109W" to="YDR507C"/>
+		<VEdge from="YML109W" to="YBL105C"/>
+		<VEdge from="YML109W" to="YDL188C"/>
+		<VEdge from="YML109W" to="YGL190C"/>
+		<VEdge from="YML109W" to="YMR273C"/>
+		<VEdge from="YML109W" to="YNL298W"/>
+		<VEdge from="YML109W" to="YML109W"/>
+		<VEdge from="YKL061W" to="YEL013W"/>
+		<VEdge from="YKL061W" to="YGR092W"/>
+		<VEdge from="YKL061W" to="YGR119C"/>
+		<VEdge from="YKL061W" to="YMR047C"/>
+		<VEdge from="YKL061W" to="YNL122C"/>
+		<VEdge from="YKL061W" to="YJL061W"/>
+		<VEdge from="YKL061W" to="YNL086W"/>
+		<VEdge from="YPL115C" to="YLR313C"/>
+		<VEdge from="YPL115C" to="YCL014W"/>
+		<VEdge from="YPL115C" to="YOR188W"/>
+		<VEdge from="YDL006W" to="YCR071C"/>
+		<VEdge from="YDL006W" to="YNL322C"/>
+		<VEdge from="YDL006W" to="YLR262C"/>
+		<VEdge from="YDL006W" to="YOR208W"/>
+		<VEdge from="YDL006W" to="YGR229C"/>
+		<VEdge from="YPL115C" to="YLR300W"/>
+		<VEdge from="YPL115C" to="YML094W"/>
+		<VEdge from="YPL115C" to="YBL026W"/>
+		<VEdge from="YPL115C" to="YNL153C"/>
+		<VEdge from="YPL115C" to="YGR078C"/>
+		<VEdge from="YPL115C" to="YNL173C"/>
+		<VEdge from="YER089C" to="YEL009C"/>
+		<VEdge from="YER089C" to="YDR071C"/>
+		<VEdge from="YER089C" to="YBR125C"/>
+		<VEdge from="YER089C" to="YBL056W"/>
+		<VEdge from="YPL115C" to="YPL161C"/>
+		<VEdge from="YOR212W" to="YFL026W"/>
+		<VEdge from="YOR212W" to="YBR083W"/>
+		<VEdge from="YOR212W" to="YJL157C"/>
+		<VEdge from="YOR212W" to="YBL016W"/>
+		<VEdge from="YHL004W" to="YBR103W"/>
+		<VEdge from="YOR212W" to="YCL032W"/>
+		<VEdge from="YOR212W" to="YCL027W"/>
+		<VEdge from="YOR212W" to="YDR103W"/>
+		<VEdge from="YOR212W" to="YDR461W"/>
+		<VEdge from="YOR212W" to="YDL230W"/>
+		<VEdge from="YOR212W" to="YLR362W"/>
+		<VEdge from="YOR212W" to="YDL101C"/>
+		<VEdge from="YOR212W" to="YNL145W"/>
+		<VEdge from="YOR212W" to="YMR159C"/>
+		<VEdge from="YOR212W" to="YKL209C"/>
+		<VEdge from="YLR373C" to="YMR154C"/>
+		<VEdge from="YDR071C" to="YDR398W"/>
+		<VEdge from="YLR373C" to="YER016W"/>
+		<VEdge from="YLR373C" to="YMR048W"/>
+		<VEdge from="YLR373C" to="YDR386W"/>
+		<VEdge from="YLR373C" to="YKL050C"/>
+		<VEdge from="YHR005C" to="YLR229C"/>
+		<VEdge from="YNL258C" to="YLR440C"/>
+		<VEdge from="YNL258C" to="YKR022C"/>
+		<VEdge from="YNL258C" to="YLR457C"/>
+		<VEdge from="YNL258C" to="YMR042W"/>
+		<VEdge from="YNL258C" to="YBL052C"/>
+		<VEdge from="YNL258C" to="YFL021W"/>
+		<VEdge from="YHR005C" to="YDR309C"/>
+		<VEdge from="YNL258C" to="YGL145W"/>
+		<VEdge from="YHR005C" to="YDL100C"/>
+		<VEdge from="YHR005C" to="YFL026W"/>
+		<VEdge from="YHR005C" to="YJL157C"/>
+		<VEdge from="YHR005C" to="YBL016W"/>
+		<VEdge from="YNL258C" to="YKL112W"/>
+		<VEdge from="YDL230W" to="YOR208W"/>
+		<VEdge from="YDL230W" to="YDL006W"/>
+		<VEdge from="YHR005C" to="YCL027W"/>
+		<VEdge from="YHL004W" to="YLR423C"/>
+		<VEdge from="YHR005C" to="YDR461W"/>
+		<VEdge from="YHR005C" to="YLR362W"/>
+		<VEdge from="YHR005C" to="YNL145W"/>
+		<VEdge from="YCL032W" to="YLR362W"/>
+		<VEdge from="YHR005C" to="YKL209C"/>
+		<VEdge from="YDL230W" to="YJR091C"/>
+		<VEdge from="YHR005C" to="YNR044W"/>
+		<VEdge from="YBR125C" to="YDR071C"/>
+		<VEdge from="YHR005C" to="YCL055W"/>
+		<VEdge from="YHR005C" to="YNL325C"/>
+		<VEdge from="YHR005C" to="YDR037W"/>
+		<VEdge from="YHR005C" to="YKL043W"/>
+		<VEdge from="YDL230W" to="YPR165W"/>
+		<VEdge from="YML094W" to="YNL298W"/>
+		<VEdge from="YLL018C" to="YHR019C"/>
+		<VEdge from="YBR125C" to="YER020W"/>
+		<VEdge from="YPL115C" to="YNL298W"/>
+		<VEdge from="YER089C" to="YER020W"/>
+		<VEdge from="YHR005C" to="YLR452C"/>
+		<VEdge from="YHR005C" to="YHR084W"/>
+		<VEdge from="YHR005C" to="YHR005C"/>
+	</Edges>
+</VisAnt>

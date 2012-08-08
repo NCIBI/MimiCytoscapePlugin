@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cytoscape Plugin for MiMI</title>
+<link href="mimipluginstyle.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {	font-size: 24px;
+	font-weight: bold;
+}
+.style2 {font-size: 12px; font-weight: bold; }
+.style4 {font-size: 16px; font-weight: bold; }
+.style5 {font-size: 12px}
+-->
+</style>
+</head>
+
+<body>
+<div id="wrapper">
+<div id="header"><img src="images/MiMI_Plugin_banner.jpg" alt="MiMi Plugin Banner" width="1000" height="60" /></div>
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="index.html" >Home</a></li>
+<li><a href="tryplugin.html">Try Plugin</a></li>
+<li><a href="tutorial.html">Tutorials</a></li>
+<li id="active"><a href="download.html" id="current">Download</a></li>
+<li><a href="acknowledgement.html">Acknowledgement</a></li>
+<li ><a href="bugs.html" >Known Bugs</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div id="content">
+  <h3>Uploaded Gene File Format</h3>
+  <hr />
+  <p class="style1">Here is the file format: </p>
+  <blockquote>
+    <p align="left"><span class="style2">line1: taxonomyID=</span>&lt;taxonomy id&gt;</p>
+    <p align="left"><span class="style2">line2: moleculeType=</span>&lt;molecule type&gt;</p>
+    <p align="left"><span class="style2">line3: dataSource=</span>&lt;data source&gt;</p>
+    <p align="left"><span class="style2">line4: <strong>interactionLevel</strong>=&lt;</span>interaction level<span class="style2">&gt;</span></p>
+    <p align="left"><span class="style2">line5: <strong>searchPathBetweenGenes</strong>=&lt;</span>yes/no<span class="style2">&gt;</span></p>
+    <p align="left"><span class="style2">line6: </span>&lt;gene 1 &gt;</p>
+    <p align="left"><span class="style2">line7:</span> &lt;gene 2 &gt;</p>
+    <p align="left"><strong>...</strong></p>
+    <p align="left"><span class="style2">linen:</span> &lt;gene n &gt;</p>
+    <p align="left">line1 must start with &quot;<span class="style2">taxonomyID=</span>&quot; followed by a taxonomy id. If user does not want to specify a taxonomy id,  &quot;all&quot; will be used to follow &quot;<span class="style2">taxonomyID=</span>&quot;. </p>
+    <p align="left">line2 must start with &quot;<span class="style2">moleculeType=</span>&quot; followed by a molecule type. The molecule type must be one of &quot;DNA,
+      gene,
+      nucleic_acid, protein, 
+      RNA, 
+      small_molecule&quot; . If user does not want to specify a molecule type, &quot;all&quot; will be used to follow &quot;<span class="style2">moleculeType=</span>&quot;. </p>
+    <p align="left">line3 must start with &quot;<span class="style2">dataSource=</span>&quot; fllowed by a data source. The data source must be one of below data set. If user does not want to specify a data source, &quot;all&quot; will be used to follow &quot;<span class="style2">dataSource=</span>&quot;. </p>
+    <p align="left">Data Sources used in MiMI: </p>
+    <table cellspacing="0" cellpadding="0">
+      <tr>
+        <td height="5"><p>Data Sources</p></td>
+      </tr>
+      <tr>
+        <td><table cellspacing="5" cellpadding="0" width="100%" border="0">
+            <tbody>
+              <tr>
+                <td align="left"><a href="http://www.bind.ca/">BIND</a></td>
+                <td align="left">Samuel Lunenfeld Research Institute</td>
+                <td align="left">(UPDATED 11/06/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://ccsb.dfci.harvard.edu/home.html">CCSB-HI1</a></td>
+                <td align="left">Center for Cancer Systems Biology, Harvard</td>
+                <td align="left">(UPDATED 09/28/2005)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://dip.doe-mbi.ucla.edu/">DIP</a></td>
+                <td align="left">UCLA</td>
+                <td align="left">(UPDATED 11/02/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.thebiogrid.org">BioGRID</a></td>
+                <td align="left">Mount Sinai Hospital</td>
+                <td align="left">(UPDATED 10/31/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.hprd.org/">HPRD</a></td>
+                <td align="left">Johns Hopkins University and Institute of Bioinformatics</td>
+                <td align="left">(UPDATED 11/07/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.ebi.ac.uk/intact/index.jsp">IntAct</a></td>
+                <td align="left">EMBL-EBI</td>
+                <td align="left">(UPDATED 10/31/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.ebi.ac.uk/interpro/">InterPro</a></td>
+                <td align="left">EMBL-EBI</td>
+                <td align="left">(UPDATED 10/31/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.ebi.ac.uk/IPI/IPIhelp.html">IPI_Sequence</a></td>
+                <td align="left">EMBL-EBI</td>
+                <td align="left">(UPDATED 11/02/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://141.80.164.19/neuroprot/ppi_search.php">MDC   PPI</a></td>
+                <td align="left">Max-Delbrueck Center for Molecular Medicine</td>
+                <td align="left">(UPDATED 11/02/2005)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.protonet.cs.huji.ac.il/">ProtoNet</a></td>
+                <td align="left">Hebrew University</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.expasy.org/sprot/">SwissProt_ORF</a></td>
+                <td align="left">Swiss Institute of Bioinformatics</td>
+                <td align="left">(UPDATED 11/17/2006)</td>
+              </tr>
+              <tr>
+                <td align="left"><a href="http://www.ncbi.nlm.nih.gov/RefSeq">RefSeq_ORF</a></td>
+                <td align="left">NCBI</td>
+                <td align="left">(UPDATED 11/06/2006)</td>
+              </tr>
+              <tr>
+                <td align="left">&nbsp;</td>
+                <td align="left">&nbsp;</td>
+              </tr>
+            </tbody>
+        </table></td>
+      </tr>
+    </table>
+    <p align="left">Line4  must start with &quot;<span class="style2"> <strong>interactionLevel</strong>=</span>&quot; followed by an integer from 1 to 3. </p>
+    <p align="left">Line5  must start with &quot;<span class="style2"><strong>searchPathBetweenGenes</strong>=</span>&quot; followed by &quot;yes&quot; or &quot;no&quot; .  &quot;yes&quot; means finding only connecting nodes between genes in starting list, in this situation, <span class="style2"> <strong>interactionLevel</strong></span> in Line4 means up to how many connecting nodes in the path between genes.  &quot;no&quot; means finding all neighbour genes for genes in starting list, in this situation, <span class="style2"><strong>interactionLevel</strong></span> in Line4 means how many steps of expansion to find neighobor genes. . </p>
+    <p align="left"> Line 6 to Linen, each line includes a gene name</p>
+    <p align="left">&nbsp;</p>
+  </blockquote>
+  <p align="left" class="style4"><strong>Here is an example :</strong></p>
+  <blockquote>
+    <p align="left" class="style5">taxonomyID=10090<br />
+      moleculeType=all<br />
+      dataSource =all<br />
+      interactionLevel=1<br />
+      searchPathBetweenGenes=yes<br />
+      pwp1<br />
+      cbl<br />
+      csf1r
+  </p>
+    <p align="left" class="style5">&nbsp;</p>
+  </blockquote>
+  </div>
+<div id ="footer">
+  <div align="center">
+    <p><br />
+      </p>
+  </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+All the references to php scripts in the code... (6Sept2011 - Terry)
+
+org.ncibi.cytoscape.mimi.action.PopupNodeContextMenuListener
+	line 120: MiMIPlugin.GENE2MESH + index.php
+	 MiMIPlugin.GENE2MESH = http://gene2mesh.ncibi.org/
+org.ncibi.cytoscape.mimi.action.SAGAListener
+	line 125: http://mimiplugin.ncibi.org/dbaccess/query_NCIBI_DBX_gene.php
+org.ncibi.cytoscape.mimi.parser.ParserXML
+	line 182: http://mimiplugin.ncibi.org/dbaccess/query_NCIBI_DBX_gene_Taxonomy.php
+org.ncibi.cytoscape.mimi.plugin.BatchMiMIQuery
+	line 60: http://mimiplugin.ncibi.org/dbaccess/query_NCIBI_DBX_mimi.php
+org.ncibi.cytoscape.mimi.plugin.MiMIPlugin
+	lines 56-62...
+		http://gene2mesh.ncibi.org/viewlist.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/queryLogin.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/addNewUser.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/validateEmail.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/getSharedAnnot.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/queryMiMIAnnot_setList.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/sendpswd.php
+	line 65: http://mimiplugin.ncibi.org/dbaccess/3.1/precomputeexpand.php
+	lines 68-70...
+		http://mimiplugin.ncibi.org/dbaccess/3.1/queryGDS_subsetExprSig.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/browseGds.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/queryCmpd.php
+org.ncibi.cytoscape.mimi.plugin.QueryBioNlp
+	line 38: http://mimiplugin.ncibi.org/dbaccess/3.1/queryPubmed.php
+org.ncibi.cytoscape.mimi.plugin.QueryMiMI
+	lines 63-65...
+		http://mimiplugin.ncibi.org/dbaccess/3.1/getInteraction.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/getAttributes.php
+		http://mimiplugin.ncibi.org/dbaccess/3.1/checkUserAnnotAttribute.php
+org.ncibi.cytoscape.mimi.plugin.SAGA
+	line 144: "http://mimiplugin.ncibi.org/dbaccess/3.1/sagaKeggOrth.php  
+org.ncibi.cytoscape.mimi.plugin.SubcellularLocalization
+	line 24: host + query_NCIBI_DBX_gene_protLocation.php
+	line 33: host + query_NCIBI_DBX_gene_protLocation.php
+	host = http://mimiplugin.ncibi.org/dbaccess
+org.ncibi.cytoscape.mimi.ui.AnnoEditor
+	line 505: http://mimiplugin.ncibi.org/dbaccess/3.1/queryMiMIAnnot_rdb.php
+	line 571: http://mimiplugin.ncibi.org/dbaccess/3.1/queryMiMIURLs_rdb.php
+	line 681: http://mimiplugin.ncibi.org/dbaccess/3.1/queryMiMIAnnot_saveUpdate_rdb.php
+	line 725: http://mimiplugin.ncibi.org/dbaccess/3.1/queryMiMIAnnot_saveUpdate_rdb.phpS
+org.ncibi.cytoscape.mimi.ui.NewUserSignup
+
+There are also references to jsp scripts in...
+org.ncibi.cytoscape.mimi.plugin.MiMIPlugin
+	line 42: /MiMI/MIQuery.jsp
+	line 43: /MiMI/MIMolecule2.jsp
+	line 53: http://mimi.ncibi.org/MimiWeb/show-gene.jsp
+	line 54: http://mimi.ncibi.org/MimiWeb/show-interaction.jsp
+	line 55: http://mimi.ncibi.org/MimiWeb/gene-symbols-from-text.jsp 
+
