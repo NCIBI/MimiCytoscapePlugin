@@ -8,7 +8,7 @@ Developed by NCIBI - The National Center for Integrative Biomedical Informatics 
 
 Please see:
 	COPYRIGHT.txt
-	ECLIPSE-INSTALL.txt
+	ECLIPSE-SETUP.txt
 	
 Links
 	The Cytoscape Project: http://www.cytoscape.org/
