@@ -29,7 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import org.ncibi.cytoscape.mimi.action.BareBonesBrowserLaunch;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 import cytoscape.Cytoscape;
 

@@ -30,25 +30,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.nio.channels.ClosedByInterruptException;
 import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 
-import org.ncibi.cytoscape.mimi.action.ListenMouse;
-import org.ncibi.cytoscape.mimi.ui.AddLegend;
-import org.ncibi.cytoscape.mimi.ui.DetailsPanel;
-
-import cytoscape.CyEdge;
-import cytoscape.CyNode;
-import cytoscape.Cytoscape;
-import cytoscape.util.SwingWorker;
+import org.cytoscape.io.util.StreamUtil;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.CyNode;
 
 /**
  * QueryMiMIWrapper
@@ -61,7 +59,6 @@ import cytoscape.util.SwingWorker;
  */
 public class QueryMiMIWrapper {
 	private JOptionPane optionPane;
-	private SwingWorker doQuery;
 	private static HashMap<Integer, String> rsc;
 	private final int msToPop = 1000;
 	public  static JDialog  dialog=new JDialog() ;
@@ -76,79 +73,41 @@ public class QueryMiMIWrapper {
 		rsc.put(QueryMiMI.QUERY_BY_EXPAND, "Expand Node ID");
 		rsc.put(QueryMiMI.QUERY_BY_REMOTEFILE, "Remote File");
 	}
-   
-	public QueryMiMIWrapper(String term) {
-		this(QueryMiMI.QUERY_BY_NAME, term);
+
+	public QueryMiMIWrapper(final int type, final String term, final CyNetworkFactory cyNetworkFactory, 
+			final CyNetworkManager cyNetworkManager, final JFrame frame, final StreamUtil streamUtil) {
+		SwingWorker<Object, Object> swingWorker = new SwingWorker<Object,Object>() {
+			public Object doInBackground() {	
+				return QueryMiMI.query(type, term, cyNetworkFactory, cyNetworkManager, frame, streamUtil);
+			}
+
+		};
+		this.createDialog(type, term, swingWorker);
+		this.spawnThread(swingWorker, frame);
+	}
+	
+	public QueryMiMIWrapper(final String term, final CyNode node, final CyNetwork network, 
+			final JFrame frame, final StreamUtil streamUtil) {
+		SwingWorker<Object, Object> swingWorker = new SwingWorker<Object,Object>() {
+			public Object doInBackground() {	
+				return QueryMiMI.query(term, node, network, frame, streamUtil);
+			}
+
+		};
+		this.createDialog(QueryMiMI.QUERY_BY_EXPAND, term, swingWorker);
+		this.spawnThread(swingWorker, frame);
 	}
 
-	public QueryMiMIWrapper(int type, String term) {
-		this.createDialog(type, term);
-		this.spawnThread(type, term);
-	}
-
-	public QueryMiMIWrapper(CyNode node) {
-		this.createDialog(QueryMiMI.QUERY_BY_ID, node.getIdentifier());
-		this.spawnThread(QueryMiMI.QUERY_BY_ID, node);
-	}
-
-	public QueryMiMIWrapper(CyEdge edge) {
-		this.createDialog(QueryMiMI.QUERY_BY_INTERACTION, edge.getIdentifier());
-		this.spawnThread(QueryMiMI.QUERY_BY_INTERACTION, edge);
-	}
-
-	public void spawnThread(final int type, final Object obj) {
+	public void spawnThread(final SwingWorker<Object, Object> swingWorker, final JFrame frame) {
 		//final JDialog dialog = optionPane.createDialog(Cytoscape.getDesktop(), "Querying MiMI...");
-		dialog = optionPane.createDialog(Cytoscape.getDesktop(), "Querying MiMI...");
+		dialog = optionPane.createDialog(frame, "Querying MiMI...");
 		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		dialog.pack();
 
 		//final Timer popupTimer = new Timer(msToPop, null);
 		popupTimer = new Timer(msToPop, null);
 		popupTimer.setRepeats(false);      
-        	doQuery = new SwingWorker() {
-			public Object construct() {	
-				if (obj instanceof String) {
-					return QueryMiMI.query(type, (String)obj);
-				} 
-				else {
-					return new Exception("Unknown Query Object");
-				}
-			}
-				
-			public void finished() {
-				popupTimer.stop();
-				dialog.setVisible(false);
-
-				if (this.get() instanceof ClosedByInterruptException) {
-					// do nothing, user cancelled query
-
-				} else if (this.get() instanceof Exception) {
-					Exception e = (Exception)this.get();
-
-					String name = e.getClass().getName();
-					String msg = e.getMessage();
-					StackTraceElement[] ste = e.getStackTrace();
-					String stack = "";
-					for (int i = 0; i < ste.length; i++) {
-						stack += ste[i].toString() + "<br>";
-					}
-					String txt = "";
-					if (name != null) txt += ": " + name;
-					txt += "<br>";
-					if (msg != null && !msg.equals("")) txt += "<br>" + msg + "<br>";
-					if (!stack.equals("")) txt += "<br>" + stack;
-					//txt += "</html>";
-
-					//JOptionPane.showMessageDialog(Cytoscape.getDesktop(), txt,
-					//	"Error", JOptionPane.ERROR_MESSAGE);
-					//System.out.println(txt);
-				} else {
-					//System.out.println("wrapper success.");						
-					new ListenMouse(); // enable expand network, modified on April 2008
-					new AddLegend();
-				}
-			}
-		};
+		
 
 		ActionListener doPopup = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -157,11 +116,11 @@ public class QueryMiMIWrapper {
 		};
 		popupTimer.addActionListener(doPopup);
 
-		doQuery.start();
+		swingWorker.execute();
 		popupTimer.start();
 	}
 	
-	private void createDialog(int type, String term) {
+	private void createDialog(final int type, final String term, final SwingWorker<Object, Object> swingWorker) {
 		final Object[] options = {"Cancel Query"};
 		//String labelStr=(type==DetailsPanel.DOMEAD)? ((DetailsPanel.SortsentencesNumber >= DetailsPanel.SORTLIMIT)? "Sort First "+ DetailsPanel.SORTLIMIT + " Sentences with MEAD" :"Sort "+DetailsPanel.SortsentencesNumber +" Sentences with MEAD" ): "Querying MiMI Database by "+ rsc.get(type);
 		String labelStr="Querying MiMI Database by "+ rsc.get(type);
@@ -187,14 +146,14 @@ public class QueryMiMIWrapper {
 					String prop = e.getPropertyName();
 					if ((e.getSource() == optionPane) && (prop.equals(JOptionPane.VALUE_PROPERTY))) {
 						if (e.getNewValue() instanceof String && e.getNewValue().equals(options[0])) {
-							if (doQuery != null) {	
+							if (swingWorker != null) {	
 								try{
 									if (QueryMiMI.rd !=null)
 										 QueryMiMI.rd.close();
 									}catch(Exception ee){
 										//System.out.println(ee);
 									}
-								doQuery.interrupt();
+								swingWorker.cancel(true);
 								
 								
 							}

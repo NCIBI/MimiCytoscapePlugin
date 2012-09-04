@@ -49,7 +49,7 @@ public class MiMIVS {
 		VisualStyle mimivs = cc.getVisualStyle("MiMI");
 		
 		if(mimivs == null){					
-			mimivs = MiMIVisualStyleFactory.createVisualStyle();
+			mimivs = MiMIVisualStyleBuilder.createVisualStyle();
 			cc.addVisualStyle(mimivs);
 			oldmiminodecolorC=mimivs.getNodeAppearanceCalculator().getCalculator(VisualPropertyType.NODE_FILL_COLOR);
 			oldmiminodelabelcolorC=mimivs.getNodeAppearanceCalculator().getCalculator(VisualPropertyType.NODE_LABEL_COLOR);

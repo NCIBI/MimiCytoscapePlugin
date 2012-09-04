@@ -79,9 +79,9 @@ import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.ncibi.cytoscape.mimi.action.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
 import org.ncibi.cytoscape.mimi.plugin.QueryGDS;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
 
 import cytoscape.Cytoscape;

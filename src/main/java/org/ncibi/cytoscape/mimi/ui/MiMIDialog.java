@@ -24,12 +24,26 @@
  ******************************************************************/
  
 package org.ncibi.cytoscape.mimi.ui;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Dimension;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import org.ncibi.cytoscape.mimi.action.ExcuteUploadFile;
-import org.ncibi.cytoscape.mimi.action.ExecuteSearch;
+import org.cytoscape.io.util.StreamUtil;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.ncibi.cytoscape.mimi.action.ExecuteUploadFileAction;
+import org.ncibi.cytoscape.mimi.action.ExecuteSearchAction;
 import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
 
 
@@ -57,33 +71,40 @@ public class MiMIDialog extends JFrame{
 	private JButton searchButton;
 	//private	JCheckBox jcheckbox;
 	private JTextField textField;
+	private StreamUtil streamUtil;
+	private CyNetworkFactory cyNetworkFactory;
+	private CyNetworkManager cyNetworkManager;
 	
-	public MiMIDialog(JFrame parent){
-		super("Welcome to MiMI Plugin " +MiMIPlugin.CURRENTPLUGINVERSION);		
-       Container cPane = getContentPane(); 
-       JTabbedPane tabbedPane=new JTabbedPane();  
-       
-       JComponent tab0=createPanel(TAB0);
-       tabbedPane.addTab("Enter Gene Symbol(s)", tab0);
-       
-       JComponent tab1=createPanel(TAB1);       
-       //tabbedPane.addTab("Enter Gene Symbol(s)", tab1);  
-       tabbedPane.addTab("Enter keyword(s)", tab1);
-       
-       JComponent tab2 = createPanel(TAB2);       
-       tabbedPane.addTab("From File", tab2);  
-       
-       JComponent tab3=createPanel(TAB3);
-       tabbedPane.addTab("For MeSH term", tab3);
-       
-       
-       tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-       //Add the tabbed pane to this panel.
-       cPane.add(tabbedPane);         
-       pack();
-       setVisible(true);
-       setLocationRelativeTo(parent);      
-      
+	public MiMIDialog(JFrame parent, StreamUtil streamUtil, CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager){
+		super("Welcome to MiMI Plugin " +MiMIPlugin.CURRENTPLUGINVERSION);
+		this.streamUtil = streamUtil;
+		this.cyNetworkFactory = cyNetworkFactory;
+		this.cyNetworkManager = cyNetworkManager;
+		
+		Container cPane = getContentPane(); 
+		JTabbedPane tabbedPane=new JTabbedPane();  
+
+		JComponent tab0=createPanel(TAB0);
+		tabbedPane.addTab("Enter Gene Symbol(s)", tab0);
+
+		JComponent tab1=createPanel(TAB1);       
+		//tabbedPane.addTab("Enter Gene Symbol(s)", tab1);  
+		tabbedPane.addTab("Enter keyword(s)", tab1);
+
+		JComponent tab2 = createPanel(TAB2);       
+		tabbedPane.addTab("From File", tab2);  
+
+		JComponent tab3=createPanel(TAB3);
+		tabbedPane.addTab("For MeSH term", tab3);
+
+
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		//Add the tabbed pane to this panel.
+		cPane.add(tabbedPane);         
+		pack();
+		setVisible(true);
+		setLocationRelativeTo(parent);      
+
 	}
 	protected JComponent createPanel(int tab) {		
 		   //create organism combobox
@@ -130,21 +151,21 @@ public class MiMIDialog extends JFrame{
 	    		  textField=new JTextField("",50);
 	    		  label=new JLabel("Enter Gene Symbol (s): e.g. csf1r, ccnt2");
 	    		  searchButton =new JButton("Search");
-	    		  searchButton.addActionListener(new ExecuteSearch(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this ));
-	    		  textField.addActionListener(new ExecuteSearch(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this ));
+	    		  searchButton.addActionListener(new ExecuteSearchAction(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager));
+	    		  textField.addActionListener(new ExecuteSearchAction(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager ));
 	    	  }
 	    	   
 	    	  if (tab==TAB1){
-	    		   //Create Search Text Field
-	    		   textField = new JTextField("",50);
-	    		   //JLabel label=new JLabel("(Official Gene Symbols: e.g. csf1r,ccnt2)");
-	    		   label=new JLabel("Enter keyword (s) to do free text search");
-	    		   //create search button		      
-	    		   searchButton = new JButton("Search");	    	   
-	    		   //add listener to search button and textfiled
-	    		   searchButton.addActionListener(new ExecuteSearch(MiMIPlugin.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this )) ;            	
-		       	   textField.addActionListener(new ExecuteSearch(MiMIPlugin.FREETEXT, textField,JCBorganismList,jcbMt,jcbDR,jcbIL,(JFrame) this ));
-	    	   }
+	    		  //Create Search Text Field
+	    		  textField = new JTextField("",50);
+	    		  //JLabel label=new JLabel("(Official Gene Symbols: e.g. csf1r,ccnt2)");
+	    		  label=new JLabel("Enter keyword (s) to do free text search");
+	    		  //create search button		      
+	    		  searchButton = new JButton("Search");	    	   
+	    		  //add listener to search button and textfiled
+	    		  searchButton.addActionListener(new ExecuteSearchAction(MiMIPlugin.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager));
+	    		  textField.addActionListener(new ExecuteSearchAction(MiMIPlugin.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager ));
+	    	  }
 	    	   if (tab==TAB3){
 	    		 //Create Search Text Field
 	    		   textField = new JTextField("",44);	    		   
@@ -152,8 +173,8 @@ public class MiMIDialog extends JFrame{
 	    		   //create search button		      
 	    		   searchButton = new JButton("Search");	    	   
 	    		   //add listener to search button and textfiled
-	    		   searchButton.addActionListener(new ExecuteSearch(MiMIPlugin.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this )) ;            	
-		       	   textField.addActionListener(new ExecuteSearch(MiMIPlugin.MESHTERM, textField,JCBorganismList,jcbMt,jcbDR,jcbIL,(JFrame) this ));
+	    		   searchButton.addActionListener(new ExecuteSearchAction(MiMIPlugin.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager));
+	    		   textField.addActionListener(new ExecuteSearchAction(MiMIPlugin.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager ));
 	    	   }
 		       JPanel panel3 = new JPanel();
 		       panel3.add(textField);
@@ -172,7 +193,7 @@ public class MiMIDialog extends JFrame{
 	       if(tab==TAB2){
 	    	   JButton loadFileButton=new JButton("Load Gene File...");	
 		       //loadFileButton.addActionListener(new ExcuteUploadFile(JCBorganismList,jcbMt,jcbDR,jcbIL,jcheckbox,(JFrame) this ));
-		       loadFileButton.addActionListener(new ExcuteUploadFile((JFrame) this ));
+		       loadFileButton.addActionListener(new ExecuteUploadFileAction((JFrame) this ));
 		       JButton fileFormat=new JButton("A Sample File");
 		       fileFormat.addActionListener(new FileFormatTemplate());
 		       JPanel loadFilePanel= new JPanel();

@@ -22,7 +22,7 @@
  * This work was supported in part by National Institutes of Health Grant #U54DA021519
  *
  ******************************************************************/
-  package org.ncibi.cytoscape.mimi.action;
+  package org.ncibi.cytoscape.mimi.util;
 
 /////////////////////////////////////////////////////////
 //Bare Bones Browser Launch                          //

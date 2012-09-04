@@ -55,9 +55,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-import org.ncibi.cytoscape.mimi.action.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.parser.UserAnnoAttr;
 import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
 import org.ncibi.cytoscape.mimi.visual.LayoutUtility;
 

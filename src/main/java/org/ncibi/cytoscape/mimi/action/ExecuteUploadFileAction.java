@@ -25,25 +25,27 @@
  
 package org.ncibi.cytoscape.mimi.action;
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.*;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
 //import javax.swing.JCheckBox;
 //import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 //import org.ncibi.cytoscape.plugin.mimiR2.plugin.QueryMiMIWrapper;
-import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
-
-import cytoscape.Cytoscape;
 
 /** 
  * @author jinggao/ExcuteUploadFile
  * @date Oct 11, 2007
  * update on Nov 19, 2007 accept species etc via both GUI and file header
  */
-public class ExcuteUploadFile implements ActionListener{
+public class ExecuteUploadFileAction implements ActionListener{
 	private  String organism;
 	private  String moleculeType;
 	private  String dataSource;
@@ -52,7 +54,7 @@ public class ExcuteUploadFile implements ActionListener{
 	private  String MoleculeTypes=" protein mRNA gene pseudo chemical DNA";
 	private  String DataSources=" BIND CCSB DIP HPRD IntAct KEGG MDC MINT PubMed reactome";
 	
-	public ExcuteUploadFile(JFrame Frame){		
+	public ExecuteUploadFileAction(JFrame Frame){		
 		frame=Frame;			
 	}
 	public void actionPerformed(ActionEvent e){			
@@ -111,7 +113,7 @@ public class ExcuteUploadFile implements ActionListener{
           	}
           	catch(Exception ex){
           		if (ex.toString().startsWith("java.lang.NumberFormatException"))
-          			JOptionPane.showMessageDialog(Cytoscape.getDesktop(),"Please check your upload file Format!");
+          			JOptionPane.showMessageDialog(frame,"Please check your upload file Format!");
 //          		System.out.println(ex);
           	}
           }

@@ -23,25 +23,28 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.ui;
+package org.ncibi.cytoscape.mimi.action;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import org.ncibi.cytoscape.mimi.action.BareBonesBrowserLaunch;
+import org.cytoscape.application.swing.AbstractCyAction;
 import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
 /**
  * @author Jing Gao
  * link to MiMI Help page
  */
-public class MiMIHelp implements ActionListener {	
-	 public MiMIHelp() {	        
-	 }
+@SuppressWarnings("serial")
+public class HelpAction extends AbstractCyAction {	
+	
+	public HelpAction(){
+		super("Help");
+		setPreferredMenu("Apps.MiMI Plugin");		
+	}
 	 
 	 public void actionPerformed(ActionEvent event) {
-		 
 		 BareBonesBrowserLaunch.openURL(MiMIPlugin.MIMIPLUGINHOME);
 	 }
 

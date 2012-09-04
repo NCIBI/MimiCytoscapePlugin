@@ -25,18 +25,17 @@
  
 package org.ncibi.cytoscape.mimi.plugin;
 
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.BufferedReader;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.net.Proxy;
+import java.net.URL;
 import java.net.URLConnection;
-import javax.swing.JOptionPane;
-import cytoscape.Cytoscape;
-import cytoscape.CyEdge;
-import cytoscape.util.ProxyHandler;
+import java.net.URLEncoder;
 
+import javax.swing.JOptionPane;
+
+import org.cytoscape.model.CyEdge;
 import org.ncibi.cytoscape.mimi.ui.DetailsPanel;
 
 /**

@@ -23,58 +23,43 @@
  *
  ******************************************************************/
   
-package org.ncibi.cytoscape.mimi.action;
-
-import giny.view.NodeView;
+package org.ncibi.cytoscape.mimi.popupMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 
+import org.cytoscape.application.swing.CyMenuItem;
+import org.cytoscape.application.swing.CyNodeViewContextMenuFactory;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
 import org.ncibi.cytoscape.mimi.ui.AnnoEditor;
 import org.ncibi.cytoscape.mimi.ui.AnnoLogin;
 import org.ncibi.cytoscape.mimi.ui.ViewPubAnno;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
 
-import cytoscape.CyNode;
-import cytoscape.Cytoscape;
-import ding.view.NodeContextMenuListener;
-
 /**
- * @author JingGao/PopupNodeContextMenuListener
+ * @author JingGao/PopupNodeContextMenuFactory
  * @date Feb 20, 2007
  */
-public class PopupNodeContextMenuListener implements NodeContextMenuListener
+public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
 {
-    private NodeView thecynodeview;
-    public static String genepairs = "";
 
-    public PopupNodeContextMenuListener()
-    {
-
-    }
-
-    public void addNodeContextMenuItems(NodeView nodeView, JPopupMenu menu)
-    {
-        thecynodeview = nodeView;
-        if (menu == null)
-        {
-            menu = new JPopupMenu();
-        }
-        // add popup menu
-        JMenu mimipluginMenu = new JMenu("MiMI Plugin");
-        menu.add(mimipluginMenu);
+	public CyMenuItem createMenuItem(final CyNetworkView networkView, final View<CyNode> nodeView) {
+		JMenu menu = new JMenu("MiMI Plugin");
 
         JMenuItem jmiDoNLP = new JMenuItem("BioNLP");
         jmiDoNLP.setEnabled(false);
-        mimipluginMenu.add(jmiDoNLP);
+        menu.add(jmiDoNLP);
 
         JMenu AnnotMenu = new JMenu("User Annotation");
-        mimipluginMenu.add(AnnotMenu);
+        menu.add(AnnotMenu);
         JMenuItem jmiPubAnno = new JMenuItem("View Public Annotation");
         JMenuItem jmiNodeAnno = new JMenuItem("Add Your Annotation");
         AnnotMenu.add(jmiPubAnno);
@@ -83,7 +68,7 @@ public class PopupNodeContextMenuListener implements NodeContextMenuListener
         {
             public void actionPerformed(ActionEvent e)
             {
-                CyNode cynode = (CyNode) thecynodeview.getNode();
+                CyNode cynode = nodeView.getModel();
                 new ViewPubAnno(cynode);
             }
         });
@@ -91,7 +76,7 @@ public class PopupNodeContextMenuListener implements NodeContextMenuListener
         {
             public void actionPerformed(ActionEvent e)
             {
-                CyNode cynode = (CyNode) thecynodeview.getNode();
+                CyNode cynode = nodeView.getModel();
                 // System.out.println("click node is"+cynode.getIdentifier());
                 if (MiMIPlugin.currentUserID.equals("0"))
                     new AnnoLogin(cynode);
@@ -102,7 +87,7 @@ public class PopupNodeContextMenuListener implements NodeContextMenuListener
 
         // add ncibi linkout
         JMenu linkoutncibi = new JMenu("LinkOut NCIBI");
-        mimipluginMenu.add(linkoutncibi);
+        menu.add(linkoutncibi);
         // add Gene2Mesh to context menu
         JMenuItem jmiGene2Mesh = new JMenuItem("Gene2Mesh");
         linkoutncibi.add(jmiGene2Mesh);
@@ -110,11 +95,10 @@ public class PopupNodeContextMenuListener implements NodeContextMenuListener
         {
             public void actionPerformed(ActionEvent e)
             {
-                CyNode cynode = (CyNode) thecynodeview.getNode();
-                String term = Cytoscape.getNodeAttributes().getStringAttribute(cynode.getIdentifier(),
-                        "Gene.name");
-                String taxid = Cytoscape.getNodeAttributes().getStringAttribute(cynode.getIdentifier(),
-                        "Gene.taxid");
+                CyNode node = nodeView.getModel();
+                CyNetwork network = networkView.getModel();
+                String term = network.getRow(node).get("Gene.name",String.class);
+                String taxid = network.getRow(node).get("Gene.taxid", String.class);
                 // get selected nodes
                 /*
                  * Iterator<CyNode> nodeSet=
@@ -137,20 +121,22 @@ public class PopupNodeContextMenuListener implements NodeContextMenuListener
         {
             public void actionPerformed(ActionEvent e)
             {
-                CyNode cynode = (CyNode) thecynodeview.getNode();
-                String mimiNodeUrl = MiMIPlugin.MIMINODELINK + "?geneid=" + cynode.getIdentifier();
+                CyNode node = nodeView.getModel();
+                CyNetwork network = networkView.getModel();
+                String mimiNodeUrl = MiMIPlugin.MIMINODELINK + "?geneid=" + network.getRow(node).get(CyNetwork.NAME, String.class);
                 BareBonesBrowserLaunch.openURL(mimiNodeUrl);
             }
         });
         
         //integrate dynamicXpr 
     	JMenuItem jmiNodeDyXpr=new JMenuItem("Dynamic Expression");
-    	mimipluginMenu.add(jmiNodeDyXpr);
+    	menu.add(jmiNodeDyXpr);
     	jmiNodeDyXpr.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent ae){         			
     			new DynamicExpression();
     		}
     	}); 
-
-    }
+    	
+    	return new CyMenuItem(menu,1.0f);
+	}
 }

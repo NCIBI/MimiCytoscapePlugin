@@ -35,10 +35,9 @@ import javax.swing.JScrollPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import org.ncibi.cytoscape.mimi.action.BareBonesBrowserLaunch;
+import org.cytoscape.io.util.StreamUtil;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
-
-import cytoscape.Cytoscape;
 
 /** 
  * @author jinggao/BrowseGDS
@@ -53,7 +52,7 @@ public class BrowseGDS extends JFrame implements  HyperlinkListener{
 	
 	
 	 
-	public BrowseGDS(){
+	public BrowseGDS(JFrame frame){
 		super("Browse GDS");
 		Container contentPane = getContentPane();   	       
         //Create an editor pane.	       
@@ -72,7 +71,7 @@ public class BrowseGDS extends JFrame implements  HyperlinkListener{
         contentPane.add(editorScrollPane);	     
         pack();
         setVisible(true);
-        setLocationRelativeTo(Cytoscape.getDesktop());
+        setLocationRelativeTo(frame);
 		//System.out.println("Browse GDS Dataset");
 	}
 	private String retrieveData(){

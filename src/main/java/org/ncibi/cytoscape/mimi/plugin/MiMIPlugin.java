@@ -27,20 +27,29 @@ package org.ncibi.cytoscape.mimi.plugin;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Properties;
 
-import javax.swing.JDesktopPane;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.JFrame;
 
-import org.ncibi.cytoscape.mimi.action.ImportFromMiMI;
-import org.ncibi.cytoscape.mimi.popupMenu.AddPopupMenu;
-import org.ncibi.cytoscape.mimi.ui.MiMIHelp;
-
-import cytoscape.Cytoscape;
-import cytoscape.CytoscapeInit;
-import cytoscape.plugin.CytoscapePlugin;
-import cytoscape.view.CyMenus;
-import cytoscape.view.CytoscapeDesktop;
+import org.cytoscape.application.swing.CyAction;
+import org.cytoscape.application.swing.CyEdgeViewContextMenuFactory;
+import org.cytoscape.application.swing.CyNodeViewContextMenuFactory;
+import org.cytoscape.application.swing.CySwingApplication;
+import org.cytoscape.io.util.StreamUtil;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.property.CyProperty;
+import org.cytoscape.service.util.AbstractCyActivator;
+import org.cytoscape.task.NodeViewTaskFactory;
+import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
+import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.ncibi.cytoscape.mimi.action.HelpAction;
+import org.ncibi.cytoscape.mimi.action.QueryAction;
+import org.ncibi.cytoscape.mimi.popupMenu.PopupEdgeContextMenuFactory;
+import org.ncibi.cytoscape.mimi.popupMenu.PopupNodeContextMenuFactory;
+import org.ncibi.cytoscape.mimi.task.ExpandCollapseNodeTaskFactory;
+import org.ncibi.cytoscape.mimi.visual.MiMIVisualStyleBuilder;
+import org.osgi.framework.BundleContext;
 
 /**
  * MiMI PlugIn.
@@ -48,7 +57,7 @@ import cytoscape.view.CytoscapeDesktop;
  * @author Jing Gao
  * @author Alex Ade
  */
-public class MiMIPlugin extends CytoscapePlugin {
+public class MiMIPlugin extends AbstractCyActivator {
 	/**
 	 * @author Jing Gao 
 	 * 
@@ -88,30 +97,34 @@ public class MiMIPlugin extends CytoscapePlugin {
 	public static int    MESHTERM=2;
 	
 	public MiMIPlugin() {
-		initialize();
-		//create listener for adding popup menu
-		new AddPopupMenu();			
-		addMiMIPluginItem();					
+		super();
 	}
-
-	/**
-	 * Init method to grab queryMiMIBy[Name|ID] property and start query if
-	 * present. Grabs setMiMIHost property and sets host variable appropriately.
-	 * Also, sets up drag and drop for URLs onto Cytoscape.
-	 *
-	 * @author Alex Ade
-	 * @date   Thu Nov 16 14:05:11 EST 2006
-	 */
-	public void initialize() {
-		String host = CytoscapeInit.getProperties().getProperty("setMiMIHost", HOST);
-
+	
+	public void start(BundleContext bc) throws Exception {
+		@SuppressWarnings("unchecked")
+		CyProperty<Properties> cytoscapePropertiesServiceRef = getService(bc, CyProperty.class,
+				"(cyPropertyName=cytoscape3.props)");
+		String host = cytoscapePropertiesServiceRef.getProperties().getProperty("setMiMIHost", HOST);
 		HashMap<String, Integer> type = new HashMap<String, Integer>();
 		type.put("queryMiMIByName", QueryMiMI.QUERY_BY_NAME);
 		type.put("queryMiMIById", QueryMiMI.QUERY_BY_ID);
 		type.put("queryMiMIByRemoteFile", QueryMiMI.QUERY_BY_REMOTEFILE);
 		type.put("queryMiMIByGenelist",10);
-		JDesktopPane dp = Cytoscape.getDesktop().getNetworkViewManager().getDesktopPane();
-		dp.setTransferHandler(new URLDropHandler(type));
+		
+		CySwingApplication cySwingApplication = getService(bc, CySwingApplication.class);
+		CyNetworkFactory cyNetworkFactory = getService(bc, CyNetworkFactory.class);
+		CyNetworkManager cyNetworkManager = getService(bc, CyNetworkManager.class);
+		StreamUtil streamUtil = getService(bc, StreamUtil.class);
+		VisualStyleFactory vsFactoryServiceRef = getService(bc, VisualStyleFactory.class);
+		VisualMappingFunctionFactory passthroughMappingFactoryRef = getService(bc, VisualMappingFunctionFactory.class,
+				"(mapping.type=passthrough)");
+		VisualMappingFunctionFactory discreteMappingFactoryRef = getService(bc, VisualMappingFunctionFactory.class,
+				"(mapping.type=discrete)");
+		MiMIVisualStyleBuilder vsBuilder = new MiMIVisualStyleBuilder(vsFactoryServiceRef,
+				discreteMappingFactoryRef, passthroughMappingFactoryRef);
+		
+		JFrame frame = cySwingApplication.getJFrame();
+		frame.setTransferHandler(new URLDropHandler(type)); //NetworkViewManager?
 
 		//ContainerListener l = new ContainerListener() {
 		//	public void componentAdded(ContainerEvent e) {
@@ -127,32 +140,27 @@ public class MiMIPlugin extends CytoscapePlugin {
 		//};
 		//dp.addContainerListener(l);
 
-		Enumeration keys = CytoscapeInit.getProperties().propertyNames();
+		Enumeration keys = cytoscapePropertiesServiceRef.getProperties().propertyNames();
 		while (keys.hasMoreElements()) {
 			String s = (String)keys.nextElement();			
 			if (type.containsKey(s)) {
-				String prop = CytoscapeInit.getProperties().getProperty(s);
+				String prop = cytoscapePropertiesServiceRef.getProperties().getProperty(s);
 
 				if (prop != null && !prop.equals("")) {	
 					//System.out.println("arg key value pair is ["+s+"] ["+prop+"]");
-					new QueryMiMIWrapper(type.get(s), prop);
+					new QueryMiMIWrapper(type.get(s), prop, cyNetworkFactory, cyNetworkManager, frame, streamUtil);
 					break;
 				}
 			}
 		}
+		// Add double click menu to the network view
+		Properties expandCollapseNodeTaskFactoryProps = new Properties();           
+		expandCollapseNodeTaskFactoryProps.setProperty("preferredAction","OPEN");
+		registerService(bc,new QueryAction(cyNetworkFactory, cyNetworkManager, cySwingApplication, streamUtil),CyAction.class, new Properties());
+		registerService(bc,new HelpAction(),CyAction.class, new Properties());
+		registerService(bc,new PopupNodeContextMenuFactory(), CyNodeViewContextMenuFactory.class, new Properties());
+		registerService(bc,new PopupEdgeContextMenuFactory(), CyEdgeViewContextMenuFactory.class, new Properties());
+		registerService(bc,new ExpandCollapseNodeTaskFactory(frame, streamUtil),NodeViewTaskFactory.class, expandCollapseNodeTaskFactoryProps);
 	}
-	
-	private void addMiMIPluginItem(){
-		CytoscapeDesktop desktop = Cytoscape.getDesktop();
-		CyMenus cyMenus = desktop.getCyMenus();
-		JMenu plugInMenu = cyMenus.getOperationsMenu();	
-		JMenu mimiMenu=new JMenu("MiMI Plugin");
-		JMenuItem menuItem1 = new JMenuItem("Query"); 			
-		menuItem1.addActionListener(new ImportFromMiMI());  
-		mimiMenu.add(menuItem1);		
-		JMenuItem menuItem2 = new JMenuItem("Help");
-		menuItem2.addActionListener(new MiMIHelp());
-		mimiMenu.add(menuItem2);	
-		plugInMenu.add(mimiMenu); 	
-	}
+
 }

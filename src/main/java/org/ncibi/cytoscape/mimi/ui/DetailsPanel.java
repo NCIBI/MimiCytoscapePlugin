@@ -35,8 +35,8 @@ import javax.swing.JScrollPane;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.event.HyperlinkEvent;
 
-import org.ncibi.cytoscape.mimi.action.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
 /**

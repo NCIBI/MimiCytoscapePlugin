@@ -37,7 +37,7 @@ import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import cytoscape.Cytoscape;
 
-import org.ncibi.cytoscape.mimi.action.ExecuteSearch;
+import org.ncibi.cytoscape.mimi.action.ExecuteSearchAction;
 
 /** 
  * @author jinggao/UploadFileDialog
@@ -105,7 +105,7 @@ public UploadFileDialog (boolean findheader, String genelist, String organism, S
 		jcbIL.setEnabled(true);
 		//create search button	    
     	JButton searchButton = new JButton("Search");    	    	
-	    searchButton.addActionListener(new ExecuteSearch(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this )) ;
+	    searchButton.addActionListener(new ExecuteSearchAction(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this )) ;
 	    
 	    JPanel panel1= new JPanel();
 	    panel1.add(JCBorganismList);

@@ -34,18 +34,21 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.cytoscape.io.util.StreamUtil;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
 import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
 import org.ncibi.cytoscape.mimi.plugin.QueryMiMIWrapper;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
-
-import cytoscape.Cytoscape;
 
 /**
  * 
  * invoke QueryMiMIWrapper to show progress bar when query
  * @author Jing Gao
  */
-public class ExecuteSearch implements ActionListener{
+public class ExecuteSearchAction implements ActionListener{
 	private JTextField textField;
 	private JComboBox jcbOrganism;
 	private JComboBox jcbMt;
@@ -53,31 +56,42 @@ public class ExecuteSearch implements ActionListener{
 	private JComboBox jcbIL;
 	//private JCheckBox jcheckBox;
 	private JFrame frame;	
-	private Boolean freetextSearch;
 	private int searchMethod;
+	private StreamUtil streamUtil;
+	private CyNetworkFactory cyNetworkFactory;
+	private CyNetworkManager cyNetworkManager;
 	
-	public ExecuteSearch (JTextField TextField ,JComboBox jcborganism ,JComboBox jcbmt,JComboBox jcbdr, JComboBox jcbil, JFrame Frame){
+	
+	public ExecuteSearchAction (JTextField textField ,JComboBox jcbOrganism ,JComboBox jcbMt,JComboBox jcbDr, JComboBox jcbIL, JFrame frame, 
+			StreamUtil streamUtil, CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager ){
 		//freetextSearch=false;
 		searchMethod=0;
-		textField= TextField;
-		jcbOrganism=jcborganism;
-		jcbMt=jcbmt;
-		jcbDr=jcbdr;
-		jcbIL=jcbil;
+		this.textField= textField;
+		this.jcbOrganism=jcbOrganism;
+		this.jcbMt=jcbMt;
+		this.jcbDr=jcbDr;
+		this.jcbIL=jcbIL;
 		//jcheckBox=jcheckbox;
-		frame=Frame;		
+		this.frame=frame;
+		this.streamUtil = streamUtil;
+		this.cyNetworkFactory = cyNetworkFactory;
+		this.cyNetworkManager = cyNetworkManager;
 	}
 	
-	public ExecuteSearch (int SearchMethod, JTextField TextField ,JComboBox jcborganism ,JComboBox jcbmt,JComboBox jcbdr, JComboBox jcbil, JFrame Frame){
+	public ExecuteSearchAction (int searchMethod, JTextField textField ,JComboBox jcbOrganism ,JComboBox jcbMt,JComboBox jcbDr, JComboBox jcbIL, JFrame frame,
+			StreamUtil streamUtil, CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager){
 		//freetextSearch=FreetextSearch;
-		searchMethod=SearchMethod;
-		textField= TextField;
-		jcbOrganism=jcborganism;
-		jcbMt=jcbmt;
-		jcbDr=jcbdr;
-		jcbIL=jcbil;
+		this.searchMethod=searchMethod;
+		this.textField= textField;
+		this.jcbOrganism=jcbOrganism;
+		this.jcbMt=jcbMt;
+		this.jcbDr=jcbDr;
+		this.jcbIL=jcbIL;
 		//jcheckBox=jcheckbox;
-		frame=Frame;		
+		this.frame=frame;
+		this.streamUtil = streamUtil;
+		this.cyNetworkFactory = cyNetworkFactory;
+		this.cyNetworkManager = cyNetworkManager;		
 	}
 	
 	public void actionPerformed(ActionEvent event) {		
@@ -117,11 +131,13 @@ public class ExecuteSearch implements ActionListener{
 			
 			String inputStr=keywords+"/////"+jcbOrganism.getSelectedItem()+"/////"+jcbMt.getSelectedItem()+"/////"+jcbDr.getSelectedItem()+"/////"+jcbIL.getSelectedItem();
 			//System.out.println("inputstr is "+inputStr);
-			//generate network			
-			new QueryMiMIWrapper(inputStr);			
+			//generate network
+			CyNetwork network = cyNetworkFactory.createNetwork();
+			cyNetworkManager.addNetwork(network);
+			new QueryMiMIWrapper(QueryMiMI.QUERY_BY_NAME, inputStr, cyNetworkFactory, cyNetworkManager, frame, streamUtil);			
 		}
 		else{
-			JOptionPane.showMessageDialog(Cytoscape.getDesktop(),"Please enter a search term."); 			
+			JOptionPane.showMessageDialog(frame,"Please enter a search term."); 			
 		}
 		
 	}
