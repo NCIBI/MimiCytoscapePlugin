@@ -150,13 +150,15 @@ public class QueryMiMI {
 	public static Object query(int inputtype, String inputStr, CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager, JFrame frame, StreamUtil streamUtil) {
 		//System.out.println("inputtypeis "+inputtype+ "inputstring is "+inputStr);
         //query mimi rdb and create network	
-		init();
- 	    CyNetwork network = cyNetworkFactory.createNetwork();
- 	    cyNetworkManager.addNetwork(network);
+		
 		//String  MaxDistance="0";
         //set mimi visual style
-        MiMIVS.SetMiMIVS();
+       // MiMIVS.SetMiMIVS();
         try{
+        	init();
+        	CyNetwork network = cyNetworkFactory.createNetwork();
+     		String [] inputParameters = inputStr.split("/////");	
+     		String geneList= (inputParameters[0].length()<=15) ? inputParameters[0]:inputParameters[0].substring(0, 15)+"...";
         	//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
         	doQuery(inputtype,inputStr, streamUtil);
         	//create networks
@@ -187,59 +189,93 @@ public class QueryMiMI {
         		if (res.length!=7)continue;
         		//result from SPs for mimiR2: symbol1,geneid1,step1,symbol2,geneid2,step2,intID
         		//source node
-        		CyNode sourceNode = network.addNode();
-        		network.getRow(sourceNode).set(CyNetwork.NAME, res[1]);
+        		CyNode sourceNode;
+        		Collection<CyRow> sourceNodeRows = defaultNodeTable.getMatchingRows(CyNetwork.NAME, res[1]);
+        		if(sourceNodeRows.isEmpty()) {
+        			sourceNode = network.addNode();
+        			network.getRow(sourceNode).set(CyNetwork.NAME, res[1]);
+        		}
+        		else {
+        			CyRow sourceNodeRow = sourceNodeRows.iterator().next();
+        			Long sourceNodeSuid = sourceNodeRow.get(CyNetwork.SUID, Long.class);
+        			sourceNode = network.getNode(sourceNodeSuid);
+        		}
         		if (!geneIDList.contains(" "+res[1]+" "))
         			geneIDList += res[1]+" ";
-        		if (!geneIDList.contains(" "+res[4]+" "))
-        			geneIDList += res[4]+" "; 
-
-        		if (!interactionIDList.contains(" "+res[6]+" "))	   				 
-        			interactionIDList += res[6]+" ";
 
         		//MaxDistance = (MaxDistance.compareTo(res[2])<0)? res[2]:MaxDistance ; 
         		//MaxDistance = (MaxDistance.compareTo(res[5])<0)? res[5]:MaxDistance ;
-        		nodeList.add(sourceNode);
-        		network.getRow(sourceNode).set("Gene.name", res[0]);
-        		//set default (false) user annotation attribute to node
-        		network.getRow(sourceNode).set("Gene.userAnnot", false);
-        		//add step attribute if it does not exist
-        		if(!network.getRow(sourceNode).get("Network Distance", String.class).equals("0")) {
-        			network.getRow(sourceNode).set("Network Distance", res[2]);
-        			network.getRow(sourceNode).set("Node Color", SEEDNEIGHBOR);
+        		if(!nodeList.contains(sourceNode)) {
+	        		nodeList.add(sourceNode);
+	        		network.getRow(sourceNode).set("Gene.name", res[0]);
+	        		//set default (false) user annotation attribute to node
+	        		network.getRow(sourceNode).set("Gene.userAnnot", false);
+	        		//add step attribute if it does not exist
+	        		if(!network.getRow(sourceNode).get("Network Distance", String.class).equals("0")) {
+	        			network.getRow(sourceNode).set("Network Distance", res[2]);
+	        			hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", SEEDNEIGHBOR);
+	        		}
+	        		else
+	        			hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", SEEDNODE);
         		}
-        		else
-        			network.getRow(sourceNode).set("Node Color", SEEDNODE);
 
         		//target node
-        		CyNode targetNode = network.addNode();
-        		network.getRow(targetNode).set(CyNetwork.NAME, res[4]);
-        		nodeList.add(targetNode);
-        		network.getRow(targetNode).set("Gene.name", res[3]);
-        		//set default (false) user annotation attribute to node
-        		network.getRow(targetNode).set("Gene.userAnnot", false);
-        		//add step attribute if it does not exist
-        		if(!network.getRow(targetNode).get("Network Distance", String.class).equals("0")) {
-        			network.getRow(targetNode).set("Network Distance", res[5]);
-        			network.getRow(targetNode).set("Node Color", SEEDNEIGHBOR);
+        		CyNode targetNode;
+        		Collection<CyRow> targetNodeRows = defaultNodeTable.getMatchingRows(CyNetwork.NAME, res[4]);
+        		if(targetNodeRows.isEmpty()) {
+        			targetNode = network.addNode();
+        			network.getRow(targetNode).set(CyNetwork.NAME, res[4]);
+        			network.getRow(targetNode).set("Gene.name", res[3]);
+	        		//set default (false) user annotation attribute to node
+	        		network.getRow(targetNode).set("Gene.userAnnot", false);
         		}
-        		else
-        			network.getRow(targetNode).set("Node Color", SEEDNODE);
+        		else {
+        			CyRow targetNodeRow = targetNodeRows.iterator().next();
+        			Long targetNodeSuid = targetNodeRow.get(CyNetwork.SUID, Long.class);
+        			targetNode = network.getNode(targetNodeSuid);
+        		}
+        		
+        		if (!geneIDList.contains(" "+res[4]+" "))
+        			geneIDList += res[4]+" "; 
+        		
+        		if(!nodeList.contains(targetNode)) {
+	        		nodeList.add(targetNode);
+	        		//add step attribute if it does not exist
+	        		if(!network.getRow(targetNode).get("Network Distance", String.class).equals("0")) {
+	        			network.getRow(targetNode).set("Network Distance", res[5]);
+	        			hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", SEEDNEIGHBOR);
+	        		}
+	        		else
+	        			hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", SEEDNODE);
+        		}
 
         		//edge
-        		CyEdge edge = network.addEdge(sourceNode, targetNode, true);
+        		CyEdge edge;
         		String name = network.getRow(sourceNode).get(CyNetwork.NAME, String.class) + 
         				" ( ) " + network.getRow(targetNode).get(CyNetwork.NAME, String.class);
-        		network.getRow(edge).set(CyEdge.INTERACTION, " ");
-        		network.getRow(edge).set(CyNetwork.NAME, name );
-        		network.getRow(edge).set("Interaction.geneName","("+res[0]+" , "+res[3]+")");
-        		network.getRow(edge).set("Interaction.userAnnot",false);
-        		network.getRow(edge).set("Interaction.id",res[6]);
+        		Collection<CyRow> edgeRows = defaultEdgeTable.getMatchingRows(CyNetwork.NAME,name);
+        		if(edgeRows.isEmpty()) {
+        			edge = network.addEdge(sourceNode, targetNode, true);
+        			network.getRow(edge).set(CyNetwork.NAME, name );
+        			network.getRow(edge).set(CyEdge.INTERACTION, " ");
+            		network.getRow(edge).set("Interaction.geneName","("+res[0]+" , "+res[3]+")");
+            		network.getRow(edge).set("Interaction.userAnnot",false);
+            		network.getRow(edge).set("Interaction.id",res[6]);
+        		}
+        		else {
+        			CyRow edgeRow = edgeRows.iterator().next();
+        			Long edgeSuid = edgeRow.get(CyNetwork.SUID, Long.class);
+        			edge = network.getEdge(edgeSuid);
+        		}
+        		
         		if (!edgeIDStrList.contains(","+network.getRow(edge).get(CyNetwork.NAME, String.class)+","))	   				 
         			edgeIDStrList += network.getRow(edge).get(CyNetwork.NAME, String.class)+",";
+        		if (!interactionIDList.contains(" "+res[6]+" "))	   				 
+        			interactionIDList += res[6]+" ";
         		intID2geneID.put(res[6],network.getRow(edge).get(CyNetwork.NAME, String.class));
         		//System.out.println ("edge identifier["+edge.getIdentifier());
-        		edgeList.add(edge);
+        		if(!edgeList.contains(edge))
+        			edgeList.add(edge);
 
         	}
         	//System.out.println("delete total return no is:"+deli);
@@ -260,16 +296,16 @@ public class QueryMiMI {
         		else{
         			//System.out.println ("node list size "+nodeList.size());
         			//System.out.println("after drawing network geneidlist is "+geneIDList);
-        			String [] inputParameters = inputStr.split("/////");	
         			//networkAttributes.setAttribute(cynetwork.getIdentifier(), "MaxDist",MaxDistance);
+        			String networkName =geneList+"|"+ inputParameters[1] + "|" +inputParameters[2] + "|" +inputParameters[3] + "|" +inputParameters[4] + "|" ;
+        			network.getRow(network).set(CyNetwork.NAME, networkName);
         			network.getRow(network).set("Input Genes", inputParameters[0].replaceAll(" ", ";"));
         			network.getRow(network).set("Organism", inputParameters[1]);
         			network.getRow(network).set("Molecule Type", inputParameters[2]);
         			network.getRow(network).set("Data Source", inputParameters[3]);
         			network.getRow(network).set("Displays for results", inputParameters[4]);            		            	 
         		}
-
-        		draw();            	 
+         	    cyNetworkManager.addNetwork(network);
         	} else {
         		QueryMiMIWrapper.popupTimer.stop();
         		QueryMiMIWrapper.dialog.setVisible(false);
@@ -288,18 +324,10 @@ public class QueryMiMI {
 	public static Object query(String term, CyNode node, CyNetwork network, JFrame frame, StreamUtil streamUtil) {
 		//System.out.println("inputtypeis "+inputtype+ "inputstring is "+inputStr);
         //query mimi rdb and create network	
-		init();
-		interactionIDList=" ";
-		edgeIDStrList=",";
-		geneIDList=" ";
-		intID2geneID = new HashMap<String, String>();
-        nodeList = new ArrayList<CyNode>();
- 	    edgeList = new ArrayList<CyEdge>();
 
-		//String  MaxDistance="0";
-        //set mimi visual style
-        MiMIVS.SetMiMIVS();
         try{
+        	init();
+        	CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
         	//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
         	doQuery(QueryMiMI.QUERY_BY_EXPAND,term, streamUtil);
         	nodeIDList =new ArrayList<String>();
@@ -325,7 +353,7 @@ public class QueryMiMI {
         				//if (!nodeAttributes.hasAttribute(sourceNode.getIdentifier(),"Network Distance"))
         				network.getRow(sourceNode).set("Network Distance", "-1");
         				network.getRow(sourceNode).set("Gene.userAnnot", false);
-        				network.getRow(sourceNode).set("Node Color", EXPANDNEIGHBOR);
+        				hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", EXPANDNEIGHBOR);
         			}
         		}
         		else {
@@ -348,7 +376,7 @@ public class QueryMiMI {
         				//if (!nodeAttributes.hasAttribute(targetNode.getIdentifier(),"Network Distance"))	
         				network.getRow(targetNode).set("Network Distance", "-1");
         				network.getRow(targetNode).set("Gene.userAnnot", false);
-        				network.getRow(targetNode).set("Node Color", EXPANDNEIGHBOR);
+        				hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", EXPANDNEIGHBOR);
         			}
         		}
         		else {
@@ -382,10 +410,9 @@ public class QueryMiMI {
         		AttributesByIDs.GetAttribute(geneIDList,interactionIDList);
         		new UserAnnoAttr().getAttribute(geneIDList.trim(),edgeIDStrList.trim());
         		//set node color attributes for expand node. set nodelist and edge list as expand node attributes for collapsing expanded network using 
-        		network.getRow(node).set("Node Color", EXPANDNODE);
-        		network.getRow(node).set("NodeIDList", nodeIDList);
-        		network.getRow(node).set("EdgeIDList", edgeIDList);
-        		draw();
+        		hiddenNodeTable.getRow(node.getSUID()).set("Node Color", EXPANDNODE);
+        		hiddenNodeTable.getRow(node.getSUID()).set("NodeIDList", nodeIDList);
+        		hiddenNodeTable.getRow(node.getSUID()).set("EdgeIDList", edgeIDList);
 
         	}
         	else {
@@ -508,20 +535,5 @@ public class QueryMiMI {
 		}
 	
 	}	
-	
-	private static void draw(){
-		//specify layout
-		LayoutUtility.doLayout();
-	
-		//set visual style 
-		MiMIVS.SetMiMIVS();
-		cynetwork = Cytoscape.getCurrentNetwork();
-		CyNetworkView netView = Cytoscape.getNetworkView(cynetwork.getIdentifier()); 
-		netView.setVisualStyle("MiMI");
-		Cytoscape.getVisualMappingManager().setNetworkView(netView); 
-		Cytoscape.getVisualMappingManager().setVisualStyle("MiMI"); 
-		netView.redrawGraph(false, true);	            	 
-		//refresh attribute browser
-		Cytoscape.firePropertyChange(Cytoscape.ATTRIBUTES_CHANGED, null, null);
-	}
+
   }

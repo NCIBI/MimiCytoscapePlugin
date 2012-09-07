@@ -132,8 +132,6 @@ public class ExecuteSearchAction implements ActionListener{
 			String inputStr=keywords+"/////"+jcbOrganism.getSelectedItem()+"/////"+jcbMt.getSelectedItem()+"/////"+jcbDr.getSelectedItem()+"/////"+jcbIL.getSelectedItem();
 			//System.out.println("inputstr is "+inputStr);
 			//generate network
-			CyNetwork network = cyNetworkFactory.createNetwork();
-			cyNetworkManager.addNetwork(network);
 			new QueryMiMIWrapper(QueryMiMI.QUERY_BY_NAME, inputStr, cyNetworkFactory, cyNetworkManager, frame, streamUtil);			
 		}
 		else{
