@@ -55,8 +55,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-import org.ncibi.cytoscape.mimi.parser.UserAnnoAttr;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.attributes.UserAnnoAttr;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
 import org.ncibi.cytoscape.mimi.visual.LayoutUtility;
@@ -137,7 +137,7 @@ public class AnnoEditor extends JFrame implements ActionListener{ //,ItemListene
 	public AnnoEditor (Object obj, String userid){		
 		super ("Annotating Editor");	
 		userID = userid;
-		MiMIPlugin.currentUserID=userID;
+		CyActivator.currentUserID=userID;
 				
 		if (obj instanceof CyNode){		
 			nodeOrEdge=1;
@@ -497,7 +497,7 @@ public class AnnoEditor extends JFrame implements ActionListener{ //,ItemListene
 		}
 		else if (e.getActionCommand().equals("Log Out")){
 			setVisible(false);
-			MiMIPlugin.currentUserID="0";
+			CyActivator.currentUserID="0";
 		}			
 	}
 	
@@ -610,7 +610,7 @@ public class AnnoEditor extends JFrame implements ActionListener{ //,ItemListene
 	private void getAnnotSetNameList(String id, String tableName,String userid){
 		try{
 			id =URLEncoder.encode(id,"UTF-8");
-			String urlstr=MiMIPlugin.ANNOTSETNAME;
+			String urlstr=CyActivator.ANNOTSETNAME;
 			String query="TABLE="+tableName+"&ID="+id+"&USERID="+userid;
 			URLConnect uc= new URLConnect();
 			uc.doURLConnect(urlstr, query);
@@ -847,8 +847,8 @@ public class AnnoEditor extends JFrame implements ActionListener{ //,ItemListene
 		public TheMouseListener (){}
 		public void mouseClicked(MouseEvent e) {			
 			long curClick=e.getWhen();				
-			if ((e.getClickCount()==2) && (MiMIPlugin.lastClick !=curClick)){
-				 MiMIPlugin.lastClick=curClick;	
+			if ((e.getClickCount()==2) && (CyActivator.lastClick !=curClick)){
+				 CyActivator.lastClick=curClick;	
 				 String selectedUrl = (String) urlList.getSelectedValue();
 				 if (selectedUrl !=null)
 						

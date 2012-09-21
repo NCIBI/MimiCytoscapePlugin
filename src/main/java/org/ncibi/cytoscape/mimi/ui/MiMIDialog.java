@@ -44,7 +44,7 @@ import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.ncibi.cytoscape.mimi.action.ExecuteUploadFileAction;
 import org.ncibi.cytoscape.mimi.action.ExecuteSearchAction;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 
 
 
@@ -76,7 +76,7 @@ public class MiMIDialog extends JFrame{
 	private CyNetworkManager cyNetworkManager;
 	
 	public MiMIDialog(JFrame parent, StreamUtil streamUtil, CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager){
-		super("Welcome to MiMI Plugin " +MiMIPlugin.CURRENTPLUGINVERSION);
+		super("Welcome to MiMI Plugin " +CyActivator.CURRENTPLUGINVERSION);
 		this.streamUtil = streamUtil;
 		this.cyNetworkFactory = cyNetworkFactory;
 		this.cyNetworkManager = cyNetworkManager;
@@ -163,8 +163,8 @@ public class MiMIDialog extends JFrame{
 	    		  //create search button		      
 	    		  searchButton = new JButton("Search");	    	   
 	    		  //add listener to search button and textfiled
-	    		  searchButton.addActionListener(new ExecuteSearchAction(MiMIPlugin.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager));
-	    		  textField.addActionListener(new ExecuteSearchAction(MiMIPlugin.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager ));
+	    		  searchButton.addActionListener(new ExecuteSearchAction(CyActivator.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager));
+	    		  textField.addActionListener(new ExecuteSearchAction(CyActivator.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager ));
 	    	  }
 	    	   if (tab==TAB3){
 	    		 //Create Search Text Field
@@ -173,8 +173,8 @@ public class MiMIDialog extends JFrame{
 	    		   //create search button		      
 	    		   searchButton = new JButton("Search");	    	   
 	    		   //add listener to search button and textfiled
-	    		   searchButton.addActionListener(new ExecuteSearchAction(MiMIPlugin.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager));
-	    		   textField.addActionListener(new ExecuteSearchAction(MiMIPlugin.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager ));
+	    		   searchButton.addActionListener(new ExecuteSearchAction(CyActivator.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager));
+	    		   textField.addActionListener(new ExecuteSearchAction(CyActivator.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this, streamUtil, cyNetworkFactory,cyNetworkManager ));
 	    	   }
 		       JPanel panel3 = new JPanel();
 		       panel3.add(textField);

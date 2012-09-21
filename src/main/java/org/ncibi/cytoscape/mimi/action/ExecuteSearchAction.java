@@ -35,11 +35,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.cytoscape.io.util.StreamUtil;
-import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
-import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
+import org.ncibi.cytoscape.mimi.enums.QueryType;
+import org.ncibi.cytoscape.mimi.enums.SearchMethod;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
+import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 import org.ncibi.cytoscape.mimi.plugin.QueryMiMIWrapper;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
 
@@ -56,7 +57,7 @@ public class ExecuteSearchAction implements ActionListener{
 	private JComboBox jcbIL;
 	//private JCheckBox jcheckBox;
 	private JFrame frame;	
-	private int searchMethod;
+	private SearchMethod searchMethod;
 	private StreamUtil streamUtil;
 	private CyNetworkFactory cyNetworkFactory;
 	private CyNetworkManager cyNetworkManager;
@@ -65,7 +66,7 @@ public class ExecuteSearchAction implements ActionListener{
 	public ExecuteSearchAction (JTextField textField ,JComboBox jcbOrganism ,JComboBox jcbMt,JComboBox jcbDr, JComboBox jcbIL, JFrame frame, 
 			StreamUtil streamUtil, CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager ){
 		//freetextSearch=false;
-		searchMethod=0;
+		searchMethod=null;
 		this.textField= textField;
 		this.jcbOrganism=jcbOrganism;
 		this.jcbMt=jcbMt;
@@ -78,7 +79,7 @@ public class ExecuteSearchAction implements ActionListener{
 		this.cyNetworkManager = cyNetworkManager;
 	}
 	
-	public ExecuteSearchAction (int searchMethod, JTextField textField ,JComboBox jcbOrganism ,JComboBox jcbMt,JComboBox jcbDr, JComboBox jcbIL, JFrame frame,
+	public ExecuteSearchAction (SearchMethod searchMethod, JTextField textField ,JComboBox jcbOrganism ,JComboBox jcbMt,JComboBox jcbDr, JComboBox jcbIL, JFrame frame,
 			StreamUtil streamUtil, CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager){
 		//freetextSearch=FreetextSearch;
 		this.searchMethod=searchMethod;
@@ -99,21 +100,21 @@ public class ExecuteSearchAction implements ActionListener{
 		frame.setVisible(false);
 		if (textField.getText().length()>0){
 			String keywords="";
-			if (searchMethod != 0){				
+			if (searchMethod != null){				
 				try{
-					if (searchMethod == MiMIPlugin.FREETEXT){
+					if (searchMethod == SearchMethod.FREETEXT){
 						String query="query="+URLEncoder.encode(textField.getText(),"UTF-8");
 						//System.out.println("query is "+query);
 						URLConnect uc=new URLConnect();
-						uc.doURLConnect(MiMIPlugin.FREETEXTSEARCH, query);
+						uc.doURLConnect(MiMIURL.FREETEXTSEARCH, query);
 						String line="";
 						if ((line=uc.getBrd().readLine()) !=null)
 							keywords=line;	
 						uc.closebrd();
 					}
-					if (searchMethod == MiMIPlugin.MESHTERM){
+					if (searchMethod == SearchMethod.MESHTERM){
 						String query="?qtype=mesh&term=" + URLEncoder.encode(textField.getText(),"UTF-8");
-						String strURL =MiMIPlugin.MESHSEARCH+query;
+						String strURL =MiMIURL.MESHSEARCH+query;
 //						System.out.println("query is " + strURL);
 						URLConnect uc=new URLConnect();
 						uc.doURLConnect(strURL);
@@ -132,7 +133,8 @@ public class ExecuteSearchAction implements ActionListener{
 			String inputStr=keywords+"/////"+jcbOrganism.getSelectedItem()+"/////"+jcbMt.getSelectedItem()+"/////"+jcbDr.getSelectedItem()+"/////"+jcbIL.getSelectedItem();
 			//System.out.println("inputstr is "+inputStr);
 			//generate network
-			new QueryMiMIWrapper(QueryMiMI.QUERY_BY_NAME, inputStr, cyNetworkFactory, cyNetworkManager, frame, streamUtil);			
+			//run existing task...
+			//new QueryMiMIWrapper(QueryType.QUERY_BY_NAME, inputStr, cyNetworkFactory, cyNetworkManager, frame, streamUtil);			
 		}
 		else{
 			JOptionPane.showMessageDialog(frame,"Please enter a search term."); 			

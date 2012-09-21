@@ -23,7 +23,7 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.parser;
+package org.ncibi.cytoscape.mimi.attributes;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -32,7 +32,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
+import org.ncibi.cytoscape.mimi.task.AbstractMiMIQueryTask;
 
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
@@ -58,7 +58,7 @@ public class UserAnnoAttr {
 		//System.out.println("geneids:["+geneIDs+"]");
 		//System.out.println("edgeids:["+edgeIDs+"]");
 		try{
-			url=new URL(QueryMiMI.URL4USERANNOATTR);	
+			url=new URL(AbstractMiMIQueryTask.CHECKUSERANNOATTR);	
 			String line;
 			if (!geneIDs.equals("")){
 				//get node userannotationattribute

@@ -38,7 +38,7 @@ import java.awt.Container;
 import java.awt.event.*;
 import java.net.URLEncoder;
 
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
 
 @SuppressWarnings("serial")
@@ -78,7 +78,7 @@ public class ForgotPswd extends JFrame implements ActionListener {
 			else {
 				try{
 					//System.out.println("emial is "+t.getText());
-					String urlStr = MiMIPlugin.SENDPSWD;
+					String urlStr = CyActivator.SENDPSWD;
 					String query="EMAIL="+URLEncoder.encode(t.getText(),"UTF-8");
 					URLConnect uc=new URLConnect();
 					uc.doURLConnect(urlStr, query) ;

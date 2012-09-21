@@ -36,7 +36,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.view.vizmap.mappings.DiscreteMapping;
 import org.cytoscape.view.vizmap.mappings.PassthroughMapping;
-import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
+import org.ncibi.cytoscape.mimi.enums.NodeType;
 
 
 /** 
@@ -87,29 +87,29 @@ public class MiMIVisualStyleBuilder {
 		DiscreteMapping<Integer, Paint> nodeColorMapping = (DiscreteMapping<Integer, Paint>) discreteMappingFactory
 				.createVisualMappingFunction(NODE_CTRL_ATT, Integer.class, BasicVisualLexicon.NODE_FILL_COLOR);
         
-        nodeColorMapping.putMapValue(QueryMiMI.SEEDNODE, new Color(209,217,197));
-        nodeColorMapping.putMapValue(QueryMiMI.SEEDNEIGHBOR, new Color(255,153,153));// 255,153,153
-        nodeColorMapping.putMapValue(QueryMiMI.EXPANDNODE, new Color(255,153,0));
-        nodeColorMapping.putMapValue(QueryMiMI.EXPANDNEIGHBOR, new Color(204,204,255));     
+        nodeColorMapping.putMapValue(NodeType.SEEDNODE.ordinal(), new Color(209,217,197));
+        nodeColorMapping.putMapValue(NodeType.SEEDNEIGHBOR.ordinal(), new Color(255,153,153));// 255,153,153
+        nodeColorMapping.putMapValue(NodeType.EXPANDNODE.ordinal(), new Color(255,153,0));
+        nodeColorMapping.putMapValue(NodeType.EXPANDNEIGHBOR.ordinal(), new Color(204,204,255));     
         style.addVisualMappingFunction(nodeColorMapping);
         
         //Node shape
         DiscreteMapping<Integer, NodeShape> nodeShapeMapping = (DiscreteMapping<Integer, NodeShape>) discreteMappingFactory
 				.createVisualMappingFunction(NODE_CTRL_ATT, Integer.class, BasicVisualLexicon.NODE_SHAPE);
-        nodeShapeMapping.putMapValue(QueryMiMI.SEEDNODE, NodeShapeVisualProperty.DIAMOND);
-        nodeShapeMapping.putMapValue(QueryMiMI.SEEDNEIGHBOR, NodeShapeVisualProperty.ELLIPSE);  
-        nodeShapeMapping.putMapValue(QueryMiMI.EXPANDNODE, NodeShapeVisualProperty.TRIANGLE); 
-        nodeShapeMapping.putMapValue(QueryMiMI.EXPANDNEIGHBOR, NodeShapeVisualProperty.ELLIPSE);         
+        nodeShapeMapping.putMapValue(NodeType.SEEDNODE.ordinal(), NodeShapeVisualProperty.DIAMOND);
+        nodeShapeMapping.putMapValue(NodeType.SEEDNEIGHBOR.ordinal(), NodeShapeVisualProperty.ELLIPSE);  
+        nodeShapeMapping.putMapValue(NodeType.EXPANDNODE.ordinal(), NodeShapeVisualProperty.TRIANGLE); 
+        nodeShapeMapping.putMapValue(NodeType.EXPANDNEIGHBOR.ordinal(), NodeShapeVisualProperty.ELLIPSE);         
         style.addVisualMappingFunction(nodeShapeMapping);
         
         //Node size
         DiscreteMapping<Integer, Double> nodeSizeMapping = (DiscreteMapping<Integer, Double>) discreteMappingFactory
 				.createVisualMappingFunction(NODE_CTRL_ATT, Integer.class, BasicVisualLexicon.NODE_SIZE);
 
-        nodeSizeMapping.putMapValue(QueryMiMI.SEEDNODE, 60.0);
-        nodeSizeMapping.putMapValue(QueryMiMI.SEEDNEIGHBOR, 35.0);  
-        nodeSizeMapping.putMapValue(QueryMiMI.EXPANDNODE, 55.0); 
-        nodeSizeMapping.putMapValue(QueryMiMI.EXPANDNEIGHBOR, 35.0); 
+        nodeSizeMapping.putMapValue(NodeType.SEEDNODE.ordinal(), 60.0);
+        nodeSizeMapping.putMapValue(NodeType.SEEDNEIGHBOR.ordinal(), 35.0);  
+        nodeSizeMapping.putMapValue(NodeType.EXPANDNODE.ordinal(), 55.0); 
+        nodeSizeMapping.putMapValue(NodeType.EXPANDNEIGHBOR.ordinal(), 35.0); 
         style.addVisualMappingFunction(nodeSizeMapping);
         
         //Node border color control by attribute "UserAnnot"

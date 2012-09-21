@@ -30,15 +30,12 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
-//import javax.swing.JCheckBox;
-//import javax.swing.JComboBox;
-//import org.ncibi.cytoscape.plugin.mimiR2.plugin.QueryMiMIWrapper;
 
 /** 
  * @author jinggao/ExcuteUploadFile
@@ -46,6 +43,8 @@ import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
  * update on Nov 19, 2007 accept species etc via both GUI and file header
  */
 public class ExecuteUploadFileAction implements ActionListener{
+	private static Map<String,String> verorgnismHM = new HashMap<String, String>();
+	
 	private  String organism;
 	private  String moleculeType;
 	private  String dataSource;
@@ -53,6 +52,17 @@ public class ExecuteUploadFileAction implements ActionListener{
 	private  JFrame frame;	
 	private  String MoleculeTypes=" protein mRNA gene pseudo chemical DNA";
 	private  String DataSources=" BIND CCSB DIP HPRD IntAct KEGG MDC MINT PubMed reactome";
+	
+	static {
+		verorgnismHM.put("6239","Caenorhabditis elegans");
+		verorgnismHM.put("7227","Drosophila melanogaster");
+		verorgnismHM.put("562","Escherichia coli");	
+		verorgnismHM.put("9606","Homo sapiens");
+		verorgnismHM.put("10090","Mus musculus");
+		verorgnismHM.put("10116","Rattus norvegicus");
+		verorgnismHM.put("4932","Saccharomyces cerevisiae");	
+		verorgnismHM.put("3702","Arabidopsis thaliana");
+	}
 	
 	public ExecuteUploadFileAction(JFrame Frame){		
 		frame=Frame;			
@@ -79,8 +89,8 @@ public class ExecuteUploadFileAction implements ActionListener{
           				if (line.contains("=")){
           					String [] line1=line.split("=");
           					if (line1.length==2 && line1[0].trim().equalsIgnoreCase("taxonomyID")){
-          						if (QueryMiMI.verorgnismHM.containsKey(line1[1].trim()))
-          							organism=QueryMiMI.verorgnismHM.get(line1[1].trim());          						
+          						if (verorgnismHM.containsKey(line1[1].trim()))
+          							organism=verorgnismHM.get(line1[1].trim());          						
            						else organism="All Organisms";  
           						fileheader=true;
           					}

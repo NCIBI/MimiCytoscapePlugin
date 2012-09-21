@@ -36,7 +36,7 @@ import org.cytoscape.application.swing.CyMenuItem;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 import org.ncibi.cytoscape.mimi.plugin.QueryBioNlp;
 import org.ncibi.cytoscape.mimi.ui.AnnoEditor;
 import org.ncibi.cytoscape.mimi.ui.AnnoLogin;
@@ -94,10 +94,10 @@ public class PopupEdgeContextMenuFactory implements CyEdgeViewContextMenuFactory
         		public 	void actionPerformed(ActionEvent e){        			
         			CyEdge edge = edgeView.getModel(); 
         			//System.out.println("click node is"+cynode.getIdentifier());
-        			if (MiMIPlugin.currentUserID.equals("0"))
+        			if (CyActivator.currentUserID.equals("0"))
         				new AnnoLogin(edge);
         			else 
-        				new AnnoEditor(edge,MiMIPlugin.currentUserID);
+        				new AnnoEditor(edge,CyActivator.currentUserID);
         		}
         	});
         	

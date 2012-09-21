@@ -46,7 +46,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 
 
 /** 
@@ -73,7 +73,7 @@ public class ViewPubAnno extends JFrame{
 				id=cyedge.getIdentifier();	
 				nodedgename=Cytoscape.getEdgeAttributes().getStringAttribute(cyedge.getIdentifier(),"Gene.name");
 			}
-			URL url =new URL(MiMIPlugin.GETSHAREDANNOT);
+			URL url =new URL(CyActivator.GETSHAREDANNOT);
 			String query= "TABLE="+table+"&ID="+URLEncoder.encode(id,"UTF-8");
 			Proxy cytoproxyhandler = ProxyHandler.getProxyServer();
 			URLConnection conn;

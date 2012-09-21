@@ -47,6 +47,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
+import org.ncibi.cytoscape.mimi.enums.QueryType;
+import org.ncibi.cytoscape.mimi.task.AbstractMiMIQueryTask;
 
 /**
  * QueryMiMIWrapper
@@ -59,26 +61,18 @@ import org.cytoscape.model.CyNode;
  */
 public class QueryMiMIWrapper {
 	private JOptionPane optionPane;
-	private static HashMap<Integer, String> rsc;
+	private static HashMap<QueryType, String> rsc;
 	private final int msToPop = 1000;
 	public  static JDialog  dialog=new JDialog() ;
 	public static Timer popupTimer = new Timer(0,null);
 
-	static {
-		rsc = new HashMap<Integer, String>();
-		rsc.put(QueryMiMI.QUERY_BY_NAME, "Gene Symbol");
-		rsc.put(QueryMiMI.QUERY_BY_ID, "Gene ID");
-		rsc.put(QueryMiMI.QUERY_BY_INTERACTION, "Interaction ID");
-		rsc.put(QueryMiMI.QUERY_BY_FILE,"File");
-		rsc.put(QueryMiMI.QUERY_BY_EXPAND, "Expand Node ID");
-		rsc.put(QueryMiMI.QUERY_BY_REMOTEFILE, "Remote File");
-	}
+	
 
 	public QueryMiMIWrapper(final int type, final String term, final CyNetworkFactory cyNetworkFactory, 
 			final CyNetworkManager cyNetworkManager, final JFrame frame, final StreamUtil streamUtil) {
 		SwingWorker<Object, Object> swingWorker = new SwingWorker<Object,Object>() {
 			public Object doInBackground() {	
-				return QueryMiMI.query(type, term, cyNetworkFactory, cyNetworkManager, frame, streamUtil);
+				return AbstractMiMIQueryTask.query(type, term, cyNetworkFactory, cyNetworkManager, frame, streamUtil);
 			}
 
 		};
@@ -90,11 +84,11 @@ public class QueryMiMIWrapper {
 			final JFrame frame, final StreamUtil streamUtil) {
 		SwingWorker<Object, Object> swingWorker = new SwingWorker<Object,Object>() {
 			public Object doInBackground() {	
-				return QueryMiMI.query(term, node, network, frame, streamUtil);
+				return AbstractMiMIQueryTask.query(term, node, network, frame, streamUtil);
 			}
 
 		};
-		this.createDialog(QueryMiMI.QUERY_BY_EXPAND, term, swingWorker);
+		this.createDialog(AbstractMiMIQueryTask.QUERY_BY_EXPAND, term, swingWorker);
 		this.spawnThread(swingWorker, frame);
 	}
 
@@ -148,8 +142,8 @@ public class QueryMiMIWrapper {
 						if (e.getNewValue() instanceof String && e.getNewValue().equals(options[0])) {
 							if (swingWorker != null) {	
 								try{
-									if (QueryMiMI.rd !=null)
-										 QueryMiMI.rd.close();
+									if (AbstractMiMIQueryTask.rd !=null)
+										 AbstractMiMIQueryTask.rd.close();
 									}catch(Exception ee){
 										//System.out.println(ee);
 									}

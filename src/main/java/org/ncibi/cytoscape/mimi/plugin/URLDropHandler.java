@@ -25,11 +25,17 @@
  
 package org.ncibi.cytoscape.mimi.plugin;
 
-import java.awt.datatransfer.*;
-import javax.swing.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+
+import javax.swing.JComponent;
+import javax.swing.TransferHandler;
+
+import org.ncibi.cytoscape.mimi.enums.QueryType;
 
 /**
  * URLDropHandler
@@ -44,9 +50,9 @@ import java.util.HashMap;
 public class URLDropHandler extends TransferHandler {
 	//private String protocol = "http";
 	//private String host     = "developer2.ncibi.org";
-	private HashMap<String, Integer> type;
+	private HashMap<String, QueryType> type;
 
-	public URLDropHandler(HashMap<String, Integer> type) {
+	public URLDropHandler(HashMap<String, QueryType> type) {
 		this.type = type;
 	}
 

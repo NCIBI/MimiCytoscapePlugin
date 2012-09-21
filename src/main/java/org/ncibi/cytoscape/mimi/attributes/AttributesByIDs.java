@@ -23,7 +23,7 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.parser;
+package org.ncibi.cytoscape.mimi.attributes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,11 +34,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 
-import org.ncibi.cytoscape.mimi.plugin.QueryMiMI;
-
-import cytoscape.Cytoscape;
-import cytoscape.data.CyAttributes;
-import cytoscape.util.ProxyHandler;
+import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
+import org.ncibi.cytoscape.mimi.task.AbstractMiMIQueryTask;
 
 /**
  * @author jinggao/AttributesByIDs
@@ -82,7 +79,7 @@ public class AttributesByIDs
         CyAttributes edgeAttr = Cytoscape.getEdgeAttributes();
         try
         {
-            url = new URL(QueryMiMI.urlStr1);
+            url = new URL(MiMIURL.GETATTRIBUTES);
             String line;
             String geneid;
 
@@ -214,8 +211,8 @@ public class AttributesByIDs
 
                         if (!curintid.equalsIgnoreCase(intid) || !curtattr.equalsIgnoreCase(attr))
                         {
-                            if (QueryMiMI.intID2geneID.containsKey(curintid))
-                                edgeAttr.setAttribute(QueryMiMI.intID2geneID.get(curintid), "Interaction."
+                            if (AbstractMiMIQueryTask.intID2geneID.containsKey(curintid))
+                                edgeAttr.setAttribute(AbstractMiMIQueryTask.intID2geneID.get(curintid), "Interaction."
                                         + curtattr.toLowerCase(),
                                         "[" + curattrV.substring(0, curattrV.length() - 2) + "]");
                             curintid = intid;
@@ -236,8 +233,8 @@ public class AttributesByIDs
             }
 
             rd.close();
-            if (curattrV.length() > 2 && QueryMiMI.intID2geneID.containsKey(curintid))
-                edgeAttr.setAttribute(QueryMiMI.intID2geneID.get(curintid),
+            if (curattrV.length() > 2 && AbstractMiMIQueryTask.intID2geneID.containsKey(curintid))
+                edgeAttr.setAttribute(AbstractMiMIQueryTask.intID2geneID.get(curintid),
                         "Interaction." + curtattr.toLowerCase(),
                         "[" + curattrV.substring(0, curattrV.length() - 2) + "]");
 

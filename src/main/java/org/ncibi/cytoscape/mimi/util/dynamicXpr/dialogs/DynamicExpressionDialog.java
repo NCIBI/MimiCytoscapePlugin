@@ -79,7 +79,7 @@ import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 import org.ncibi.cytoscape.mimi.plugin.QueryGDS;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
@@ -256,7 +256,7 @@ public class DynamicExpressionDialog extends JFrame {//implements WindowListener
     		public void actionPerformed(ActionEvent ae){
     			//System.out.println("gene list:"+geneT.getText());
     			String geneList=getGeneList(geneT.getText());
-    			BareBonesBrowserLaunch.openURL(MiMIPlugin.BROWSEGDS+"?GENELIST="+geneList);  
+    			BareBonesBrowserLaunch.openURL(CyActivator.BROWSEGDS+"?GENELIST="+geneList);  
     			
     		}
     	});		
@@ -264,7 +264,7 @@ public class DynamicExpressionDialog extends JFrame {//implements WindowListener
 		JButton BrowseGDS =new JButton("Browse ALL Dataset");
 		BrowseGDS.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent ae){  
-    			BareBonesBrowserLaunch.openURL(MiMIPlugin.BROWSEGDS+"?GENELIST=");  
+    			BareBonesBrowserLaunch.openURL(CyActivator.BROWSEGDS+"?GENELIST=");  
     			//new BrowseGDS();
     		}
     	} );

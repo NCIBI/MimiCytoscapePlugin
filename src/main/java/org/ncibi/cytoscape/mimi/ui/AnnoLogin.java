@@ -44,7 +44,7 @@ import java.awt.Container;
 import java.net.URLEncoder;
 import cytoscape.Cytoscape;
 
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
 
 @SuppressWarnings("serial")
@@ -114,7 +114,7 @@ public class AnnoLogin extends JFrame implements ActionListener {
 				try{
 				tEmail=URLEncoder.encode(tEmail,"UTF-8");
 				tPaswd =URLEncoder.encode(tPaswd,"UTF-8");	
-				String urlstr=MiMIPlugin.ANNOTEDITORLOGIN;
+				String urlstr=CyActivator.ANNOTEDITORLOGIN;
 				String query= "EMAIL="+tEmail+"&PWD="+tPaswd;
 				URLConnect uc= new URLConnect();
 				uc.doURLConnect(urlstr, query);

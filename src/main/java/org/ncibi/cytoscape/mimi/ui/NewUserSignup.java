@@ -35,7 +35,7 @@ import java.net.URLEncoder;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 import org.ncibi.cytoscape.mimi.util.MD5;
 import org.ncibi.cytoscape.mimi.util.URLConnect;
 
@@ -135,7 +135,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 					String til=URLEncoder.encode(ttil.getText(),"UTF-8");
 					String pwd =  String.valueOf(tpwd.getPassword());
 					pwd =URLEncoder.encode(pwd,"UTF-8");				
-					String urlstr=MiMIPlugin.NEWUSERURL;
+					String urlstr=CyActivator.NEWUSERURL;
 					String query="NAME="+name+"&PWD="+pwd+"&EMAIL="+email+"&ORG="+org+"&TIL="+til;
 					URLConnect uc= new URLConnect();
 					uc.doURLConnect(urlstr, query);
@@ -148,7 +148,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 							else{//call php file to validate log in email
 								//get md5 hash
 								String md5hash=new MD5(email).getmd5hash();	
-								String urlstr1=MiMIPlugin.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
+								String urlstr1=CyActivator.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
 								URLConnect uc1= new URLConnect();
 								uc1.doURLConnect(urlstr1);
 								String inputLine2;				

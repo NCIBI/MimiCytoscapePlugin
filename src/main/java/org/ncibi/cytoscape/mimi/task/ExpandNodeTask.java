@@ -24,22 +24,21 @@
  ******************************************************************/
  
 package org.ncibi.cytoscape.mimi.task;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.cytoscape.io.util.StreamUtil;
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.work.AbstractTask;
+import org.cytoscape.model.CyRow;
+import org.cytoscape.model.CyTable;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
-import org.ncibi.cytoscape.mimi.plugin.QueryMiMIWrapper;
+import org.ncibi.cytoscape.mimi.attributes.AttributesByIDs;
+import org.ncibi.cytoscape.mimi.attributes.UserAnnoAttr;
+import org.ncibi.cytoscape.mimi.enums.NodeType;
+import org.ncibi.cytoscape.mimi.enums.QueryType;
 
 
 /**
@@ -47,49 +46,113 @@ import org.ncibi.cytoscape.mimi.plugin.QueryMiMIWrapper;
  *
  * @author Jing Gao
  */
-public class ExpandNodeTask extends AbstractTask{
+public class ExpandNodeTask extends AbstractMiMIQueryTask{
 	
 	private CyNode node;
 	private CyNetwork network;
-	private JFrame frame;
 	private StreamUtil streamUtil;
 	
-	public ExpandNodeTask(CyNode node, CyNetwork network, JFrame frame, StreamUtil streamUtil) {
+	public ExpandNodeTask(CyNode node, CyNetwork network, StreamUtil streamUtil) {
 		this.node = node;
 		this.network = network;
-		this.frame = frame;
 		this.streamUtil = streamUtil;
 	}
-	
 
 	@Override
 	public void run(TaskMonitor taskMonitor) throws Exception {
-		String name = network.getRow(node).get(CyNetwork.NAME, String.class);
-		String taxid = network.getRow(node).get("Gene.taxid", String.class);
-		String molType = network.getRow(network).get("Molecule Type", String.class, "All Molecule Types");
-		String dataSource = network.getRow(network).get("Data Source", String.class, "All Data Sources");
-		String urlstr =MiMIPlugin.PRECOMPUTEEXPAND+"?ID="+name+"&ORGANISMID="+taxid+"&MOLTYPE="+URLEncoder.encode(molType,"UTF-8")+"&DATASOURCE="+URLEncoder.encode(dataSource,"UTF-8");
-		URL url = new URL(urlstr);
-		URLConnection conn = streamUtil.getURLConnection(url) ;
-		conn.setUseCaches(false);
-		// Get result        
-		BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		String line=rd.readLine();
-		//System.out.println("Node number is "+line);
-		rd.close();							
-
-		if(line != null ){
-			int nodeNo =Integer.parseInt(line);
-			String inputStr = network.getRow(node).get("Gene.name", String.class)+"/////"+network.getRow(node).get("Gene.organism", String.class)+"/////"+molType+"/////"+dataSource+"/////1. Query genes + nearest neighbors";
-			if (nodeNo<=30){
-				new QueryMiMIWrapper(inputStr, node, network, frame, streamUtil);
-			}
-			if (nodeNo>30){
-				int decision=JOptionPane.showConfirmDialog(frame, "You will expand network with "+nodeNo +" nodes, continue?");
-				if (decision==0){
-					new QueryMiMIWrapper(inputStr, node, network, frame, streamUtil);	
+		//System.out.println("inputtypeis "+inputtype+ "inputstring is "+inputStr);
+		//query mimi rdb and create network	
+		String term = network.getRow(node).get("Gene.name", String.class);
+		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
+		//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
+		doQuery(QueryType.QUERY_BY_EXPAND,term, streamUtil);
+		nodeIDList =new ArrayList<String>();
+		edgeIDList =new ArrayList<String>();
+		//System.out.println("query by expand"+QUERY_BY_EXPAND);
+		String line;
+		//System.out.println("clicked node id "+clickNodeId);
+		while ((line = rd.readLine()) != null) {
+			//Process line..
+			//System.out.println("get line is ["+line+"]");
+			String [] res=line.split("/////");
+			CyNode sourceNode;
+			Collection<CyRow> sourceNodeRows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, res[1]);
+			if(sourceNodeRows.isEmpty()) {
+				sourceNode = network.addNode();
+				network.getRow(sourceNode).set(CyNetwork.NAME, res[1]);
+				if (!geneIDList.contains(res[1]+" ")){
+					nodeList.add(sourceNode);
+					geneIDList += res[1]+" ";	
+					nodeIDList.add(res[1]);
+					network.getRow(sourceNode).set("Gene.name", res[0]);
+					//add step attribute 	
+					//if (!nodeAttributes.hasAttribute(sourceNode.getIdentifier(),"Network Distance"))
+					network.getRow(sourceNode).set("Network Distance", "-1");
+					network.getRow(sourceNode).set("Gene.userAnnot", false);
+					hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.EXPANDNEIGHBOR);
 				}
 			}
+			else {
+				CyRow sourceNodeRow = sourceNodeRows.iterator().next();
+				sourceNode=network.getNode(sourceNodeRow.get(CyIdentifiable.SUID, Long.class));
+			}
+			//		            	    CyNode sourceNode=Cytoscape.getCyNode(res[1], true); 
+			//		            	    CyNode targetNode=Cytoscape.getCyNode(res[4], true); 
+
+			CyNode targetNode;
+			Collection<CyRow> targetNodeRows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, res[4]);
+			if(targetNodeRows.isEmpty()) {
+				targetNode = network.addNode();
+				network.getRow(targetNode).set(CyNetwork.NAME, res[4]);
+				if (!geneIDList.contains(res[4]+" ")){
+					nodeList.add(targetNode);
+					geneIDList += res[4]+" ";
+					nodeIDList.add(res[4]);
+					network.getRow(targetNode).set("Gene.name", res[3]);
+					//if (!nodeAttributes.hasAttribute(targetNode.getIdentifier(),"Network Distance"))	
+					network.getRow(targetNode).set("Network Distance", "-1");
+					network.getRow(targetNode).set("Gene.userAnnot", false);
+					hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.EXPANDNEIGHBOR);
+				}
+			}
+			else {
+				CyRow targetNodeRow = targetNodeRows.iterator().next();
+				targetNode=network.getNode(targetNodeRow.get(CyIdentifiable.SUID, Long.class));
+			}
+
+
+			if (!network.containsEdge(sourceNode,targetNode) && !network.containsEdge(targetNode, sourceNode) && !interactionIDList.contains(res[6]+" ")){
+				CyEdge edge = network.addEdge(sourceNode, targetNode, true);
+				String name = network.getRow(sourceNode).get(CyNetwork.NAME, String.class) + 
+						" ( ) " + network.getRow(targetNode).get(CyNetwork.NAME, String.class);
+				network.getRow(edge).set(CyEdge.INTERACTION, " ");
+				network.getRow(edge).set(CyNetwork.NAME, name);
+				edgeList.add(edge);
+				interactionIDList += res[6]+" ";
+				edgeIDList.add(name);
+				network.getRow(edge).set("Interaction.geneName", "("+res[0]+" , "+res[3]+")");
+				network.getRow(edge).set("Interaction.userAnnot", false);
+				network.getRow(edge).set("Interaction.id", res[6]);
+				if (!edgeIDStrList.contains(","+name+","))	 //modified on June 24  				 
+					edgeIDStrList += name+",";
+				intID2geneID.put(res[6],name);
+			}
+
+		}
+		rd.close();
+		if (!nodeList.isEmpty() && !edgeList.isEmpty()){
+			//System.out.println("node list and edge list is not empty");
+			//get all molecule and interaction attributes using returned gene IDs and interaction IDs	
+			AttributesByIDs.GetAttribute(geneIDList,interactionIDList);
+			new UserAnnoAttr().getAttribute(geneIDList.trim(),edgeIDStrList.trim());
+			//set node color attributes for expand node. set nodelist and edge list as expand node attributes for collapsing expanded network using 
+			hiddenNodeTable.getRow(node.getSUID()).set("Node Color", NodeType.EXPANDNODE);
+			hiddenNodeTable.getRow(node.getSUID()).set("NodeIDList", nodeIDList);
+			hiddenNodeTable.getRow(node.getSUID()).set("EdgeIDList", edgeIDList);
+			
+		}
+		else {
+			throw new Exception("No Expanded network found for this node");	            	 
 		}
 	}
 }

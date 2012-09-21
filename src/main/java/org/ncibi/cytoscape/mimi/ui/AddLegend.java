@@ -38,7 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 //import java.net.*;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 @SuppressWarnings("serial")
 public class AddLegend {
 	public AddLegend(){
@@ -53,7 +53,7 @@ public class AddLegend {
 	
 	class MiMILegend extends JPanel{
 		public MiMILegend(){
-			Icon icon = new ImageIcon(MiMIPlugin.class.getResource("legend4.png"));
+			Icon icon = new ImageIcon(CyActivator.class.getResource("legend4.png"));
 			JLabel l=new JLabel (icon);
 			this.add(l);
 			

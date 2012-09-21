@@ -37,7 +37,7 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.plugin.CyActivator;
 import org.ncibi.cytoscape.mimi.ui.AnnoEditor;
 import org.ncibi.cytoscape.mimi.ui.AnnoLogin;
 import org.ncibi.cytoscape.mimi.ui.ViewPubAnno;
@@ -78,10 +78,10 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
             {
                 CyNode cynode = nodeView.getModel();
                 // System.out.println("click node is"+cynode.getIdentifier());
-                if (MiMIPlugin.currentUserID.equals("0"))
+                if (CyActivator.currentUserID.equals("0"))
                     new AnnoLogin(cynode);
                 else
-                    new AnnoEditor(cynode, MiMIPlugin.currentUserID);
+                    new AnnoEditor(cynode, CyActivator.currentUserID);
             }
         });
 
@@ -109,7 +109,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
                  * .getIdentifier(), "Gene.name"); }
                  */
 
-                BareBonesBrowserLaunch.openURL(MiMIPlugin.GENE2MESH + "index.php?view=simple&qtype=gene"
+                BareBonesBrowserLaunch.openURL(CyActivator.GENE2MESH + "index.php?view=simple&qtype=gene"
                         + "&term=" + term + "&taxid=" + taxid);
             }
         });
@@ -123,7 +123,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
             {
                 CyNode node = nodeView.getModel();
                 CyNetwork network = networkView.getModel();
-                String mimiNodeUrl = MiMIPlugin.MIMINODELINK + "?geneid=" + network.getRow(node).get(CyNetwork.NAME, String.class);
+                String mimiNodeUrl = CyActivator.MIMINODELINK + "?geneid=" + network.getRow(node).get(CyNetwork.NAME, String.class);
                 BareBonesBrowserLaunch.openURL(mimiNodeUrl);
             }
         });

@@ -41,13 +41,21 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.task.NodeViewTaskFactory;
+import org.cytoscape.view.layout.CyLayoutAlgorithm;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
+import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.cytoscape.work.swing.DialogTaskManager;
 import org.ncibi.cytoscape.mimi.action.HelpAction;
 import org.ncibi.cytoscape.mimi.action.QueryAction;
+import org.ncibi.cytoscape.mimi.enums.QueryType;
 import org.ncibi.cytoscape.mimi.popupMenu.PopupEdgeContextMenuFactory;
 import org.ncibi.cytoscape.mimi.popupMenu.PopupNodeContextMenuFactory;
-import org.ncibi.cytoscape.mimi.task.ExpandCollapseNodeTaskFactory;
+import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
+import org.ncibi.cytoscape.mimi.task.BuildNetworkTaskFactory;
+import org.ncibi.cytoscape.mimi.task.MiMINodeViewTaskFactory;
 import org.ncibi.cytoscape.mimi.visual.MiMIVisualStyleBuilder;
 import org.osgi.framework.BundleContext;
 
@@ -57,7 +65,7 @@ import org.osgi.framework.BundleContext;
  * @author Jing Gao
  * @author Alex Ade
  */
-public class MiMIPlugin extends AbstractCyActivator {
+public class CyActivator extends AbstractCyActivator {
 	/**
 	 * @author Jing Gao 
 	 * 
@@ -65,38 +73,8 @@ public class MiMIPlugin extends AbstractCyActivator {
 	 * This method is called by the main Cytoscape Application upon startup.
 	 * redesign input box on Oct 10, 2007
 	 */
-	public static String MiMILOGO="http://www.bioinformatics.med.umich.edu/app/nlp/logo/";	
-	public static long lastClick=0;
-    public static long lastNodeHashcode=0;
-    public static long lastEdgeHashcode=0;  
-    public static String currentUserID="0";
-	private static String PROTOCOL = "http";
-	//private static String HOST ="mimitest.ncibi.org"; 
-	private static String HOST="mimi.ncibi.org";
-	public static String BIONLPURL="https://portal.ncibi.org/portal/site/!gateway/page/9b2c0673-4252-409d-003d-25996426b215";
-	public static String GENEFILETEMPLATE="http://mimiplugin.ncibi.org/template.html";
-	public static String MIMIPLUGINHOME="http://mimiplugin.ncibi.org";
-	public static String GENE2MESH="http://gene2mesh.ncibi.org/";
-	public static String MIMINODELINK="http://mimitest.ncibi.org/mimi/gene"; //?geneid=1436
-	public static String FREETEXTSEARCH="http://mimitest.ncibi.org/mimi/symbols";//?query=Prostate+Cancer
-	public static String MESHSEARCH="http://gene2mesh.ncibi.org/viewlist.php";//?term=prostatic+neoplasms&qtype=mesh";
-	public static String ANNOTEDITORLOGIN="http://mimiplugin.ncibi.org/dbaccess/3.2/queryLogin.php";
-	public static String NEWUSERURL="http://mimiplugin.ncibi.org/dbaccess/3.2/addNewUser.php";
-	public static String VALIDATEEMAIL="http://mimiplugin.ncibi.org/dbaccess/3.2/validateEmail.php";
-	public static String GETSHAREDANNOT="http://mimiplugin.ncibi.org/dbaccess/3.2/getSharedAnnot.php";
-	public static String ANNOTSETNAME="http://mimiplugin.ncibi.org/dbaccess/3.2/queryMiMIAnnot_setList.php";
-	public static String SENDPSWD="http://mimiplugin.ncibi.org/dbaccess/3.2/sendpswd.php";
-	public static String CHECKPLUGINVERSION="http://mimiplugin.ncibi.org/CurrentPluginVersion";
-	public static String CURRENTPLUGINVERSION ="3.2";
-	public static String PRECOMPUTEEXPAND="http://mimiplugin.ncibi.org/dbaccess/3.2/precomputeexpand.php";
-	public static String GENESAMPLE="http://mimiplugin.ncibi.org/mygene.txt";
-	public static String QUERYGDS="http://mimiplugin.ncibi.org/dbaccess/3.2/queryGDS_subsetExprSig.php";
-	public static String BROWSEGDS="http://mimiplugin.ncibi.org/dbaccess/3.2/browseGds.php";
-	public static int 	 RTRNGDSEXPSIGCOLUMNNO=5;	
-	public static int    FREETEXT=1;
-	public static int    MESHTERM=2;
 	
-	public MiMIPlugin() {
+	public CyActivator() {
 		super();
 	}
 	
@@ -104,24 +82,43 @@ public class MiMIPlugin extends AbstractCyActivator {
 		@SuppressWarnings("unchecked")
 		CyProperty<Properties> cytoscapePropertiesServiceRef = getService(bc, CyProperty.class,
 				"(cyPropertyName=cytoscape3.props)");
-		String host = cytoscapePropertiesServiceRef.getProperties().getProperty("setMiMIHost", HOST);
-		HashMap<String, Integer> type = new HashMap<String, Integer>();
-		type.put("queryMiMIByName", QueryMiMI.QUERY_BY_NAME);
-		type.put("queryMiMIById", QueryMiMI.QUERY_BY_ID);
-		type.put("queryMiMIByRemoteFile", QueryMiMI.QUERY_BY_REMOTEFILE);
-		type.put("queryMiMIByGenelist",10);
+		HashMap<String, QueryType> type = new HashMap<String, QueryType>();
+		type.put("queryMiMIByName", QueryType.QUERY_BY_NAME);
+		type.put("queryMiMIById", QueryType.QUERY_BY_ID);
+		type.put("queryMiMIByRemoteFile", QueryType.QUERY_BY_REMOTEFILE);
+		type.put("queryMiMIByGenelist",null);
 		
 		CySwingApplication cySwingApplication = getService(bc, CySwingApplication.class);
 		CyNetworkFactory cyNetworkFactory = getService(bc, CyNetworkFactory.class);
 		CyNetworkManager cyNetworkManager = getService(bc, CyNetworkManager.class);
-		StreamUtil streamUtil = getService(bc, StreamUtil.class);
+		CyNetworkViewFactory cyNetworkViewFactory = getService(bc, CyNetworkViewFactory.class);
+		CyNetworkViewManager cyNetworkViewManager = getService(bc, CyNetworkViewManager.class);
+		DialogTaskManager dialogTaskManager = getService(bc, DialogTaskManager.class);
+		
 		VisualStyleFactory vsFactoryServiceRef = getService(bc, VisualStyleFactory.class);
 		VisualMappingFunctionFactory passthroughMappingFactoryRef = getService(bc, VisualMappingFunctionFactory.class,
 				"(mapping.type=passthrough)");
 		VisualMappingFunctionFactory discreteMappingFactoryRef = getService(bc, VisualMappingFunctionFactory.class,
 				"(mapping.type=discrete)");
+		VisualMappingManager vmm = getService(bc, VisualMappingManager.class);
 		MiMIVisualStyleBuilder vsBuilder = new MiMIVisualStyleBuilder(vsFactoryServiceRef,
 				discreteMappingFactoryRef, passthroughMappingFactoryRef);
+		
+		
+		CyLayoutAlgorithm layout = getService(bc, CyLayoutAlgorithm.class, "(title=Force directed \\(BioLayout\\))");
+		ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory = new ApplyVisualStyleAndLayoutTaskFactory(vsBuilder, vmm, layout);
+		StreamUtil streamUtil = getService(bc, StreamUtil.class);
+		BuildNetworkTaskFactory buildNetworkTaskFactory = new BuildNetworkTaskFactory(cyNetworkFactory, cyNetworkManager, 
+				cyNetworkViewFactory, cyNetworkViewManager, vslTaskFactory, streamUtil);
+		
+//		Object context = layout.createLayoutContext();
+//		Map<String, Object> settings = new HashMap<String, Object>();
+//		settings.put("gravity_multiplier", 5.0);
+//		TunableSetter setter = getService(bc, TunableSetter.class);
+//		setter.applyTunables(context, settings);
+
+
+		
 		
 		JFrame frame = cySwingApplication.getJFrame();
 		frame.setTransferHandler(new URLDropHandler(type)); //NetworkViewManager?
@@ -140,7 +137,7 @@ public class MiMIPlugin extends AbstractCyActivator {
 		//};
 		//dp.addContainerListener(l);
 
-		Enumeration keys = cytoscapePropertiesServiceRef.getProperties().propertyNames();
+		Enumeration<?> keys = cytoscapePropertiesServiceRef.getProperties().propertyNames();
 		while (keys.hasMoreElements()) {
 			String s = (String)keys.nextElement();			
 			if (type.containsKey(s)) {
@@ -148,19 +145,19 @@ public class MiMIPlugin extends AbstractCyActivator {
 
 				if (prop != null && !prop.equals("")) {	
 					//System.out.println("arg key value pair is ["+s+"] ["+prop+"]");
-					new QueryMiMIWrapper(type.get(s), prop, cyNetworkFactory, cyNetworkManager, frame, streamUtil);
+					buildNetworkTaskFactory.createTaskIterator(type.get(s), prop);
 					break;
 				}
 			}
 		}
 		// Add double click menu to the network view
-		Properties expandCollapseNodeTaskFactoryProps = new Properties();           
-		expandCollapseNodeTaskFactoryProps.setProperty("preferredAction","OPEN");
+		Properties mimiNodeViewTaskFactoryProps = new Properties();           
+		mimiNodeViewTaskFactoryProps.setProperty("preferredAction","OPEN");
 		registerService(bc,new QueryAction(cyNetworkFactory, cyNetworkManager, cySwingApplication, streamUtil),CyAction.class, new Properties());
 		registerService(bc,new HelpAction(),CyAction.class, new Properties());
 		registerService(bc,new PopupNodeContextMenuFactory(), CyNodeViewContextMenuFactory.class, new Properties());
 		registerService(bc,new PopupEdgeContextMenuFactory(), CyEdgeViewContextMenuFactory.class, new Properties());
-		registerService(bc,new ExpandCollapseNodeTaskFactory(frame, streamUtil),NodeViewTaskFactory.class, expandCollapseNodeTaskFactoryProps);
+		registerService(bc,new MiMINodeViewTaskFactory(vslTaskFactory, frame, streamUtil),NodeViewTaskFactory.class, mimiNodeViewTaskFactoryProps);
 	}
 
 }
