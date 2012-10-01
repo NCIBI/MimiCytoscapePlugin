@@ -35,7 +35,10 @@ import java.util.HashMap;
 import javax.swing.JComponent;
 import javax.swing.TransferHandler;
 
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskManager;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
+import org.ncibi.cytoscape.mimi.task.BuildNetworkTaskFactory;
 
 /**
  * URLDropHandler
@@ -51,9 +54,13 @@ public class URLDropHandler extends TransferHandler {
 	//private String protocol = "http";
 	//private String host     = "developer2.ncibi.org";
 	private HashMap<String, QueryType> type;
+	private BuildNetworkTaskFactory buildNetworkTaskFactory;
+	private TaskManager<?,?> taskManager;
 
-	public URLDropHandler(HashMap<String, QueryType> type) {
+	public URLDropHandler(HashMap<String, QueryType> type, BuildNetworkTaskFactory buildNetworkTaskFactory, TaskManager<?,?> taskManager) {
 		this.type = type;
+		this.buildNetworkTaskFactory = buildNetworkTaskFactory;
+		this.taskManager = taskManager;
 	}
 
 	public boolean canImport(JComponent comp, DataFlavor[] flavors) {
@@ -87,7 +94,8 @@ public class URLDropHandler extends TransferHandler {
 				if (!type.containsKey(token[0])) return false;
 
 				if (token[1] != null && !token[1].equals("")) {
-					new QueryMiMIWrapper(type.get(token[0]), token[1]);
+					TaskIterator taskIterator = buildNetworkTaskFactory.createTaskIterator(type.get(token[0]), token[1]);
+					taskManager.execute(taskIterator);
 				} else return false;
 			//} else return false;
 

@@ -38,6 +38,7 @@ import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.ncibi.cytoscape.mimi.plugin.MiMIState;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 import org.ncibi.cytoscape.mimi.ui.MiMIDialog;
 
@@ -75,7 +76,7 @@ public class QueryAction extends AbstractCyAction{
             	BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	 
             	String line;
             	if ((line = rd.readLine()) != null) {
-            		if (line.compareTo(MiMIURL.CURRENTPLUGINVERSION)>0){
+            		if (line.compareTo(MiMIState.CURRENTPLUGINVERSION)>0){
 			  				JOptionPane.showMessageDialog(desktopApp.getJFrame(), "You are using old version, Please update to "+"MiMI Plugin "+ line+" from within Cytoscape (Plugins->Update Plugins->MiMIPlugin "+line+")");		
 			  			}
 			  			

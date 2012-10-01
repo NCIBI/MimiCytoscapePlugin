@@ -99,7 +99,10 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 		rsc.put(QueryType.QUERY_BY_REMOTEFILE, "Remote File");
 	}
 	           
-	protected void doQuery(QueryType queryType, String term, StreamUtil streamUtil) throws Exception{
+	protected void doQuery(QueryType queryType, String term, StreamUtil streamUtil, TaskMonitor taskMonitor) throws Exception{
+		taskMonitor.setTitle("Querying MiMI...");
+		taskMonitor.setStatusMessage("Querying MiMI Database by "+ rsc.get(queryType));
+		
 		int continueQuery=1;
 		String inputgene="";
 		keyword=" ";

@@ -110,32 +110,9 @@ public class CyActivator extends AbstractCyActivator {
 		StreamUtil streamUtil = getService(bc, StreamUtil.class);
 		BuildNetworkTaskFactory buildNetworkTaskFactory = new BuildNetworkTaskFactory(cyNetworkFactory, cyNetworkManager, 
 				cyNetworkViewFactory, cyNetworkViewManager, vslTaskFactory, streamUtil);
-		
-//		Object context = layout.createLayoutContext();
-//		Map<String, Object> settings = new HashMap<String, Object>();
-//		settings.put("gravity_multiplier", 5.0);
-//		TunableSetter setter = getService(bc, TunableSetter.class);
-//		setter.applyTunables(context, settings);
 
-
-		
-		
 		JFrame frame = cySwingApplication.getJFrame();
-		frame.setTransferHandler(new URLDropHandler(type)); //NetworkViewManager?
-
-		//ContainerListener l = new ContainerListener() {
-		//	public void componentAdded(ContainerEvent e) {
-		//		if (e.getChild() instanceof JInternalFrame) {
-		//			JInternalFrame iframe = (JInternalFrame)e.getChild();
-		//			iframe.setTransferHandler(null);
-		//			iframe.getRootPane().setTransferHandler(null);
-		//			iframe.getLayeredPane().setTransferHandler(null);
-		//		}
-		//	}
-
-		//	public void componentRemoved(ContainerEvent e) { }
-		//};
-		//dp.addContainerListener(l);
+		frame.setTransferHandler(new URLDropHandler(type, buildNetworkTaskFactory, dialogTaskManager));
 
 		Enumeration<?> keys = cytoscapePropertiesServiceRef.getProperties().propertyNames();
 		while (keys.hasMoreElements()) {
