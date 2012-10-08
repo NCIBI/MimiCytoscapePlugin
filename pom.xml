@@ -13,7 +13,7 @@
 	
 	<groupId>org.ncibi.cytoscape.mimi.plugin</groupId>
 	<artifactId>mimi-plugin</artifactId>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 	<name>MiMI Plugin</name>
 	<version>3.2</version>
 	<organization>
@@ -65,7 +65,7 @@
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Export-Package>!${bundle.namespace}.*</Export-Package>
 						<Private-Package>${bundle.namespace}.*</Private-Package>
-						<Bundle-Activator>${bundle.namespace}.plugin.MiMIPlugin</Bundle-Activator>
+						<Bundle-Activator>${bundle.namespace}.plugin.CyActivator</Bundle-Activator>
 					</instructions>
 				</configuration>
 			</plugin>

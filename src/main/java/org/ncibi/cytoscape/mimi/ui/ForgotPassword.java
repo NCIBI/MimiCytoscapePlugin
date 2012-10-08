@@ -76,32 +76,32 @@ public class ForgotPassword extends JFrame implements ActionListener {
         setLocationRelativeTo(parent);		
 	}
 	public void actionPerformed (ActionEvent e){
-		if (e.getActionCommand().equals("Submit")){
-			if (t.getText().trim().equals(""))
-				JOptionPane.showMessageDialog(this, "Please enter your emmail");
-			else {
-				try{
-					//System.out.println("emial is "+t.getText());
-					String urlStr = MiMIURL.SENDPSWD;
-					String query="EMAIL="+URLEncoder.encode(t.getText(),"UTF-8");
-					URLConnect uc=new URLConnect();
-					uc.doURLConnect(urlStr, query) ;
-					String rslt="";
-					if ((rslt=uc.getBrd().readLine())!=null)						
-						if (rslt.equals("1"))
-							JOptionPane.showMessageDialog(this, "Your password was sent to your email successfully");
-						else if (rslt.equals("-1")) 
-							JOptionPane.showMessageDialog(this, "Your email does not exist in our database.\nPlease check your spelling");
-							
-					setVisible(false);
-				}
-				catch(Exception es){
-					//System.out.println(es);
-				}
-			}
-		}
-		if (e.getActionCommand().equals("Cancel"))
-			setVisible(false);
+//		if (e.getActionCommand().equals("Submit")){
+//			if (t.getText().trim().equals(""))
+//				JOptionPane.showMessageDialog(this, "Please enter your emmail");
+//			else {
+//				try{
+//					//System.out.println("emial is "+t.getText());
+//					String urlStr = MiMIURL.SENDPSWD;
+//					String query="EMAIL="+URLEncoder.encode(t.getText(),"UTF-8");
+//					URLConnect uc=new URLConnect();
+//					uc.doURLConnect(urlStr, query) ;
+//					String rslt="";
+//					if ((rslt=uc.getBrd().readLine())!=null)						
+//						if (rslt.equals("1"))
+//							JOptionPane.showMessageDialog(this, "Your password was sent to your email successfully");
+//						else if (rslt.equals("-1")) 
+//							JOptionPane.showMessageDialog(this, "Your email does not exist in our database.\nPlease check your spelling");
+//							
+//					setVisible(false);
+//				}
+//				catch(Exception es){
+//					//System.out.println(es);
+//				}
+//			}
+//		}
+//		if (e.getActionCommand().equals("Cancel"))
+//			setVisible(false);
 	}
 
 }
