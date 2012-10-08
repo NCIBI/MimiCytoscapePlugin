@@ -36,10 +36,11 @@ import javax.swing.JOptionPane;
 import org.cytoscape.application.swing.AbstractCyAction;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.io.util.StreamUtil;
-import org.cytoscape.model.CyNetworkFactory;
-import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.work.swing.DialogTaskManager;
 import org.ncibi.cytoscape.mimi.plugin.MiMIState;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
+import org.ncibi.cytoscape.mimi.task.SearchTaskFactory;
+import org.ncibi.cytoscape.mimi.task.UploadFileTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.MiMIDialog;
 
 
@@ -52,16 +53,19 @@ import org.ncibi.cytoscape.mimi.ui.MiMIDialog;
 public class QueryAction extends AbstractCyAction{
 	
 	private MiMIDialog mimiDialog;
-	private CySwingApplication desktopApp;
 	private StreamUtil streamUtil;
-	private CyNetworkFactory cyNetworkFactory;
-	private CyNetworkManager cyNetworkManager;
+	private CySwingApplication desktopApp;
+	private SearchTaskFactory searchTaskFactory;
+	private UploadFileTaskFactory uploadFileTaskFactory;
+	private DialogTaskManager dialogTaskManager;
 	
-	public QueryAction(CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager, CySwingApplication desktopApp, StreamUtil streamUtil){
+	public QueryAction(SearchTaskFactory searchTaskFactory, UploadFileTaskFactory uploadFileTaskFactory, DialogTaskManager dialogTaskManager, CySwingApplication desktopApp, StreamUtil streamUtil){
 		super("Query");
-		setPreferredMenu("Apps.MiMI Plugin");		
-		this.cyNetworkFactory = cyNetworkFactory;
-		this.cyNetworkManager = cyNetworkManager;
+		setPreferredMenu("Apps.MiMI Plugin");	
+		
+		this.searchTaskFactory = searchTaskFactory;
+		this.uploadFileTaskFactory = uploadFileTaskFactory;
+		this.dialogTaskManager = dialogTaskManager;
 		this.desktopApp = desktopApp;
 		this.streamUtil = streamUtil;
 	}
@@ -92,7 +96,7 @@ public class QueryAction extends AbstractCyAction{
 //    			discrete.setValue(true);
 //    			layout.updateSettings();
 //    		}
-            mimiDialog = new MiMIDialog(desktopApp.getJFrame(), streamUtil, cyNetworkFactory, cyNetworkManager);            
+            mimiDialog = new MiMIDialog(searchTaskFactory, uploadFileTaskFactory, dialogTaskManager, desktopApp.getJFrame());            
            // mimiDialog=null;
         }
     	// if there is a current network and current view,

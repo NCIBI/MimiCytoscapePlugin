@@ -56,6 +56,8 @@ import org.ncibi.cytoscape.mimi.popupMenu.PopupNodeContextMenuFactory;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.task.BuildNetworkTaskFactory;
 import org.ncibi.cytoscape.mimi.task.MiMINodeViewTaskFactory;
+import org.ncibi.cytoscape.mimi.task.SearchTaskFactory;
+import org.ncibi.cytoscape.mimi.task.UploadFileTaskFactory;
 import org.ncibi.cytoscape.mimi.visual.MiMIVisualStyleBuilder;
 import org.osgi.framework.BundleContext;
 
@@ -110,7 +112,9 @@ public class CyActivator extends AbstractCyActivator {
 		StreamUtil streamUtil = getService(bc, StreamUtil.class);
 		BuildNetworkTaskFactory buildNetworkTaskFactory = new BuildNetworkTaskFactory(cyNetworkFactory, cyNetworkManager, 
 				cyNetworkViewFactory, cyNetworkViewManager, vslTaskFactory, streamUtil);
-
+		SearchTaskFactory searchTaskFactory = new SearchTaskFactory(buildNetworkTaskFactory, streamUtil);
+		UploadFileTaskFactory uploadFileTaskFactory = new UploadFileTaskFactory(searchTaskFactory, dialogTaskManager);
+		
 		JFrame frame = cySwingApplication.getJFrame();
 		frame.setTransferHandler(new URLDropHandler(type, buildNetworkTaskFactory, dialogTaskManager));
 
@@ -130,10 +134,10 @@ public class CyActivator extends AbstractCyActivator {
 		// Add double click menu to the network view
 		Properties mimiNodeViewTaskFactoryProps = new Properties();           
 		mimiNodeViewTaskFactoryProps.setProperty("preferredAction","OPEN");
-		registerService(bc,new QueryAction(cyNetworkFactory, cyNetworkManager, cySwingApplication, streamUtil),CyAction.class, new Properties());
+		registerService(bc,new QueryAction(searchTaskFactory, uploadFileTaskFactory, dialogTaskManager, cySwingApplication, streamUtil),CyAction.class, new Properties());
 		registerService(bc,new HelpAction(),CyAction.class, new Properties());
-		registerService(bc,new PopupNodeContextMenuFactory(), CyNodeViewContextMenuFactory.class, new Properties());
-		registerService(bc,new PopupEdgeContextMenuFactory(), CyEdgeViewContextMenuFactory.class, new Properties());
+		//registerService(bc,new PopupNodeContextMenuFactory(), CyNodeViewContextMenuFactory.class, new Properties());
+		//registerService(bc,new PopupEdgeContextMenuFactory(), CyEdgeViewContextMenuFactory.class, new Properties());
 		registerService(bc,new MiMINodeViewTaskFactory(vslTaskFactory, frame, streamUtil),NodeViewTaskFactory.class, mimiNodeViewTaskFactoryProps);
 	}
 

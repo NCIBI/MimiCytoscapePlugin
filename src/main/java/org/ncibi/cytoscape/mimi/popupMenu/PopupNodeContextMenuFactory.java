@@ -39,9 +39,9 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.ncibi.cytoscape.mimi.plugin.MiMIState;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
-import org.ncibi.cytoscape.mimi.ui.AnnoEditor;
-import org.ncibi.cytoscape.mimi.ui.AnnoLogin;
-import org.ncibi.cytoscape.mimi.ui.ViewPubAnno;
+import org.ncibi.cytoscape.mimi.ui.AnnotationEditor;
+import org.ncibi.cytoscape.mimi.ui.AnnotationLogin;
+import org.ncibi.cytoscape.mimi.ui.ViewPublicAnnotation;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
 
@@ -55,10 +55,6 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
 	public CyMenuItem createMenuItem(final CyNetworkView networkView, final View<CyNode> nodeView) {
 		JMenu menu = new JMenu("MiMI Plugin");
 
-        JMenuItem jmiDoNLP = new JMenuItem("BioNLP");
-        jmiDoNLP.setEnabled(false);
-        menu.add(jmiDoNLP);
-
         JMenu AnnotMenu = new JMenu("User Annotation");
         menu.add(AnnotMenu);
         JMenuItem jmiPubAnno = new JMenuItem("View Public Annotation");
@@ -70,7 +66,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
             public void actionPerformed(ActionEvent e)
             {
                 CyNode cynode = nodeView.getModel();
-                new ViewPubAnno(cynode);
+                new ViewPublicAnnotation(cynode);
             }
         });
         jmiNodeAnno.addActionListener(new ActionListener()
@@ -80,9 +76,9 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
                 CyNode cynode = nodeView.getModel();
                 // System.out.println("click node is"+cynode.getIdentifier());
                 if (MiMIState.currentUserID.equals("0"))
-                    new AnnoLogin(cynode);
+                    new AnnotationLogin(cynode);
                 else
-                    new AnnoEditor(cynode, MiMIState.currentUserID);
+                    new AnnotationEditor(cynode, MiMIState.currentUserID);
             }
         });
 

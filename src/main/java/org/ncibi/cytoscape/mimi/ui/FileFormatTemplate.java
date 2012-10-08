@@ -28,7 +28,7 @@ package org.ncibi.cytoscape.mimi.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import org.ncibi.cytoscape.mimi.plugin.CyActivator;
+import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
@@ -43,7 +43,7 @@ public class FileFormatTemplate implements ActionListener{
 	 
 	 public void actionPerformed(ActionEvent event) {		
 		
-		 BareBonesBrowserLaunch.openURL(CyActivator.GENESAMPLE);
+		 BareBonesBrowserLaunch.openURL(MiMIURL.GENESAMPLE);
 	 }
 
 

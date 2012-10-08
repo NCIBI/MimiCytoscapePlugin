@@ -24,7 +24,6 @@
  ******************************************************************/
  
 package org.ncibi.cytoscape.mimi.task;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.cytoscape.io.util.StreamUtil;
@@ -35,8 +34,6 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.attributes.AttributesByIDs;
-import org.ncibi.cytoscape.mimi.attributes.UserAnnoAttr;
 import org.ncibi.cytoscape.mimi.enums.NodeType;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 
@@ -66,8 +63,6 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
 		//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
 		doQuery(QueryType.QUERY_BY_EXPAND,term, streamUtil, taskMonitor);
-		nodeIDList =new ArrayList<String>();
-		edgeIDList =new ArrayList<String>();
 		//System.out.println("query by expand"+QUERY_BY_EXPAND);
 		String line;
 		//System.out.println("clicked node id "+clickNodeId);
@@ -80,9 +75,8 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 			if(sourceNodeRows.isEmpty()) {
 				sourceNode = network.addNode();
 				network.getRow(sourceNode).set(CyNetwork.NAME, res[1]);
-				if (!geneIDList.contains(res[1]+" ")){
+				if (!nodeList.contains(sourceNode)){
 					nodeList.add(sourceNode);
-					geneIDList += res[1]+" ";	
 					nodeIDList.add(res[1]);
 					network.getRow(sourceNode).set("Gene.name", res[0]);
 					//add step attribute 	
@@ -104,9 +98,8 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 			if(targetNodeRows.isEmpty()) {
 				targetNode = network.addNode();
 				network.getRow(targetNode).set(CyNetwork.NAME, res[4]);
-				if (!geneIDList.contains(res[4]+" ")){
+				if (!nodeList.contains(targetNode)){
 					nodeList.add(targetNode);
-					geneIDList += res[4]+" ";
 					nodeIDList.add(res[4]);
 					network.getRow(targetNode).set("Gene.name", res[3]);
 					//if (!nodeAttributes.hasAttribute(targetNode.getIdentifier(),"Network Distance"))	
@@ -121,35 +114,28 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 			}
 
 
-			if (!network.containsEdge(sourceNode,targetNode) && !network.containsEdge(targetNode, sourceNode) && !interactionIDList.contains(res[6]+" ")){
+			if (!network.containsEdge(sourceNode,targetNode) && !network.containsEdge(targetNode, sourceNode)){
 				CyEdge edge = network.addEdge(sourceNode, targetNode, true);
 				String name = network.getRow(sourceNode).get(CyNetwork.NAME, String.class) + 
 						" ( ) " + network.getRow(targetNode).get(CyNetwork.NAME, String.class);
 				network.getRow(edge).set(CyEdge.INTERACTION, " ");
 				network.getRow(edge).set(CyNetwork.NAME, name);
 				edgeList.add(edge);
-				interactionIDList += res[6]+" ";
 				edgeIDList.add(name);
 				network.getRow(edge).set("Interaction.geneName", "("+res[0]+" , "+res[3]+")");
 				network.getRow(edge).set("Interaction.userAnnot", false);
 				network.getRow(edge).set("Interaction.id", res[6]);
-				if (!edgeIDStrList.contains(","+name+","))	 //modified on June 24  				 
-					edgeIDStrList += name+",";
-				intID2geneID.put(res[6],name);
 			}
 
 		}
 		rd.close();
 		if (!nodeList.isEmpty() && !edgeList.isEmpty()){
-			//System.out.println("node list and edge list is not empty");
-			//get all molecule and interaction attributes using returned gene IDs and interaction IDs	
-			AttributesByIDs.GetAttribute(geneIDList,interactionIDList);
-			new UserAnnoAttr().getAttribute(geneIDList.trim(),edgeIDStrList.trim());
 			//set node color attributes for expand node. set nodelist and edge list as expand node attributes for collapsing expanded network using 
 			hiddenNodeTable.getRow(node.getSUID()).set("Node Color", NodeType.EXPANDNODE);
 			hiddenNodeTable.getRow(node.getSUID()).set("NodeIDList", nodeIDList);
 			hiddenNodeTable.getRow(node.getSUID()).set("EdgeIDList", edgeIDList);
-			
+			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));
+			insertTasksAfterCurrentTask(new GetAnnotationAttributesTask(nodeList, edgeList, network, streamUtil));
 		}
 		else {
 			throw new Exception("No Expanded network found for this node");	            	 

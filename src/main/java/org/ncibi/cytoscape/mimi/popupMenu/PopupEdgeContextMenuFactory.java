@@ -38,9 +38,9 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.ncibi.cytoscape.mimi.plugin.MiMIState;
 import org.ncibi.cytoscape.mimi.plugin.QueryBioNlp;
-import org.ncibi.cytoscape.mimi.ui.AnnoEditor;
-import org.ncibi.cytoscape.mimi.ui.AnnoLogin;
-import org.ncibi.cytoscape.mimi.ui.ViewPubAnno;
+import org.ncibi.cytoscape.mimi.ui.AnnotationEditor;
+import org.ncibi.cytoscape.mimi.ui.AnnotationLogin;
+import org.ncibi.cytoscape.mimi.ui.ViewPublicAnnotation;
 import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
 
 
@@ -52,64 +52,50 @@ public class PopupEdgeContextMenuFactory implements CyEdgeViewContextMenuFactory
 
 	public CyMenuItem createMenuItem(final CyNetworkView networkView, final View<CyEdge> edgeView) {
 		//add mimi plugin menu
-        JMenu menu=new JMenu("MiMI Plugin");
-        
-        //add BioNlp to edge context menu
-       // JMenu BioNLPMenu=new JMenu("BioNLP");
-       // mimipluginMenu.add(BioNLPMenu);
-        //JMenuItem jmiAboutNLP=new JMenuItem("About BioNLP");
-        JMenuItem jmiDoNLP=new JMenuItem("BioNLP");
-        menu.add(jmiDoNLP);
-        //BioNLPMenu.add(jmiDoNLP);
-        //BioNLPMenu.add(jmiAboutNLP);	        
-        
-       /* jmiAboutNLP.addActionListener(new ActionListener(){
-    		public 	void actionPerformed(ActionEvent e){
-    			
-    			BareBonesBrowserLaunch.openURL(MiMIPlugIn.BIONLPURL);
-    		}
-    	});*/
-        
-        jmiDoNLP.addActionListener(new ActionListener(){
-    		public 	void actionPerformed(ActionEvent e){
-    			CyEdge edge = edgeView.getModel(); 
-    			new QueryBioNlp(edge);
-    		}
-    	});
-       
-        	//add edge annotation to edge context menu
-        	JMenu AnnotMenu = new JMenu("User Annotation");
-        	menu.add(AnnotMenu);
-        	JMenuItem jmiPubAnno= new JMenuItem("View Public Annotation");
-        	JMenuItem jmiEdgeAnno = new JMenuItem ("Add Your Annotation");         
-        	AnnotMenu.add(jmiPubAnno);
-        	AnnotMenu.add(jmiEdgeAnno);
-        	jmiPubAnno.addActionListener(new ActionListener(){
-        		public 	void actionPerformed(ActionEvent e){        			
-        			CyEdge edge = edgeView.getModel(); 
-        			new ViewPubAnno(edge);        			
-        		}
-        	});
-        	jmiEdgeAnno.addActionListener(new ActionListener(){
-        		public 	void actionPerformed(ActionEvent e){        			
-        			CyEdge edge = edgeView.getModel(); 
-        			//System.out.println("click node is"+cynode.getIdentifier());
-        			if (MiMIState.currentUserID.equals("0"))
-        				new AnnoLogin(edge);
-        			else 
-        				new AnnoEditor(edge,MiMIState.currentUserID);
-        		}
-        	});
-        	
-        	//integrate dynamicXpr 
-        	JMenuItem jmiNodeDyXpr=new JMenuItem("Dynamic Expression");
-        	menu.add(jmiNodeDyXpr);
-        	jmiNodeDyXpr.addActionListener(new ActionListener(){
-        		public void actionPerformed(ActionEvent ae){         			
-        			new DynamicExpression();
-        		}
-        	});
-        	return new CyMenuItem(menu,1.0f);
+		JMenu menu=new JMenu("MiMI Plugin");
+
+		JMenuItem jmiDoNLP=new JMenuItem("BioNLP");
+		menu.add(jmiDoNLP);
+
+		jmiDoNLP.addActionListener(new ActionListener(){
+			public 	void actionPerformed(ActionEvent e){
+				CyEdge edge = edgeView.getModel(); 
+				new QueryBioNlp(edge);
+			}
+		});
+
+		//add edge annotation to edge context menu
+		JMenu AnnotMenu = new JMenu("User Annotation");
+		menu.add(AnnotMenu);
+		JMenuItem jmiPubAnno= new JMenuItem("View Public Annotation");
+		JMenuItem jmiEdgeAnno = new JMenuItem ("Add Your Annotation");         
+		AnnotMenu.add(jmiPubAnno);
+		AnnotMenu.add(jmiEdgeAnno);
+		jmiPubAnno.addActionListener(new ActionListener(){
+			public 	void actionPerformed(ActionEvent e){        			
+				CyEdge edge = edgeView.getModel(); 
+				new ViewPublicAnnotation(edge);        			
+			}
+		});
+		jmiEdgeAnno.addActionListener(new ActionListener(){
+			public 	void actionPerformed(ActionEvent e){        			
+				CyEdge edge = edgeView.getModel(); 
+				if (MiMIState.currentUserID.equals("0"))
+					new AnnotationLogin(edge);
+				else 
+					new AnnotationEditor(edge,MiMIState.currentUserID);
+			}
+		});
+
+		//integrate dynamicXpr 
+		JMenuItem jmiNodeDyXpr=new JMenuItem("Dynamic Expression");
+		menu.add(jmiNodeDyXpr);
+		jmiNodeDyXpr.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent ae){         			
+				new DynamicExpression();
+			}
+		});
+		return new CyMenuItem(menu,1.0f);
 	}
 }
 

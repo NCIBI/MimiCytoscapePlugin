@@ -30,34 +30,36 @@ package org.ncibi.cytoscape.mimi.ui;
  * @date Mar 27, 2007
  */
 
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URLEncoder;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.*;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Container;
-import java.net.URLEncoder;
-import cytoscape.Cytoscape;
 
-import org.ncibi.cytoscape.mimi.plugin.CyActivator;
-import org.ncibi.cytoscape.mimi.util.URLConnect;
+import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
 @SuppressWarnings("serial")
-public class AnnoLogin extends JFrame implements ActionListener {
+public class AnnotationLogin extends JFrame implements ActionListener {
 	private JTextField temail;
 	private JPasswordField tpaswd;	
+	private JFrame parent;
 	private Object nodeEdgeObj;
 	private String NEWUSER="-1";
 	private String WRONGPWD="-2";
 	private String FAKEEMAIL="-3";
 	
-	public AnnoLogin(Object obj){
+	public AnnotationLogin(Object obj, JFrame parent){
 		super("Sign in");
+		this.parent = parent;
 		nodeEdgeObj=obj;
 		Container cPane = getContentPane(); 		
 		JPanel p=new JPanel();
@@ -98,7 +100,7 @@ public class AnnoLogin extends JFrame implements ActionListener {
 		cPane.add(p);		
 		pack();
         setVisible(true);
-        setLocationRelativeTo(Cytoscape.getDesktop());
+        setLocationRelativeTo(parent);
 		
 	}
 	public void actionPerformed(ActionEvent e){		
@@ -114,7 +116,7 @@ public class AnnoLogin extends JFrame implements ActionListener {
 				try{
 				tEmail=URLEncoder.encode(tEmail,"UTF-8");
 				tPaswd =URLEncoder.encode(tPaswd,"UTF-8");	
-				String urlstr=CyActivator.ANNOTEDITORLOGIN;
+				String urlstr=MiMIURL.ANNOTEDITORLOGIN;
 				String query= "EMAIL="+tEmail+"&PWD="+tPaswd;
 				URLConnect uc= new URLConnect();
 				uc.doURLConnect(urlstr, query);
@@ -134,7 +136,7 @@ public class AnnoLogin extends JFrame implements ActionListener {
 						setVisible(false);
 						if ((!inputLine1.equals("")) && (!inputLine1.equals(" "))){	
 							//System.out.println(inputLine1);
-							new AnnoEditor(nodeEdgeObj,inputLine1);						
+							new AnnotationEditor(nodeEdgeObj,inputLine1);						
 								
 						}				
 					}				
@@ -147,12 +149,12 @@ public class AnnoLogin extends JFrame implements ActionListener {
 		}
 		if(e.getActionCommand().equals("New User")){
 			setVisible(false);
-			new NewUserSignup();
+			new NewUserSignup(parent);
 		}
 		
         if(e.getActionCommand().equals("Forgot Password")){
         	setVisible(false);
-        	new ForgotPswd();
+        	new ForgotPassword(parent);
 			
 		}
 	}

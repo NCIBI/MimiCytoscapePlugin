@@ -29,22 +29,26 @@ package org.ncibi.cytoscape.mimi.ui;
  * @author jinggao/ForgotPswd
  * @date Jul 2, 2008
  */
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
-import cytoscape.Cytoscape;
-
 import java.awt.Container;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URLEncoder;
 
-import org.ncibi.cytoscape.mimi.plugin.CyActivator;
-import org.ncibi.cytoscape.mimi.util.URLConnect;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
 @SuppressWarnings("serial")
-public class ForgotPswd extends JFrame implements ActionListener {
+public class ForgotPassword extends JFrame implements ActionListener {
 	private JTextField t;
-	public ForgotPswd(){	
+	public ForgotPassword(JFrame parent){	
 		super("Forgot Password");
 		JLabel l=new JLabel("Please enter your email: ");
 		t=new JTextField(40);
@@ -69,7 +73,7 @@ public class ForgotPswd extends JFrame implements ActionListener {
 		cpane.add(p);
 		pack();
         setVisible(true);
-        setLocationRelativeTo(Cytoscape.getDesktop());		
+        setLocationRelativeTo(parent);		
 	}
 	public void actionPerformed (ActionEvent e){
 		if (e.getActionCommand().equals("Submit")){
@@ -78,7 +82,7 @@ public class ForgotPswd extends JFrame implements ActionListener {
 			else {
 				try{
 					//System.out.println("emial is "+t.getText());
-					String urlStr = CyActivator.SENDPSWD;
+					String urlStr = MiMIURL.SENDPSWD;
 					String query="EMAIL="+URLEncoder.encode(t.getText(),"UTF-8");
 					URLConnect uc=new URLConnect();
 					uc.doURLConnect(urlStr, query) ;

@@ -14,8 +14,6 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.attributes.AttributesByIDs;
-import org.ncibi.cytoscape.mimi.attributes.UserAnnoAttr;
 import org.ncibi.cytoscape.mimi.enums.NodeType;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 
@@ -90,8 +88,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				Long sourceNodeSuid = sourceNodeRow.get(CyNetwork.SUID, Long.class);
 				sourceNode = network.getNode(sourceNodeSuid);
 			}
-			if (!geneIDList.contains(" "+res[1]+" "))
-				geneIDList += res[1]+" ";
 
 			//MaxDistance = (MaxDistance.compareTo(res[2])<0)? res[2]:MaxDistance ; 
 			//MaxDistance = (MaxDistance.compareTo(res[5])<0)? res[5]:MaxDistance ;
@@ -125,9 +121,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				targetNode = network.getNode(targetNodeSuid);
 			}
 
-			if (!geneIDList.contains(" "+res[4]+" "))
-				geneIDList += res[4]+" "; 
-
 			if(!nodeList.contains(targetNode)) {
 				nodeList.add(targetNode);
 				//add step attribute if it does not exist
@@ -158,11 +151,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				edge = network.getEdge(edgeSuid);
 			}
 
-			if (!edgeIDStrList.contains(","+network.getRow(edge).get(CyNetwork.NAME, String.class)+","))	   				 
-				edgeIDStrList += network.getRow(edge).get(CyNetwork.NAME, String.class)+",";
-			if (!interactionIDList.contains(" "+res[6]+" "))	   				 
-				interactionIDList += res[6]+" ";
-			intID2geneID.put(res[6],network.getRow(edge).get(CyNetwork.NAME, String.class));
 			//System.out.println ("edge identifier["+edge.getIdentifier());
 			if(!edgeList.contains(edge))
 				edgeList.add(edge);
@@ -173,12 +161,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 		//System.out.println("node list size is:"+nodeList.size());
 		//System.out.println("edge list size is:"+edgeList.size());
 		if (!nodeList.isEmpty()){
-			//get all molecule and ineraction attributes using returned gene IDs and interaction IDs	from MiMI database
-			AttributesByIDs.GetAttribute(geneIDList.trim(),interactionIDList.trim());
-			//query MiMIAnnotation database to set UserAnnotation attriubte to node/edge
-			//System.out.println("gene list is ["+geneIDList+"]\n\n\n\n");
-			//System.out.println("edge list is ["+edgeIDStrList+"]\n\n\n\n");
-			new UserAnnoAttr().getAttribute(geneIDList.trim(),edgeIDStrList.trim());
 			//create network    
 			if (queryType==QueryType.QUERY_BY_ID){
 				network.getRow(network).set(CyNetwork.NAME, "geneID:"+inputStr);
@@ -198,6 +180,8 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 			
 			cyNetworkManager.addNetwork(network);
 			cyNetworkViewManager.addNetworkView(view);
+			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));
+			insertTasksAfterCurrentTask(new GetAnnotationAttributesTask(nodeList, edgeList, network, streamUtil));
 			insertTasksAfterCurrentTask(vslTaskFactory.createTaskIterator(view));
 		} else {
 			throw new Exception("No result returned for this query.\n Please check if you entered up to date gene symbols, OR\nyou may need to modify paramters and try again");	            	 

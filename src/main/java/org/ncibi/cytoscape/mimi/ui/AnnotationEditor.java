@@ -55,17 +55,12 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-import org.ncibi.cytoscape.mimi.attributes.UserAnnoAttr;
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.CyNetworkView;
 import org.ncibi.cytoscape.mimi.plugin.CyActivator;
+import org.ncibi.cytoscape.mimi.task.GetAnnotationAttributesTask;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
-import org.ncibi.cytoscape.mimi.util.URLConnect;
-import org.ncibi.cytoscape.mimi.visual.LayoutUtility;
-
-import cytoscape.CyEdge;
-import cytoscape.CyNode;
-import cytoscape.Cytoscape;
-import cytoscape.util.ProxyHandler;
-import cytoscape.view.CyNetworkView;
 
 
 
@@ -77,7 +72,7 @@ import cytoscape.view.CyNetworkView;
  * @date Mar 6, 2007
  */
 @SuppressWarnings("serial")
-public class AnnoEditor extends JFrame implements ActionListener{ //,ItemListener{
+public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemListener{
 	private Container cPane;
 	private JTextArea content;
 	private JList urlList;
@@ -134,7 +129,7 @@ public class AnnoEditor extends JFrame implements ActionListener{ //,ItemListene
 	private int nodeOrEdge;
 	private String share;
 	
-	public AnnoEditor (Object obj, String userid){		
+	public AnnotationEditor (Object obj, String userid){		
 		super ("Annotating Editor");	
 		userID = userid;
 		CyActivator.currentUserID=userID;
@@ -401,13 +396,13 @@ public class AnnoEditor extends JFrame implements ActionListener{ //,ItemListene
 				if (nodeOrEdge==0 && sharebutton.isSelected())
 					Cytoscape.getEdgeAttributes().setAttribute(id, "Gene.edgeUserAnnot", true);
 				if (nodeOrEdge==1 && !sharebutton.isSelected()){
-					UserAnnoAttr uaa1=new UserAnnoAttr();
+					GetAnnotationAttributesTask uaa1=new GetAnnotationAttributesTask();
 					uaa1.getAttribute(id,"");
 					if (uaa1.getGenewithPublAnnot().equals(""))
 						Cytoscape.getNodeAttributes().setAttribute(id, "Gene.userAnnot", false);
 				}
 				if (nodeOrEdge==0 && !sharebutton.isSelected()){
-					UserAnnoAttr uaa1=new UserAnnoAttr();
+					GetAnnotationAttributesTask uaa1=new GetAnnotationAttributesTask();
 					uaa1.getAttribute("",id);
 					if (uaa1.getEdgewithPublAnnot().equals(""))
 						Cytoscape.getEdgeAttributes().setAttribute(id, "Gene.userAnnot", false);					

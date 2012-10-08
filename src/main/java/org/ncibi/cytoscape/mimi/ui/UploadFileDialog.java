@@ -27,17 +27,21 @@ package org.ncibi.cytoscape.mimi.ui;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import cytoscape.Cytoscape;
 
-import org.ncibi.cytoscape.mimi.action.ExecuteSearchAction;
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.swing.DialogTaskManager;
+import org.ncibi.cytoscape.mimi.task.SearchTaskFactory;
 
 /** 
  * @author jinggao/UploadFileDialog
@@ -54,7 +58,8 @@ public class UploadFileDialog extends JFrame  {
 	private JTextField textField;
 	
 	
-public UploadFileDialog (boolean findheader, String genelist, String organism, String moleculeType, String dataSource, String interactionLevel){
+public UploadFileDialog (boolean findheader, String genelist, String organism, String moleculeType, 
+		String dataSource, String interactionLevel, final SearchTaskFactory searchTaskFactory, final DialogTaskManager dialogTaskManager){
 		super ("MiMI Plugin");		
 		Container cPane = getContentPane();		
 		textField = new JTextField(genelist);			
@@ -105,7 +110,12 @@ public UploadFileDialog (boolean findheader, String genelist, String organism, S
 		jcbIL.setEnabled(true);
 		//create search button	    
     	JButton searchButton = new JButton("Search");    	    	
-	    searchButton.addActionListener(new ExecuteSearchAction(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this )) ;
+	    searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TaskIterator ti = searchTaskFactory.createTaskIterator(textField,JCBorganismList,jcbMt,jcbDR, jcbIL);
+				dialogTaskManager.execute(ti);
+			}
+	    });
 	    
 	    JPanel panel1= new JPanel();
 	    panel1.add(JCBorganismList);
@@ -132,7 +142,6 @@ public UploadFileDialog (boolean findheader, String genelist, String organism, S
 		cPane.add(panel);         
 	    pack();
 	    setVisible(true);
-	    setLocationRelativeTo(Cytoscape.getDesktop());
 	}
 	
 

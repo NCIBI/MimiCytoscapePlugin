@@ -24,14 +24,8 @@
  ******************************************************************/
  
 package org.ncibi.cytoscape.mimi.ui;
-import cytoscape.CyNode;
-import cytoscape.CyEdge;
-import cytoscape.Cytoscape;
-import cytoscape.util.ProxyHandler;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,13 +34,18 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.awt.Container;
-import java.awt.Dimension;
-import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
 
-import org.ncibi.cytoscape.mimi.plugin.CyActivator;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNode;
+import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
 
 /** 
@@ -54,10 +53,10 @@ import org.ncibi.cytoscape.mimi.plugin.CyActivator;
  * @date May 7, 2008
  */
 @SuppressWarnings("serial")
-public class ViewPubAnno extends JFrame{	
+public class ViewPublicAnnotation extends JFrame{	
 	private String table;
 	private String id;
-	public ViewPubAnno (Object obj){		
+	public ViewPublicAnnotation (Object obj, JFrame parent){		
 		super("Annotation");
 		try{
 			String nodedgename=" ";
@@ -73,7 +72,7 @@ public class ViewPubAnno extends JFrame{
 				id=cyedge.getIdentifier();	
 				nodedgename=Cytoscape.getEdgeAttributes().getStringAttribute(cyedge.getIdentifier(),"Gene.name");
 			}
-			URL url =new URL(CyActivator.GETSHAREDANNOT);
+			URL url =new URL(MiMIURL.GETSHAREDANNOT);
 			String query= "TABLE="+table+"&ID="+URLEncoder.encode(id,"UTF-8");
 			Proxy cytoproxyhandler = ProxyHandler.getProxyServer();
 			URLConnection conn;
@@ -134,7 +133,7 @@ public class ViewPubAnno extends JFrame{
 			cPane.setPreferredSize(new Dimension(620,220));
 			pack();
 	        setVisible(true);
-	        setLocationRelativeTo(Cytoscape.getDesktop());
+	        setLocationRelativeTo(parent);
 			
 			
 			

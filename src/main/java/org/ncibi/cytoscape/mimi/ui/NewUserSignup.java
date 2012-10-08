@@ -28,18 +28,24 @@ package org.ncibi.cytoscape.mimi.ui;
 /** 
  * New user sign up panel
  */
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URLEncoder;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
-import org.ncibi.cytoscape.mimi.plugin.CyActivator;
+import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 import org.ncibi.cytoscape.mimi.util.MD5;
-import org.ncibi.cytoscape.mimi.util.URLConnect;
-
-import cytoscape.Cytoscape;
 
 @SuppressWarnings("serial")
 public class NewUserSignup extends JFrame implements ActionListener{	
@@ -56,7 +62,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 	private JPasswordField tpwd;
 	private JPasswordField tpwd1;
 	
-	public NewUserSignup(){
+	public NewUserSignup(JFrame parent){
 		super("Sign up");				
 		Container cPane = getContentPane(); 
 		//Create and populate the panel.
@@ -109,7 +115,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 		cPane.add(p);		
 		pack();
         setVisible(true);
-        setLocationRelativeTo(Cytoscape.getDesktop());
+        setLocationRelativeTo(parent);
 		
 	}
 	public void actionPerformed(ActionEvent e){	
@@ -135,7 +141,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 					String til=URLEncoder.encode(ttil.getText(),"UTF-8");
 					String pwd =  String.valueOf(tpwd.getPassword());
 					pwd =URLEncoder.encode(pwd,"UTF-8");				
-					String urlstr=CyActivator.NEWUSERURL;
+					String urlstr=MiMIURL.NEWUSERURL;
 					String query="NAME="+name+"&PWD="+pwd+"&EMAIL="+email+"&ORG="+org+"&TIL="+til;
 					URLConnect uc= new URLConnect();
 					uc.doURLConnect(urlstr, query);
@@ -148,7 +154,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 							else{//call php file to validate log in email
 								//get md5 hash
 								String md5hash=new MD5(email).getmd5hash();	
-								String urlstr1=CyActivator.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
+								String urlstr1=MiMIURL.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
 								URLConnect uc1= new URLConnect();
 								uc1.doURLConnect(urlstr1);
 								String inputLine2;				

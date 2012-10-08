@@ -26,6 +26,7 @@
 package org.ncibi.cytoscape.mimi.task;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -42,7 +43,6 @@ import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
-import org.ncibi.cytoscape.mimi.util.URLConnect;
 
 
 
@@ -68,12 +68,8 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 	
 	protected ArrayList<CyNode> nodeList = new ArrayList<CyNode>();
 	protected ArrayList<CyEdge> edgeList = new ArrayList<CyEdge>(); 
-	protected ArrayList<String> nodeIDList;
-	protected ArrayList<String> edgeIDList;
-	protected String geneIDList = " ";
-	protected String edgeIDStrList = ",";
-	protected String interactionIDList = " ";
-	protected HashMap<String, String> intID2geneID = new HashMap<String, String>();	
+	protected ArrayList<String> nodeIDList = new ArrayList<String>();
+	protected ArrayList<String> edgeIDList = new ArrayList<String>();
 	
 	public abstract void run(TaskMonitor arg0) throws Exception;
 	
@@ -145,15 +141,20 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 			String query="" ;
 			//get keyword
 			//for remote file
-			if (queryType==QueryType.QUERY_BY_REMOTEFILE && inputgene.startsWith("http")){					
-				URLConnect uc= new URLConnect();
-				uc.doURLConnect(inputgene);
-				String line="";
-				while ((line = uc.getBrd().readLine()) != null){
-					keyword += line +" ";
-					//System.out.println("keyword is " +keyword);
+			if (queryType==QueryType.QUERY_BY_REMOTEFILE && inputgene.startsWith("http")){
+				try {
+					InputStream stream = streamUtil.getInputStream(new URL(inputgene));
+					BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+					String line="";
+					while ((line = br.readLine()) != null){
+						keyword += line +" ";
+						//System.out.println("keyword is " +keyword);
+					}
+					br.close();
 				}
-				uc.closebrd();
+				catch(Exception e) {
+					throw new Exception("Could not connect to the remote file.\n Please make sure the remote file exists.");
+				}
 
 			}
 			else keyword=inputgene;
@@ -187,7 +188,6 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 			// Get the response	        
 			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	 			
 			wr.close();	
-
 		}
 	}
 }
