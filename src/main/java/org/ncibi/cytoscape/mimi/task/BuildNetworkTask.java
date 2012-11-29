@@ -2,6 +2,7 @@ package org.ncibi.cytoscape.mimi.task;
 
 import java.util.Collection;
 
+import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -25,18 +26,20 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 	private CyNetworkManager cyNetworkManager;
 	private CyNetworkViewFactory cyNetworkViewFactory;
 	private CyNetworkViewManager cyNetworkViewManager;
+	private CyEventHelper cyEventHelper;
 	private ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory;
 	private StreamUtil streamUtil;
 	
 	public BuildNetworkTask(QueryType queryType, String inputStr, CyNetworkFactory cyNetworkFactory, 
 			CyNetworkManager cyNetworkManager, CyNetworkViewFactory cyNetworkViewFactory,
-			CyNetworkViewManager cyNetworkViewManager, ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory, StreamUtil streamUtil) {
+			CyNetworkViewManager cyNetworkViewManager, CyEventHelper cyEventHelper, ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory, StreamUtil streamUtil) {
 		this.queryType = queryType;
 		this.inputStr = inputStr;
 		this.cyNetworkFactory = cyNetworkFactory;
 		this.cyNetworkManager = cyNetworkManager;
 		this.cyNetworkViewFactory = cyNetworkViewFactory;
 		this.cyNetworkViewManager = cyNetworkViewManager;
+		this.cyEventHelper = cyEventHelper;
 		this.vslTaskFactory = vslTaskFactory;
 		this.streamUtil = streamUtil;
 	}
@@ -44,7 +47,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 	@Override
 	public void run(TaskMonitor taskMonitor) throws Exception {
 		CyNetwork network = cyNetworkFactory.createNetwork();
-		CyNetworkView view = cyNetworkViewFactory.createNetworkView(network);
 		String [] inputParameters = inputStr.split("/////");	
 		String geneList= (inputParameters[0].length()<=15) ? inputParameters[0]:inputParameters[0].substring(0, 15)+"...";
 		//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
@@ -97,12 +99,12 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				//set default (false) user annotation attribute to node
 				network.getRow(sourceNode).set("Gene.userAnnot", false);
 				//add step attribute if it does not exist
-				if(!network.getRow(sourceNode).get("Network Distance", String.class).equals("0")) {
+				if(!network.getRow(sourceNode).get("Network Distance", String.class, "-1").equals("0")) {
 					network.getRow(sourceNode).set("Network Distance", res[2]);
-					hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR);
+					hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
 				}
 				else
-					hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNODE);
+					hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
 			}
 
 			//target node
@@ -124,12 +126,12 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 			if(!nodeList.contains(targetNode)) {
 				nodeList.add(targetNode);
 				//add step attribute if it does not exist
-				if(!network.getRow(targetNode).get("Network Distance", String.class).equals("0")) {
+				if(!network.getRow(targetNode).get("Network Distance", String.class, "-1").equals("0")) {
 					network.getRow(targetNode).set("Network Distance", res[5]);
-					hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR);
+					hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
 				}
 				else
-					hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNODE);
+					hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
 			}
 
 			//edge
@@ -177,11 +179,13 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				network.getRow(network).set("Data Source", inputParameters[3]);
 				network.getRow(network).set("Displays for results", inputParameters[4]);
 			}
-			
 			cyNetworkManager.addNetwork(network);
+			CyNetworkView view = cyNetworkViewFactory.createNetworkView(network);
+			
 			cyNetworkViewManager.addNetworkView(view);
-			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));
-			insertTasksAfterCurrentTask(new GetAnnotationAttributesTask(nodeList, edgeList, network, streamUtil));
+			cyEventHelper.flushPayloadEvents();
+			//insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));
+			//insertTasksAfterCurrentTask(new GetAnnotationAttributesTask(nodeList, edgeList, network, streamUtil));
 			insertTasksAfterCurrentTask(vslTaskFactory.createTaskIterator(view));
 		} else {
 			throw new Exception("No result returned for this query.\n Please check if you entered up to date gene symbols, OR\nyou may need to modify paramters and try again");	            	 

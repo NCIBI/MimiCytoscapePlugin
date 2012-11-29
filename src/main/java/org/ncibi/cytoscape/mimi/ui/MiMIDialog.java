@@ -200,6 +200,7 @@ public class MiMIDialog extends JFrame{
 		       //loadFileButton.addActionListener(new ExcuteUploadFile(JCBorganismList,jcbMt,jcbDR,jcbIL,jcheckbox,(JFrame) this ));
 		       loadFileButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
 						JFileChooser fc=new JFileChooser();
 						int returnVal = fc.showOpenDialog(parent); 
 						if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -236,12 +237,13 @@ public class MiMIDialog extends JFrame{
 	}
 	
 	protected ActionListener createSearchAction(final JTextField textField ,final JComboBox jcbOrganism ,final JComboBox jcbMt,final JComboBox jcbDr, final JComboBox jcbI) {
-		return createSearchAction(textField, jcbOrganism, jcbMt, jcbDr, jcbI);
+		return createSearchAction(null, textField, jcbOrganism, jcbMt, jcbDr, jcbI);
 	}
 	
 	protected ActionListener createSearchAction(final SearchMethod searchMethod, final JTextField textField ,final JComboBox jcbOrganism ,final JComboBox jcbMt,final JComboBox jcbDr, final JComboBox jcbI) {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				TaskIterator ti = searchTaskFactory.createTaskIterator(searchMethod, textField, jcbOrganism, jcbMt, jcbDr, jcbI);
 				dialogTaskManager.execute(ti);
 			}

@@ -46,8 +46,7 @@ public class ApplyVisualStyleAndLayoutTask extends AbstractNetworkViewTask {
 		mimiStyle.apply(view);
 		view.updateView();
 		vmm.setVisualStyle(mimiStyle, view);
-		
-		insertTasksAfterCurrentTask(layout.createTaskIterator(view, layout.getDefaultLayoutContext(), 
+		insertTasksAfterCurrentTask(layout.createTaskIterator(view, layout.createLayoutContext(), 
 				new HashSet<View<CyNode>>(view.getNodeViews()), CyNetwork.NAME));
 	}
 

@@ -40,6 +40,7 @@ import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.work.AbstractTask;
+import org.cytoscape.work.ProvidesTitle;
 import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
@@ -98,6 +99,7 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 	protected void doQuery(QueryType queryType, String term, StreamUtil streamUtil, TaskMonitor taskMonitor) throws Exception{
 		taskMonitor.setTitle("Querying MiMI...");
 		taskMonitor.setStatusMessage("Querying MiMI Database by "+ rsc.get(queryType));
+		taskMonitor.setProgress(-1);
 		
 		int continueQuery=1;
 		String inputgene="";

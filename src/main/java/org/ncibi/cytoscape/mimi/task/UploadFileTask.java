@@ -31,6 +31,8 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFrame;
+
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.swing.DialogTaskManager;
@@ -45,6 +47,7 @@ public class UploadFileTask extends AbstractTask{
 	private File file;
 	private SearchTaskFactory searchTaskFactory;
 	private DialogTaskManager dialogTaskManager;
+	private JFrame frame;
 	private String organism;
 	private String moleculeType;
 	private String dataSource;
@@ -63,10 +66,11 @@ public class UploadFileTask extends AbstractTask{
 		verorgnismHM.put("3702","Arabidopsis thaliana");
 	}
 	
-	public UploadFileTask(File file, SearchTaskFactory searchTaskFactory, DialogTaskManager dialogTaskManager) {
+	public UploadFileTask(File file, SearchTaskFactory searchTaskFactory, DialogTaskManager dialogTaskManager, JFrame frame) {
 		this.file = file;
 		this.searchTaskFactory = searchTaskFactory;
 		this.dialogTaskManager = dialogTaskManager;
+		this.frame = frame;
 	}
 	
 	@Override
@@ -115,7 +119,7 @@ public class UploadFileTask extends AbstractTask{
 					genelist +=line.trim()+" ";		                  					             					
 			}
 			br.close();          			
-			new org.ncibi.cytoscape.mimi.ui.UploadFileDialog(fileheader,genelist,organism,moleculeType,dataSource,interactionLevel,searchTaskFactory,dialogTaskManager);
+			new org.ncibi.cytoscape.mimi.ui.UploadFileDialog(fileheader,genelist,organism,moleculeType,dataSource,interactionLevel,searchTaskFactory,dialogTaskManager,frame);
 		}
 
 		catch(Exception ex){

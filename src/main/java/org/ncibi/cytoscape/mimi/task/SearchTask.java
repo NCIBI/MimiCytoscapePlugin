@@ -72,6 +72,7 @@ public class SearchTask extends AbstractTask{
 
 	@Override
 	public void run(TaskMonitor taskMonitor) throws Exception {
+		taskMonitor.setProgress(-1);
 		//System.out.println("text is "+textField.getText());
 		if (textField.getText().length()>0){
 			String keywords="";
@@ -80,8 +81,11 @@ public class SearchTask extends AbstractTask{
 					String query="query="+URLEncoder.encode(textField.getText(),"UTF-8");
 					//System.out.println("query is "+query);
 					URLConnection uc = streamUtil.getURLConnection(new URL(MiMIURL.FREETEXTSEARCH));
+					uc.setUseCaches(false);
+					uc.setDoOutput(true);
 					OutputStreamWriter wr = new OutputStreamWriter(uc.getOutputStream());
 					wr.write(query);
+					wr.flush();
 					wr.close();
 					BufferedReader rd = new BufferedReader(new InputStreamReader(uc.getInputStream()));
 					String line="";
@@ -92,7 +96,6 @@ public class SearchTask extends AbstractTask{
 				if (searchMethod == SearchMethod.MESHTERM){
 					String query="?qtype=mesh&term=" + URLEncoder.encode(textField.getText(),"UTF-8");
 					String strURL =MiMIURL.MESHSEARCH+query;
-					//								System.out.println("query is " + strURL);
 					InputStream stream = streamUtil.getInputStream(strURL);
 					BufferedReader rd = new BufferedReader(new InputStreamReader(stream));
 					String line="";

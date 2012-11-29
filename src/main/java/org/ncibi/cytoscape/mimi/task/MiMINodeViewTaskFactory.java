@@ -37,7 +37,7 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 		CyNetwork network = netView.getModel();
 		TaskIterator taskIterator = new TaskIterator();
 		String dplymode=network.getRow(network).get("Displays for results", String.class, "1");
-		Integer nodeColor = network.getRow(node).get("Node Color",  Integer.class);
+		Integer nodeColor = network.getRow(node).get("Node Color",  Integer.class, 1);
 
 		if(nodeColor==NodeType.SEEDNEIGHBOR.ordinal() || nodeColor==NodeType.EXPANDNEIGHBOR.ordinal()
 				|| ((dplymode.equals("2") || dplymode.equals("4")) && nodeColor != NodeType.EXPANDNODE.ordinal() )) {

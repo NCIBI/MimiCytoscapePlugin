@@ -58,8 +58,8 @@ public class UploadFileDialog extends JFrame  {
 	private JTextField textField;
 	
 	
-public UploadFileDialog (boolean findheader, String genelist, String organism, String moleculeType, 
-		String dataSource, String interactionLevel, final SearchTaskFactory searchTaskFactory, final DialogTaskManager dialogTaskManager){
+public UploadFileDialog (final boolean findheader, final String genelist, final String organism, final String moleculeType, 
+		final String dataSource, final String interactionLevel, final SearchTaskFactory searchTaskFactory, final DialogTaskManager dialogTaskManager, final JFrame frame){
 		super ("MiMI Plugin");		
 		Container cPane = getContentPane();		
 		textField = new JTextField(genelist);			
@@ -112,6 +112,7 @@ public UploadFileDialog (boolean findheader, String genelist, String organism, S
     	JButton searchButton = new JButton("Search");    	    	
 	    searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				TaskIterator ti = searchTaskFactory.createTaskIterator(textField,JCBorganismList,jcbMt,jcbDR, jcbIL);
 				dialogTaskManager.execute(ti);
 			}
@@ -142,6 +143,7 @@ public UploadFileDialog (boolean findheader, String genelist, String organism, S
 		cPane.add(panel);         
 	    pack();
 	    setVisible(true);
+	    setLocationRelativeTo(frame);
 	}
 	
 

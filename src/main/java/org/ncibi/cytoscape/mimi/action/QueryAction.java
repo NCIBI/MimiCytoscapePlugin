@@ -31,10 +31,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.cytoscape.application.swing.AbstractCyAction;
-import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.work.swing.DialogTaskManager;
 import org.ncibi.cytoscape.mimi.plugin.MiMIState;
@@ -52,60 +52,50 @@ import org.ncibi.cytoscape.mimi.ui.MiMIDialog;
 @SuppressWarnings("serial")
 public class QueryAction extends AbstractCyAction{
 	
-	private MiMIDialog mimiDialog;
-	private StreamUtil streamUtil;
-	private CySwingApplication desktopApp;
 	private SearchTaskFactory searchTaskFactory;
 	private UploadFileTaskFactory uploadFileTaskFactory;
 	private DialogTaskManager dialogTaskManager;
+	private JFrame frame;
+	private StreamUtil streamUtil;
+	private MiMIDialog mimiDialog;
 	
-	public QueryAction(SearchTaskFactory searchTaskFactory, UploadFileTaskFactory uploadFileTaskFactory, DialogTaskManager dialogTaskManager, CySwingApplication desktopApp, StreamUtil streamUtil){
+	public QueryAction(SearchTaskFactory searchTaskFactory, UploadFileTaskFactory uploadFileTaskFactory, DialogTaskManager dialogTaskManager, JFrame frame, StreamUtil streamUtil){
 		super("Query");
 		setPreferredMenu("Apps.MiMI Plugin");	
-		
 		this.searchTaskFactory = searchTaskFactory;
 		this.uploadFileTaskFactory = uploadFileTaskFactory;
 		this.dialogTaskManager = dialogTaskManager;
-		this.desktopApp = desktopApp;
+		this.frame = frame;
 		this.streamUtil = streamUtil;
+		
 	}
     
-    public void actionPerformed(ActionEvent e) { 	
-    	
-    	if (mimiDialog == null) {
-            try{
-            	URL url = new URL(MiMIURL.CHECKPLUGINVERSION);        	
-            	URLConnection conn = streamUtil.getURLConnection(url);
-            	conn.setUseCaches(false);			    
-            	BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	 
-            	String line;
-            	if ((line = rd.readLine()) != null) {
-            		if (line.compareTo(MiMIState.CURRENTPLUGINVERSION)>0){
-			  				JOptionPane.showMessageDialog(desktopApp.getJFrame(), "You are using old version, Please update to "+"MiMI Plugin "+ line+" from within Cytoscape (Plugins->Update Plugins->MiMIPlugin "+line+")");		
-			  			}
-			  			
-            	}
-            	rd.close();	
-            }
-            catch(Exception ve){
-//            	System.out.println(ve);
-            }
-//            CyLayoutAlgorithm layout = CyLayouts.getLayout("force-directed");
-//    		Tunable discrete = layout.getSettings().get("discrete");
-//    		if(discrete != null) {
-//    			discrete.setValue(true);
-//    			layout.updateSettings();
-//    		}
-            mimiDialog = new MiMIDialog(searchTaskFactory, uploadFileTaskFactory, dialogTaskManager, desktopApp.getJFrame());            
-           // mimiDialog=null;
-        }
-    	// if there is a current network and current view,
-    	// and if any nodes are selected... 
-    	// use the selected nodes to prime the serach
-		//mimiDialog.getSearchGenesFromSelection();
+	public void actionPerformed(ActionEvent e) { 	
+		if (mimiDialog == null) {
+			try{
+				URL url = new URL(MiMIURL.CHECKPLUGINVERSION);        	
+				URLConnection conn = streamUtil.getURLConnection(url);
+				conn.setUseCaches(false);			    
+				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	 
+				String line;
+				if ((line = rd.readLine()) != null) {
+					if (line.compareTo(MiMIState.CURRENTPLUGINVERSION)>0){
+						JOptionPane.showMessageDialog(frame, "You are using an old version, Please update to "+"MiMI Plugin "+ line+" from within Cytoscape (Apps->App Manager->Check for Updates)");		
+					}
 
-    	mimiDialog.setVisible(true);
-    	
-   }
+				}
+				rd.close();	
+			}
+			catch(Exception ve){
+				JOptionPane.showMessageDialog(frame, "Unable to connect to the MiMI server.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			mimiDialog = new MiMIDialog(searchTaskFactory, uploadFileTaskFactory, dialogTaskManager, frame);            
+		}
+		
+		mimiDialog.setVisible(true);
+
+	}
 
 }
