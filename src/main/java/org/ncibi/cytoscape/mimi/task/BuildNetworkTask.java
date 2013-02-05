@@ -99,12 +99,14 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				//set default (false) user annotation attribute to node
 				network.getRow(sourceNode).set("Gene.userAnnot", false);
 				//add step attribute if it does not exist
-				if(!network.getRow(sourceNode).get("Network Distance", String.class, "-1").equals("0")) {
+				if(network.getRow(sourceNode).get("Network Distance", String.class) == null) {
 					network.getRow(sourceNode).set("Network Distance", res[2]);
-					defaultNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
+				}
+				if(network.getRow(sourceNode).get("Network Distance", String.class).equals("0")) {
+					defaultNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
 				}
 				else
-					defaultNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
+					defaultNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
 			}
 
 			//target node
@@ -126,12 +128,14 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 			if(!nodeList.contains(targetNode)) {
 				nodeList.add(targetNode);
 				//add step attribute if it does not exist
-				if(!network.getRow(targetNode).get("Network Distance", String.class, "-1").equals("0")) {
+				if(network.getRow(targetNode).get("Network Distance", String.class) == null) {
 					network.getRow(targetNode).set("Network Distance", res[5]);
-					defaultNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
+				}
+				if(network.getRow(targetNode).get("Network Distance", String.class).equals("0")) {
+					defaultNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
 				}
 				else
-					defaultNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
+					defaultNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
 			}
 
 			//edge
@@ -184,9 +188,9 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 			
 			cyNetworkViewManager.addNetworkView(view);
 			cyEventHelper.flushPayloadEvents();
+			insertTasksAfterCurrentTask(vslTaskFactory.createTaskIterator(view));
 			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));
 			insertTasksAfterCurrentTask(new GetAnnotationAttributesTask(nodeList, edgeList, network, streamUtil));
-			insertTasksAfterCurrentTask(vslTaskFactory.createTaskIterator(view));
 		} else {
 			throw new Exception("No result returned for this query.\n Please check if you entered up to date gene symbols, OR\nyou may need to modify paramters and try again");	            	 
 		}
