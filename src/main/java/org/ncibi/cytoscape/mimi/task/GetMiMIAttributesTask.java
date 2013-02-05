@@ -39,6 +39,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
+import org.cytoscape.model.CyTable;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
@@ -54,6 +55,8 @@ public class GetMiMIAttributesTask extends AbstractTask
     private Collection<CyEdge> edges;
     private CyNetwork network;
     private StreamUtil streamUtil;
+    private CyTable nodeTable;
+    private CyTable edgeTable;
 
     // GENE related attributes
     private final static int GENE_BASIC_ATTR = 1;
@@ -84,6 +87,9 @@ public class GetMiMIAttributesTask extends AbstractTask
 		this.edges = edges;
 		this.network = network;
 		this.streamUtil = streamUtil;
+		
+		this.nodeTable = network.getDefaultNodeTable();
+    	this.edgeTable = network.getDefaultEdgeTable();
 	}
     
     @Override
@@ -117,8 +123,10 @@ public class GetMiMIAttributesTask extends AbstractTask
     		{
     			geneid = res[0];
     			String geneattr = "Gene." + res[1].toLowerCase();
+				if(nodeTable.getColumn(geneattr) == null)
+					nodeTable.createColumn(geneattr, String.class, true);
     			if (!geneid.equals("")) {
-    				Collection<CyRow> rows=network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, geneid);
+    				Collection<CyRow> rows=nodeTable.getMatchingRows(CyNetwork.NAME, geneid);
     				row = rows.iterator().next();
     				row.set(geneattr, res[2]);
     			}
@@ -150,7 +158,10 @@ public class GetMiMIAttributesTask extends AbstractTask
 
     					if (!curgeneid.equalsIgnoreCase(geneid) || !curctgry.equalsIgnoreCase(category))
     					{
-    	    				row.set("Gene." + curctgry.toLowerCase(), goterm.substring(0, goterm.length() - 2));
+    	    				String column = "Gene." + curctgry.toLowerCase();
+    						if(nodeTable.getColumn(column) == null)
+    							nodeTable.createColumn(column, String.class, true);
+    						row.set(column, goterm.substring(0, goterm.length() - 2));
     						goterm = go_term + "; ";
     						curgeneid = geneid;
     						curctgry = category;
@@ -158,7 +169,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     			}
     			else
     			{
-    				Collection<CyRow> rows=network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, geneid);
+    				Collection<CyRow> rows=nodeTable.getMatchingRows(CyNetwork.NAME, geneid);
     				row = rows.iterator().next();
     				isfirstline = false;
     				curgeneid = geneid;
@@ -168,8 +179,12 @@ public class GetMiMIAttributesTask extends AbstractTask
     		}
     	}
     	rd.close();
-    	if (row != null && goterm.length() > 2)
-			row.set("Gene." + curctgry.toLowerCase(), goterm.substring(0, goterm.length() - 2));
+    	if (row != null && goterm.length() > 2) {
+    		String column = "Gene." + curctgry.toLowerCase();
+			if(nodeTable.getColumn(column) == null)
+				nodeTable.createColumn(column, String.class, true);
+			row.set(column, goterm.substring(0, goterm.length() - 2));
+    	}
 
     	// get gene alias
     	line = "";
@@ -178,6 +193,8 @@ public class GetMiMIAttributesTask extends AbstractTask
     	String aliasList = "";
     	isfirstline = true;
     	doQuery(GENE_GENEALIAS_ATTR, geneIDs, interIDs);
+    	if(nodeTable.getColumn("Gene.otherNames") == null)
+    		nodeTable.createColumn("Gene.otherNames", String.class, true);
     	while ((line = rd.readLine()) != null)
     	{
     		String[] res = line.split("/////");
@@ -199,7 +216,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     			}
     			else
     			{
-    				Collection<CyRow> rows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, geneid);
+    				Collection<CyRow> rows = nodeTable.getMatchingRows(CyNetwork.NAME, geneid);
 					row = rows.iterator().next();
     				isfirstline = false;
     				curgeneid = geneid;
@@ -240,6 +257,9 @@ public class GetMiMIAttributesTask extends AbstractTask
 
     					if (!curintid.equalsIgnoreCase(intid) || !curtattr.equalsIgnoreCase(attr))
     					{
+    						String column = "Interaction." + curtattr.toLowerCase();
+    						if(edgeTable.getColumn(column) == null)
+    							edgeTable.createColumn(column, String.class, true);
     						row.set("Interaction."
     									+ curtattr.toLowerCase(),
     									"[" + curattrV.substring(0, curattrV.length() - 2) + "]");
@@ -252,7 +272,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     			else
     			{
     				
-    				Collection<CyRow> rows = network.getDefaultEdgeTable().getMatchingRows("Interaction.id", intid);
+    				Collection<CyRow> rows = edgeTable.getMatchingRows("Interaction.id", intid);
     				row = rows.iterator().next();
     				isfirstlineType = false;
     				curintid = intid;
@@ -278,6 +298,9 @@ public class GetMiMIAttributesTask extends AbstractTask
         String geneid = "";
         CyRow row = null;
         Boolean isfirstline = true;
+        
+        if(nodeTable.getColumn("Gene.pathway") == null)
+        	nodeTable.createColumn("Gene.pathway", String.class, false);
         while ((line = rd.readLine()) != null)
         {
             String[] res = line.split("/////");

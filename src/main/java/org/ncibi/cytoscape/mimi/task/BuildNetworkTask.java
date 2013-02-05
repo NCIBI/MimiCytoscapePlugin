@@ -184,8 +184,8 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 			
 			cyNetworkViewManager.addNetworkView(view);
 			cyEventHelper.flushPayloadEvents();
-			//insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));
-			//insertTasksAfterCurrentTask(new GetAnnotationAttributesTask(nodeList, edgeList, network, streamUtil));
+			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));
+			insertTasksAfterCurrentTask(new GetAnnotationAttributesTask(nodeList, edgeList, network, streamUtil));
 			insertTasksAfterCurrentTask(vslTaskFactory.createTaskIterator(view));
 		} else {
 			throw new Exception("No result returned for this query.\n Please check if you entered up to date gene symbols, OR\nyou may need to modify paramters and try again");	            	 

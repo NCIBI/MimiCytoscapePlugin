@@ -37,6 +37,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
+import org.cytoscape.model.CyTable;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
@@ -52,12 +53,17 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 	private Collection<CyEdge> edges;
 	private CyNetwork network;
 	private StreamUtil streamUtil;
+	private CyTable nodeTable;
+	private CyTable edgeTable;
 	
 	public GetAnnotationAttributesTask(Collection<CyNode> nodes, Collection<CyEdge> edges, CyNetwork network, StreamUtil streamUtil) {
 		this.nodes = nodes;
 		this.edges = edges;
 		this.network = network;
 		this.streamUtil = streamUtil;
+		
+		this.nodeTable = network.getDefaultNodeTable();
+		this.edgeTable = network.getDefaultEdgeTable();
 	}
 	
 
@@ -70,12 +76,13 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 			geneIDs += network.getRow(node).get(CyNetwork.NAME, String.class) + " ";
 		}
 		geneIDs = geneIDs.trim();
-		
+		if(nodeTable.getColumn("Gene.userAnnot") == null)
+			nodeTable.createColumn("Gene.userAnnot",Boolean.class, true, false);
 		if (!geneIDs.equals("")){
 			//get node userannotationattribute
 			doQuery(1,geneIDs);
 			line="";
-
+			
 			while ((line = rd.readLine()) != null){
 				Collection<CyRow> rows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, line);
 				CyRow row = rows.iterator().next();
@@ -89,7 +96,8 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 			edgeIDs += network.getRow(edge).get(CyNetwork.NAME, String.class) + " ";
 		}
 		edgeIDs = edgeIDs.trim();
-
+		if(edgeTable.getColumn("Interaction.userAnnot") == null)
+			edgeTable.createColumn("InteractionuserAnnot",Boolean.class, true, false);
 		if (!edgeIDs.equals("")){
 			//get edge user annotation attribute
 			doQuery(0,edgeIDs);
