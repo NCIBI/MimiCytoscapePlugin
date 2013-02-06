@@ -59,7 +59,11 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 	public void run(TaskMonitor taskMonitor) throws Exception {
 		//System.out.println("inputtypeis "+inputtype+ "inputstring is "+inputStr);
 		//query mimi rdb and create network	
-		String term = network.getRow(node).get("Gene.name", String.class);
+		String geneName = network.getRow(node).get("Gene.name", String.class);
+		String organism = network.getRow(node).get("Gene.organism", String.class);
+		String molType = network.getRow(network).get("Molecule Type", String.class, "All Molecule Types");
+		String dataSource = network.getRow(network).get("Data Source", String.class, "All Data Sources");
+		String term = geneName+"/////"+organism+"/////"+molType+"/////"+dataSource+"/////1. Query genes + nearest neighbors";
 		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
 		//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
 		doQuery(QueryType.QUERY_BY_EXPAND,term, streamUtil, taskMonitor);
@@ -83,7 +87,7 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 					//if (!nodeAttributes.hasAttribute(sourceNode.getIdentifier(),"Network Distance"))
 					network.getRow(sourceNode).set("Network Distance", "-1");
 					network.getRow(sourceNode).set("Gene.userAnnot", false);
-					hiddenNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.EXPANDNEIGHBOR);
+					network.getRow(sourceNode).set("Node Color", NodeType.EXPANDNEIGHBOR.ordinal());
 				}
 			}
 			else {
@@ -105,7 +109,7 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 					//if (!nodeAttributes.hasAttribute(targetNode.getIdentifier(),"Network Distance"))	
 					network.getRow(targetNode).set("Network Distance", "-1");
 					network.getRow(targetNode).set("Gene.userAnnot", false);
-					hiddenNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.EXPANDNEIGHBOR);
+					network.getRow(targetNode).set("Node Color", NodeType.EXPANDNEIGHBOR.ordinal());
 				}
 			}
 			else {
@@ -131,7 +135,7 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 		rd.close();
 		if (!nodeList.isEmpty() && !edgeList.isEmpty()){
 			//set node color attributes for expand node. set nodelist and edge list as expand node attributes for collapsing expanded network using 
-			hiddenNodeTable.getRow(node.getSUID()).set("Node Color", NodeType.EXPANDNODE);
+			network.getRow(node).set("Node Color", NodeType.EXPANDNODE.ordinal());
 			hiddenNodeTable.getRow(node.getSUID()).set("NodeIDList", nodeIDList);
 			hiddenNodeTable.getRow(node.getSUID()).set("EdgeIDList", edgeIDList);
 			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));

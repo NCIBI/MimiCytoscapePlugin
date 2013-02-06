@@ -31,6 +31,8 @@ import java.util.List;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyRow;
+import org.cytoscape.model.CyTable;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.enums.NodeType;
@@ -52,13 +54,31 @@ public class CollapseNodeTask extends AbstractTask{
 
 	@Override
 	public void run(TaskMonitor taskMonitor) throws Exception {
+		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
+		
     	List<CyNode> nodeList = network.getNodeList();
     	List<CyEdge> edgeList = network.getEdgeList();
     	
-    	List<String> nodeIDList=network.getRow(node).getList("NodeIDList", String.class);
-    	List<String> edgeIDList=network.getRow(node).getList("EdgeIDList", String.class);
+    	List<String> nodeIDList=hiddenNodeTable.getRow(node.getSUID()).getList("NodeIDList", String.class);
+    	List<String> edgeIDList=hiddenNodeTable.getRow(node.getSUID()).getList("EdgeIDList", String.class);
     	
-    	//remove expanded nodes from network
+		//remove expanded edges from network		
+		Iterator<CyEdge> edgeIt=edgeList.iterator();
+		while (edgeIt.hasNext()){
+			CyEdge theedge=(CyEdge)edgeIt.next();
+			Iterator<String> edgeIDIt=edgeIDList.iterator();
+			while (edgeIDIt.hasNext()){
+				String edgeID = (String)edgeIDIt.next();
+				CyRow row = network.getRow(theedge);
+				if (row.get(CyNetwork.NAME, String.class).equals(edgeID)){
+					network.removeEdges(Collections.singleton(theedge));
+    				network.getDefaultEdgeTable().deleteRows(Collections.singleton(theedge.getSUID()));
+					break;
+				}
+			}
+		}
+		
+		//remove expanded nodes from network
     	Iterator<CyNode> nodeIt=nodeList.iterator();     	
     	while (nodeIt.hasNext()){
     		CyNode thenode=(CyNode)nodeIt.next();
@@ -69,31 +89,19 @@ public class CollapseNodeTask extends AbstractTask{
     			if (network.getRow(thenode).get(CyNetwork.NAME, String.class).equals(nodeID)){
     				//System.out.println("remove the node");
     				network.removeNodes(Collections.singleton(thenode));//only remove node from current network
+    				network.getDefaultNodeTable().deleteRows(Collections.singleton(thenode.getSUID()));
     				break;
     				//System.out.println("add node to network "+node.getIdentifier());
     			}
     		}
     	}
-		//remove expanded edges from network		
-		Iterator<CyEdge> edgeIt=edgeList.iterator();
-		while (edgeIt.hasNext()){
-			CyEdge theedge=(CyEdge)edgeIt.next();
-			Iterator<String> edgeIDIt=edgeIDList.iterator();
-			while (edgeIDIt.hasNext()){
-				String edgeID = (String)edgeIDIt.next();	
-				if (network.getRow(theedge).get(CyNetwork.NAME, String.class).equals(edgeID)){
-					network.removeEdges(Collections.singleton(theedge));
-					break;
-				}
-			}
-		}
 		//change clciked node color to be origninal
 		//System.out.println("collapse node "+node.getIdentifier()+" distance  is "+nodeAttributes.getAttribute(node.getIdentifier(), "Network Distance"));
 		if (network.getRow(node).get("Network Distance", String.class).equals("0"))
-			network.getRow(node).set("Node Color", NodeType.SEEDNODE);
+			network.getRow(node).set("Node Color", NodeType.SEEDNODE.ordinal());
 		else if (network.getRow(node).get("Network Distance", String.class).equals("-1"))
-			network.getRow(node).set("Node Color", NodeType.EXPANDNEIGHBOR);
-		else network.getRow(node).set("Node Color", NodeType.SEEDNEIGHBOR);
+			network.getRow(node).set("Node Color", NodeType.EXPANDNEIGHBOR.ordinal());
+		else network.getRow(node).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
 	}
 
 }
