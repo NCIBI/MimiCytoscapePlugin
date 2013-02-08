@@ -30,7 +30,6 @@ import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -43,7 +42,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
@@ -56,95 +58,83 @@ import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 public class ViewPublicAnnotation extends JFrame{	
 	private String table;
 	private String id;
-	public ViewPublicAnnotation (Object obj, JFrame parent){		
-//		super("Annotation");
-//		try{
-//			String nodedgename=" ";
-//			if (obj instanceof CyNode ){				
-//				table="Node";
-//				CyNode cynode= (CyNode)obj;
-//				id=cynode.getIdentifier();
-//				nodedgename=Cytoscape.getNodeAttributes().getStringAttribute(cynode.getIdentifier(), "Gene.name");				
-//			}
-//			if (obj instanceof CyEdge){				
-//				table="Edge";
-//				CyEdge cyedge= (CyEdge)obj;
-//				id=cyedge.getIdentifier();	
-//				nodedgename=Cytoscape.getEdgeAttributes().getStringAttribute(cyedge.getIdentifier(),"Gene.name");
-//			}
-//			URL url =new URL(MiMIURL.GETSHAREDANNOT);
-//			String query= "TABLE="+table+"&ID="+URLEncoder.encode(id,"UTF-8");
-//			Proxy cytoproxyhandler = ProxyHandler.getProxyServer();
-//			URLConnection conn;
-//			if (cytoproxyhandler==null)
-//				conn=url.openConnection();
-//			else conn=url.openConnection(cytoproxyhandler);
-//			conn.setUseCaches(false);
-//			conn.setDoOutput(true);
-//			OutputStreamWriter wr= new OutputStreamWriter(conn.getOutputStream());
-//			wr.write(query);
-//			wr.flush();
-//			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	
-//			String inputLine1;
-//			String result="";
-//			while ((inputLine1 = rd.readLine()) != null){
-//				//System.out.println("here ["+inputLine1);
-//				String[] elems=inputLine1.split("/////");
-//				int len = elems.length;
-//				if (len ==4 && !(elems[1].equals("")||elems[1].equals(" ")))
-//					result +="Annotation Created By "+elems[0]+":"+elems[3]+" on "+elems[2].substring(0, 11)+"\n"+elems[1]+"\n";
-//			}
-//			if (result.equals("")||result.equals(" "))
-//				result="There is no shared annotation for this "+table;
-//			
-//			rd.close();	
-//			wr.close();
-//			//System.out.println("result is "+result);
-//			JPanel p1=new JPanel();
-//			p1.setBorder(new EmptyBorder(0,8,0,8));
-//			p1.setLayout(new GridLayout(0,1));			
-//			JLabel label= new JLabel("Shared Annotation for "+table+" "+nodedgename);			
-//			p1.add(label);
-//			p1.setPreferredSize(new Dimension(600,22));
-//			
-//			JPanel p2 =new JPanel();
-//			p2.setBorder(new EmptyBorder(0,8,0,8));
-//			p2.setLayout(new GridLayout(0,1));
-//			JTextArea content = new JTextArea(result);			
-//			JScrollPane scrollPane1 = 
-//			    new JScrollPane(content,
-//			                    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-//			                    JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//			content.setEditable(false);
-//			content.setText(result);			
-//			p2.add(scrollPane1);
-//			p2.setPreferredSize(new Dimension(600,180));
-//			
-//			Container cPane = getContentPane(); 
-//			JPanel parentPanel= new JPanel();
-//			parentPanel.setLayout(new BoxLayout(parentPanel,BoxLayout.Y_AXIS));
-//			parentPanel.add(p1);
-//			parentPanel.add(p2);			
-//			JScrollPane scrollCPane = 
-//			    new JScrollPane(parentPanel,
-//			                    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-//			                    JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//			cPane.add(scrollCPane);	
-//			cPane.setPreferredSize(new Dimension(620,220));
-//			pack();
-//	        setVisible(true);
-//	        setLocationRelativeTo(parent);
-//			
-//			
-//			
-//						
-//			
-//			
-//		}
-//		catch (Exception e){
-//			//System.out.println(e);
-//			
-//		}
+	public ViewPublicAnnotation (CyIdentifiable obj, CyNetwork network, JFrame frame, StreamUtil streamUtil){		
+		super("Annotation");
+		try{
+			String nodedgename=" ";
+			if (obj instanceof CyNode ){				
+				table="Node";
+				CyNode node= (CyNode)obj;
+				id=network.getRow(node).get(CyNetwork.NAME, String.class);
+				nodedgename=network.getRow(node).get("Gene.name", String.class);				
+			}
+			if (obj instanceof CyEdge){				
+				table="Edge";
+				CyEdge edge= (CyEdge)obj;
+				id=network.getRow(edge).get(CyNetwork.NAME, String.class);
+				nodedgename=network.getRow(edge).get("Gene.name", String.class);	
+			}
+			URL url =new URL(MiMIURL.GETSHAREDANNOT);
+			String query= "TABLE="+table+"&ID="+URLEncoder.encode(id,"UTF-8");
+			URLConnection conn = streamUtil.getURLConnection(url);
+			conn.setUseCaches(false);
+			conn.setDoOutput(true);
+			OutputStreamWriter wr= new OutputStreamWriter(conn.getOutputStream());
+			wr.write(query);
+			wr.flush();
+			wr.close();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	
+			String inputLine1;
+			String result="";
+			while ((inputLine1 = rd.readLine()) != null){
+				//System.out.println("here ["+inputLine1);
+				String[] elems=inputLine1.split("/////");
+				int len = elems.length;
+				if (len ==4 && !(elems[1].equals("")||elems[1].equals(" ")))
+					result +="Annotation Created By "+elems[0]+":"+elems[3]+" on "+elems[2].substring(0, 11)+"\n"+elems[1]+"\n";
+			}
+			if (result.equals("")||result.equals(" "))
+				result="There is no shared annotation for this "+table;
+			
+			rd.close();	
+			//System.out.println("result is "+result);
+			JPanel p1=new JPanel();
+			p1.setBorder(new EmptyBorder(0,8,0,8));
+			p1.setLayout(new GridLayout(0,1));			
+			JLabel label= new JLabel("Shared Annotation for "+table+" "+nodedgename);			
+			p1.add(label);
+			p1.setPreferredSize(new Dimension(600,22));
+			
+			JPanel p2 =new JPanel();
+			p2.setBorder(new EmptyBorder(0,8,0,8));
+			p2.setLayout(new GridLayout(0,1));
+			JTextArea content = new JTextArea(result);			
+			JScrollPane scrollPane1 = 
+			    new JScrollPane(content,
+			                    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+			                    JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			content.setEditable(false);
+			content.setText(result);			
+			p2.add(scrollPane1);
+			p2.setPreferredSize(new Dimension(600,180));
+			
+			Container cPane = getContentPane(); 
+			JPanel parentPanel= new JPanel();
+			parentPanel.setLayout(new BoxLayout(parentPanel,BoxLayout.Y_AXIS));
+			parentPanel.add(p1);
+			parentPanel.add(p2);			
+			JScrollPane scrollCPane = 
+			    new JScrollPane(parentPanel,
+			                    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+			                    JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			cPane.add(scrollCPane);	
+			cPane.setPreferredSize(new Dimension(620,220));
+			pack();
+	        setVisible(true);
+	        setLocationRelativeTo(frame);
+		}
+		catch (Exception e){
+		}
 	}
 
 }

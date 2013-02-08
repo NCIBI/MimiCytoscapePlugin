@@ -28,20 +28,24 @@ package org.ncibi.cytoscape.mimi.popupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import org.cytoscape.application.swing.CyEdgeViewContextMenuFactory;
 import org.cytoscape.application.swing.CyMenuItem;
+import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.work.swing.DialogTaskManager;
 import org.ncibi.cytoscape.mimi.plugin.MiMIState;
 import org.ncibi.cytoscape.mimi.plugin.QueryBioNlp;
+import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.AnnotationEditor;
 import org.ncibi.cytoscape.mimi.ui.AnnotationLogin;
 import org.ncibi.cytoscape.mimi.ui.ViewPublicAnnotation;
-import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
 
 
 /** 
@@ -50,44 +54,57 @@ import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
  */
 public class PopupEdgeContextMenuFactory implements CyEdgeViewContextMenuFactory{
 
+	private DialogTaskManager dialogTaskManager;
+	private ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory;
+	private JFrame frame;
+	private StreamUtil streamUtil;
+	public PopupEdgeContextMenuFactory(DialogTaskManager dialogTaskManager, ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory, JFrame frame, StreamUtil streamUtil){
+		this.dialogTaskManager = dialogTaskManager;
+		this.vslTaskFactory = vslTaskFactory;
+		this.frame = frame;
+		this.streamUtil = streamUtil;
+	}
+	
 	public CyMenuItem createMenuItem(final CyNetworkView networkView, final View<CyEdge> edgeView) {
-//		//add mimi plugin menu
-//		JMenu menu=new JMenu("MiMI Plugin");
-//
-//		JMenuItem jmiDoNLP=new JMenuItem("BioNLP");
-//		menu.add(jmiDoNLP);
-//
-//		jmiDoNLP.addActionListener(new ActionListener(){
-//			public 	void actionPerformed(ActionEvent e){
-//				CyEdge edge = edgeView.getModel(); 
-//				new QueryBioNlp(edge);
-//			}
-//		});
-//
-//		//add edge annotation to edge context menu
-//		JMenu AnnotMenu = new JMenu("User Annotation");
-//		menu.add(AnnotMenu);
-//		JMenuItem jmiPubAnno= new JMenuItem("View Public Annotation");
-//		JMenuItem jmiEdgeAnno = new JMenuItem ("Add Your Annotation");         
-//		AnnotMenu.add(jmiPubAnno);
-//		AnnotMenu.add(jmiEdgeAnno);
-//		jmiPubAnno.addActionListener(new ActionListener(){
-//			public 	void actionPerformed(ActionEvent e){        			
-//				CyEdge edge = edgeView.getModel(); 
-//				new ViewPublicAnnotation(edge);        			
-//			}
-//		});
-//		jmiEdgeAnno.addActionListener(new ActionListener(){
-//			public 	void actionPerformed(ActionEvent e){        			
-//				CyEdge edge = edgeView.getModel(); 
-//				if (MiMIState.currentUserID.equals("0"))
-//					new AnnotationLogin(edge);
-//				else 
-//					new AnnotationEditor(edge,MiMIState.currentUserID);
-//			}
-//		});
-//
-//		//integrate dynamicXpr 
+		final CyNetwork network = networkView.getModel();
+		final CyEdge edge = edgeView.getModel();
+		
+		//add mimi plugin menu
+		JMenu menu=new JMenu("MiMI Plugin");
+
+		JMenuItem jmiDoNLP=new JMenuItem("BioNLP");
+		menu.add(jmiDoNLP);
+
+		jmiDoNLP.addActionListener(new ActionListener(){
+			public 	void actionPerformed(ActionEvent e){
+				new QueryBioNlp(edge, network, frame, streamUtil);
+			}
+		});
+
+		//add edge annotation to edge context menu
+		JMenu AnnotMenu = new JMenu("User Annotation");
+		menu.add(AnnotMenu);
+		JMenuItem jmiPubAnno= new JMenuItem("View Public Annotation");
+		JMenuItem jmiEdgeAnno = new JMenuItem ("Add Your Annotation");         
+		AnnotMenu.add(jmiPubAnno);
+		AnnotMenu.add(jmiEdgeAnno);
+		jmiPubAnno.addActionListener(new ActionListener(){
+			public 	void actionPerformed(ActionEvent e){        			
+				new ViewPublicAnnotation(edge, network, frame, streamUtil);        			
+			}
+		});
+		jmiEdgeAnno.addActionListener(new ActionListener(){
+			public 	void actionPerformed(ActionEvent e){        			
+				if (MiMIState.currentUserID.equals("0"))
+					new AnnotationLogin(edge, network, networkView, 
+							dialogTaskManager, vslTaskFactory, frame, streamUtil);
+				else 
+					new AnnotationEditor(edge, network, networkView, MiMIState.currentUserID,
+							dialogTaskManager, vslTaskFactory, frame, streamUtil);
+			}
+		});
+
+		//integrate dynamicXpr 
 //		JMenuItem jmiNodeDyXpr=new JMenuItem("Dynamic Expression");
 //		menu.add(jmiNodeDyXpr);
 //		jmiNodeDyXpr.addActionListener(new ActionListener(){
@@ -95,8 +112,7 @@ public class PopupEdgeContextMenuFactory implements CyEdgeViewContextMenuFactory
 //				new DynamicExpression();
 //			}
 //		});
-//		return new CyMenuItem(menu,1.0f);
-		return null;
+		return new CyMenuItem(menu,1.0f);
 	}
 }
 

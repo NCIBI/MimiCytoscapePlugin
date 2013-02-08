@@ -61,29 +61,8 @@ package org.ncibi.cytoscape.mimi.util.dynamicXpr;
  */
 
 // TODO: LEFT HERE Handle meta-nodes!!!!
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
 
-import javax.swing.AbstractAction;
-import javax.swing.JMenu;
-import javax.swing.Timer;
-
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.vizmap.VisualMappingManager;
-import org.cytoscape.view.vizmap.mappings.BoundaryRangeValues;
-import org.cytoscape.view.vizmap.mappings.ContinuousMapping;
-import org.ncibi.cytoscape.mimi.util.dynamicXpr.dialogs.DynamicExpressionDialog;
-
-public class DynamicExpression extends AbstractAction {
+//public class DynamicExpression extends AbstractAction {
 //
 //	private static final long serialVersionUID = -511692971223776221L;
 //
@@ -446,7 +425,7 @@ public class DynamicExpression extends AbstractAction {
 //	/**
 //	 * Pops up the <code>DynamicExpressionDialog</code>.
 //	 */
-	public void actionPerformed(ActionEvent event) {
+//	public void actionPerformed(ActionEvent event) {
 //		if (dialog == null) {
 //			dialog = new DynamicExpressionDialog(this, "Dynamic Expression");
 //		}
@@ -455,7 +434,7 @@ public class DynamicExpression extends AbstractAction {
 //		dialog.setLocationRelativeTo(Cytoscape.getDesktop());
 //		// dialog.setResizable(false);
 //		dialog.setVisible(true);
-	}// actionPerformed
+//	}// actionPerformed
 //
 //	/**
 //	 * Restores the old node color calculator.
@@ -688,5 +667,5 @@ public class DynamicExpression extends AbstractAction {
 //		Cytoscape.firePropertyChange(Cytoscape.ATTRIBUTES_CHANGED, null, null);
 //		
 //	}
-
-}// DynamicExpression
+//
+//}// DynamicExpression

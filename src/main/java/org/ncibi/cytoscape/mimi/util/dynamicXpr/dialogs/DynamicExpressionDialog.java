@@ -50,38 +50,6 @@ package org.ncibi.cytoscape.mimi.util.dynamicXpr.dialogs;
  **/
 
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.text.DecimalFormat;
-import java.util.Dictionary;
-import java.util.Hashtable;
-
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import org.ncibi.cytoscape.mimi.plugin.CyActivator;
-import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
-import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
 
 
 /**
@@ -92,70 +60,70 @@ import org.ncibi.cytoscape.mimi.util.dynamicXpr.DynamicExpression;
  * @since 1.1
  */
 
-public class DynamicExpressionDialog extends JFrame {//implements WindowListener{
-
-	//protected final DynamicExpression listener;
-	protected JTextField geneT;
-
-	JPanel mainPanel;
-
-	JPanel edgedPanel;
-
-	JPanel filePanel;
-
-	JLabel fileLabel;
-
-	JTextField fileField;
-
-	JButton browseButton;
-
-	JPanel conditionsPanel;
-
-	JLabel conditionsLabel;
-
-	JSlider conditionsSlider;
-
-	//ConditionsSliderListener conditionsListener;
-
-	JPanel speedPanel;
-
-	JLabel speedLabel;
-
-	JSlider speedSlider;
-
-	JPanel buttonPanel;
-
-	JButton playButton;
-
-	JButton stopButton;
-
-	JButton pauseButton;
-
-	JPanel dismissPanel;
-
-	JButton dismissButton;
-
-	Border etched;
-
-	Border paneEdge;
-
-	File currentDirectory;
-	
-	JTextField searchField;
-	
-	JLabel dataRangeLabel;
-
-	boolean nodeColorChanged = false;
-
-	/**
-	 * Constructor
-	 * 
-	 * @param listener
-	 *            the <code>DynamicExpression</code> object that is listening
-	 *            to the button requests of the dialog
-	 * @param title
-	 *            the title for the dialog to use
-	 */
+//public class DynamicExpressionDialog extends JFrame {//implements WindowListener{
+//
+//	//protected final DynamicExpression listener;
+//	protected JTextField geneT;
+//
+//	JPanel mainPanel;
+//
+//	JPanel edgedPanel;
+//
+//	JPanel filePanel;
+//
+//	JLabel fileLabel;
+//
+//	JTextField fileField;
+//
+//	JButton browseButton;
+//
+//	JPanel conditionsPanel;
+//
+//	JLabel conditionsLabel;
+//
+//	JSlider conditionsSlider;
+//
+//	//ConditionsSliderListener conditionsListener;
+//
+//	JPanel speedPanel;
+//
+//	JLabel speedLabel;
+//
+//	JSlider speedSlider;
+//
+//	JPanel buttonPanel;
+//
+//	JButton playButton;
+//
+//	JButton stopButton;
+//
+//	JButton pauseButton;
+//
+//	JPanel dismissPanel;
+//
+//	JButton dismissButton;
+//
+//	Border etched;
+//
+//	Border paneEdge;
+//
+//	File currentDirectory;
+//	
+//	JTextField searchField;
+//	
+//	JLabel dataRangeLabel;
+//
+//	boolean nodeColorChanged = false;
+//
+//	/**
+//	 * Constructor
+//	 * 
+//	 * @param listener
+//	 *            the <code>DynamicExpression</code> object that is listening
+//	 *            to the button requests of the dialog
+//	 * @param title
+//	 *            the title for the dialog to use
+//	 */
 //	public DynamicExpressionDialog(final DynamicExpression listener, String title) {
 //		//super(Cytoscape.getDesktop(), false);
 //		this.listener = listener;
@@ -668,5 +636,5 @@ public class DynamicExpressionDialog extends JFrame {//implements WindowListener
 //	
 //	/*********end*********************/
 //
-}// DynamicExpression
+//}// DynamicExpression
 

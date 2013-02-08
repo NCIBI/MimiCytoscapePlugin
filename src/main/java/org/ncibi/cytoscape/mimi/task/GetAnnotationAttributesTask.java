@@ -31,6 +31,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyEdge;
@@ -72,8 +74,11 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		String line;
 		
 		String geneIDs = "";
+		Map<String,CyRow> nodeRowMap = new HashMap<String,CyRow>();
 		for(CyNode node: nodes) {
-			geneIDs += network.getRow(node).get(CyNetwork.NAME, String.class) + " ";
+			String id = network.getRow(node).get(CyNetwork.NAME, String.class);
+			geneIDs += id + " ";
+			nodeRowMap.put(id, network.getRow(node));
 		}
 		geneIDs = geneIDs.trim();
 		if(nodeTable.getColumn("Gene.userAnnot") == null)
@@ -84,30 +89,39 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 			line="";
 			
 			while ((line = rd.readLine()) != null){
-				Collection<CyRow> rows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, line);
-				CyRow row = rows.iterator().next();
+				CyRow row = nodeRowMap.get(line);
 				row.set("Gene.userAnnot", true);
+				nodeRowMap.remove(line);
 			}		
-			rd.close();	
+			rd.close();
+			for(CyRow row: nodeRowMap.values()) {
+				row.set("Gene.userAnnot", false);
+			}
 		}
 		
 		String edgeIDs = "";
+		Map<String,CyRow> edgeRowMap = new HashMap<String,CyRow>();
 		for(CyEdge edge: edges) {
-			edgeIDs += network.getRow(edge).get(CyNetwork.NAME, String.class) + " ";
+			String id = network.getRow(edge).get(CyNetwork.NAME, String.class);
+			edgeIDs += id + " ";
+			edgeRowMap.put(id, network.getRow(edge));
 		}
 		edgeIDs = edgeIDs.trim();
 		if(edgeTable.getColumn("Interaction.userAnnot") == null)
-			edgeTable.createColumn("InteractionuserAnnot",Boolean.class, true, false);
+			edgeTable.createColumn("Interaction.userAnnot",Boolean.class, true, false);
 		if (!edgeIDs.equals("")){
 			//get edge user annotation attribute
 			doQuery(0,edgeIDs);
 			line="";
 			while ((line = rd.readLine()) != null){
-				Collection<CyRow> rows = network.getDefaultEdgeTable().getMatchingRows(CyNetwork.NAME, line);
-				CyRow row = rows.iterator().next();
+				CyRow row = edgeRowMap.get(line);
 				row.set("Interaction.userAnnot", true);
+				edgeRowMap.remove(line);
 			}			
 			rd.close();
+			for(CyRow row: edgeRowMap.values()) {
+				row.set("Interaction.userAnnot", false);
+			}
 		}
 	}
 	

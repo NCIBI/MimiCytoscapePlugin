@@ -32,6 +32,11 @@ package org.ncibi.cytoscape.mimi.ui;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 
 import javax.swing.BoxLayout;
@@ -43,13 +48,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.cytoscape.io.util.StreamUtil;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
 @SuppressWarnings("serial")
 public class ForgotPassword extends JFrame implements ActionListener {
 	private JTextField t;
-	public ForgotPassword(JFrame parent){	
+	private StreamUtil streamUtil;
+	public ForgotPassword(JFrame frame, StreamUtil streamUtil){	
 		super("Forgot Password");
+		this.streamUtil = streamUtil;
 		JLabel l=new JLabel("Please enter your email: ");
 		t=new JTextField(40);
 		JButton bsbmt=new JButton("Submit");
@@ -73,35 +81,42 @@ public class ForgotPassword extends JFrame implements ActionListener {
 		cpane.add(p);
 		pack();
         setVisible(true);
-        setLocationRelativeTo(parent);		
+        setLocationRelativeTo(frame);		
 	}
 	public void actionPerformed (ActionEvent e){
-//		if (e.getActionCommand().equals("Submit")){
-//			if (t.getText().trim().equals(""))
-//				JOptionPane.showMessageDialog(this, "Please enter your emmail");
-//			else {
-//				try{
-//					//System.out.println("emial is "+t.getText());
-//					String urlStr = MiMIURL.SENDPSWD;
-//					String query="EMAIL="+URLEncoder.encode(t.getText(),"UTF-8");
-//					URLConnect uc=new URLConnect();
-//					uc.doURLConnect(urlStr, query) ;
-//					String rslt="";
-//					if ((rslt=uc.getBrd().readLine())!=null)						
-//						if (rslt.equals("1"))
-//							JOptionPane.showMessageDialog(this, "Your password was sent to your email successfully");
-//						else if (rslt.equals("-1")) 
-//							JOptionPane.showMessageDialog(this, "Your email does not exist in our database.\nPlease check your spelling");
-//							
-//					setVisible(false);
-//				}
-//				catch(Exception es){
-//					//System.out.println(es);
-//				}
-//			}
-//		}
-//		if (e.getActionCommand().equals("Cancel"))
-//			setVisible(false);
+		if (e.getActionCommand().equals("Submit")){
+			if (t.getText().trim().equals(""))
+				JOptionPane.showMessageDialog(this, "Please enter your emmail");
+			else {
+				try{
+					//System.out.println("emial is "+t.getText());
+					String urlstr = MiMIURL.SENDPSWD;
+					String query="EMAIL="+URLEncoder.encode(t.getText(),"UTF-8");
+					URLConnection uc = streamUtil.getURLConnection(new URL(urlstr));
+					uc.setDoOutput(true);	
+					OutputStreamWriter wr = new OutputStreamWriter(uc.getOutputStream());
+					wr.write(query);
+					wr.flush();	
+					// Get the response
+					BufferedReader rd = new BufferedReader(new InputStreamReader(uc.getInputStream()));	
+					wr.close();	
+					String rslt="";
+					if ((rslt=rd.readLine())!=null)						
+						if (rslt.equals("1"))
+							JOptionPane.showMessageDialog(this, "Your password was sent to your email successfully");
+						else if (rslt.equals("-1")) 
+							JOptionPane.showMessageDialog(this, "Your email does not exist in our database.\nPlease check your spelling");
+							
+					setVisible(false);
+					rd.close();
+				}
+				catch(Exception es){
+					//System.out.println(es);
+				}
+			}
+		}
+		if (e.getActionCommand().equals("Cancel"))
+			setVisible(false);
 	}
 
 }

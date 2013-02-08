@@ -66,6 +66,7 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 						if (decision==0){
 							taskIterator.append(new ExpandNodeTask(node, network, streamUtil));
 						}
+						else return null;
 					}
 				}
 			}

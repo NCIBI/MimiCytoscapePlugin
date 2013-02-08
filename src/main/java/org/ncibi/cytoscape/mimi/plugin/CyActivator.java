@@ -32,6 +32,8 @@ import java.util.Properties;
 import javax.swing.JFrame;
 
 import org.cytoscape.application.swing.CyAction;
+import org.cytoscape.application.swing.CyEdgeViewContextMenuFactory;
+import org.cytoscape.application.swing.CyNodeViewContextMenuFactory;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.util.StreamUtil;
@@ -51,6 +53,8 @@ import org.cytoscape.work.swing.DialogTaskManager;
 import org.ncibi.cytoscape.mimi.action.HelpAction;
 import org.ncibi.cytoscape.mimi.action.QueryAction;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
+import org.ncibi.cytoscape.mimi.popupMenu.PopupEdgeContextMenuFactory;
+import org.ncibi.cytoscape.mimi.popupMenu.PopupNodeContextMenuFactory;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.task.BuildNetworkTaskFactory;
 import org.ncibi.cytoscape.mimi.task.MiMINodeViewTaskFactory;
@@ -137,8 +141,8 @@ public class CyActivator extends AbstractCyActivator {
 		mimiNodeViewTaskFactoryProps.setProperty("title","Expand/Collapse");
 		registerService(bc,new QueryAction(searchTaskFactory, uploadFileTaskFactory, dialogTaskManager, frame, streamUtil),CyAction.class, new Properties());
 		registerService(bc,new HelpAction(),CyAction.class, new Properties());
-		//registerService(bc,new PopupNodeContextMenuFactory(), CyNodeViewContextMenuFactory.class, new Properties());
-		//registerService(bc,new PopupEdgeContextMenuFactory(), CyEdgeViewContextMenuFactory.class, new Properties());
+		registerService(bc,new PopupNodeContextMenuFactory(dialogTaskManager, vslTaskFactory, frame, streamUtil), CyNodeViewContextMenuFactory.class, new Properties());
+		registerService(bc,new PopupEdgeContextMenuFactory(dialogTaskManager, vslTaskFactory, frame, streamUtil), CyEdgeViewContextMenuFactory.class, new Properties());
 		registerService(bc,new MiMINodeViewTaskFactory(vslTaskFactory, frame, streamUtil),NodeViewTaskFactory.class, mimiNodeViewTaskFactoryProps);
 	}
 
