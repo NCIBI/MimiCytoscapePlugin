@@ -413,6 +413,7 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 	public void actionPerformed(ActionEvent e) {		
 		if (e.getActionCommand().equals("Save...")){	
 			if (!annotSetName.equals("")){
+				TaskIterator ti = new TaskIterator();
 				doSaveUpdate();	
 				if (nodeOrEdge==1 && sharebutton.isSelected())
 					network.getRow(obj).set("Gene.userAnnot", true);
@@ -434,9 +435,10 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 					GetAnnotationAttributesTask getAnnoAttrTask=
 							new GetAnnotationAttributesTask
 							(nodeSet,edgeSet,network,streamUtil);
-					dialogTaskManager.execute(new TaskIterator(getAnnoAttrTask));
+					ti.append(getAnnoAttrTask);
 				}
-				dialogTaskManager.execute(vslTaskFactory.createTaskIterator(view));
+				ti.append(vslTaskFactory.createTaskIterator(view));
+				dialogTaskManager.execute(ti);
 			}
 			else JOptionPane.showMessageDialog(this,"Please enter annotation set name");
 		}
