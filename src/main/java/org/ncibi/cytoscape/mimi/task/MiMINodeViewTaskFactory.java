@@ -15,7 +15,9 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.task.AbstractNodeViewTaskFactory;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.enums.NodeType;
 import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
@@ -66,7 +68,7 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 						if (decision==0){
 							taskIterator.append(new ExpandNodeTask(node, network, streamUtil));
 						}
-						else return null;
+						else taskIterator.append(new NullTask());
 					}
 				}
 			}
@@ -78,6 +80,12 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 		if(taskIterator.getNumTasks() > 0)
 			taskIterator.append(vslTaskFactory.createTaskIterator(netView));
 		return taskIterator;
+	}
+	
+	class NullTask extends AbstractTask {
+		public void run(TaskMonitor tm) throws Exception {
+			return;
+		}
 	}
 
 }
