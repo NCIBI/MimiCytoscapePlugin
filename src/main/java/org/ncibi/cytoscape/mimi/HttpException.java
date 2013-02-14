@@ -22,20 +22,33 @@
  * This work was supported in part by National Institutes of Health Grant #U54DA021519
  *
  ******************************************************************/
+ 
+package org.ncibi.cytoscape.mimi;
 
-package org.ncibi.cytoscape.mimi.plugin;
+import java.net.SocketException;
 
-/** 
- * @author jinggao/Test
- * @date Nov 24, 2008
+/**
+ * HttpException
+ *
+ * Signals that a response code other than 200 was recieved.
+ *
+ * @author Alex Ade
+ * @date   Sun Dec 17 19:16:06 EST 2006
  */
-public class Test {
-	public Test(){
-		//System.out.println("mimi plugin Test lib success");
-		/*Cytoscape.getCurrentNetwork().getSelectedEdges();
-		Cytoscape.getCurrentNetwork().getSelectedNodes();
-		Cytoscape.createNetwork(Cytoscape.getCurrentNetwork().getSelectedNodes(), Cytoscape.getCurrentNetwork().getSelectedEdges(), "search result",Cytoscape.getCurrentNetwork() ,true);*/
-		
+@SuppressWarnings("serial")
+public class HttpException extends SocketException {
+
+	/**
+	 * Constructs a new HttpException with the specified detail message. A
+	 * detail message is a String that gives a specific description of the
+	 * error.	
+	 */
+	public HttpException(String msg) {
+		super(msg);
 	}
 
+	/**
+	 * Constructs a new HttpException with no detailed message.
+	 */
+	public HttpException() {}
 }

@@ -50,7 +50,7 @@ import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
 import org.cytoscape.io.util.StreamUtil;
-import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.util.MD5;
 
 @SuppressWarnings("serial")

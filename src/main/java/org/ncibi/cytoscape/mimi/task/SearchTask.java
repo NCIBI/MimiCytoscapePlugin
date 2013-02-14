@@ -39,9 +39,9 @@ import javax.swing.JTextField;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 import org.ncibi.cytoscape.mimi.enums.SearchMethod;
-import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
 /**
  * 

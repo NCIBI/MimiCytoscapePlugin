@@ -23,7 +23,7 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.plugin;
+package org.ncibi.cytoscape.mimi;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.ncibi.cytoscape.mimi.plugin.CyActivator;
+import org.ncibi.cytoscape.mimi.CyActivator;
 
 @SuppressWarnings("serial")
 public class MiMILegend extends JPanel implements CytoPanelComponent {

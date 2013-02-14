@@ -37,8 +37,8 @@ import javax.swing.JOptionPane;
 import org.cytoscape.application.swing.AbstractCyAction;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.plugin.MiMIState;
-import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMIState;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.task.SearchTaskFactory;
 import org.ncibi.cytoscape.mimi.task.UploadFileTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.MiMIDialog;
@@ -61,7 +61,7 @@ public class QueryAction extends AbstractCyAction{
 	
 	public QueryAction(SearchTaskFactory searchTaskFactory, UploadFileTaskFactory uploadFileTaskFactory, DialogTaskManager dialogTaskManager, JFrame frame, StreamUtil streamUtil){
 		super("Query");
-		setPreferredMenu("Apps.MiMI Plugin");	
+		setPreferredMenu("Apps.MiMI");	
 		this.searchTaskFactory = searchTaskFactory;
 		this.uploadFileTaskFactory = uploadFileTaskFactory;
 		this.dialogTaskManager = dialogTaskManager;
@@ -73,14 +73,14 @@ public class QueryAction extends AbstractCyAction{
 	public void actionPerformed(ActionEvent e) { 	
 		if (mimiDialog == null) {
 			try{
-				URL url = new URL(MiMIURL.CHECKPLUGINVERSION);        	
+				URL url = new URL(MiMIURL.CHECKAPPVERSION);        	
 				URLConnection conn = streamUtil.getURLConnection(url);
 				conn.setUseCaches(false);			    
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	 
 				String line;
 				if ((line = rd.readLine()) != null) {
-					if (line.compareTo(MiMIState.CURRENTPLUGINVERSION)>0){
-						JOptionPane.showMessageDialog(frame, "You are using an old version, Please update to "+"MiMI Plugin "+ line+" from within Cytoscape (Apps->App Manager->Check for Updates)");		
+					if (line.compareTo(MiMIState.CURRENTAPPVERSION)>0){
+						JOptionPane.showMessageDialog(frame, "You are using an old version, Please update to "+"MiMI "+ line+" from within Cytoscape (Apps->App Manager->Check for Updates)");		
 					}
 
 				}

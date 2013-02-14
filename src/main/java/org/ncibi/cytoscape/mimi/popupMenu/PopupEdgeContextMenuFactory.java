@@ -40,8 +40,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.plugin.MiMIState;
-import org.ncibi.cytoscape.mimi.plugin.QueryBioNlp;
+import org.ncibi.cytoscape.mimi.MiMIState;
+import org.ncibi.cytoscape.mimi.QueryBioNlp;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.AnnotationEditor;
 import org.ncibi.cytoscape.mimi.ui.AnnotationLogin;
@@ -69,8 +69,8 @@ public class PopupEdgeContextMenuFactory implements CyEdgeViewContextMenuFactory
 		final CyNetwork network = networkView.getModel();
 		final CyEdge edge = edgeView.getModel();
 		
-		//add mimi plugin menu
-		JMenu menu=new JMenu("MiMI Plugin");
+		//add mimi menu
+		JMenu menu=new JMenu("MiMI");
 
 		JMenuItem jmiDoNLP=new JMenuItem("BioNLP");
 		menu.add(jmiDoNLP);

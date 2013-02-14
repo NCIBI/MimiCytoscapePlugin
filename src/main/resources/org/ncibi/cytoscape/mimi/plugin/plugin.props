@@ -4,11 +4,11 @@
 # -- The following properties are REQUIRED -- #
 
 # The plugin name that will be displayed to users
-pluginName=MiMIplugin
+pluginName=MiMI
 
 # Description used to give users information about the plugin such as what it does.  
 # Html tags are encouraged for formatting purposes.
-pluginDescription=<p>MiMI Cytoscape plugin retrieves molecular interactions from Michigan Molecular Interactions (MiMI) database and displays the interaction network with Cytoscape. MiMI gathers and merges data from well-known protein interaction databases including BIND, DIP, HPRD, RefSeq, SwissProt, IPI and CCSB-HI1 etc. A provenance model has been developed that tracks the source of each data element and what processes have been performed upon it. The plugin also integrates with other NCIBI tools for literature information, document summarization and pathway matching.</p>
+pluginDescription=<p>MiMI for Cytoscape retrieves molecular interactions from Michigan Molecular Interactions (MiMI) database and displays the interaction network with Cytoscape. MiMI gathers and merges data from well-known protein interaction databases including BIND, DIP, HPRD, RefSeq, SwissProt, IPI and CCSB-HI1 etc. A provenance model has been developed that tracks the source of each data element and what processes have been performed upon it. The plugin also integrates with other NCIBI tools for literature information, document summarization and pathway matching.</p>
 
 
 # Plugin version number, this must be two numbers separated by a decimlal.  Ex. 0.2, 14.03

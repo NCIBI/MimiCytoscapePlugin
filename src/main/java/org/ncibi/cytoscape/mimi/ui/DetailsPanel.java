@@ -35,7 +35,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
@@ -60,7 +60,7 @@ public class DetailsPanel extends JFrame implements  HyperlinkListener{
 	 //private int sentenceNumber;
 	 
 	 public DetailsPanel(String str, String mol1, String mol2, String molID1, String molID2, JFrame parent){		
-		 super("Cytoscape MiMI Plugin Query BioNLP");	
+		 super("Cytoscape MiMI Query BioNLP");	
 		    strResult =str;
 		    molecule1=mol1;
 		    molecule2=mol2;

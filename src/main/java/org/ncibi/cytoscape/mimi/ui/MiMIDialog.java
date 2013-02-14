@@ -44,8 +44,8 @@ import javax.swing.border.TitledBorder;
 
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.swing.DialogTaskManager;
+import org.ncibi.cytoscape.mimi.MiMIState;
 import org.ncibi.cytoscape.mimi.enums.SearchMethod;
-import org.ncibi.cytoscape.mimi.plugin.MiMIState;
 import org.ncibi.cytoscape.mimi.task.SearchTaskFactory;
 import org.ncibi.cytoscape.mimi.task.UploadFileTaskFactory;
 
@@ -81,7 +81,7 @@ public class MiMIDialog extends JFrame{
 	
 	
 	public MiMIDialog(SearchTaskFactory searchTaskFactory, UploadFileTaskFactory uploadFileTaskFactory, DialogTaskManager dialogTaskManager, JFrame parent){
-		super("Welcome to MiMI Plugin " +MiMIState.CURRENTPLUGINVERSION);
+		super("Welcome to MiMI " +MiMIState.CURRENTAPPVERSION);
 		this.parent = parent;
 		this.searchTaskFactory = searchTaskFactory;
 		this.uploadFileTaskFactory = uploadFileTaskFactory;

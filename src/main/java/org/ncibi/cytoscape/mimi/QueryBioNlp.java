@@ -23,7 +23,7 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.plugin;
+package org.ncibi.cytoscape.mimi;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

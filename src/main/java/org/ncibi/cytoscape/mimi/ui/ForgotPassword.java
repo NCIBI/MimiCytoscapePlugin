@@ -49,7 +49,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.cytoscape.io.util.StreamUtil;
-import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 
 @SuppressWarnings("serial")
 public class ForgotPassword extends JFrame implements ActionListener {

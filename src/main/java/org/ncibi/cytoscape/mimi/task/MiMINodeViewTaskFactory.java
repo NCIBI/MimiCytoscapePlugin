@@ -18,8 +18,8 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskMonitor;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.enums.NodeType;
-import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
 
 public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 	

@@ -23,7 +23,7 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.plugin;
+package org.ncibi.cytoscape.mimi;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -64,7 +64,7 @@ import org.ncibi.cytoscape.mimi.visual.MiMIVisualStyleBuilder;
 import org.osgi.framework.BundleContext;
 
 /**
- * MiMI PlugIn.
+ * MiMI
  *
  * @author Jing Gao
  * @author Alex Ade
@@ -137,7 +137,7 @@ public class CyActivator extends AbstractCyActivator {
 		// Add double click menu to the network view
 		Properties mimiNodeViewTaskFactoryProps = new Properties();           
 		mimiNodeViewTaskFactoryProps.setProperty("preferredAction","OPEN");
-		mimiNodeViewTaskFactoryProps.setProperty("preferredMenu","MiMI Plugin");
+		mimiNodeViewTaskFactoryProps.setProperty("preferredMenu","MiMI");
 		mimiNodeViewTaskFactoryProps.setProperty("title","Expand/Collapse");
 		registerService(bc,new QueryAction(searchTaskFactory, uploadFileTaskFactory, dialogTaskManager, frame, streamUtil),CyAction.class, new Properties());
 		registerService(bc,new HelpAction(),CyAction.class, new Properties());

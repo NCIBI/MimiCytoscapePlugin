@@ -60,7 +60,7 @@ public class UploadFileDialog extends JFrame  {
 	
 public UploadFileDialog (final boolean findheader, final String genelist, final String organism, final String moleculeType, 
 		final String dataSource, final String interactionLevel, final SearchTaskFactory searchTaskFactory, final DialogTaskManager dialogTaskManager, final JFrame frame){
-		super ("MiMI Plugin");		
+		super ("MiMI");		
 		Container cPane = getContentPane();		
 		textField = new JTextField(genelist);			
 		if (findheader)

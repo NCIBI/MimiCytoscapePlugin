@@ -40,8 +40,8 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.plugin.MiMIState;
-import org.ncibi.cytoscape.mimi.plugin.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMIState;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.AnnotationEditor;
 import org.ncibi.cytoscape.mimi.ui.AnnotationLogin;
@@ -69,7 +69,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
 		final CyNetwork network = networkView.getModel();
 		final CyNode node = nodeView.getModel();
 		
-		JMenu menu = new JMenu("MiMI Plugin");
+		JMenu menu = new JMenu("MiMI");
         JMenu AnnotMenu = new JMenu("User Annotation");
         menu.add(AnnotMenu);
         JMenuItem jmiPubAnno = new JMenuItem("View Public Annotation");
