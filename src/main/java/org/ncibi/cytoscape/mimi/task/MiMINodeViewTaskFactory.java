@@ -68,7 +68,6 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 						if (decision==0){
 							taskIterator.append(new ExpandNodeTask(node, network, streamUtil));
 						}
-						else taskIterator.append(new NullTask());
 					}
 				}
 			}
@@ -79,6 +78,9 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 		}
 		if(taskIterator.getNumTasks() > 0)
 			taskIterator.append(vslTaskFactory.createTaskIterator(netView));
+		else
+			taskIterator.append(new NullTask());
+		
 		return taskIterator;
 	}
 	
