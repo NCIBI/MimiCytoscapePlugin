@@ -1,7 +1,7 @@
 package org.ncibi.cytoscape.mimi.task;
 
 import org.cytoscape.task.AbstractNetworkViewTaskFactory;
-import org.cytoscape.view.layout.CyLayoutAlgorithm;
+import org.cytoscape.view.layout.CyLayoutAlgorithmManager;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.work.TaskIterator;
@@ -11,17 +11,17 @@ public class ApplyVisualStyleAndLayoutTaskFactory extends AbstractNetworkViewTas
 	
 	private MiMIVisualStyleBuilder vsBuilder;
 	private VisualMappingManager vmm;
-	private CyLayoutAlgorithm layout;
+	private CyLayoutAlgorithmManager layouts;
 
 	public ApplyVisualStyleAndLayoutTaskFactory(MiMIVisualStyleBuilder vsBuilder, VisualMappingManager vmm, 
-			CyLayoutAlgorithm layout) {
+			CyLayoutAlgorithmManager layouts) {
 		this.vsBuilder = vsBuilder;
 		this.vmm = vmm;
-		this.layout = layout;
+		this.layouts = layouts;
 	}
 	
 	public TaskIterator createTaskIterator(CyNetworkView view) {
-		return new TaskIterator(new ApplyVisualStyleAndLayoutTask(view,vsBuilder, vmm, layout));
+		return new TaskIterator(new ApplyVisualStyleAndLayoutTask(view,vsBuilder, vmm, layouts));
 	}
 
 }

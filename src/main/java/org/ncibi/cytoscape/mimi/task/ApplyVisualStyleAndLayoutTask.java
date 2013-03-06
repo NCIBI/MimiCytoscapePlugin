@@ -6,6 +6,7 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.task.AbstractNetworkViewTask;
 import org.cytoscape.view.layout.CyLayoutAlgorithm;
+import org.cytoscape.view.layout.CyLayoutAlgorithmManager;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.vizmap.VisualMappingManager;
@@ -18,20 +19,20 @@ public class ApplyVisualStyleAndLayoutTask extends AbstractNetworkViewTask {
 
 	private MiMIVisualStyleBuilder vsBuilder;
 	private VisualMappingManager vmm;
-	private CyLayoutAlgorithm layout;
+	private CyLayoutAlgorithmManager layouts;
 
 	public ApplyVisualStyleAndLayoutTask(CyNetworkView view, 
 			MiMIVisualStyleBuilder vsBuilder, VisualMappingManager vmm, 
-			CyLayoutAlgorithm layout) {
+			CyLayoutAlgorithmManager layouts) {
 		super(view);
 		this.vsBuilder = vsBuilder;
 		this.vmm = vmm;
-		this.layout = layout;
+		this.layouts = layouts;
 	}
 
 	@Override
 	public void run(TaskMonitor taskMonitor) throws Exception {
-		
+		CyLayoutAlgorithm layout = layouts.getLayout("force-directed");
 		VisualStyle mimiStyle = null;
 		for(VisualStyle style: vmm.getAllVisualStyles()) {
 			if(style.getTitle().equals("MiMI")) {
