@@ -65,10 +65,6 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 		String dataSource = network.getRow(network).get("Data Source", String.class, "All Data Sources");
 		String term = geneName+"/////"+organism+"/////"+molType+"/////"+dataSource+"/////1. Query genes + nearest neighbors";
 		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
-		if(hiddenNodeTable.getColumn("NodeIDList") == null)
-			hiddenNodeTable.createListColumn("NodeIDList", String.class, true);
-		if(hiddenNodeTable.getColumn("EdgeIDList") == null)
-			hiddenNodeTable.createListColumn("EdgeIDList", String.class, true);
 		//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
 		doQuery(QueryType.QUERY_BY_EXPAND,term, streamUtil, taskMonitor);
 		//System.out.println("query by expand"+QUERY_BY_EXPAND);
