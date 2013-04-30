@@ -391,7 +391,7 @@ public class QueryMiMI {
 	    
                
 	           
-	private static void doQuery(int inputtype, String inputStr){
+	static void doQuery(int inputtype, String inputStr){
 		int continueQuery=1;
 		String inputgene="";
 		keyword=" ";
