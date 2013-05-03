@@ -33,6 +33,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.subnetwork.CyRootNetwork;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.enums.NodeType;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
@@ -47,11 +49,13 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 	
 	private CyNode node;
 	private CyNetwork network;
+	private CyRootNetworkManager rootNetworkManager;
 	private StreamUtil streamUtil;
 	
-	public ExpandNodeTask(CyNode node, CyNetwork network, StreamUtil streamUtil) {
+	public ExpandNodeTask(CyNode node, CyNetwork network, CyRootNetworkManager rootNetworkManager, StreamUtil streamUtil) {
 		this.node = node;
 		this.network = network;
+		this.rootNetworkManager = rootNetworkManager;
 		this.streamUtil = streamUtil;
 	}
 
@@ -61,8 +65,9 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 		//query mimi rdb and create network	
 		String geneName = network.getRow(node).get("Gene.name", String.class);
 		String organism = network.getRow(node).get("Gene.organism", String.class);
-		String molType = network.getRow(network).get("Molecule Type", String.class, "All Molecule Types");
-		String dataSource = network.getRow(network).get("Data Source", String.class, "All Data Sources");
+		CyRootNetwork rootNetwork = rootNetworkManager.getRootNetwork(network);
+		String molType = rootNetwork.getRow(rootNetwork).get("Molecule Type", String.class, "All Molecule Types");
+		String dataSource = rootNetwork.getRow(rootNetwork).get("Data Source", String.class, "All Data Sources");
 		String term = geneName+"/////"+organism+"/////"+molType+"/////"+dataSource+"/////1. Query genes + nearest neighbors";
 		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
 		//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
@@ -136,6 +141,10 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 		if (!nodeList.isEmpty() && !edgeList.isEmpty()){
 			//set node color attributes for expand node. set nodelist and edge list as expand node attributes for collapsing expanded network using 
 			network.getRow(node).set("Node Color", NodeType.EXPANDNODE.ordinal());
+			if(hiddenNodeTable.getColumn("NodeIDList") == null)
+				hiddenNodeTable.createListColumn("NodeIDList", String.class, true);
+			if(hiddenNodeTable.getColumn("EdgeIDList") == null)
+				hiddenNodeTable.createListColumn("EdgeIDList", String.class, true);
 			hiddenNodeTable.getRow(node.getSUID()).set("NodeIDList", nodeIDList);
 			hiddenNodeTable.getRow(node.getSUID()).set("EdgeIDList", edgeIDList);
 			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));

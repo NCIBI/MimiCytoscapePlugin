@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.subnetwork.CyRootNetwork;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.task.AbstractNodeViewTaskFactory;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
@@ -25,20 +27,23 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 	
 	private ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory;
 	private JFrame frame;
+	private CyRootNetworkManager rootNetworkManager;
 	private StreamUtil streamUtil;
 	
 	public MiMINodeViewTaskFactory(ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory, 
-			JFrame frame, StreamUtil streamUtil) {
+			JFrame frame, CyRootNetworkManager rootNetworkManager, StreamUtil streamUtil) {
 		this.vslTaskFactory = vslTaskFactory;
 		this.frame = frame;
+		this.rootNetworkManager = rootNetworkManager;
 		this.streamUtil = streamUtil;
 	}
 
 	public TaskIterator createTaskIterator(View<CyNode> view, CyNetworkView netView) {
 		CyNode node = view.getModel();
 		CyNetwork network = netView.getModel();
+		CyRootNetwork rootNetwork = rootNetworkManager.getRootNetwork(network);
 		TaskIterator taskIterator = new TaskIterator();
-		String dplymode=network.getRow(network).get("Displays for results", String.class, "1");
+		String dplymode=rootNetwork.getRow(rootNetwork).get("Displays for results", String.class, "1");
 		Integer nodeColor = network.getRow(node).get("Node Color",  Integer.class, 1);
 
 		if(nodeColor==NodeType.SEEDNEIGHBOR.ordinal() || nodeColor==NodeType.EXPANDNEIGHBOR.ordinal()
@@ -46,8 +51,8 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 			try {
 				String name = network.getRow(node).get(CyNetwork.NAME, String.class);
 				String taxid = network.getRow(node).get("Gene.taxid", String.class);
-				String molType = network.getRow(network).get("Molecule Type", String.class, "All Molecule Types");
-				String dataSource = network.getRow(network).get("Data Source", String.class, "All Data Sources");
+				String molType = rootNetwork.getRow(rootNetwork).get("Molecule Type", String.class, "All Molecule Types");
+				String dataSource = rootNetwork.getRow(rootNetwork).get("Data Source", String.class, "All Data Sources");
 				String urlstr =MiMIURL.PRECOMPUTEEXPAND+"?ID="+name+"&ORGANISMID="+taxid+"&MOLTYPE="+URLEncoder.encode(molType,"UTF-8")+"&DATASOURCE="+URLEncoder.encode(dataSource,"UTF-8");
 				URL url = new URL(urlstr);
 				URLConnection conn = streamUtil.getURLConnection(url) ;
@@ -61,12 +66,12 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 				if(line != null ){
 					int nodeNo =Integer.parseInt(line);
 					if (nodeNo<=30){
-						taskIterator.append(new ExpandNodeTask(node, network, streamUtil));
+						taskIterator.append(new ExpandNodeTask(node, network, rootNetworkManager, streamUtil));
 					}
 					else {
 						int decision=JOptionPane.showConfirmDialog(frame, "You will expand network with "+nodeNo +" nodes, continue?");
 						if (decision==0){
-							taskIterator.append(new ExpandNodeTask(node, network, streamUtil));
+							taskIterator.append(new ExpandNodeTask(node, network, rootNetworkManager, streamUtil));
 						}
 					}
 				}

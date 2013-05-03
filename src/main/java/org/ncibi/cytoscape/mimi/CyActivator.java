@@ -39,6 +39,7 @@ import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.task.NodeViewTaskFactory;
@@ -96,6 +97,7 @@ public class CyActivator extends AbstractCyActivator {
 		CyNetworkManager cyNetworkManager = getService(bc, CyNetworkManager.class);
 		CyNetworkViewFactory cyNetworkViewFactory = getService(bc, CyNetworkViewFactory.class);
 		CyNetworkViewManager cyNetworkViewManager = getService(bc, CyNetworkViewManager.class);
+		CyRootNetworkManager rootNetworkManager = getService(bc, CyRootNetworkManager.class);
 		DialogTaskManager dialogTaskManager = getService(bc, DialogTaskManager.class);
 		
 		VisualStyleFactory vsFactoryServiceRef = getService(bc, VisualStyleFactory.class);
@@ -141,7 +143,7 @@ public class CyActivator extends AbstractCyActivator {
 		registerService(bc,new HelpAction(),CyAction.class, new Properties());
 		registerService(bc,new PopupNodeContextMenuFactory(dialogTaskManager, vslTaskFactory, frame, streamUtil), CyNodeViewContextMenuFactory.class, new Properties());
 		registerService(bc,new PopupEdgeContextMenuFactory(dialogTaskManager, vslTaskFactory, frame, streamUtil), CyEdgeViewContextMenuFactory.class, new Properties());
-		registerService(bc,new MiMINodeViewTaskFactory(vslTaskFactory, frame, streamUtil),NodeViewTaskFactory.class, mimiNodeViewTaskFactoryProps);
+		registerService(bc,new MiMINodeViewTaskFactory(vslTaskFactory, frame, rootNetworkManager, streamUtil),NodeViewTaskFactory.class, mimiNodeViewTaskFactoryProps);
 	}
 
 }

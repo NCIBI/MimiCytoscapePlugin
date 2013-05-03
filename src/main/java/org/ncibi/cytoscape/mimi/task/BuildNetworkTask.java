@@ -55,11 +55,9 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 		CyTable defaultNodeTable = network.getDefaultNodeTable();
 		defaultNodeTable.createColumn("Gene.name", String.class, true);
 		defaultNodeTable.createColumn("Gene.userAnnot", Boolean.class, true);
-		defaultNodeTable.createColumn("Network Distance", String.class, true);
-		defaultNodeTable.createColumn("Node Color", Integer.class, true);
-		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
-		hiddenNodeTable.createListColumn("NodeIDList", String.class, true);
-		hiddenNodeTable.createListColumn("EdgeIDList", String.class, true);
+		CyTable localNodeTable = network.getTable(CyNode.class, CyNetwork.LOCAL_ATTRS);
+		localNodeTable.createColumn("Network Distance", String.class, true);
+		localNodeTable.createColumn("Node Color", Integer.class, true);
 		CyTable defaultEdgeTable = network.getDefaultEdgeTable();
 		defaultEdgeTable.createColumn("Interaction.geneName", String.class, true);
 		defaultEdgeTable.createColumn("Interaction.userAnnot", Boolean.class, true);
