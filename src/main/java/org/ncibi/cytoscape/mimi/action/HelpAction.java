@@ -23,28 +23,29 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.ui;
+package org.ncibi.cytoscape.mimi.action;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import org.cytoscape.application.swing.AbstractCyAction;
 import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
-
-/** 
- * @author jinggao/FileFormatTemplate
- * @date Aug 27, 2007
+/**
+ * @author Jing Gao
+ * link to MiMI Help page
  */
-public class FileFormatTemplate implements ActionListener{
-	public FileFormatTemplate() {	       
-	 }
+@SuppressWarnings("serial")
+public class HelpAction extends AbstractCyAction {	
+	
+	public HelpAction(){
+		super("Help");
+		setPreferredMenu("Apps.MiMI");		
+	}
 	 
-	 public void actionPerformed(ActionEvent event) {		
-		
-		 BareBonesBrowserLaunch.openURL(MiMIURL.GENESAMPLE);
+	 public void actionPerformed(ActionEvent event) {
+		 BareBonesBrowserLaunch.openURL(MiMIURL.MIMIAPPHOME);
 	 }
-
 
 }

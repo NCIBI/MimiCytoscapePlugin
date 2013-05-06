@@ -28,18 +28,30 @@ package org.ncibi.cytoscape.mimi.ui;
 /** 
  * New user sign up panel
  */
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.cytoscape.io.util.StreamUtil;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.util.MD5;
-import org.ncibi.cytoscape.mimi.util.URLConnect;
-
-import cytoscape.Cytoscape;
 
 @SuppressWarnings("serial")
 public class NewUserSignup extends JFrame implements ActionListener{	
@@ -55,9 +67,11 @@ public class NewUserSignup extends JFrame implements ActionListener{
 	private JTextField ttil;
 	private JPasswordField tpwd;
 	private JPasswordField tpwd1;
+	private StreamUtil streamUtil;
 	
-	public NewUserSignup(){
-		super("Sign up");				
+	public NewUserSignup(JFrame frame, StreamUtil streamUtil){
+		super("Sign up");
+		this.streamUtil = streamUtil;
 		Container cPane = getContentPane(); 
 		//Create and populate the panel.
 		int row=6;
@@ -109,7 +123,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 		cPane.add(p);		
 		pack();
         setVisible(true);
-        setLocationRelativeTo(Cytoscape.getDesktop());
+        setLocationRelativeTo(frame);
 		
 	}
 	public void actionPerformed(ActionEvent e){	
@@ -135,12 +149,18 @@ public class NewUserSignup extends JFrame implements ActionListener{
 					String til=URLEncoder.encode(ttil.getText(),"UTF-8");
 					String pwd =  String.valueOf(tpwd.getPassword());
 					pwd =URLEncoder.encode(pwd,"UTF-8");				
-					String urlstr=MiMIPlugin.NEWUSERURL;
+					String urlstr=MiMIURL.NEWUSERURL;
 					String query="NAME="+name+"&PWD="+pwd+"&EMAIL="+email+"&ORG="+org+"&TIL="+til;
-					URLConnect uc= new URLConnect();
-					uc.doURLConnect(urlstr, query);
+					URLConnection uc = streamUtil.getURLConnection(new URL(urlstr));
+					uc.setDoOutput(true);	
+					OutputStreamWriter wr = new OutputStreamWriter(uc.getOutputStream());
+					wr.write(query);
+					wr.flush();	
+					// Get the response
+					BufferedReader rd = new BufferedReader(new InputStreamReader(uc.getInputStream()));	
+					wr.close();	
 					String inputLine1;				
-					if ((inputLine1 = uc.getBrd().readLine()) != null){
+					if ((inputLine1 = rd.readLine()) != null){
 						setVisible(false);
 						if ((!inputLine1.equals("")) && (!inputLine1.equals(" "))){
 							if (inputLine1.equals("-1"))
@@ -148,25 +168,32 @@ public class NewUserSignup extends JFrame implements ActionListener{
 							else{//call php file to validate log in email
 								//get md5 hash
 								String md5hash=new MD5(email).getmd5hash();	
-								String urlstr1=MiMIPlugin.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
-								URLConnect uc1= new URLConnect();
-								uc1.doURLConnect(urlstr1);
+								String urlstr1=MiMIURL.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
+								URLConnection uc1 = streamUtil.getURLConnection(new URL(urlstr));
+								uc1.setDoOutput(true);	
+								OutputStreamWriter wr1 = new OutputStreamWriter(uc.getOutputStream());
+								wr1.write(query);
+								wr1.flush();	
+								// Get the response
+								BufferedReader rd1 = new BufferedReader(new InputStreamReader(uc.getInputStream()));	
+								wr.close();	
+								
 								String inputLine2;				
-								if ((inputLine2 = uc1.getBrd().readLine()) != null){
+								if ((inputLine2 = rd1.readLine()) != null){
 								setVisible(false);
-									//System.out.println("["+inputLine2+"]");
-									if (inputLine2.equals("1"))
-										JOptionPane.showMessageDialog(this,"We just sent you email with a link.\nPlease click the link to activate your account and then log in");
-									if (inputLine2.equals("0"))
-										JOptionPane.showMessageDialog(this,"Invalid Email Address.\n");
-									if (inputLine2.equals("-1"))
-										JOptionPane.showMessageDialog(this,"New user is not added to Database\n");
+								//System.out.println("["+inputLine2+"]");
+								if (inputLine2.equals("1"))
+									JOptionPane.showMessageDialog(this,"We just sent you email with a link.\nPlease click the link to activate your account and then log in");
+								if (inputLine2.equals("0"))
+									JOptionPane.showMessageDialog(this,"Invalid Email Address.\n");
+								if (inputLine2.equals("-1"))
+									JOptionPane.showMessageDialog(this,"New user is not added to Database\n");
 								}
-								uc1.closebrd();								
+								rd1.close();								
 							}							
 						}
 					    }
-						uc.closebrd();
+						rd.close();
 					}
 					catch (Exception ee){
 						//System.out.println(ee);

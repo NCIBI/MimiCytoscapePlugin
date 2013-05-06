@@ -23,28 +23,32 @@
  *
  ******************************************************************/
  
-package org.ncibi.cytoscape.mimi.ui;
+package org.ncibi.cytoscape.mimi;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.net.SocketException;
 
-import org.ncibi.cytoscape.mimi.MiMIURL;
-import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
-
-
-
-/** 
- * @author jinggao/FileFormatTemplate
- * @date Aug 27, 2007
+/**
+ * HttpException
+ *
+ * Signals that a response code other than 200 was recieved.
+ *
+ * @author Alex Ade
+ * @date   Sun Dec 17 19:16:06 EST 2006
  */
-public class FileFormatTemplate implements ActionListener{
-	public FileFormatTemplate() {	       
-	 }
-	 
-	 public void actionPerformed(ActionEvent event) {		
-		
-		 BareBonesBrowserLaunch.openURL(MiMIURL.GENESAMPLE);
-	 }
+@SuppressWarnings("serial")
+public class HttpException extends SocketException {
 
+	/**
+	 * Constructs a new HttpException with the specified detail message. A
+	 * detail message is a String that gives a specific description of the
+	 * error.	
+	 */
+	public HttpException(String msg) {
+		super(msg);
+	}
 
+	/**
+	 * Constructs a new HttpException with no detailed message.
+	 */
+	public HttpException() {}
 }

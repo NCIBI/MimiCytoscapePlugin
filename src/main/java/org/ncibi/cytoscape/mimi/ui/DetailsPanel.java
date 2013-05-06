@@ -24,19 +24,19 @@
  ******************************************************************/
  
 package org.ncibi.cytoscape.mimi.ui;
-import cytoscape.Cytoscape;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.net.URL;
 import java.util.HashMap;
+
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 
-import org.ncibi.cytoscape.mimi.action.BareBonesBrowserLaunch;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
 /**
@@ -59,8 +59,8 @@ public class DetailsPanel extends JFrame implements  HyperlinkListener{
 	 public final static int   SORTLIMIT=20;
 	 //private int sentenceNumber;
 	 
-	 public DetailsPanel(String str, String mol1, String mol2, String molID1, String molID2){		
-		 super("Cytoscape MiMI Plugin Query BioNLP");	
+	 public DetailsPanel(String str, String mol1, String mol2, String molID1, String molID2, JFrame parent){		
+		 super("Cytoscape MiMI Query BioNLP");	
 		    strResult =str;
 		    molecule1=mol1;
 		    molecule2=mol2;
@@ -83,7 +83,7 @@ public class DetailsPanel extends JFrame implements  HyperlinkListener{
 	        contentPane.add(editorScrollPane);	     
 	        pack();
 	        setVisible(true);
-	        setLocationRelativeTo(Cytoscape.getDesktop());
+	        setLocationRelativeTo(parent);
     }
     
     private String getHtml() {    	
@@ -102,8 +102,8 @@ public class DetailsPanel extends JFrame implements  HyperlinkListener{
         	String[] chunk=lines[i].split("\t");        	
         	html.append("<TR><TD><A HREF='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=search&term="+chunk[0]+"'>"+chunk[0]+"</A></TD>");
         	html.append("<TD>"+chunk[1]+"</TD>");
-        	html.append("<TD><A HREF='"+MiMIPlugin.MIMINODELINK+"?geneid="+moleculeID1+"'>"+chunk[2]+"</A></TD>");
-        	html.append("<TD><A HREF='"+MiMIPlugin.MIMINODELINK+"?geneid="+moleculeID2+"'>"+chunk[3]+"</A></TD>");        	
+        	html.append("<TD><A HREF='"+MiMIURL.MIMINODELINK+"?geneid="+moleculeID1+"'>"+chunk[2]+"</A></TD>");
+        	html.append("<TD><A HREF='"+MiMIURL.MIMINODELINK+"?geneid="+moleculeID2+"'>"+chunk[3]+"</A></TD>");        	
         	html.append("<TD>"+chunk[4]+"</TD>");        	       	
         	html.append("</TR>");  
         	

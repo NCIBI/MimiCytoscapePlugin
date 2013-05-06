@@ -24,13 +24,30 @@
  ******************************************************************/
  
 package org.ncibi.cytoscape.mimi.ui;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import org.ncibi.cytoscape.mimi.action.ExcuteUploadFile;
-import org.ncibi.cytoscape.mimi.action.ExecuteSearch;
-import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.swing.DialogTaskManager;
+import org.ncibi.cytoscape.mimi.MiMIState;
+import org.ncibi.cytoscape.mimi.enums.SearchMethod;
+import org.ncibi.cytoscape.mimi.task.SearchTaskFactory;
+import org.ncibi.cytoscape.mimi.task.UploadFileTaskFactory;
 
 
 
@@ -44,7 +61,7 @@ import org.ncibi.cytoscape.mimi.plugin.MiMIPlugin;
  * update on Oct 11 07
  */
 @SuppressWarnings("serial")
-public class MiMIDialog extends JFrame{	
+public class MiMIDialog extends JFrame{
 	private int TAB0=0;
 	private int TAB1=1;
 	private int TAB2=2;		
@@ -55,35 +72,44 @@ public class MiMIDialog extends JFrame{
 	private JComboBox jcbIL;
 	private JLabel label;
 	private JButton searchButton;
-	//private	JCheckBox jcheckbox;
 	private JTextField textField;
+	private JFrame parent;
+	private SearchTaskFactory searchTaskFactory;
+	private UploadFileTaskFactory uploadFileTaskFactory;
+	private DialogTaskManager dialogTaskManager;
 	
-	public MiMIDialog(JFrame parent){
-		super("Welcome to MiMI Plugin " +MiMIPlugin.CURRENTPLUGINVERSION);		
-       Container cPane = getContentPane(); 
-       JTabbedPane tabbedPane=new JTabbedPane();  
-       
-       JComponent tab0=createPanel(TAB0);
-       tabbedPane.addTab("Enter Gene Symbol(s)", tab0);
-       
-       JComponent tab1=createPanel(TAB1);       
-       //tabbedPane.addTab("Enter Gene Symbol(s)", tab1);  
-       tabbedPane.addTab("Enter keyword(s)", tab1);
-       
-       JComponent tab2 = createPanel(TAB2);       
-       tabbedPane.addTab("From File", tab2);  
-       
-       JComponent tab3=createPanel(TAB3);
-       tabbedPane.addTab("For MeSH term", tab3);
-       
-       
-       tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-       //Add the tabbed pane to this panel.
-       cPane.add(tabbedPane);         
-       pack();
-       setVisible(true);
-       setLocationRelativeTo(parent);      
-      
+	
+	
+	public MiMIDialog(SearchTaskFactory searchTaskFactory, UploadFileTaskFactory uploadFileTaskFactory, DialogTaskManager dialogTaskManager, JFrame parent){
+		super("Welcome to MiMI " +MiMIState.CURRENTAPPVERSION);
+		this.parent = parent;
+		this.searchTaskFactory = searchTaskFactory;
+		this.uploadFileTaskFactory = uploadFileTaskFactory;
+		this.dialogTaskManager = dialogTaskManager;
+		Container cPane = getContentPane(); 
+		JTabbedPane tabbedPane=new JTabbedPane();  
+
+		JComponent tab0=createPanel(TAB0);
+		tabbedPane.addTab("Enter Gene Symbol(s)", tab0);
+
+		JComponent tab1=createPanel(TAB1);       
+		//tabbedPane.addTab("Enter Gene Symbol(s)", tab1);  
+		tabbedPane.addTab("Enter keyword(s)", tab1);
+
+		JComponent tab2 = createPanel(TAB2);       
+		tabbedPane.addTab("From File", tab2);  
+
+		JComponent tab3=createPanel(TAB3);
+		tabbedPane.addTab("For MeSH term", tab3);
+
+
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		//Add the tabbed pane to this panel.
+		cPane.add(tabbedPane);         
+		pack();
+		setVisible(true);
+		setLocationRelativeTo(parent);      
+
 	}
 	protected JComponent createPanel(int tab) {		
 		   //create organism combobox
@@ -130,21 +156,21 @@ public class MiMIDialog extends JFrame{
 	    		  textField=new JTextField("",50);
 	    		  label=new JLabel("Enter Gene Symbol (s): e.g. csf1r, ccnt2");
 	    		  searchButton =new JButton("Search");
-	    		  searchButton.addActionListener(new ExecuteSearch(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this ));
-	    		  textField.addActionListener(new ExecuteSearch(textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this ));
+	    		  searchButton.addActionListener(createSearchAction(textField,JCBorganismList,jcbMt,jcbDR,jcbIL));
+	    		  textField.addActionListener(createSearchAction(textField,JCBorganismList,jcbMt,jcbDR, jcbIL));
 	    	  }
 	    	   
 	    	  if (tab==TAB1){
-	    		   //Create Search Text Field
-	    		   textField = new JTextField("",50);
-	    		   //JLabel label=new JLabel("(Official Gene Symbols: e.g. csf1r,ccnt2)");
-	    		   label=new JLabel("Enter keyword (s) to do free text search");
-	    		   //create search button		      
-	    		   searchButton = new JButton("Search");	    	   
-	    		   //add listener to search button and textfiled
-	    		   searchButton.addActionListener(new ExecuteSearch(MiMIPlugin.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this )) ;            	
-		       	   textField.addActionListener(new ExecuteSearch(MiMIPlugin.FREETEXT, textField,JCBorganismList,jcbMt,jcbDR,jcbIL,(JFrame) this ));
-	    	   }
+	    		  //Create Search Text Field
+	    		  textField = new JTextField("",50);
+	    		  //JLabel label=new JLabel("(Official Gene Symbols: e.g. csf1r,ccnt2)");
+	    		  label=new JLabel("Enter keyword (s) to do free text search");
+	    		  //create search button		      
+	    		  searchButton = new JButton("Search");	    	   
+	    		  //add listener to search button and textfiled
+	    		  searchButton.addActionListener(createSearchAction(SearchMethod.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL));
+	    		  textField.addActionListener(createSearchAction(SearchMethod.FREETEXT,textField,JCBorganismList,jcbMt,jcbDR, jcbIL));
+	    	  }
 	    	   if (tab==TAB3){
 	    		 //Create Search Text Field
 	    		   textField = new JTextField("",44);	    		   
@@ -152,8 +178,8 @@ public class MiMIDialog extends JFrame{
 	    		   //create search button		      
 	    		   searchButton = new JButton("Search");	    	   
 	    		   //add listener to search button and textfiled
-	    		   searchButton.addActionListener(new ExecuteSearch(MiMIPlugin.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL,(JFrame) this )) ;            	
-		       	   textField.addActionListener(new ExecuteSearch(MiMIPlugin.MESHTERM, textField,JCBorganismList,jcbMt,jcbDR,jcbIL,(JFrame) this ));
+	    		   searchButton.addActionListener(createSearchAction(SearchMethod.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL));
+	    		   textField.addActionListener(createSearchAction(SearchMethod.MESHTERM,textField,JCBorganismList,jcbMt,jcbDR, jcbIL));
 	    	   }
 		       JPanel panel3 = new JPanel();
 		       panel3.add(textField);
@@ -172,7 +198,18 @@ public class MiMIDialog extends JFrame{
 	       if(tab==TAB2){
 	    	   JButton loadFileButton=new JButton("Load Gene File...");	
 		       //loadFileButton.addActionListener(new ExcuteUploadFile(JCBorganismList,jcbMt,jcbDR,jcbIL,jcheckbox,(JFrame) this ));
-		       loadFileButton.addActionListener(new ExcuteUploadFile((JFrame) this ));
+		       loadFileButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+						JFileChooser fc=new JFileChooser();
+						int returnVal = fc.showOpenDialog(parent); 
+						if(returnVal == JFileChooser.APPROVE_OPTION) {
+							TaskIterator ti = uploadFileTaskFactory.createTaskIterator(fc.getSelectedFile());
+							dialogTaskManager.execute(ti);
+						}
+						
+					}
+				});
 		       JButton fileFormat=new JButton("A Sample File");
 		       fileFormat.addActionListener(new FileFormatTemplate());
 		       JPanel loadFilePanel= new JPanel();
@@ -197,6 +234,20 @@ public class MiMIDialog extends JFrame{
 	       
 	      
 	       return panel;
+	}
+	
+	protected ActionListener createSearchAction(final JTextField textField ,final JComboBox jcbOrganism ,final JComboBox jcbMt,final JComboBox jcbDr, final JComboBox jcbI) {
+		return createSearchAction(null, textField, jcbOrganism, jcbMt, jcbDr, jcbI);
+	}
+	
+	protected ActionListener createSearchAction(final SearchMethod searchMethod, final JTextField textField ,final JComboBox jcbOrganism ,final JComboBox jcbMt,final JComboBox jcbDr, final JComboBox jcbI) {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TaskIterator ti = searchTaskFactory.createTaskIterator(searchMethod, textField, jcbOrganism, jcbMt, jcbDr, jcbI);
+				dialogTaskManager.execute(ti);
+			}
+		};
 	}
 	
 }

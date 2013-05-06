@@ -22,29 +22,20 @@
  * This work was supported in part by National Institutes of Health Grant #U54DA021519
  *
  ******************************************************************/
- 
-package org.ncibi.cytoscape.mimi.ui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import org.ncibi.cytoscape.mimi.MiMIURL;
-import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
-
-
+package org.ncibi.cytoscape.mimi;
 
 /** 
- * @author jinggao/FileFormatTemplate
- * @date Aug 27, 2007
+ * @author jinggao/Test
+ * @date Nov 24, 2008
  */
-public class FileFormatTemplate implements ActionListener{
-	public FileFormatTemplate() {	       
-	 }
-	 
-	 public void actionPerformed(ActionEvent event) {		
+public class Test {
+	public Test(){
+		//System.out.println("mimi plugin Test lib success");
+		/*Cytoscape.getCurrentNetwork().getSelectedEdges();
+		Cytoscape.getCurrentNetwork().getSelectedNodes();
+		Cytoscape.createNetwork(Cytoscape.getCurrentNetwork().getSelectedNodes(), Cytoscape.getCurrentNetwork().getSelectedEdges(), "search result",Cytoscape.getCurrentNetwork() ,true);*/
 		
-		 BareBonesBrowserLaunch.openURL(MiMIURL.GENESAMPLE);
-	 }
-
+	}
 
 }
