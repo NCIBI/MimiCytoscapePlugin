@@ -16,36 +16,49 @@ import org.ncibi.cytoscape.mimi.task.AbstractMiMIQueryTask;
 
 public class DatabaseQueryTest {
 
-	private static final String QUERY_FOR_QUERY_BY_SYMBOL = "csf1r/////Homo sapiens/////All Molecule Types/////All Data Sources/////1. Query genes + nearest neighbors";
-	private static final QueryType QUERY_TYPE_BY_SYMBOL = QueryType.QUERY_BY_NAME;
-
 	@Test
-	public void basicQueryTest1() throws Exception {
-		
-		QueryShadow gateway = new QueryShadow();
-
-		gateway.doQuery(QUERY_TYPE_BY_SYMBOL, QUERY_FOR_QUERY_BY_SYMBOL);
-
-		BufferedReader in = gateway.getReader();
-
+	public void basicQueryByName() throws Exception {
+		QueryType type = QueryType.QUERY_BY_NAME;
+		String queryString = "csf1r/////Homo sapiens/////All Molecule Types/////All Data Sources/////1. Query genes + nearest neighbors";
 		String[] items = {"CSF1R","CALB2","CBL","FYN","GRB2","HTR2C","INPP5D","INPPL1","LYN","PIK3R1","RASA1"};
+		queryForItems(type, queryString, items);
+	}
+	
+	@Test
+	public void basicQueryById() throws Exception {
+		QueryType type = QueryType.QUERY_BY_ID;
+		String queryString = "1436";
+		String[] items = {"CSF1R","CALB2","CBL","FYN","GRB2","HTR2C","INPP5D","INPPL1","LYN","PIK3R1","RASA1"};
+		queryForItems(type, queryString, items);
+	}
+	
+	
+	private void queryForItems(QueryType type, String queryString, String[] items) throws Exception {
+
 		boolean[] hits = new boolean[items.length];
 		
 		for (int i = 0; i < hits.length; i++)
 			hits[i] = false;
 
+		QueryShadow gateway = new QueryShadow();
+		gateway.doQuery(type, queryString);
+		BufferedReader in = gateway.getReader();
+		
 		String line;
 		while ((line = in.readLine()) != null) {
-			for (int i = 0; i < hits.length; i++)
+			for (int i = 0; i < hits.length; i++){
+				//System.out.println(line);
 				if (line.contains(items[i])) hits[i] = true;
+			}
 		}
 		gateway.closeReader();
 		
 		for (int i = 0; i < hits.length; i++) {
-			Assert.assertTrue("Did not fine expected query match: " + items[i], hits[i]);
+			Assert.assertTrue("Query type: " + type + ";\n" +
+					"Query text " + queryString + ";\n" +
+					"Did not fine expected query match: " + items[i], hits[i]);
 		}
 	}
-
 	
 	private class QueryShadow extends AbstractMiMIQueryTask {
 		
