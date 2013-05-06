@@ -3,6 +3,8 @@ package org.ncibi.cytoscape.mimi.data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -11,11 +13,24 @@ import junit.framework.Assert;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.work.TaskMonitor;
 import org.junit.Test;
+import org.ncibi.cytoscape.mimi.MiMIURL;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 import org.ncibi.cytoscape.mimi.task.AbstractMiMIQueryTask;
 
 public class DatabaseQueryTest {
 
+	@Test
+	public void versionTest() throws MalformedURLException, IOException {
+		StreamUtil streamUtil = new StreamUtilShqdow();
+		InputStream stream = streamUtil.getInputStream(new URL(MiMIURL.DBACCESSVERSION));
+		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+		String line="";
+		while ((line = br.readLine()) != null){
+			System.out.println(line);
+		}
+		br.close();
+	}
+	
 	@Test
 	public void basicQueryByName() throws Exception {
 		QueryType type = QueryType.QUERY_BY_NAME;
@@ -47,7 +62,7 @@ public class DatabaseQueryTest {
 		String line;
 		while ((line = in.readLine()) != null) {
 			for (int i = 0; i < hits.length; i++){
-				//System.out.println(line);
+				System.out.println(line);
 				if (line.contains(items[i])) hits[i] = true;
 			}
 		}

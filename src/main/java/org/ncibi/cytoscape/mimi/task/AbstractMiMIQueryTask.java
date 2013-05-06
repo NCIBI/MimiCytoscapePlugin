@@ -180,8 +180,8 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 			default:
 				break;
 			}				
-			//System.out.println("query is "+query) ;
-			//System.out.println("url is "+urlStr);				
+			//System.out.println("query is " + query) ;
+			//System.out.println("url is " + conn.getURL().toExternalForm());				
 
 			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 			wr.write(query);
