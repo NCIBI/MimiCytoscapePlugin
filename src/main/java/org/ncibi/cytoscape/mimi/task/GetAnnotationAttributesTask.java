@@ -103,10 +103,10 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		Map<String,CyRow> edgeRowMap = new HashMap<String,CyRow>();
 		for(CyEdge edge: edges) {
 			String id = network.getRow(edge).get(CyNetwork.NAME, String.class);
-			edgeIDs += id + " ";
+			edgeIDs += "," + id;
 			edgeRowMap.put(id, network.getRow(edge));
 		}
-		edgeIDs = edgeIDs.trim();
+		edgeIDs = edgeIDs.substring(1).trim();
 		if(edgeTable.getColumn("Interaction.userAnnot") == null)
 			edgeTable.createColumn("Interaction.userAnnot",Boolean.class, true, false);
 		if (!edgeIDs.equals("")){
