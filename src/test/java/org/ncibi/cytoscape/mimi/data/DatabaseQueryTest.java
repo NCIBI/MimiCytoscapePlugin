@@ -25,10 +25,13 @@ public class DatabaseQueryTest {
 		InputStream stream = streamUtil.getInputStream(new URL(MiMIURL.DBACCESSVERSION));
 		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 		String line="";
+		String version = null;
 		while ((line = br.readLine()) != null){
+			if (version == null) version = line;
 			System.out.println(line);
 		}
 		br.close();
+		Assert.assertEquals(MiMIURL.VERSION,version);
 	}
 	
 	@Test

@@ -3,7 +3,7 @@ package org.ncibi.cytoscape.mimi;
 public class MiMIURL {
 	private static final String MIMIPLUGIN_WEB = "http://mimiplugin.ncibi.org";
 	private static final String DBACCESS = MIMIPLUGIN_WEB + "/dbaccess/";
-	private static final String VERSION = "4.0";
+	public static final String VERSION = "4.0B";
 	
 	private static final String MIMI_WEB = "http://mimitest.ncibi.org/mimi";
 	
