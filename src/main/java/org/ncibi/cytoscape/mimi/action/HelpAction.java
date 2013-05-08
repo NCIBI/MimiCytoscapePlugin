@@ -28,7 +28,7 @@ package org.ncibi.cytoscape.mimi.action;
 import java.awt.event.ActionEvent;
 
 import org.cytoscape.application.swing.AbstractCyAction;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
@@ -45,7 +45,7 @@ public class HelpAction extends AbstractCyAction {
 	}
 	 
 	 public void actionPerformed(ActionEvent event) {
-		 BareBonesBrowserLaunch.openURL(MiMIURL.MIMIAPPHOME);
+		 BareBonesBrowserLaunch.openURL(MiMI.MIMIAPPHOME);
 	 }
 
 }

@@ -42,7 +42,7 @@ import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 
 /**
  * @author jinggao/AttributesByIDs
@@ -343,7 +343,7 @@ public class GetMiMIAttributesTask extends AbstractTask
             query = "TYPE=" + attrType + "&GENEIDS=" + gene_IDs + "&INTERACTIONIDS=";
         else
             query = "TYPE=" + attrType + "&GENEIDS=" + "&INTERACTIONIDS=" + inter_IDs;
-            URLConnection conn = streamUtil.getURLConnection(new URL(MiMIURL.GETATTRIBUTES));
+            URLConnection conn = streamUtil.getURLConnection(new URL(MiMI.GETATTRIBUTES));
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(query);

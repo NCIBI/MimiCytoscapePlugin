@@ -1,12 +1,13 @@
 package org.ncibi.cytoscape.mimi;
 
-public class MiMIURL {
+public class MiMI {
+	public static String currentUserID="0";
+	
 	private static final String MIMIPLUGIN_WEB = "http://mimiplugin.ncibi.org";
 	private static final String DBACCESS = MIMIPLUGIN_WEB + "/dbaccess/";
-	public static final String VERSION = "4.0";
-	
 	private static final String MIMI_WEB = "http://mimitest.ncibi.org/mimi";
 	
+	public static final String VERSION = "4.0";
 	public static final String LOGO="http://www.bioinformatics.med.umich.edu/app/nlp/logo/";	
 	public static final String BIONLPURL="https://portal.ncibi.org/portal/site/!gateway/page/9b2c0673-4252-409d-003d-25996426b215";
 	public static final String GENE2MESH="http://gene2mesh.ncibi.org/";

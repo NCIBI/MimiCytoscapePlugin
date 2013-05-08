@@ -64,8 +64,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.MiMIState;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.task.GetAnnotationAttributesTask;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
@@ -149,7 +148,7 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 			DialogTaskManager dialogTaskManager, ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory,
 			JFrame frame, StreamUtil streamUtil){		
 		super ("Annotating Editor");	
-		MiMIState.currentUserID=userid;
+		MiMI.currentUserID=userid;
 		this.obj = obj;
 		this.network = network;
 		this.view = view;
@@ -518,7 +517,7 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 		}
 		else if (e.getActionCommand().equals("Log Out")){
 			setVisible(false);
-			MiMIState.currentUserID="0";
+			MiMI.currentUserID="0";
 		}			
 	}
 	
@@ -623,7 +622,7 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 	private void getAnnotSetNameList(String id, String tableName,String userid){
 		try{
 			id =URLEncoder.encode(id,"UTF-8");
-			String urlstr=MiMIURL.ANNOTSETNAME;
+			String urlstr=MiMI.ANNOTSETNAME;
 			String query="TABLE="+tableName+"&ID="+id+"&USERID="+userid;
 			URLConnection uc = streamUtil.getURLConnection(new URL(urlstr));
 			uc.setDoOutput(true);	

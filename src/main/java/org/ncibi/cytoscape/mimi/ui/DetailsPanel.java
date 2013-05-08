@@ -35,7 +35,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.util.BareBonesBrowserLaunch;
 
 
@@ -102,8 +102,8 @@ public class DetailsPanel extends JFrame implements  HyperlinkListener{
         	String[] chunk=lines[i].split("\t");        	
         	html.append("<TR><TD><A HREF='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=search&term="+chunk[0]+"'>"+chunk[0]+"</A></TD>");
         	html.append("<TD>"+chunk[1]+"</TD>");
-        	html.append("<TD><A HREF='"+MiMIURL.MIMINODELINK+"?geneid="+moleculeID1+"'>"+chunk[2]+"</A></TD>");
-        	html.append("<TD><A HREF='"+MiMIURL.MIMINODELINK+"?geneid="+moleculeID2+"'>"+chunk[3]+"</A></TD>");        	
+        	html.append("<TD><A HREF='"+MiMI.MIMINODELINK+"?geneid="+moleculeID1+"'>"+chunk[2]+"</A></TD>");
+        	html.append("<TD><A HREF='"+MiMI.MIMINODELINK+"?geneid="+moleculeID2+"'>"+chunk[3]+"</A></TD>");        	
         	html.append("<TD>"+chunk[4]+"</TD>");        	       	
         	html.append("</TR>");  
         	

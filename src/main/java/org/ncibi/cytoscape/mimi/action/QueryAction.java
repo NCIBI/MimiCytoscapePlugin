@@ -37,8 +37,7 @@ import javax.swing.JOptionPane;
 import org.cytoscape.application.swing.AbstractCyAction;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.MiMIState;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.task.SearchTaskFactory;
 import org.ncibi.cytoscape.mimi.task.UploadFileTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.MiMIDialog;
@@ -73,13 +72,13 @@ public class QueryAction extends AbstractCyAction{
 	public void actionPerformed(ActionEvent e) { 	
 		if (mimiDialog == null) {
 			try{
-				URL url = new URL(MiMIURL.CHECKAPPVERSION);        	
+				URL url = new URL(MiMI.CHECKAPPVERSION);        	
 				URLConnection conn = streamUtil.getURLConnection(url);
 				conn.setUseCaches(false);			    
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));	 
 				String line;
 				if ((line = rd.readLine()) != null) {
-					if (line.compareTo(MiMIState.CURRENTAPPVERSION)>0){
+					if (line.compareTo(MiMI.VERSION)>0){
 						JOptionPane.showMessageDialog(frame, "You are using an old version, Please update to "+"MiMI "+ line+" from within Cytoscape (Apps->App Manager->Check for Updates)");		
 					}
 

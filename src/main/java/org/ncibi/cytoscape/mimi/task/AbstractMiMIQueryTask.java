@@ -42,7 +42,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.ProvidesTitle;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 
 
@@ -162,7 +162,7 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 			else keyword=inputgene;
 
 
-			URLConnection conn = streamUtil.getURLConnection(new URL(MiMIURL.GETINTERACTION));
+			URLConnection conn = streamUtil.getURLConnection(new URL(MiMI.GETINTERACTION));
 			conn.setUseCaches(false);
 			conn.setDoOutput(true);
 			switch (queryType){

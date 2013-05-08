@@ -39,7 +39,7 @@ import javax.swing.JTextField;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 import org.ncibi.cytoscape.mimi.enums.SearchMethod;
 
@@ -80,7 +80,7 @@ public class SearchTask extends AbstractTask{
 				if (searchMethod == SearchMethod.FREETEXT){
 					String query="query="+URLEncoder.encode(textField.getText(),"UTF-8");
 					//System.out.println("query is "+query);
-					URLConnection uc = streamUtil.getURLConnection(new URL(MiMIURL.FREETEXTSEARCH));
+					URLConnection uc = streamUtil.getURLConnection(new URL(MiMI.FREETEXTSEARCH));
 					uc.setUseCaches(false);
 					uc.setDoOutput(true);
 					OutputStreamWriter wr = new OutputStreamWriter(uc.getOutputStream());
@@ -95,7 +95,7 @@ public class SearchTask extends AbstractTask{
 				}
 				if (searchMethod == SearchMethod.MESHTERM){
 					String query="?qtype=mesh&term=" + URLEncoder.encode(textField.getText(),"UTF-8");
-					String strURL =MiMIURL.MESHSEARCH+query;
+					String strURL =MiMI.MESHSEARCH+query;
 					InputStream stream = streamUtil.getInputStream(strURL);
 					BufferedReader rd = new BufferedReader(new InputStreamReader(stream));
 					String line="";

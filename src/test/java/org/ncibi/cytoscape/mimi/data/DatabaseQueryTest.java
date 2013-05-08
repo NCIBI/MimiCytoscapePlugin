@@ -13,7 +13,7 @@ import junit.framework.Assert;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.work.TaskMonitor;
 import org.junit.Test;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.enums.QueryType;
 import org.ncibi.cytoscape.mimi.task.AbstractMiMIQueryTask;
 
@@ -22,7 +22,7 @@ public class DatabaseQueryTest {
 	@Test
 	public void versionTest() throws MalformedURLException, IOException {
 		StreamUtil streamUtil = new StreamUtilShqdow();
-		InputStream stream = streamUtil.getInputStream(new URL(MiMIURL.DBACCESSVERSION));
+		InputStream stream = streamUtil.getInputStream(new URL(MiMI.DBACCESSVERSION));
 		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 		String line="";
 		String version = null;
@@ -31,7 +31,7 @@ public class DatabaseQueryTest {
 			System.out.println(line);
 		}
 		br.close();
-		Assert.assertEquals(MiMIURL.VERSION,version);
+		Assert.assertEquals(MiMI.VERSION,version);
 	}
 	
 	@Test

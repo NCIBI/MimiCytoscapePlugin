@@ -40,8 +40,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.MiMIState;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.AnnotationEditor;
 import org.ncibi.cytoscape.mimi.ui.AnnotationLogin;
@@ -88,11 +87,11 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
             public void actionPerformed(ActionEvent e)
             {
                 // System.out.println("click node is"+cynode.getIdentifier());
-                if (MiMIState.currentUserID.equals("0"))
+                if (MiMI.currentUserID.equals("0"))
                     new AnnotationLogin(node, network, networkView,
             			dialogTaskManager, vslTaskFactory, frame, streamUtil);
                 else
-                    new AnnotationEditor(node, network, networkView, MiMIState.currentUserID,
+                    new AnnotationEditor(node, network, networkView, MiMI.currentUserID,
                     		dialogTaskManager, vslTaskFactory, frame, streamUtil);
             }
         });
@@ -121,7 +120,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
                  * .getIdentifier(), "Gene.name"); }
                  */
 
-                BareBonesBrowserLaunch.openURL(MiMIURL.GENE2MESH + "index.php?view=simple&qtype=gene"
+                BareBonesBrowserLaunch.openURL(MiMI.GENE2MESH + "index.php?view=simple&qtype=gene"
                         + "&term=" + term + "&taxid=" + taxid);
             }
         });
@@ -135,7 +134,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
             {
                 CyNode node = nodeView.getModel();
                 CyNetwork network = networkView.getModel();
-                String mimiNodeUrl = MiMIURL.MIMINODELINK + "?geneid=" + network.getRow(node).get(CyNetwork.NAME, String.class);
+                String mimiNodeUrl = MiMI.MIMINODELINK + "?geneid=" + network.getRow(node).get(CyNetwork.NAME, String.class);
                 BareBonesBrowserLaunch.openURL(mimiNodeUrl);
             }
         });

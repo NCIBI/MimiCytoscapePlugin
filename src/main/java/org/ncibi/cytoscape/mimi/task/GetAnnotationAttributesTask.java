@@ -42,7 +42,7 @@ import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 
 /** 
  * @author jinggao/UserAnnoAttr
@@ -132,7 +132,7 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		//System.out.println("url is "+QueryMiMI.urlStr1);
 		//System.out.println("query is "+query);
 
-		URLConnection conn = streamUtil.getURLConnection(new URL(MiMIURL.CHECKUSERANNOATTR));
+		URLConnection conn = streamUtil.getURLConnection(new URL(MiMI.CHECKUSERANNOATTR));
 		conn.setDoOutput(true);	
 		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 		wr.write(query);

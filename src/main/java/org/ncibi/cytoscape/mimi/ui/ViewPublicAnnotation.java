@@ -47,7 +47,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 
 
 /** 
@@ -74,7 +74,7 @@ public class ViewPublicAnnotation extends JFrame{
 				id=network.getRow(edge).get(CyNetwork.NAME, String.class);
 				nodedgename=network.getRow(edge).get("Interaction.geneName", String.class);	
 			}
-			URL url =new URL(MiMIURL.GETSHAREDANNOT);
+			URL url =new URL(MiMI.GETSHAREDANNOT);
 			String query= "TABLE="+table+"&ID="+URLEncoder.encode(id,"UTF-8");
 			URLConnection conn = streamUtil.getURLConnection(url);
 			conn.setUseCaches(false);
