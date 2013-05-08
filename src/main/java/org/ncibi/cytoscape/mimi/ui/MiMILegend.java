@@ -9,13 +9,12 @@ import javax.swing.JPanel;
 
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.ncibi.cytoscape.mimi.CyActivator;
 
 @SuppressWarnings("serial")
 public class MiMILegend extends JPanel implements CytoPanelComponent {
 
 	public MiMILegend(){
-		Icon icon = new ImageIcon(CyActivator.class.getResource("legend4.png"));
+		Icon icon = new ImageIcon(MiMILegend.class.getResource("legend4.png"));
 		JLabel l=new JLabel (icon);
 		this.add(l);
 	}
