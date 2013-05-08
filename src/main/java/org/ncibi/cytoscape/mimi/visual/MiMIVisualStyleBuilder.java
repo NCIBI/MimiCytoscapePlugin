@@ -128,7 +128,7 @@ public class MiMIVisualStyleBuilder {
         
         //edge color
         DiscreteMapping<Boolean, Paint> edgeColorMapping = (DiscreteMapping<Boolean, Paint>) discreteMappingFactory
-				.createVisualMappingFunction("Interaction.userAnnot", Boolean.class, BasicVisualLexicon.EDGE_PAINT);
+				.createVisualMappingFunction("Interaction.userAnnot", Boolean.class, BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
         edgeColorMapping.putMapValue(false, new Color(0,0,0)); 
         edgeColorMapping.putMapValue(true, new Color(0,255,0));                    
         style.addVisualMappingFunction(edgeColorMapping);
