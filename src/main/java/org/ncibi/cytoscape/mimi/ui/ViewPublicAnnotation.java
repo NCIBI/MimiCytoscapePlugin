@@ -72,7 +72,7 @@ public class ViewPublicAnnotation extends JFrame{
 				table="Edge";
 				CyEdge edge= (CyEdge)obj;
 				id=network.getRow(edge).get(CyNetwork.NAME, String.class);
-				nodedgename=network.getRow(edge).get("Gene.name", String.class);	
+				nodedgename=network.getRow(edge).get("Interaction.geneName", String.class);	
 			}
 			URL url =new URL(MiMIURL.GETSHAREDANNOT);
 			String query= "TABLE="+table+"&ID="+URLEncoder.encode(id,"UTF-8");
