@@ -2,8 +2,8 @@
 
   function checkdb($port, $label, $dbname, $sql) {
     $ok = TRUE;
-    $user = "weymouth";
-    $pw = "tew4ncibi";
+    $user = "username";
+    $pw = "pw";
     $server="dbx.ncibi.org:$port";
 
     print("test for $label <br /> \n");
