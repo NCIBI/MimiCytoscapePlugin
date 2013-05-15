@@ -50,7 +50,7 @@ import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
 import org.cytoscape.io.util.StreamUtil;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.util.MD5;
 
 @SuppressWarnings("serial")
@@ -149,7 +149,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 					String til=URLEncoder.encode(ttil.getText(),"UTF-8");
 					String pwd =  String.valueOf(tpwd.getPassword());
 					pwd =URLEncoder.encode(pwd,"UTF-8");				
-					String urlstr=MiMIURL.NEWUSERURL;
+					String urlstr=MiMI.NEWUSERURL;
 					String query="NAME="+name+"&PWD="+pwd+"&EMAIL="+email+"&ORG="+org+"&TIL="+til;
 					URLConnection uc = streamUtil.getURLConnection(new URL(urlstr));
 					uc.setDoOutput(true);	
@@ -168,7 +168,7 @@ public class NewUserSignup extends JFrame implements ActionListener{
 							else{//call php file to validate log in email
 								//get md5 hash
 								String md5hash=new MD5(email).getmd5hash();	
-								String urlstr1=MiMIURL.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
+								String urlstr1=MiMI.VALIDATEEMAIL+"?EMAIL="+email+"&PWD="+pwd+"&MD5HASH="+md5hash;
 								URLConnection uc1 = streamUtil.getURLConnection(new URL(urlstr));
 								uc1.setDoOutput(true);	
 								OutputStreamWriter wr1 = new OutputStreamWriter(uc.getOutputStream());

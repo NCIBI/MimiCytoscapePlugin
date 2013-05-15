@@ -20,7 +20,7 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskMonitor;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.enums.NodeType;
 
 public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
@@ -53,7 +53,7 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 				String taxid = network.getRow(node).get("Gene.taxid", String.class);
 				String molType = rootNetwork.getRow(rootNetwork).get("Molecule Type", String.class, "All Molecule Types");
 				String dataSource = rootNetwork.getRow(rootNetwork).get("Data Source", String.class, "All Data Sources");
-				String urlstr =MiMIURL.PRECOMPUTEEXPAND+"?ID="+name+"&ORGANISMID="+taxid+"&MOLTYPE="+URLEncoder.encode(molType,"UTF-8")+"&DATASOURCE="+URLEncoder.encode(dataSource,"UTF-8");
+				String urlstr =MiMI.PRECOMPUTEEXPAND+"?ID="+name+"&ORGANISMID="+taxid+"&MOLTYPE="+URLEncoder.encode(molType,"UTF-8")+"&DATASOURCE="+URLEncoder.encode(dataSource,"UTF-8");
 				URL url = new URL(urlstr);
 				URLConnection conn = streamUtil.getURLConnection(url) ;
 				conn.setUseCaches(false);

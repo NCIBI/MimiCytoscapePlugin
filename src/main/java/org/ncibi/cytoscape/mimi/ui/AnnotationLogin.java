@@ -55,7 +55,7 @@ import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 
 @SuppressWarnings("serial")
@@ -137,7 +137,7 @@ public class AnnotationLogin extends JFrame implements ActionListener {
 				try{
 					tEmail=URLEncoder.encode(tEmail,"UTF-8");
 					tPaswd =URLEncoder.encode(tPaswd,"UTF-8");	
-					String urlstr=MiMIURL.ANNOTEDITORLOGIN;
+					String urlstr=MiMI.ANNOTEDITORLOGIN;
 					String query= "EMAIL="+tEmail+"&PWD="+tPaswd;
 					URLConnection uc = streamUtil.getURLConnection(new URL(urlstr));
 					uc.setDoOutput(true);	

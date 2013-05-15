@@ -49,7 +49,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.cytoscape.io.util.StreamUtil;
-import org.ncibi.cytoscape.mimi.MiMIURL;
+import org.ncibi.cytoscape.mimi.MiMI;
 
 @SuppressWarnings("serial")
 public class ForgotPassword extends JFrame implements ActionListener {
@@ -90,7 +90,7 @@ public class ForgotPassword extends JFrame implements ActionListener {
 			else {
 				try{
 					//System.out.println("emial is "+t.getText());
-					String urlstr = MiMIURL.SENDPSWD;
+					String urlstr = MiMI.SENDPSWD;
 					String query="EMAIL="+URLEncoder.encode(t.getText(),"UTF-8");
 					URLConnection uc = streamUtil.getURLConnection(new URL(urlstr));
 					uc.setDoOutput(true);	

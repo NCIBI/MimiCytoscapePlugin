@@ -40,7 +40,7 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.swing.DialogTaskManager;
-import org.ncibi.cytoscape.mimi.MiMIState;
+import org.ncibi.cytoscape.mimi.MiMI;
 import org.ncibi.cytoscape.mimi.QueryBioNlp;
 import org.ncibi.cytoscape.mimi.task.ApplyVisualStyleAndLayoutTaskFactory;
 import org.ncibi.cytoscape.mimi.ui.AnnotationEditor;
@@ -95,11 +95,11 @@ public class PopupEdgeContextMenuFactory implements CyEdgeViewContextMenuFactory
 		});
 		jmiEdgeAnno.addActionListener(new ActionListener(){
 			public 	void actionPerformed(ActionEvent e){        			
-				if (MiMIState.currentUserID.equals("0"))
+				if (MiMI.currentUserID.equals("0"))
 					new AnnotationLogin(edge, network, networkView, 
 							dialogTaskManager, vslTaskFactory, frame, streamUtil);
 				else 
-					new AnnotationEditor(edge, network, networkView, MiMIState.currentUserID,
+					new AnnotationEditor(edge, network, networkView, MiMI.currentUserID,
 							dialogTaskManager, vslTaskFactory, frame, streamUtil);
 			}
 		});
