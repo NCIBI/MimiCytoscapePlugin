@@ -53,13 +53,14 @@ public class DetailsPanel extends JFrame implements  HyperlinkListener{
 	 private JEditorPane editorPane;
 	 private String strResult;
 	 //private String molecule1, molecule2, moleculeID1, moleculeID2;
-	 public static String molecule1, molecule2, moleculeID1, moleculeID2;
+	 public static String molecule1, molecule2;
+	 public static Integer moleculeID1, moleculeID2;
 	 public static URL url;
 	 public static int SortsentencesNumber;
 	 public final static int   SORTLIMIT=20;
 	 //private int sentenceNumber;
 	 
-	 public DetailsPanel(String str, String mol1, String mol2, String molID1, String molID2, JFrame parent){		
+	 public DetailsPanel(String str, String mol1, String mol2, Integer molID1, Integer molID2, JFrame parent){		
 		 super("Cytoscape MiMI Query BioNLP");	
 		    strResult =str;
 		    molecule1=mol1;

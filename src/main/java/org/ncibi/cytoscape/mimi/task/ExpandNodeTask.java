@@ -63,11 +63,11 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 	public void run(TaskMonitor taskMonitor) throws Exception {
 		//System.out.println("inputtypeis "+inputtype+ "inputstring is "+inputStr);
 		//query mimi rdb and create network	
-		String geneName = network.getRow(node).get("Gene.name", String.class);
-		String organism = network.getRow(node).get("Gene.organism", String.class);
-		CyRootNetwork rootNetwork = rootNetworkManager.getRootNetwork(network);
-		String molType = rootNetwork.getRow(rootNetwork).get("Molecule Type", String.class, "All Molecule Types");
-		String dataSource = rootNetwork.getRow(rootNetwork).get("Data Source", String.class, "All Data Sources");
+		String geneName = network.getRow(node).get(CyRootNetwork.SHARED_NAME, String.class);
+		String organism = network.getRow(node).get("Organism", String.class);
+		CyNetwork baseNetwork = rootNetworkManager.getRootNetwork(network).getBaseNetwork();
+		String molType = baseNetwork.getRow(baseNetwork).get("Molecule Type", String.class, "All Molecule Types");
+		String dataSource = baseNetwork.getRow(baseNetwork).get("Data Source", String.class, "All Data Sources");
 		String term = geneName+"/////"+organism+"/////"+molType+"/////"+dataSource+"/////1. Query genes + nearest neighbors";
 		CyTable hiddenNodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
 		//System.out.println("start query mimi geneidlist["+geneIDList+"]");				   
@@ -79,19 +79,31 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 			//Process line..
 			//System.out.println("get line is ["+line+"]");
 			String [] res=line.split("/////");
+			Integer sourceId;
+			Integer targetId;
+			Integer interactionId;
+			try {
+				sourceId = Integer.valueOf(res[1]);
+				targetId = Integer.valueOf(res[4]);
+				interactionId = Integer.valueOf(res[6]);
+			}
+			catch(NumberFormatException e) {
+				continue;
+			}
 			CyNode sourceNode;
-			Collection<CyRow> sourceNodeRows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, res[1]);
+			Collection<CyRow> sourceNodeRows = network.getDefaultNodeTable().getMatchingRows("ID", sourceId);
 			if(sourceNodeRows.isEmpty()) {
 				sourceNode = network.addNode();
-				network.getRow(sourceNode).set(CyNetwork.NAME, res[1]);
+				network.getRow(sourceNode).set(CyNetwork.NAME, res[0]);
+				network.getRow(sourceNode).set(CyRootNetwork.SHARED_NAME, res[0]);
 				if (!nodeList.contains(sourceNode)){
 					nodeList.add(sourceNode);
-					nodeIDList.add(res[1]);
-					network.getRow(sourceNode).set("Gene.name", res[0]);
+					nodeIDList.add(sourceId);
+					network.getRow(sourceNode).set("ID", sourceId);
 					//add step attribute 	
 					//if (!nodeAttributes.hasAttribute(sourceNode.getIdentifier(),"Network Distance"))
 					network.getRow(sourceNode).set("Network Distance", "-1");
-					network.getRow(sourceNode).set("Gene.userAnnot", false);
+					network.getRow(sourceNode).set("UserAnnot", false);
 					network.getRow(sourceNode).set("Node Color", NodeType.EXPANDNEIGHBOR.ordinal());
 				}
 			}
@@ -103,17 +115,18 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 			//		            	    CyNode targetNode=Cytoscape.getCyNode(res[4], true); 
 
 			CyNode targetNode;
-			Collection<CyRow> targetNodeRows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME, res[4]);
+			Collection<CyRow> targetNodeRows = network.getDefaultNodeTable().getMatchingRows("ID", targetId);
 			if(targetNodeRows.isEmpty()) {
 				targetNode = network.addNode();
-				network.getRow(targetNode).set(CyNetwork.NAME, res[4]);
+				network.getRow(targetNode).set(CyNetwork.NAME, res[3]);
+				network.getRow(targetNode).set(CyRootNetwork.SHARED_NAME, res[3]);
 				if (!nodeList.contains(targetNode)){
 					nodeList.add(targetNode);
-					nodeIDList.add(res[4]);
-					network.getRow(targetNode).set("Gene.name", res[3]);
+					nodeIDList.add(targetId);
+					network.getRow(targetNode).set("ID", targetId);
 					//if (!nodeAttributes.hasAttribute(targetNode.getIdentifier(),"Network Distance"))	
 					network.getRow(targetNode).set("Network Distance", "-1");
-					network.getRow(targetNode).set("Gene.userAnnot", false);
+					network.getRow(targetNode).set("UserAnnot", false);
 					network.getRow(targetNode).set("Node Color", NodeType.EXPANDNEIGHBOR.ordinal());
 				}
 			}
@@ -124,16 +137,14 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 
 
 			if (!network.containsEdge(sourceNode,targetNode) && !network.containsEdge(targetNode, sourceNode)){
+				String name = "("+res[0]+" , "+res[3]+")";
 				CyEdge edge = network.addEdge(sourceNode, targetNode, true);
-				String name = network.getRow(sourceNode).get(CyNetwork.NAME, String.class) + 
-						" ( ) " + network.getRow(targetNode).get(CyNetwork.NAME, String.class);
-				network.getRow(edge).set(CyEdge.INTERACTION, " ");
-				network.getRow(edge).set(CyNetwork.NAME, name);
 				edgeList.add(edge);
-				edgeIDList.add(name);
-				network.getRow(edge).set("Interaction.geneName", "("+res[0]+" , "+res[3]+")");
-				network.getRow(edge).set("Interaction.userAnnot", false);
-				network.getRow(edge).set("Interaction.id", res[6]);
+				edgeIDList.add(interactionId);
+				network.getRow(targetNode).set(CyNetwork.NAME, res[3]);
+				network.getRow(edge).set(CyRootNetwork.SHARED_NAME, name);
+				network.getRow(edge).set("ID", interactionId);
+				network.getRow(edge).set("UserAnnot", false);
 			}
 
 		}
@@ -142,9 +153,9 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 			//set node color attributes for expand node. set nodelist and edge list as expand node attributes for collapsing expanded network using 
 			network.getRow(node).set("Node Color", NodeType.EXPANDNODE.ordinal());
 			if(hiddenNodeTable.getColumn("NodeIDList") == null)
-				hiddenNodeTable.createListColumn("NodeIDList", String.class, true);
+				hiddenNodeTable.createListColumn("NodeIDList", Integer.class, true);
 			if(hiddenNodeTable.getColumn("EdgeIDList") == null)
-				hiddenNodeTable.createListColumn("EdgeIDList", String.class, true);
+				hiddenNodeTable.createListColumn("EdgeIDList", Integer.class, true);
 			hiddenNodeTable.getRow(node.getSUID()).set("NodeIDList", nodeIDList);
 			hiddenNodeTable.getRow(node.getSUID()).set("EdgeIDList", edgeIDList);
 			insertTasksAfterCurrentTask(new GetMiMIAttributesTask(nodeList, edgeList, network, streamUtil));

@@ -59,18 +59,18 @@ public class CollapseNodeTask extends AbstractTask{
     	List<CyNode> nodeList = network.getNodeList();
     	List<CyEdge> edgeList = network.getEdgeList();
     	
-    	List<String> nodeIDList=hiddenNodeTable.getRow(node.getSUID()).getList("NodeIDList", String.class);
-    	List<String> edgeIDList=hiddenNodeTable.getRow(node.getSUID()).getList("EdgeIDList", String.class);
+    	List<Integer> nodeIDList=hiddenNodeTable.getRow(node.getSUID()).getList("NodeIDList", Integer.class);
+    	List<Integer> edgeIDList=hiddenNodeTable.getRow(node.getSUID()).getList("EdgeIDList", Integer.class);
     	
 		//remove expanded edges from network		
 		Iterator<CyEdge> edgeIt=edgeList.iterator();
 		while (edgeIt.hasNext()){
 			CyEdge theedge=(CyEdge)edgeIt.next();
-			Iterator<String> edgeIDIt=edgeIDList.iterator();
+			Iterator<Integer> edgeIDIt=edgeIDList.iterator();
 			while (edgeIDIt.hasNext()){
-				String edgeID = (String)edgeIDIt.next();
+				Integer edgeID = (Integer)edgeIDIt.next();
 				CyRow row = network.getRow(theedge);
-				if (row.get(CyNetwork.NAME, String.class).equals(edgeID)){
+				if (row.get("ID", Integer.class).equals(edgeID)){
 					network.removeEdges(Collections.singleton(theedge));
     				network.getDefaultEdgeTable().deleteRows(Collections.singleton(theedge.getSUID()));
 					break;
@@ -82,11 +82,11 @@ public class CollapseNodeTask extends AbstractTask{
     	Iterator<CyNode> nodeIt=nodeList.iterator();     	
     	while (nodeIt.hasNext()){
     		CyNode thenode=(CyNode)nodeIt.next();
-    		Iterator<String> nodeIDIt =nodeIDList.iterator();
+    		Iterator<Integer> nodeIDIt =nodeIDList.iterator();
     		while (nodeIDIt.hasNext()){
-    			String nodeID =(String)nodeIDIt.next();
+    			Integer nodeID =(Integer)nodeIDIt.next();
     			//System.out.println("node id "+nodeID);
-    			if (network.getRow(thenode).get(CyNetwork.NAME, String.class).equals(nodeID)){
+    			if (network.getRow(thenode).get("ID", Integer.class).equals(nodeID)){
     				//System.out.println("remove the node");
     				network.removeNodes(Collections.singleton(thenode));//only remove node from current network
     				network.getDefaultNodeTable().deleteRows(Collections.singleton(thenode.getSUID()));

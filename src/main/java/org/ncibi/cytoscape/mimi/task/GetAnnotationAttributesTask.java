@@ -40,6 +40,7 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.ncibi.cytoscape.mimi.MiMI;
@@ -57,6 +58,8 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 	private StreamUtil streamUtil;
 	private CyTable nodeTable;
 	private CyTable edgeTable;
+	private CyTable geneTable;
+    private CyTable interactionTable;
 	
 	public GetAnnotationAttributesTask(Collection<CyNode> nodes, Collection<CyEdge> edges, CyNetwork network, StreamUtil streamUtil) {
 		this.nodes = nodes;
@@ -66,61 +69,80 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		
 		this.nodeTable = network.getDefaultNodeTable();
 		this.edgeTable = network.getDefaultEdgeTable();
+		this.geneTable = nodeTable.getColumn("ID").getVirtualColumnInfo().getSourceTable();
+    	this.interactionTable = edgeTable.getColumn("ID").getVirtualColumnInfo().getSourceTable();
 	}
 	
 
 	@Override
 	public void run(TaskMonitor taskMonitor) throws Exception {
 		String line;
-		
 		String geneIDs = "";
-		Map<String,CyRow> nodeRowMap = new HashMap<String,CyRow>();
+		Map<Integer,CyRow> nodeRowMap = new HashMap<Integer,CyRow>();
 		for(CyNode node: nodes) {
-			String id = network.getRow(node).get(CyNetwork.NAME, String.class);
+			Integer id = network.getRow(node).get("ID", Integer.class);
 			geneIDs += id + " ";
 			nodeRowMap.put(id, network.getRow(node));
 		}
 		geneIDs = geneIDs.trim();
-		if(nodeTable.getColumn("Gene.userAnnot") == null)
-			nodeTable.createColumn("Gene.userAnnot",Boolean.class, true, false);
+		if(nodeTable.getColumn("UserAnnot") == null) {
+			geneTable.createColumn("UserAnnot",Boolean.class, true, true);
+			nodeTable.addVirtualColumn("UserAnnot","UserAnnot",geneTable,CyRootNetwork.SHARED_NAME,true);
+		}
 		if (!geneIDs.equals("")){
-			//get node userannotationattribute
+			//get node UserAnnotationattribute
 			doQuery(1,geneIDs);
 			line="";
 			
 			while ((line = rd.readLine()) != null){
-				CyRow row = nodeRowMap.get(line);
-				row.set("Gene.userAnnot", true);
+				Integer geneid;
+				try {
+					geneid = Integer.valueOf(line);
+				}
+				catch(NumberFormatException e) {
+					continue;
+				}
+				CyRow row = nodeRowMap.get(geneid);
+				row.set("UserAnnot", true);
 				nodeRowMap.remove(line);
 			}		
 			rd.close();
 			for(CyRow row: nodeRowMap.values()) {
-				row.set("Gene.userAnnot", false);
+				row.set("UserAnnot", false);
 			}
 		}
 		
 		String edgeIDs = "";
-		Map<String,CyRow> edgeRowMap = new HashMap<String,CyRow>();
+		Map<Integer,CyRow> edgeRowMap = new HashMap<Integer,CyRow>();
 		for(CyEdge edge: edges) {
-			String id = network.getRow(edge).get(CyNetwork.NAME, String.class);
-			edgeIDs += "," + id;
+			Integer id = network.getRow(edge).get("ID", Integer.class);
+			edgeIDs += id + " ";
 			edgeRowMap.put(id, network.getRow(edge));
 		}
-		edgeIDs = edgeIDs.substring(1).trim();
-		if(edgeTable.getColumn("Interaction.userAnnot") == null)
-			edgeTable.createColumn("Interaction.userAnnot",Boolean.class, true, false);
+		edgeIDs = edgeIDs.trim();
+		if(edgeTable.getColumn("UserAnnot") == null) {
+			interactionTable.createColumn("UserAnnot",Boolean.class, true, false);
+			edgeTable.addVirtualColumn("UserAnnot", "UserAnnot", interactionTable, CyRootNetwork.SHARED_NAME, true);
+		}
 		if (!edgeIDs.equals("")){
 			//get edge user annotation attribute
 			doQuery(0,edgeIDs);
 			line="";
 			while ((line = rd.readLine()) != null){
-				CyRow row = edgeRowMap.get(line);
-				row.set("Interaction.userAnnot", true);
+				Integer edgeid;
+				try {
+					edgeid = Integer.valueOf(line);
+				}
+				catch(NumberFormatException e) {
+					continue;
+				}
+				CyRow row = edgeRowMap.get(edgeid);
+				row.set("UserAnnot", true);
 				edgeRowMap.remove(line);
 			}			
 			rd.close();
 			for(CyRow row: edgeRowMap.values()) {
-				row.set("Interaction.userAnnot", false);
+				row.set("UserAnnot", false);
 			}
 		}
 	}

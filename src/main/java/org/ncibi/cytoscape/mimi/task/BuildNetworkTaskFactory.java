@@ -7,6 +7,8 @@ import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.CyTableFactory;
+import org.cytoscape.model.CyTableManager;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.CyNetworkViewManager;
@@ -17,6 +19,8 @@ import org.ncibi.cytoscape.mimi.ui.MiMILegend;
 public class BuildNetworkTaskFactory {
 	
 	private boolean isLegendVisible = false;
+	private CyTableFactory cyTableFactory;
+	private CyTableManager cyTableManager;
 	private CyNetworkFactory cyNetworkFactory;
 	private CyNetworkManager cyNetworkManager;
 	private CyNetworkViewFactory cyNetworkViewFactory;
@@ -26,11 +30,13 @@ public class BuildNetworkTaskFactory {
 	private CyServiceRegistrar cyServiceRegistrar;
 	private StreamUtil streamUtil;
 
-	public BuildNetworkTaskFactory(CyNetworkFactory cyNetworkFactory, 
-			CyNetworkManager cyNetworkManager, 
+	public BuildNetworkTaskFactory(CyTableFactory cyTableFactory, CyTableManager cyTableManager, 
+			CyNetworkFactory cyNetworkFactory, CyNetworkManager cyNetworkManager, 
 			CyNetworkViewFactory cyNetworkViewFactory, CyNetworkViewManager cyNetworkViewManager, 
 			CyEventHelper cyEventHelper, ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory,
 			CyServiceRegistrar cyServiceRegistrar, StreamUtil streamUtil) {
+		this.cyTableFactory = cyTableFactory;
+		this.cyTableManager = cyTableManager;
 		this.cyNetworkFactory = cyNetworkFactory;
 		this.cyNetworkManager = cyNetworkManager;
 		this.cyNetworkViewFactory = cyNetworkViewFactory;
@@ -46,7 +52,7 @@ public class BuildNetworkTaskFactory {
 			isLegendVisible = true;
 		}
 		return new TaskIterator(new BuildNetworkTask(queryType, inputStr, 
-				cyNetworkFactory, cyNetworkManager, 
+				cyTableFactory, cyTableManager, cyNetworkFactory, cyNetworkManager, 
 				cyNetworkViewFactory, cyNetworkViewManager, cyEventHelper, vslTaskFactory, streamUtil));
 	}
 	

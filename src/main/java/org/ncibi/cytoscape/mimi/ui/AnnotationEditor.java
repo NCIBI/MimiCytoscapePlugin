@@ -118,8 +118,8 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 	private JTextField urlTextField;
 	private ArrayList<String> urls=new ArrayList<String>();
 	private ArrayList<String> annotSetNameList= new ArrayList<String>();
+	private int id;
 	private String name="";
-	private String id="";
 	private String alias="";
 	private String chromosome="";
 	private String maploc="";	
@@ -162,8 +162,8 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 			nodeOrEdge=1;
 			table="Node";
 			CyNode node= (CyNode)obj;
-			name=network.getRow(obj).get("Gene.name", String.class);
-			id=network.getRow(obj).get(CyNetwork.NAME, String.class);			
+			name=network.getRow(obj).get(CyNetwork.NAME, String.class);
+			id=network.getRow(obj).get("ID", Integer.class);			
 			getAnnotSetNameList(id,table,userid);			
 			if (annotSetNameList.size()==0){			
 				annotSetName="INPUT YOUR ANNOTATION NAME";
@@ -178,9 +178,9 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 			nodeOrEdge=0;
 			table="Edge";
 			CyEdge edge= (CyEdge)obj;
-			name=network.getRow(edge.getSource()).get("Gene.name", String.class)+"<=>"
-					+network.getRow(edge.getTarget()).get("Gene.name", String.class);
-			id =network.getRow(edge).get(CyNetwork.NAME, String.class);		
+			name=network.getRow(edge.getSource()).get("Gene Name", String.class)+"<=>"
+					+network.getRow(edge.getTarget()).get("Gene Name", String.class);
+			id =network.getRow(edge).get("ID", Integer.class);		
 			getAnnotSetNameList(id,table,userid);	
 			if (annotSetNameList.size()==0){			
 				annotSetName="INPUT YOUR ANNOTATION NAME HERE";				
@@ -214,7 +214,7 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 		
 		JLabel idLabel =new JLabel("ID",JLabel.LEADING);			
 		p.add(idLabel);
-		JTextField idtext=new JTextField(id,10);
+		JTextField idtext=new JTextField(Integer.toString(id),10);
 		idtext.setEditable(false);
 		idLabel.setLabelFor(idtext);
 		p.add(idtext);
@@ -415,7 +415,7 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 				TaskIterator ti = new TaskIterator();
 				doSaveUpdate();	
 				if (nodeOrEdge==1 && sharebutton.isSelected())
-					network.getRow(obj).set("Gene.userAnnot", true);
+					network.getRow(obj).set("UserAnnot", true);
 				else if (nodeOrEdge==0 && sharebutton.isSelected())
 					network.getRow(obj).set("Gene.edgeUserAnnot", true);
 				else if (!sharebutton.isSelected()){
@@ -522,13 +522,12 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 	}
 	
 
-	private void getContent(String table,String setName,String id, String userid){		
+	private void getContent(String table,String setName,Integer id, String userid){		
 		try{
 			urls=new ArrayList<String>();
 			String setID="";
 			String result="";			
 			setName=URLEncoder.encode(setName,"UTF-8");
-			id =URLEncoder.encode(id,"UTF-8");
 			String url="http://mimiplugin.ncibi.org/dbaccess/3.2/queryMiMIAnnot_rdb.php";						
 			URL ncibi_dbx=new URL(url);	
 			String query="TABLE="+table+"&SETNAME="+setName+"&ID="+id+"&USERID="+userid;
@@ -619,9 +618,8 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 	
 	}
 	
-	private void getAnnotSetNameList(String id, String tableName,String userid){
+	private void getAnnotSetNameList(Integer id, String tableName,String userid){
 		try{
-			id =URLEncoder.encode(id,"UTF-8");
 			String urlstr=MiMI.ANNOTSETNAME;
 			String query="TABLE="+tableName+"&ID="+id+"&USERID="+userid;
 			URLConnection uc = streamUtil.getURLConnection(new URL(urlstr));
@@ -738,7 +736,7 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 			}
 			
 		   if (content != null && !annotSetName.equals("MiMI")){				
-				String lid=URLEncoder.encode(id,"UTF-8");
+				String lid=URLEncoder.encode(Integer.toString(id),"UTF-8");
 				String annot=URLEncoder.encode(content.getText().replaceAll("'", "").replaceAll("\n",""),"UTF-8");	
 				//System.out.println("annot before save is ["+annot);
 				String annotsetname=URLEncoder.encode(annotSetName.replaceAll("'", ""),"UTF-8");
@@ -826,28 +824,28 @@ public class AnnotationEditor extends JFrame implements ActionListener{ //,ItemL
 	}
 	
 	private void getNodeAttributes(CyNode node, CyNetwork network){
-		alias=network.getRow(node).get("Gene.otherNames", String.class, " ");
-		chromosome=network.getRow(node).get("Gene.chromosome", String.class, " ");
-		maploc=network.getRow(node).get("Gene.map_loc", String.class, " ");
-		locustag=network.getRow(node).get("Gene.locustag", String.class, " ");
-		taxid=network.getRow(node).get("Gene.taxid", String.class, " ");
-		taxonomyName=network.getRow(node).get("Gene.organism", String.class, " ");
-		type=network.getRow(node).get("Gene.gene type", String.class, " ");    
-        description=network.getRow(node).get("Gene.description", String.class, " ");
-        component=network.getRow(node).get("Gene.component", String.class, " ");
-        function=network.getRow(node).get("Gene.function", String.class, " ");
-        process=network.getRow(node).get("Gene.process", String.class, " ");
-        complex=network.getRow(node).get("Gene.complex", String.class, " ");
+		alias=network.getRow(node).get("Other Names", String.class, " ");
+		chromosome=network.getRow(node).get("Chromosome", String.class, " ");
+		maploc=network.getRow(node).get("Map_loc", String.class, " ");
+		locustag=network.getRow(node).get("Locustag", String.class, " ");
+		taxid=network.getRow(node).get("Taxid", String.class, " ");
+		taxonomyName=network.getRow(node).get("Organism", String.class, " ");
+		type=network.getRow(node).get("Gene type", String.class, " ");    
+        description=network.getRow(node).get("Description", String.class, " ");
+        component=network.getRow(node).get("Component", String.class, " ");
+        function=network.getRow(node).get("Function", String.class, " ");
+        process=network.getRow(node).get("Process", String.class, " ");
+        complex=network.getRow(node).get("Complex", String.class, " ");
 	}
 	
 	private void getEdgeAttributes(CyEdge edge, CyNetwork network){
-		itype=network.getRow(edge).get("Interaction.interactiontype", String.class, " ");
-	    name=network.getRow(edge).get("Interaction.geneName", String.class, " ");
-		iprovenance=network.getRow(edge).get("Interaction.provenance", String.class, " ");
-		icomponent=network.getRow(edge).get("Interaction.component", String.class, " ");
-		ifunction=network.getRow(edge).get("Interaction.function", String.class, " ");
-		iprocess=network.getRow(edge).get("Interaction.process", String.class, " ");
-		ipubmed=network.getRow(edge).get("Interaction.pubmed", String.class, " ");
+	    name=network.getRow(edge).get(CyNetwork.NAME, String.class, " ");
+		itype=network.getRow(edge).get("Interactiontype", String.class, " ");
+		iprovenance=network.getRow(edge).get("Provenance", String.class, " ");
+		icomponent=network.getRow(edge).get("Component", String.class, " ");
+		ifunction=network.getRow(edge).get("Function", String.class, " ");
+		iprocess=network.getRow(edge).get("Process", String.class, " ");
+		ipubmed=network.getRow(edge).get("Pubmed", String.class, " ");
 	}
 	
 	class TheMouseListener implements MouseListener{

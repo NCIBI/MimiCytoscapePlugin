@@ -51,12 +51,12 @@ public class QueryBioNlp {
 		CyRow sourceRow = network.getRow(edge.getSource());
 		CyRow targetRow = network.getRow(edge.getTarget());
 		
-		String molecule1=sourceRow.get("Gene.name", String.class);
-		String molecule2=targetRow.get("Gene.name", String.class);
-		String moleculeID1=sourceRow.get(CyNetwork.NAME, String.class);
-		String moleculeID2=targetRow.get(CyNetwork.NAME, String.class);
-		String taxID1=sourceRow.get("Gene.taxid", String.class);
-		String taxID2=targetRow.get("Gene.taxid", String.class);
+		String molecule1=sourceRow.get(CyNetwork.NAME, String.class);
+		String molecule2=targetRow.get(CyNetwork.NAME, String.class);
+		Integer moleculeID1=sourceRow.get("ID", Integer.class);
+		Integer moleculeID2=targetRow.get("ID", Integer.class);
+		String taxID1=sourceRow.get("Taxid", String.class);
+		String taxID2=targetRow.get("Taxid", String.class);
 		if(!molecule1.equalsIgnoreCase("N/A") && !molecule2.equalsIgnoreCase("N/A")){
 			
 			try{

@@ -108,7 +108,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
             {
                 CyNode node = nodeView.getModel();
                 CyNetwork network = networkView.getModel();
-                String term = network.getRow(node).get("Gene.name",String.class);
+                String term = network.getRow(node).get("Gene Name",String.class);
                 String taxid = network.getRow(node).get("Gene.taxid", String.class);
                 // get selected nodes
                 /*
@@ -117,7 +117,7 @@ public class PopupNodeContextMenuFactory implements CyNodeViewContextMenuFactory
                  * while (nodeSet.hasNext()){ CyNode sltNode=nodeSet.next();
                  * term +=
                  * Cytoscape.getNodeAttributes().getStringAttribute(sltNode
-                 * .getIdentifier(), "Gene.name"); }
+                 * .getIdentifier(), "Gene Name"); }
                  */
 
                 BareBonesBrowserLaunch.openURL(MiMI.GENE2MESH + "index.php?view=simple&qtype=gene"

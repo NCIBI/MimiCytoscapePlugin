@@ -69,8 +69,8 @@ public abstract class AbstractMiMIQueryTask extends AbstractTask{
 	
 	protected ArrayList<CyNode> nodeList = new ArrayList<CyNode>();
 	protected ArrayList<CyEdge> edgeList = new ArrayList<CyEdge>(); 
-	protected ArrayList<String> nodeIDList = new ArrayList<String>();
-	protected ArrayList<String> edgeIDList = new ArrayList<String>();
+	protected ArrayList<Integer> nodeIDList = new ArrayList<Integer>();
+	protected ArrayList<Integer> edgeIDList = new ArrayList<Integer>();
 	
 	public abstract void run(TaskMonitor arg0) throws Exception;
 	

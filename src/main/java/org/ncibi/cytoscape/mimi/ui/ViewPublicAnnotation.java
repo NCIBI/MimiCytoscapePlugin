@@ -66,13 +66,13 @@ public class ViewPublicAnnotation extends JFrame{
 				table="Node";
 				CyNode node= (CyNode)obj;
 				id=network.getRow(node).get(CyNetwork.NAME, String.class);
-				nodedgename=network.getRow(node).get("Gene.name", String.class);				
+				nodedgename=network.getRow(node).get("Gene Name", String.class);				
 			}
 			if (obj instanceof CyEdge){				
 				table="Edge";
 				CyEdge edge= (CyEdge)obj;
 				id=network.getRow(edge).get(CyNetwork.NAME, String.class);
-				nodedgename=network.getRow(edge).get("Interaction.geneName", String.class);	
+				nodedgename=network.getRow(edge).get("Gene Name", String.class);	
 			}
 			URL url =new URL(MiMI.GETSHAREDANNOT);
 			String query= "TABLE="+table+"&ID="+URLEncoder.encode(id,"UTF-8");

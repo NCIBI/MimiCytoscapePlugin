@@ -28,6 +28,7 @@ package org.ncibi.cytoscape.mimi.visual;
 import java.awt.Color;
 import java.awt.Paint;
 
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.NodeShape;
@@ -47,7 +48,7 @@ import org.ncibi.cytoscape.mimi.enums.NodeType;
 public class MiMIVisualStyleBuilder {
 	public static final String MiMI_VS = "MiMI";   
     public static final String NODE_CTRL_ATT="Node Color";
-    public static final String USERANNOT_CTRL="Gene.userAnnot";
+    public static final String UserAnnot_CTRL="UserAnnot";
     
     private VisualStyleFactory visualStyleFactory;
     private VisualMappingFunctionFactory discreteMappingFactory;
@@ -73,7 +74,7 @@ public class MiMIVisualStyleBuilder {
     	style.setDefaultValue(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT, Color.white);
     	
         //use Gene Name as node label     
-        String nodeLabel="Gene.name";
+        String nodeLabel=CyNetwork.NAME;
         PassthroughMapping<String, String> nodeLabelMapping = (PassthroughMapping<String, String>) passthroughMappingFactory
 				.createVisualMappingFunction(nodeLabel, String.class, BasicVisualLexicon.NODE_LABEL);
         style.addVisualMappingFunction(nodeLabelMapping);
@@ -114,21 +115,21 @@ public class MiMIVisualStyleBuilder {
         
         //Node border color control by attribute "UserAnnot"
         DiscreteMapping<Boolean, Paint> nodeBorderColorMapping = (DiscreteMapping<Boolean, Paint>) discreteMappingFactory
-				.createVisualMappingFunction(USERANNOT_CTRL, Boolean.class, BasicVisualLexicon.NODE_BORDER_PAINT);
+				.createVisualMappingFunction(UserAnnot_CTRL, Boolean.class, BasicVisualLexicon.NODE_BORDER_PAINT);
         nodeBorderColorMapping.putMapValue(false, new Color(0,0,0)); 
         nodeBorderColorMapping.putMapValue(true, new Color(0,255,0));             
         style.addVisualMappingFunction(nodeBorderColorMapping);
         
         ////Node line width control by attribute "UserAnnot"    
         DiscreteMapping<Boolean, Double> nodeBorderWidthMapping = (DiscreteMapping<Boolean, Double>) discreteMappingFactory
-				.createVisualMappingFunction(USERANNOT_CTRL, Boolean.class, BasicVisualLexicon.NODE_BORDER_WIDTH);
+				.createVisualMappingFunction(UserAnnot_CTRL, Boolean.class, BasicVisualLexicon.NODE_BORDER_WIDTH);
         nodeBorderWidthMapping.putMapValue(false, 1.0); 
         nodeBorderWidthMapping.putMapValue(true, 2.0);             
         style.addVisualMappingFunction(nodeBorderWidthMapping);
         
         //edge color
         DiscreteMapping<Boolean, Paint> edgeColorMapping = (DiscreteMapping<Boolean, Paint>) discreteMappingFactory
-				.createVisualMappingFunction("Interaction.userAnnot", Boolean.class, BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
+				.createVisualMappingFunction("UserAnnot", Boolean.class, BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
         edgeColorMapping.putMapValue(false, new Color(0,0,0)); 
         edgeColorMapping.putMapValue(true, new Color(0,255,0));                    
         style.addVisualMappingFunction(edgeColorMapping);

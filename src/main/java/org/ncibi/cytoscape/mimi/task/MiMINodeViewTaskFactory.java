@@ -41,19 +41,19 @@ public class MiMINodeViewTaskFactory extends AbstractNodeViewTaskFactory {
 	public TaskIterator createTaskIterator(View<CyNode> view, CyNetworkView netView) {
 		CyNode node = view.getModel();
 		CyNetwork network = netView.getModel();
-		CyRootNetwork rootNetwork = rootNetworkManager.getRootNetwork(network);
+		CyNetwork baseNetwork = rootNetworkManager.getRootNetwork(network).getBaseNetwork();
 		TaskIterator taskIterator = new TaskIterator();
-		String dplymode=rootNetwork.getRow(rootNetwork).get("Displays for results", String.class, "1");
+		String dplymode=baseNetwork.getRow(baseNetwork).get("Displays for results", String.class, "1");
 		Integer nodeColor = network.getRow(node).get("Node Color",  Integer.class, 1);
 
 		if(nodeColor==NodeType.SEEDNEIGHBOR.ordinal() || nodeColor==NodeType.EXPANDNEIGHBOR.ordinal()
 				|| ((dplymode.equals("2") || dplymode.equals("4")) && nodeColor != NodeType.EXPANDNODE.ordinal() )) {
 			try {
-				String name = network.getRow(node).get(CyNetwork.NAME, String.class);
-				String taxid = network.getRow(node).get("Gene.taxid", String.class);
-				String molType = rootNetwork.getRow(rootNetwork).get("Molecule Type", String.class, "All Molecule Types");
-				String dataSource = rootNetwork.getRow(rootNetwork).get("Data Source", String.class, "All Data Sources");
-				String urlstr =MiMI.PRECOMPUTEEXPAND+"?ID="+name+"&ORGANISMID="+taxid+"&MOLTYPE="+URLEncoder.encode(molType,"UTF-8")+"&DATASOURCE="+URLEncoder.encode(dataSource,"UTF-8");
+				Integer id = network.getRow(node).get("ID", Integer.class);
+				String taxid = network.getRow(node).get("Taxid", String.class);
+				String molType = baseNetwork.getRow(baseNetwork).get("Molecule Type", String.class, "All Molecule Types");
+				String dataSource = baseNetwork.getRow(baseNetwork).get("Data Source", String.class, "All Data Sources");
+				String urlstr =MiMI.PRECOMPUTEEXPAND+"?ID="+id+"&ORGANISMID="+taxid+"&MOLTYPE="+URLEncoder.encode(molType,"UTF-8")+"&DATASOURCE="+URLEncoder.encode(dataSource,"UTF-8");
 				URL url = new URL(urlstr);
 				URLConnection conn = streamUtil.getURLConnection(url) ;
 				conn.setUseCaches(false);

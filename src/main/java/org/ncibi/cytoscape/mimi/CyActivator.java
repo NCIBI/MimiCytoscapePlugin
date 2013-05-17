@@ -39,6 +39,8 @@ import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.CyTableFactory;
+import org.cytoscape.model.CyTableManager;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.service.util.AbstractCyActivator;
@@ -94,6 +96,8 @@ public class CyActivator extends AbstractCyActivator {
 		type.put("queryMiMIByGenelist",null);
 		
 		CySwingApplication cySwingApplication = getService(bc, CySwingApplication.class);
+		CyTableFactory cyTableFactory = getService(bc, CyTableFactory.class);
+		CyTableManager cyTableManager = getService(bc, CyTableManager.class);
 		CyNetworkFactory cyNetworkFactory = getService(bc, CyNetworkFactory.class);
 		CyNetworkManager cyNetworkManager = getService(bc, CyNetworkManager.class);
 		CyNetworkViewFactory cyNetworkViewFactory = getService(bc, CyNetworkViewFactory.class);
@@ -115,7 +119,7 @@ public class CyActivator extends AbstractCyActivator {
 		CyEventHelper cyEventHelper = getService(bc, CyEventHelper.class);
 		ApplyVisualStyleAndLayoutTaskFactory vslTaskFactory = new ApplyVisualStyleAndLayoutTaskFactory(vsBuilder, vmm, layouts);
 		StreamUtil streamUtil = getService(bc, StreamUtil.class);
-		BuildNetworkTaskFactory buildNetworkTaskFactory = new BuildNetworkTaskFactory(cyNetworkFactory, cyNetworkManager, 
+		BuildNetworkTaskFactory buildNetworkTaskFactory = new BuildNetworkTaskFactory(cyTableFactory, cyTableManager, cyNetworkFactory, cyNetworkManager, 
 				cyNetworkViewFactory, cyNetworkViewManager, cyEventHelper, vslTaskFactory, cyServiceRegistrar, streamUtil);
 		SearchTaskFactory searchTaskFactory = new SearchTaskFactory(buildNetworkTaskFactory, streamUtil);
 		UploadFileTaskFactory uploadFileTaskFactory = new UploadFileTaskFactory(searchTaskFactory, dialogTaskManager, cySwingApplication.getJFrame());
