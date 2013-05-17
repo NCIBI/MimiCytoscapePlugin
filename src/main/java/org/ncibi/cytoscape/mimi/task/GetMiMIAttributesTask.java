@@ -33,6 +33,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.model.CyEdge;
@@ -57,6 +58,8 @@ public class GetMiMIAttributesTask extends AbstractTask
     private StreamUtil streamUtil;
     private CyTable nodeTable;
     private CyTable edgeTable;
+    private Map<String,CyRow> nodeRowMap;
+    private Map<String,CyRow> interRowMap;
 
     // GENE related attributes
     private final static int GENE_BASIC_ATTR = 1;
@@ -96,17 +99,22 @@ public class GetMiMIAttributesTask extends AbstractTask
 	public void run(TaskMonitor arg0) throws Exception {
     	String line;
     	String geneid;
-    	CyRow row;
     	
     	String geneIDs = "";
+		nodeRowMap = new HashMap<String,CyRow>();
 		for(CyNode node: nodes) {
-			geneIDs += network.getRow(node).get(CyNetwork.NAME, String.class) + " ";
+			String id = network.getRow(node).get(CyNetwork.NAME, String.class);
+			geneIDs += id + " ";
+			nodeRowMap.put(id, network.getRow(node));
 		}
 		geneIDs = geneIDs.trim();
 		
 		String interIDs = "";
+		interRowMap = new HashMap<String,CyRow>();
 		for(CyEdge edge: edges) {
-			interIDs += network.getRow(edge).get("Interaction.id", String.class) + " ";
+			String id = network.getRow(edge).get("Interaction.id", String.class);
+			interIDs += id + " ";
+			interRowMap.put(id,  network.getRow(edge));
 		}
 		interIDs = interIDs.trim();
 
@@ -126,8 +134,7 @@ public class GetMiMIAttributesTask extends AbstractTask
 				if(nodeTable.getColumn(geneattr) == null)
 					nodeTable.createColumn(geneattr, String.class, true);
     			if (!geneid.equals("")) {
-    				Collection<CyRow> rows=nodeTable.getMatchingRows(CyNetwork.NAME, geneid);
-    				row = rows.iterator().next();
+    				CyRow row = nodeRowMap.get(geneid);
     				row.set(geneattr, res[2]);
     			}
     		}
@@ -137,7 +144,6 @@ public class GetMiMIAttributesTask extends AbstractTask
 
     	// get gene GO info
     	line = "";
-    	row = null;
     	String curgeneid = "";
     	String curctgry = "";
     	String goterm = "";
@@ -161,6 +167,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     	    				String column = "Gene." + curctgry.toLowerCase();
     						if(nodeTable.getColumn(column) == null)
     							nodeTable.createColumn(column, String.class, true);
+    						CyRow row = nodeRowMap.get(curgeneid);
     						row.set(column, goterm.substring(0, goterm.length() - 2));
     						goterm = go_term + "; ";
     						curgeneid = geneid;
@@ -169,8 +176,6 @@ public class GetMiMIAttributesTask extends AbstractTask
     			}
     			else
     			{
-    				Collection<CyRow> rows=nodeTable.getMatchingRows(CyNetwork.NAME, geneid);
-    				row = rows.iterator().next();
     				isfirstline = false;
     				curgeneid = geneid;
     				curctgry = category;
@@ -179,17 +184,17 @@ public class GetMiMIAttributesTask extends AbstractTask
     		}
     	}
     	rd.close();
-    	if (row != null && goterm.length() > 2) {
+    	if (goterm.length() > 2) {
     		String column = "Gene." + curctgry.toLowerCase();
 			if(nodeTable.getColumn(column) == null)
 				nodeTable.createColumn(column, String.class, true);
+			CyRow row = nodeRowMap.get(curgeneid);
 			row.set(column, goterm.substring(0, goterm.length() - 2));
     	}
 
     	// get gene alias
     	line = "";
     	curgeneid = "";
-    	row = null;
     	String aliasList = "";
     	isfirstline = true;
     	doQuery(GENE_GENEALIAS_ATTR, geneIDs, interIDs);
@@ -208,6 +213,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     					aliasList += alias + "; ";
     					else
     					{
+    						CyRow row = nodeRowMap.get(curgeneid);
     						row.set("Gene.otherNames",
     								aliasList.substring(0, aliasList.length() - 2) + " ]");
     						aliasList = "[" + alias + "; ";
@@ -216,8 +222,6 @@ public class GetMiMIAttributesTask extends AbstractTask
     			}
     			else
     			{
-    				Collection<CyRow> rows = nodeTable.getMatchingRows(CyNetwork.NAME, geneid);
-					row = rows.iterator().next();
     				isfirstline = false;
     				curgeneid = geneid;
     				aliasList = "[" + alias + "; ";
@@ -225,10 +229,11 @@ public class GetMiMIAttributesTask extends AbstractTask
     		}
     	}
     	rd.close();
-    	if (aliasList.length() > 2)
+    	if (aliasList.length() > 2) {
+    		CyRow row = nodeRowMap.get(curgeneid);
     		row.set("Gene.otherNames",
 					aliasList.substring(0, aliasList.length() - 2) + " ]");
-
+    	}
     	// get gene pathway info
     	doQuery(GENE_PATHWAY_ATTR, geneIDs, interIDs);
     	setPathwayAttributes();
@@ -236,7 +241,6 @@ public class GetMiMIAttributesTask extends AbstractTask
     	// ***************get INTERACTION related attributes
     	// get interaction type
     	line = " ";
-    	row = null;
     	String curintid = " ";
     	String curtattr = " ";
     	String curattrV = " ";
@@ -260,6 +264,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     						String column = "Interaction." + curtattr.toLowerCase();
     						if(edgeTable.getColumn(column) == null)
     							edgeTable.createColumn(column, String.class, true);
+    						CyRow row = interRowMap.get(curintid);
     						row.set("Interaction."
     									+ curtattr.toLowerCase(),
     									"[" + curattrV.substring(0, curattrV.length() - 2) + "]");
@@ -271,9 +276,6 @@ public class GetMiMIAttributesTask extends AbstractTask
     			}
     			else
     			{
-    				
-    				Collection<CyRow> rows = edgeTable.getMatchingRows("Interaction.id", intid);
-    				row = rows.iterator().next();
     				isfirstlineType = false;
     				curintid = intid;
     				curtattr = attr;
@@ -284,9 +286,11 @@ public class GetMiMIAttributesTask extends AbstractTask
     	}
 
     	rd.close();
-    	if (curattrV.length() > 2)
+    	if (curattrV.length() > 2) {
+    		CyRow row = interRowMap.get(curintid);
     		row.set("Interaction." + curtattr.toLowerCase(),
     				"[" + curattrV.substring(0, curattrV.length() - 2) + "]");
+    	}
 	}
 
     private void setPathwayAttributes() throws IOException
@@ -296,7 +300,6 @@ public class GetMiMIAttributesTask extends AbstractTask
         String curgeneid = "";
         String description = "";
         String geneid = "";
-        CyRow row = null;
         Boolean isfirstline = true;
         
         if(nodeTable.getColumn("Gene.pathway") == null)
@@ -316,15 +319,14 @@ public class GetMiMIAttributesTask extends AbstractTask
                     }
                     else if (!curgeneid.equalsIgnoreCase(geneid))
                     {
-                        row.set("Gene.pathway", description);
+                    	CyRow row = nodeRowMap.get(curgeneid);
+                    	row.set("Gene.pathway", description);
                         curgeneid = geneid;
                         description = attrValue;
                     }
                 }
                 else
                 {	
-                	Collection<CyRow> rows = network.getDefaultNodeTable().getMatchingRows(CyNetwork.NAME,geneid);
-    				row = rows.iterator().next();
                     isfirstline = false;
                     curgeneid = geneid;
                     description += attrValue;
@@ -332,8 +334,10 @@ public class GetMiMIAttributesTask extends AbstractTask
             }
         }
         rd.close();
-        if (description.length() > 2)
+        if (description.length() > 2) {
+        	CyRow row = nodeRowMap.get(curgeneid);
         	row.set("Gene.pathway", description);
+        }
     }
 
     private void doQuery(int attrType, String gene_IDs, String inter_IDs) throws Exception

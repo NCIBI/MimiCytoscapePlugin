@@ -57,6 +57,8 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 	private StreamUtil streamUtil;
 	private CyTable nodeTable;
 	private CyTable edgeTable;
+	private Map<String,CyRow> nodeRowMap;
+	private Map<String,CyRow> edgeRowMap;
 	
 	public GetAnnotationAttributesTask(Collection<CyNode> nodes, Collection<CyEdge> edges, CyNetwork network, StreamUtil streamUtil) {
 		this.nodes = nodes;
@@ -74,7 +76,7 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		String line;
 		
 		String geneIDs = "";
-		Map<String,CyRow> nodeRowMap = new HashMap<String,CyRow>();
+		nodeRowMap = new HashMap<String,CyRow>();
 		for(CyNode node: nodes) {
 			String id = network.getRow(node).get(CyNetwork.NAME, String.class);
 			geneIDs += id + " ";
@@ -100,7 +102,7 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		}
 		
 		String edgeIDs = "";
-		Map<String,CyRow> edgeRowMap = new HashMap<String,CyRow>();
+		edgeRowMap = new HashMap<String,CyRow>();
 		for(CyEdge edge: edges) {
 			String id = network.getRow(edge).get(CyNetwork.NAME, String.class);
 			edgeIDs += "," + id;
