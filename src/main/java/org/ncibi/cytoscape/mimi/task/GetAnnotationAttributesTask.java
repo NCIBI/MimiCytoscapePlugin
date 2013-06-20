@@ -69,8 +69,8 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		
 		this.nodeTable = network.getDefaultNodeTable();
 		this.edgeTable = network.getDefaultEdgeTable();
-		this.geneTable = nodeTable.getColumn("ID").getVirtualColumnInfo().getSourceTable();
-    	this.interactionTable = edgeTable.getColumn("ID").getVirtualColumnInfo().getSourceTable();
+		this.geneTable = nodeTable.getColumn("UserAnnot").getVirtualColumnInfo().getSourceTable();
+    	this.interactionTable = edgeTable.getColumn("UserAnnot").getVirtualColumnInfo().getSourceTable();
 	}
 	
 
@@ -87,7 +87,7 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		geneIDs = geneIDs.trim();
 		if(nodeTable.getColumn("UserAnnot") == null) {
 			geneTable.createColumn("UserAnnot",Boolean.class, true, true);
-			nodeTable.addVirtualColumn("UserAnnot","UserAnnot",geneTable,CyRootNetwork.SHARED_NAME,true);
+			nodeTable.addVirtualColumn("UserAnnot","UserAnnot",geneTable,"ID",true);
 		}
 		if (!geneIDs.equals("")){
 			//get node UserAnnotationattribute
@@ -122,7 +122,7 @@ public class GetAnnotationAttributesTask extends AbstractTask {
 		edgeIDs = edgeIDs.trim();
 		if(edgeTable.getColumn("UserAnnot") == null) {
 			interactionTable.createColumn("UserAnnot",Boolean.class, true, false);
-			edgeTable.addVirtualColumn("UserAnnot", "UserAnnot", interactionTable, CyRootNetwork.SHARED_NAME, true);
+			edgeTable.addVirtualColumn("UserAnnot", "UserAnnot", interactionTable, "ID", true);
 		}
 		if (!edgeIDs.equals("")){
 			//get edge user annotation attribute

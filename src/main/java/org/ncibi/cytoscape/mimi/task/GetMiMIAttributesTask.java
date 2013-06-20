@@ -93,8 +93,8 @@ public class GetMiMIAttributesTask extends AbstractTask
 		
 		this.nodeTable = network.getDefaultNodeTable();
     	this.edgeTable = network.getDefaultEdgeTable();
-    	this.geneTable = nodeTable.getColumn("ID").getVirtualColumnInfo().getSourceTable();
-    	this.interactionTable = edgeTable.getColumn("ID").getVirtualColumnInfo().getSourceTable();
+    	this.geneTable = nodeTable.getColumn("UserAnnot").getVirtualColumnInfo().getSourceTable();
+    	this.interactionTable = edgeTable.getColumn("UserAnnot").getVirtualColumnInfo().getSourceTable();
 	}
     
     @Override
@@ -136,7 +136,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     			String geneattr = Character.toUpperCase(res[1].charAt(0)) + res[1].substring(1);
 				if(nodeTable.getColumn(geneattr) == null) {
 					geneTable.createColumn(geneattr, String.class, true);
-					nodeTable.addVirtualColumn(geneattr, geneattr, geneTable, CyRootNetwork.SHARED_NAME, true);
+					nodeTable.addVirtualColumn(geneattr, geneattr, geneTable, "ID", true);
 				}
 				if (!geneid.equals("")) {
     				Collection<CyRow> rows=nodeTable.getMatchingRows("ID", geneid);
@@ -178,7 +178,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     					{
     						if(nodeTable.getColumn(curctgry) == null) {
     							geneTable.createColumn(curctgry, String.class, true);
-    							nodeTable.addVirtualColumn(curctgry, curctgry, geneTable, CyRootNetwork.SHARED_NAME, true);
+    							nodeTable.addVirtualColumn(curctgry, curctgry, geneTable, "ID", true);
     						}
     						row.set(curctgry, goterm.substring(0, goterm.length() - 2));
     						goterm = go_term + "; ";
@@ -201,7 +201,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     	if (row != null && goterm.length() > 2) {
 			if(nodeTable.getColumn(curctgry) == null) {
 				geneTable.createColumn(curctgry, String.class, true);
-				nodeTable.addVirtualColumn(curctgry, curctgry, geneTable, CyRootNetwork.SHARED_NAME, true);
+				nodeTable.addVirtualColumn(curctgry, curctgry, geneTable, "ID", true);
 			}
 			row.set(curctgry, goterm.substring(0, goterm.length() - 2));
     	}
@@ -215,7 +215,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     	doQuery(GENE_GENEALIAS_ATTR, geneIDs, interIDs);
     	if(nodeTable.getColumn("Other Names") == null) {
     		geneTable.createColumn("Other Names", String.class, true);
-    		nodeTable.addVirtualColumn("Other Names", "Other Names", geneTable, CyRootNetwork.SHARED_NAME, true);
+    		nodeTable.addVirtualColumn("Other Names", "Other Names", geneTable, "ID", true);
     	}
     	while ((line = rd.readLine()) != null)
     	{
@@ -291,7 +291,7 @@ public class GetMiMIAttributesTask extends AbstractTask
     					{
     						if(edgeTable.getColumn(curtattr) == null) {
     							interactionTable.createColumn(curtattr, String.class, true);
-    							edgeTable.addVirtualColumn(curtattr, curtattr, interactionTable, CyRootNetwork.SHARED_NAME, true);
+    							edgeTable.addVirtualColumn(curtattr, curtattr, interactionTable, "ID", true);
     						}
     						row.set(curtattr,"[" + curattrV.substring(0, curattrV.length() - 2) + "]");
     						curintid = intid;
@@ -330,7 +330,7 @@ public class GetMiMIAttributesTask extends AbstractTask
         
         if(nodeTable.getColumn("Pathway") == null) {
         	geneTable.createColumn("Pathway", String.class, true);
-        	nodeTable.addVirtualColumn("Pathway", "Pathway", geneTable, CyRootNetwork.SHARED_NAME, true);
+        	nodeTable.addVirtualColumn("Pathway", "Pathway", geneTable, "ID", true);
         }
         while ((line = rd.readLine()) != null)
         {

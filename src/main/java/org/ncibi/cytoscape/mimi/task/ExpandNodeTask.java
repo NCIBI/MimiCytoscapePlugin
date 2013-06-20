@@ -96,10 +96,10 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 				sourceNode = network.addNode();
 				network.getRow(sourceNode).set(CyNetwork.NAME, res[0]);
 				network.getRow(sourceNode).set(CyRootNetwork.SHARED_NAME, res[0]);
+				network.getRow(sourceNode).set("ID", sourceId);
 				if (!nodeList.contains(sourceNode)){
 					nodeList.add(sourceNode);
 					nodeIDList.add(sourceId);
-					network.getRow(sourceNode).set("ID", sourceId);
 					//add step attribute 	
 					//if (!nodeAttributes.hasAttribute(sourceNode.getIdentifier(),"Network Distance"))
 					network.getRow(sourceNode).set("Network Distance", "-1");
@@ -120,10 +120,10 @@ public class ExpandNodeTask extends AbstractMiMIQueryTask{
 				targetNode = network.addNode();
 				network.getRow(targetNode).set(CyNetwork.NAME, res[3]);
 				network.getRow(targetNode).set(CyRootNetwork.SHARED_NAME, res[3]);
+				network.getRow(targetNode).set("ID", targetId);
 				if (!nodeList.contains(targetNode)){
 					nodeList.add(targetNode);
 					nodeIDList.add(targetId);
-					network.getRow(targetNode).set("ID", targetId);
 					//if (!nodeAttributes.hasAttribute(targetNode.getIdentifier(),"Network Distance"))	
 					network.getRow(targetNode).set("Network Distance", "-1");
 					network.getRow(targetNode).set("UserAnnot", false);

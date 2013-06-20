@@ -66,15 +66,13 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				break;
 		}
 		if(geneTable == null) {
-			geneTable = cyTableFactory.createTable("MiMI Gene Table", "Gene Name", String.class, false, true);
+			geneTable = cyTableFactory.createTable("MiMI Gene Table", "ID", Integer.class, false, true);
 			cyTableManager.addTable(geneTable);
-			geneTable.createColumn("ID", Integer.class, true);
 			geneTable.createColumn("UserAnnot", Boolean.class, true);
 		}
 		if(interactionTable == null) {
-			interactionTable = cyTableFactory.createTable("MiMI Interaction Table", "Gene Names", String.class, false, true);
+			interactionTable = cyTableFactory.createTable("MiMI Interaction Table", "ID", Integer.class, false, true);
 			cyTableManager.addTable(interactionTable);
-			interactionTable.createColumn("ID", Integer.class, true);
 			interactionTable.createColumn("UserAnnot", Boolean.class, true);
 		}
 		CyNetwork network = cyNetworkFactory.createNetwork();
@@ -84,12 +82,14 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 		doQuery(queryType,inputStr, streamUtil, taskMonitor);
 		//create networks
 		CyTable defaultNodeTable = network.getDefaultNodeTable();
-		defaultNodeTable.addVirtualColumns(geneTable, CyRootNetwork.SHARED_NAME, true);
+		defaultNodeTable.createColumn("ID", Integer.class, true);
+		defaultNodeTable.addVirtualColumns(geneTable, "ID", true);
 		CyTable localNodeTable = network.getTable(CyNode.class, CyNetwork.LOCAL_ATTRS);
 		localNodeTable.createColumn("Network Distance", String.class, true);
 		localNodeTable.createColumn("Node Color", Integer.class, true);
 		CyTable defaultEdgeTable = network.getDefaultEdgeTable();
-		defaultEdgeTable.addVirtualColumns(interactionTable, CyRootNetwork.SHARED_NAME, true);
+		defaultEdgeTable.createColumn("ID", Integer.class, true);
+		defaultEdgeTable.addVirtualColumns(interactionTable, "ID", true);
 		CyTable defaultNetworkTable = network.getDefaultNetworkTable();
 		defaultNetworkTable.createColumn("Input Genes", String.class, true);
 		defaultNetworkTable.createColumn("Organism", String.class, true);
@@ -122,7 +122,7 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				sourceNode = network.addNode();
 				network.getRow(sourceNode).set(CyNetwork.NAME, res[0]);
 				network.getRow(sourceNode).set(CyRootNetwork.SHARED_NAME, res[0]);
-				
+				network.getRow(sourceNode).set("ID", sourceId);
 			}
 			else {
 				CyRow sourceNodeRow = sourceNodeRows.iterator().next();
@@ -134,7 +134,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 			//MaxDistance = (MaxDistance.compareTo(res[5])<0)? res[5]:MaxDistance ;
 			if(!nodeList.contains(sourceNode)) {
 				nodeList.add(sourceNode);
-				network.getRow(sourceNode).set("ID", sourceId);
 				//set default (false) user annotation attribute to node
 				network.getRow(sourceNode).set("UserAnnot", false);
 				//add step attribute if it does not exist
@@ -142,10 +141,10 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 					network.getRow(sourceNode).set("Network Distance", res[2]);
 				}
 				if(network.getRow(sourceNode).get("Network Distance", String.class).equals("0")) {
-					defaultNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
+					network.getRow(sourceNode).set("Node Color", NodeType.SEEDNODE.ordinal());
 				}
 				else
-					defaultNodeTable.getRow(sourceNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
+					network.getRow(sourceNode).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
 			}
 
 			//target node
@@ -155,6 +154,7 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				targetNode = network.addNode();
 				network.getRow(targetNode).set(CyNetwork.NAME, res[3]);
 				network.getRow(targetNode).set(CyRootNetwork.SHARED_NAME, res[3]);
+				network.getRow(targetNode).set("ID", targetId);
 			}
 			else {
 				CyRow targetNodeRow = targetNodeRows.iterator().next();
@@ -164,7 +164,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 
 			if(!nodeList.contains(targetNode)) {
 				nodeList.add(targetNode);
-				network.getRow(targetNode).set("ID", targetId);
 				//set default (false) user annotation attribute to node
 				network.getRow(targetNode).set("UserAnnot", false);
 				//add step attribute if it does not exist
@@ -172,10 +171,10 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 					network.getRow(targetNode).set("Network Distance", res[5]);
 				}
 				if(network.getRow(targetNode).get("Network Distance", String.class).equals("0")) {
-					defaultNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNODE.ordinal());
+					network.getRow(targetNode).set("Node Color", NodeType.SEEDNODE.ordinal());
 				}
 				else
-					defaultNodeTable.getRow(targetNode.getSUID()).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
+					network.getRow(targetNode).set("Node Color", NodeType.SEEDNEIGHBOR.ordinal());
 			}
 
 			//edge
@@ -186,6 +185,7 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 				String name = "("+res[0]+" , "+res[3]+")";
 				network.getRow(edge).set(CyNetwork.NAME, name);
 				network.getRow(edge).set(CyRootNetwork.SHARED_NAME, name);
+				network.getRow(edge).set("ID",interactionId);
 			}
 			else {
 				CyRow edgeRow = edgeRows.iterator().next();
@@ -196,7 +196,6 @@ public class BuildNetworkTask extends AbstractMiMIQueryTask {
 			//System.out.println ("edge identifier["+edge.getIdentifier());
 			if(!edgeList.contains(edge)) {
 				edgeList.add(edge);
-				network.getRow(edge).set("ID",interactionId);
 				network.getRow(edge).set("UserAnnot",false);
 			}
 
